@@ -6,7 +6,7 @@ const LoginButton = () => {
 
   return (
     <div
-      className="mx-4 text-center text-white font-medium bg-purple-700 rounded-md py-2 px-4"
+      className="mx-4 text-center text-white font-medium bg-purple-600 hover:bg-purple-500 rounded-md py-2 px-4"
       onClick={async () => {
         if (isAuthenticated) {
           await logOut()

@@ -5,9 +5,12 @@ import LandingLayout from '../../layouts/LandingLayout'
 const WelcomePage = () => {
   return (
     <LandingLayout>
-      <h1>WelcomePage</h1>
+      <h1 className="text-center text-3xl font-bold pb-4">
+        Welcome to Class Karma
+      </h1>
       <p>
-        Find me in <code>./web/src/pages/WelcomePage/WelcomePage.js</code>
+        This is a website that will eventually be for awarding and redeeming
+        points in class!
       </p>
       <p>
         My default route is named <code>welcome</code>, link to me with `

@@ -22,7 +22,7 @@ const LandingLayout = ({ children }) => {
           <LoginButton />
         </div>
       </nav>
-      {children}
+      <div className="pt-8 px-4">{children}</div>
     </div>
   )
 }
