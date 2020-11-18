@@ -24,8 +24,9 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "autoprefixer": "9.8.6",
+    "autoprefixer": "^10.0.2",
+    "postcss": "^8.1.7",
     "postcss-loader": "4.0.2",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^2.0.1"
   }
 }
