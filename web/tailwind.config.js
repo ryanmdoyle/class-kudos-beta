@@ -18,10 +18,21 @@ module.exports = {
       display: ['Signika'],
       body: ['Lato'],
     },
-    extend: {},
+    extend: {
+      width: {
+        dashboard: '200px',
+        content: 'calc(100% - 200px)',
+      },
+      height: {
+        'full-minusNav': 'calc(100% - 4rem)',
+        'sub-full': 'calc(100% - 3rem)',
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      ringWidth: ['hover'],
+    },
   },
   plugins: [],
 }

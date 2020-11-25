@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import NavItem from './NavItem'
+import SubNav from './SubNav'
 
-describe('NavItem', () => {
+describe('SubNav', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<NavItem />)
+      render(<SubNav />)
     }).not.toThrow()
   })
 })

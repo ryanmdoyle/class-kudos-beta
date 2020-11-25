@@ -1,18 +1,28 @@
-import { Link, routes } from '@redwoodjs/router'
+// import { Link, routes } from '@redwoodjs/router'
+import ClassGroupItem from 'src/components/ClassGroupItem/ClassGroupItem'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 
 const TeacherHomePage = () => {
   return (
     <DashboardLayout>
-      <h1>TeacherHomePage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/TeacherHomePage/TeacherHomePage.js</code>
-      </p>
-      <p>
-        My default route is named <code>teacherHome</code>, link to me with `
-        <Link to={routes.teacherHome()}>TeacherHome</Link>`
-      </p>
+      <div className="p-4">
+        <div className="flex flex-col lg:flex-row">
+          <div id="classes" className="w-100 lg:w-1/2 pr-2">
+            <h1 className="text-3xl font-display mb-4">Classes</h1>
+            <ClassGroupItem />
+            <ClassGroupItem />
+            <ClassGroupItem />
+            <ClassGroupItem />
+          </div>
+          <div id="groups" className="w-100 lg:w-1/2 pl-2">
+            <h1 className="text-3xl font-display mb-4">Groups</h1>
+            <ClassGroupItem />
+            <ClassGroupItem />
+            <ClassGroupItem />
+            <ClassGroupItem />
+          </div>
+        </div>
+      </div>
     </DashboardLayout>
   )
 }

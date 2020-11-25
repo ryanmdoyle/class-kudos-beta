@@ -1,23 +1,17 @@
-import { Link, routes } from '@redwoodjs/router'
-
-import StudentNav from 'src/components/StudentNav'
+import StudentNav from 'src/components/StudentNav/StudentNav'
+import SiteHeader from 'src/components/SiteHeader/SiteHeader'
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="w-full h-screen flex">
-      <div className="w-64 h-full bg-white xl:w-1/5 py-6 px-2 flex flex-col items-center">
-        <Link to={routes.welcome()}>
-          <div className="w-full flex justify-center">
-            <img className="w-16 h-16" src="ClassKarmaLogo.svg"></img>
-          </div>
-          <span className="block font-bold text-purple-600 text-2xl mb-6">
-            Class Karma
-          </span>
-        </Link>
-        <StudentNav />
-      </div>
-      <div className="w-full h-full bg-gray-100 xl:w-4/5 py-6 px-2">
-        {children}
+    <div className="w-full h-screen">
+      <SiteHeader />
+      <div className="flex w-full h-full-minusNav">
+        <nav className="w-1/5 h-full bg-white lg:w-dashboard">
+          <StudentNav />
+        </nav>
+        <content className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll">
+          {children}
+        </content>
       </div>
     </div>
   )
