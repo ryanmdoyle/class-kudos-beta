@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+// import { Link, routes } from '@redwoodjs/router'
 import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStudentItem'
 import SubNav from 'src/components/SubNav/SubNav'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
@@ -50,7 +50,9 @@ const ClassGroupListPage = () => {
             <h2 className="font-display text-lg">Award Feedback</h2>
           </div>
         </div>
-        <div className="bg-white rounded-md shadow p-4 col-span-3">h</div>
+        <div className="bg-white rounded-md shadow p-4 col-span-3">
+          <h2 className="font-display text-lg">Recent Feedback</h2>
+        </div>
       </div>
     </DashboardLayout>
   )
