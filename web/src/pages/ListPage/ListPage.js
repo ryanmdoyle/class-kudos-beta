@@ -32,7 +32,7 @@ const ListPage = () => {
         </ul>
         <div className="h-full flex flex-col col-span-4 2xl:col-span-3">
           <h1 className="text-3xl font-display mb-4">Student Name</h1>
-          <div className="h-48 bg-white rounded-md shadow p-4 mb-4 flex flex-col">
+          <div className="h-48 white-box mb-4 flex flex-col">
             <h2 className="font-display text-lg">Points</h2>
             <div className="w-full h-full flex justify-end">
               <span className="font-display text-9xl text-green-500 mr-8">
@@ -48,7 +48,7 @@ const ListPage = () => {
               </div>
             </div>
           </div>
-          <div className="h-full bg-white rounded-md shadow p-4">
+          <div className="h-full white-box">
             <h2 className="font-display text-lg">Award Feedback</h2>
             <div className="h-full w-full flex flex-wrap justify-evenly">
               <FeedbackButton />
@@ -62,7 +62,7 @@ const ListPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-md shadow p-4 col-span-4 2xl:col-span-4">
+        <div className="white-box col-span-4 2xl:col-span-4">
           <h2 className="font-display text-lg mb-2">
             Recent Feedback for _______
           </h2>

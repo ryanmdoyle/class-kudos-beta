@@ -1,6 +1,6 @@
 const ClassGroupItem = () => {
   return (
-    <div className="w-100 h-24 bg-white rounded-md shadow-sm hover:shadow flex justify-between items-center px-4 mb-4">
+    <div className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4">
       <div className="flex items-center">
         <img
           src="/ClassKarmaLogo.svg"
