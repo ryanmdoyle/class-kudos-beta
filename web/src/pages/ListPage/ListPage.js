@@ -10,7 +10,7 @@ const ListPage = () => {
     <DashboardLayout>
       <SubNav />
       <div className="w-full h-sub-full p-4 grid grid-cols-12 gap-4">
-        <ul className="col-span-4 overflow-scroll p-1">
+        <ul className="col-span-4 overflow-scroll p-1 2xl:col-span-5">
           <ListViewStudentItem />
           <ListViewStudentItem />
           <ListViewStudentItem />
@@ -30,7 +30,7 @@ const ListPage = () => {
           <ListViewStudentItem />
           <ListViewStudentItem />
         </ul>
-        <div className="h-full flex flex-col col-span-5">
+        <div className="h-full flex flex-col col-span-4 2xl:col-span-3">
           <h1 className="text-3xl font-display mb-4">Student Name</h1>
           <div className="h-48 bg-white rounded-md shadow p-4 mb-4 flex flex-col">
             <h2 className="font-display text-lg">Points</h2>
@@ -62,7 +62,7 @@ const ListPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-md shadow p-4 col-span-3">
+        <div className="bg-white rounded-md shadow p-4 col-span-4 2xl:col-span-4">
           <h2 className="font-display text-lg mb-2">
             Recent Feedback for _______
           </h2>
