@@ -10,16 +10,10 @@ const GridPage = () => {
       <div className="w-full h-sub-full p-4">
         <div className="w-full flex justify-between mb-6">
           <div>
-            <button className="h-8 white-box hover:ring-2 ring-purple-700 px-8 mr-4 font-light">
-              Select Multiple
-            </button>
-            <button className="h-8 bg-green-400 hover:bg-green-500 rounded-md shadow px-8 text-white">
-              Award
-            </button>
+            <button className="button-white mr-4">Select Multiple</button>
+            <button className="button-green">Award</button>
           </div>
-          <button className="h-8 white-box hover:ring-2 ring-purple-700 px-8 font-light">
-            Sort by: First
-          </button>
+          <button className="button-white">Sort by: First</button>
         </div>
 
         <div className="w-full flex flex-wrap justify-between">

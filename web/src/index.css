@@ -8,3 +8,24 @@
   @apply rounded-md;
   @apply shadow;
 }
+
+.button-white {
+  @apply h-8;
+  @apply bg-white;
+  @apply px-8;
+  @apply rounded-md;
+  @apply shadow;
+  @apply font-light;
+  @apply ring-purple-500;
+  @apply hover:ring-2;
+}
+
+.button-green {
+  @apply h-8;
+  @apply bg-green-400;
+  @apply px-8;
+  @apply rounded-md;
+  @apply shadow;
+  @apply text-white;
+  @apply hover:bg-green-500;
+}
