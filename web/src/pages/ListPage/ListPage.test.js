@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import ClassGroupListPage from './ClassGroupListPage'
+import ListPage from './ListPage'
 
-describe('ClassGroupListPage', () => {
+describe('ListPage', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<ClassGroupListPage />)
+      render(<ListPage />)
     }).not.toThrow()
   })
 })

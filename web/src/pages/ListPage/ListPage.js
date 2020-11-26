@@ -1,14 +1,16 @@
 // import { Link, routes } from '@redwoodjs/router'
+import FeedbackButton from 'src/components/FeedbackButton/FeedbackButton'
 import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStudentItem'
 import SubNav from 'src/components/SubNav/SubNav'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
+import ListViewRecentItem from '../../components/ListViewRecentItem/ListViewRecentItem'
 
-const ClassGroupListPage = () => {
+const ListPage = () => {
   return (
     <DashboardLayout>
       <SubNav />
       <div className="w-full h-sub-full p-4 grid grid-cols-12 gap-4">
-        <div className="col-span-4 overflow-scroll p-1">
+        <ul className="col-span-4 overflow-scroll p-1">
           <ListViewStudentItem />
           <ListViewStudentItem />
           <ListViewStudentItem />
@@ -27,7 +29,7 @@ const ClassGroupListPage = () => {
           <ListViewStudentItem />
           <ListViewStudentItem />
           <ListViewStudentItem />
-        </div>
+        </ul>
         <div className="h-full flex flex-col col-span-5">
           <h1 className="text-3xl font-display mb-4">Student Name</h1>
           <div className="h-48 bg-white rounded-md shadow p-4 mb-4 flex flex-col">
@@ -48,14 +50,32 @@ const ClassGroupListPage = () => {
           </div>
           <div className="h-full bg-white rounded-md shadow p-4">
             <h2 className="font-display text-lg">Award Feedback</h2>
+            <div className="h-full w-full flex flex-wrap justify-evenly">
+              <FeedbackButton />
+              <FeedbackButton />
+              <FeedbackButton />
+              <FeedbackButton />
+              <FeedbackButton />
+              <FeedbackButton />
+              <FeedbackButton />
+              <FeedbackButton />
+            </div>
           </div>
         </div>
         <div className="bg-white rounded-md shadow p-4 col-span-3">
-          <h2 className="font-display text-lg">Recent Feedback</h2>
+          <h2 className="font-display text-lg mb-2">
+            Recent Feedback for _______
+          </h2>
+          <ul>
+            <ListViewRecentItem />
+            <ListViewRecentItem />
+            <ListViewRecentItem />
+            <ListViewRecentItem />
+          </ul>
         </div>
       </div>
     </DashboardLayout>
   )
 }
 
-export default ClassGroupListPage
+export default ListPage
