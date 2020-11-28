@@ -22,7 +22,6 @@ const TeacherHomePage = () => {
             <ClassGroupItem />
           </div>
         </div>
-        <div className="h-12 w-full white-box">hello</div>
       </div>
     </DashboardLayout>
   )
