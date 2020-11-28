@@ -15,15 +15,19 @@ generator client {
 // TODO: Please remove the following example:
 
 model User {
-  id        String     @id @default(uuid())
-  firstName String
-  lastName  String
-  email     String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @default(now())
-  roles     UserRole[]
-  Feedback  Feedback[]
-  Redeemed  Redeemed[]
+  id              String            @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @default(now())
+  roles           UserRole[]
+  Feedback        Feedback[]
+  Redeemed        Redeemed[]
+  ClassEnrollment ClassEnrollment[]
+  GroupEnrollment GroupEnrollment[]
+  StudentClass    StudentClass[]
+  StudentGroup    StudentGroup[]
 }
 
 model UserRole {
@@ -63,4 +67,38 @@ model Reward {
   name     String
   cost     Int
   Redeemed Redeemed[]
+}
+
+// Check below for working in scaffolds
+
+model StudentClass {
+  id              String            @id @default(uuid())
+  name            String
+  owner           User              @relation(fields: [ownerId], references: [id])
+  ownerId         String
+  ClassEnrollment ClassEnrollment[]
+}
+
+model StudentGroup {
+  id              String            @id @default(uuid())
+  name            String
+  owner           User              @relation(fields: [ownerId], references: [id])
+  ownerId         String
+  GroupEnrollment GroupEnrollment[]
+}
+
+model ClassEnrollment {
+  id             String       @id @default(uuid())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  studentClass   StudentClass @relation(fields: [studentClassId], references: [id])
+  studentClassId String
+}
+
+model GroupEnrollment {
+  id             String       @id @default(uuid())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  studentGroup   StudentGroup @relation(fields: [studentGroupId], references: [id])
+  studentGroupId String
 }
