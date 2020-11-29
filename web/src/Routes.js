@@ -12,6 +12,14 @@ import { Router, Route, Private } from '@redwoodjs/router'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/scaffolds/primary-enrollments/new" page={ScaffoldsNewPrimaryEnrollmentPage} name="scaffoldsNewPrimaryEnrollment" />
+      <Route path="/scaffolds/primary-enrollments/{id}/edit" page={ScaffoldsEditPrimaryEnrollmentPage} name="scaffoldsEditPrimaryEnrollment" />
+      <Route path="/scaffolds/primary-enrollments/{id}" page={ScaffoldsPrimaryEnrollmentPage} name="scaffoldsPrimaryEnrollment" />
+      <Route path="/scaffolds/primary-enrollments" page={ScaffoldsPrimaryEnrollmentsPage} name="scaffoldsPrimaryEnrollments" />
+      <Route path="/scaffolds/primary-groups/new" page={ScaffoldsNewPrimaryGroupPage} name="scaffoldsNewPrimaryGroup" />
+      <Route path="/scaffolds/primary-groups/{id}/edit" page={ScaffoldsEditPrimaryGroupPage} name="scaffoldsEditPrimaryGroup" />
+      <Route path="/scaffolds/primary-groups/{id}" page={ScaffoldsPrimaryGroupPage} name="scaffoldsPrimaryGroup" />
+      <Route path="/scaffolds/primary-groups" page={ScaffoldsPrimaryGroupsPage} name="scaffoldsPrimaryGroups" />
       <Route path="/list" page={ListPage} name="list" />
       <Route path="/grid" page={GridPage} name="grid" />
       <Route path="/scaffolds/rewards/new" page={ScaffoldsNewRewardPage} name="scaffoldsNewReward" />
@@ -38,8 +46,8 @@ const Routes = () => {
       <Route path="/scaffolds/users/{id}/edit" page={ScaffoldsEditUserPage} name="scaffoldsEditUser" />
       <Route path="/scaffolds/users/{id}" page={ScaffoldsUserPage} name="scaffoldsUser" />
       <Route path="/scaffolds/users" page={ScaffoldsUsersPage} name="scaffoldsUsers" />
-      <Route path="/teacher-home" page={TeacherHomePage} name="teacherHome" />
-      <Route path="/student-home" page={StudentHomePage} name="studentHome" />
+      <Route path="/teacher" page={TeacherHomePage} name="teacherHome" />
+      <Route path="/student" page={StudentHomePage} name="studentHome" />
       <Route path="/" page={WelcomePage} name="welcome" />
       <Private unauthenticated="public">
         <Route path="/protected" page={ProtectedPage} name="protected" />

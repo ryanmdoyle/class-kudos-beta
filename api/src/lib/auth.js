@@ -22,12 +22,28 @@ const config = {
 
 const adminApp = admin.initializeApp(config)
 
+// eslint-disable-next-line no-unused-vars
 export const getCurrentUser = async (decoded, { token, type }) => {
-  const { email, uid } = await adminApp.auth().verifyIdToken(token)
+  // const { email, uid } = await adminApp.auth().verifyIdToken(token)
   //check if user exists
   // !user ? add user to db with TEACHER role : get all the roles and add to current user
   // const roles = ['testing 1', 'testing 2']
-  return { email, uid }
+  // return { email, uid }
+  const verifiedUser = await adminApp.auth().verifyIdToken(token)
+  const existsInDb = await db.user.findOne({
+    where: { id: verifiedUser.uid },
+  })
+  // if (existsInDb === null) {
+  //   return await db.user.createUser({
+  //     firstName: verifiedUser.name.split(' ')[0],
+  //     lastName: verifiedUser.name.split(' ')[1],
+  //     email: verifiedUser.email,
+  //     id: verifiedUser.uid,
+  //   })
+  // }
+  // console.log(user)
+  // console.log(inDb)
+  return verifiedUser
 }
 
 // Use this function in your services to check that a user is logged in, and
