@@ -1,0 +1,93 @@
+import { useMutation, useFlash } from '@redwoodjs/web'
+import { Link, routes, navigate } from '@redwoodjs/router'
+
+import { QUERY } from 'src/components/Scaffolds/SecondaryGroupsCell'
+
+const DELETE_SECONDARY_GROUP_MUTATION = gql`
+  mutation DeleteSecondaryGroupMutation($id: String!) {
+    deleteSecondaryGroup(id: $id) {
+      id
+    }
+  }
+`
+
+const jsonDisplay = (obj) => {
+  return (
+    <pre>
+      <code>{JSON.stringify(obj, null, 2)}</code>
+    </pre>
+  )
+}
+
+const timeTag = (datetime) => {
+  return (
+    <time dateTime={datetime} title={datetime}>
+      {new Date(datetime).toUTCString()}
+    </time>
+  )
+}
+
+const checkboxInputTag = (checked) => {
+  return <input type="checkbox" checked={checked} disabled />
+}
+
+const SecondaryGroup = ({ secondaryGroup }) => {
+  const { addMessage } = useFlash()
+  const [deleteSecondaryGroup] = useMutation(DELETE_SECONDARY_GROUP_MUTATION, {
+    onCompleted: () => {
+      navigate(routes.scaffoldsSecondaryGroups())
+      addMessage('SecondaryGroup deleted.', { classes: 'rw-flash-success' })
+    },
+  })
+
+  const onDeleteClick = (id) => {
+    if (confirm('Are you sure you want to delete secondaryGroup ' + id + '?')) {
+      deleteSecondaryGroup({ variables: { id } })
+    }
+  }
+
+  return (
+    <>
+      <div className="rw-segment">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">
+            SecondaryGroup {secondaryGroup.id} Detail
+          </h2>
+        </header>
+        <table className="rw-table">
+          <tbody>
+            <tr>
+              <th>Id</th>
+              <td>{secondaryGroup.id}</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>{secondaryGroup.name}</td>
+            </tr>
+            <tr>
+              <th>Owner id</th>
+              <td>{secondaryGroup.ownerId}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav className="rw-button-group">
+        <Link
+          to={routes.scaffoldsEditSecondaryGroup({ id: secondaryGroup.id })}
+          className="rw-button rw-button-blue"
+        >
+          Edit
+        </Link>
+        <a
+          href="#"
+          className="rw-button rw-button-red"
+          onClick={() => onDeleteClick(secondaryGroup.id)}
+        >
+          Delete
+        </a>
+      </nav>
+    </>
+  )
+}
+
+export default SecondaryGroup

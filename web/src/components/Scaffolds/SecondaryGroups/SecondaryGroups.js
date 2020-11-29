@@ -1,11 +1,11 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 
-import { QUERY } from 'src/components/Scaffolds/UsersCell'
+import { QUERY } from 'src/components/Scaffolds/SecondaryGroupsCell'
 
-const DELETE_USER_MUTATION = gql`
-  mutation DeleteUserMutation($id: String!) {
-    deleteUser(id: $id) {
+const DELETE_SECONDARY_GROUP_MUTATION = gql`
+  mutation DeleteSecondaryGroupMutation($id: String!) {
+    deleteSecondaryGroup(id: $id) {
       id
     }
   }
@@ -37,11 +37,11 @@ const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
-const UsersList = ({ users }) => {
+const SecondaryGroupsList = ({ secondaryGroups }) => {
   const { addMessage } = useFlash()
-  const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
+  const [deleteSecondaryGroup] = useMutation(DELETE_SECONDARY_GROUP_MUTATION, {
     onCompleted: () => {
-      addMessage('User deleted.', { classes: 'rw-flash-success' })
+      addMessage('SecondaryGroup deleted.', { classes: 'rw-flash-success' })
     },
     // This refetches the query on the list page. Read more about other ways to
     // update the cache over here:
@@ -51,8 +51,8 @@ const UsersList = ({ users }) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete user ' + id + '?')) {
-      deleteUser({ variables: { id } })
+    if (confirm('Are you sure you want to delete secondaryGroup ' + id + '?')) {
+      deleteSecondaryGroup({ variables: { id } })
     }
   }
 
@@ -62,48 +62,44 @@ const UsersList = ({ users }) => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Uid</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Profile image</th>
-            <th>Created at</th>
-            <th>Updated at</th>
+            <th>Name</th>
+            <th>Owner id</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{truncate(user.id)}</td>
-              <td>{truncate(user.uid)}</td>
-              <td>{truncate(user.firstName)}</td>
-              <td>{truncate(user.lastName)}</td>
-              <td>{truncate(user.email)}</td>
-              <td>{truncate(user.profileImage)}</td>
-              <td>{timeTag(user.createdAt)}</td>
-              <td>{timeTag(user.updatedAt)}</td>
+          {secondaryGroups.map((secondaryGroup) => (
+            <tr key={secondaryGroup.id}>
+              <td>{truncate(secondaryGroup.id)}</td>
+              <td>{truncate(secondaryGroup.name)}</td>
+              <td>{truncate(secondaryGroup.ownerId)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
-                    to={routes.scaffoldsUser({ id: user.id })}
-                    title={'Show user ' + user.id + ' detail'}
+                    to={routes.scaffoldsSecondaryGroup({
+                      id: secondaryGroup.id,
+                    })}
+                    title={
+                      'Show secondaryGroup ' + secondaryGroup.id + ' detail'
+                    }
                     className="rw-button rw-button-small"
                   >
                     Show
                   </Link>
                   <Link
-                    to={routes.scaffoldsEditUser({ id: user.id })}
-                    title={'Edit user ' + user.id}
+                    to={routes.scaffoldsEditSecondaryGroup({
+                      id: secondaryGroup.id,
+                    })}
+                    title={'Edit secondaryGroup ' + secondaryGroup.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >
                     Edit
                   </Link>
                   <a
                     href="#"
-                    title={'Delete user ' + user.id}
+                    title={'Delete secondaryGroup ' + secondaryGroup.id}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(user.id)}
+                    onClick={() => onDeleteClick(secondaryGroup.id)}
                   >
                     Delete
                   </a>
@@ -117,4 +113,4 @@ const UsersList = ({ users }) => {
   )
 }
 
-export default UsersList
+export default SecondaryGroupsList

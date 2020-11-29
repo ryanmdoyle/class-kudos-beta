@@ -12,6 +12,18 @@ import { Router, Route, Private } from '@redwoodjs/router'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/scaffolds/secondary-groups/new" page={ScaffoldsNewSecondaryGroupPage} name="scaffoldsNewSecondaryGroup" />
+      <Route path="/scaffolds/secondary-groups/{id}/edit" page={ScaffoldsEditSecondaryGroupPage} name="scaffoldsEditSecondaryGroup" />
+      <Route path="/scaffolds/secondary-groups/{id}" page={ScaffoldsSecondaryGroupPage} name="scaffoldsSecondaryGroup" />
+      <Route path="/scaffolds/secondary-groups" page={ScaffoldsSecondaryGroupsPage} name="scaffoldsSecondaryGroups" />
+      <Route path="/scaffolds/secondary-enrollments/new" page={ScaffoldsNewSecondaryEnrollmentPage} name="scaffoldsNewSecondaryEnrollment" />
+      <Route path="/scaffolds/secondary-enrollments/{id}/edit" page={ScaffoldsEditSecondaryEnrollmentPage} name="scaffoldsEditSecondaryEnrollment" />
+      <Route path="/scaffolds/secondary-enrollments/{id}" page={ScaffoldsSecondaryEnrollmentPage} name="scaffoldsSecondaryEnrollment" />
+      <Route path="/scaffolds/secondary-enrollments" page={ScaffoldsSecondaryEnrollmentsPage} name="scaffoldsSecondaryEnrollments" />
+      <Route path="/scaffolds/users/new" page={ScaffoldsNewUserPage} name="scaffoldsNewUser" />
+      <Route path="/scaffolds/users/{id}/edit" page={ScaffoldsEditUserPage} name="scaffoldsEditUser" />
+      <Route path="/scaffolds/users/{id}" page={ScaffoldsUserPage} name="scaffoldsUser" />
+      <Route path="/scaffolds/users" page={ScaffoldsUsersPage} name="scaffoldsUsers" />
       <Route path="/scaffolds/primary-enrollments/new" page={ScaffoldsNewPrimaryEnrollmentPage} name="scaffoldsNewPrimaryEnrollment" />
       <Route path="/scaffolds/primary-enrollments/{id}/edit" page={ScaffoldsEditPrimaryEnrollmentPage} name="scaffoldsEditPrimaryEnrollment" />
       <Route path="/scaffolds/primary-enrollments/{id}" page={ScaffoldsPrimaryEnrollmentPage} name="scaffoldsPrimaryEnrollment" />
@@ -42,10 +54,6 @@ const Routes = () => {
       <Route path="/scaffolds/user-roles/{id}/edit" page={ScaffoldsEditUserRolePage} name="scaffoldsEditUserRole" />
       <Route path="/scaffolds/user-roles/{id}" page={ScaffoldsUserRolePage} name="scaffoldsUserRole" />
       <Route path="/scaffolds/user-roles" page={ScaffoldsUserRolesPage} name="scaffoldsUserRoles" />
-      <Route path="/scaffolds/users/new" page={ScaffoldsNewUserPage} name="scaffoldsNewUser" />
-      <Route path="/scaffolds/users/{id}/edit" page={ScaffoldsEditUserPage} name="scaffoldsEditUser" />
-      <Route path="/scaffolds/users/{id}" page={ScaffoldsUserPage} name="scaffoldsUser" />
-      <Route path="/scaffolds/users" page={ScaffoldsUsersPage} name="scaffoldsUsers" />
       <Route path="/teacher" page={TeacherHomePage} name="teacherHome" />
       <Route path="/student" page={StudentHomePage} name="studentHome" />
       <Route path="/" page={WelcomePage} name="welcome" />

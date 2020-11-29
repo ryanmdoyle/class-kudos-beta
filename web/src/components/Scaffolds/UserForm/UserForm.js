@@ -23,6 +23,22 @@ const UserForm = (props) => {
         />
 
         <Label
+          name="uid"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Uid
+        </Label>
+        <TextField
+          name="uid"
+          defaultValue={props.user?.uid}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="uid" className="rw-field-error" />
+
+        <Label
           name="firstName"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -69,6 +85,22 @@ const UserForm = (props) => {
           validation={{ required: true }}
         />
         <FieldError name="email" className="rw-field-error" />
+
+        <Label
+          name="profileImage"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Profile image
+        </Label>
+        <TextField
+          name="profileImage"
+          defaultValue={props.user?.profileImage}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="profileImage" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

@@ -3,3 +3,6 @@
 20201110222334-migration
 20201110222409-migration
 20201128225144-rename-group-types
+20201129214134-add-uid-to-user-schema
+20201129214931-add--unique-to-user-schema
+20201129221706-add-image-to-user

@@ -38,11 +38,6 @@ const User = ({ user }) => {
       navigate(routes.scaffoldsUsers())
       addMessage('User deleted.', { classes: 'rw-flash-success' })
     },
-    // This refetches the query on the list page. Read more about other ways to
-    // update the cache over here:
-    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
-    refetchQueries: [{ query: QUERY }],
-    awaitRefetchQueries: true,
   })
 
   const onDeleteClick = (id) => {
@@ -66,6 +61,10 @@ const User = ({ user }) => {
               <td>{user.id}</td>
             </tr>
             <tr>
+              <th>Uid</th>
+              <td>{user.uid}</td>
+            </tr>
+            <tr>
               <th>First name</th>
               <td>{user.firstName}</td>
             </tr>
@@ -76,6 +75,10 @@ const User = ({ user }) => {
             <tr>
               <th>Email</th>
               <td>{user.email}</td>
+            </tr>
+            <tr>
+              <th>Profile image</th>
+              <td>{user.profileImage}</td>
             </tr>
             <tr>
               <th>Created at</th>

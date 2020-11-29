@@ -1,10 +1,3 @@
-// Define what you want `currentUser` to return throughout your app. For example,
-// to return a real user from your database, you could do something like:
-//
-//   export const getCurrentUser = async ({ email }) => {
-//     return await db.user.findOne({ where: { email } })
-//   }
-
 import { AuthenticationError } from '@redwoodjs/api'
 import admin from 'firebase-admin'
 
@@ -24,31 +17,30 @@ const adminApp = admin.initializeApp(config)
 
 // eslint-disable-next-line no-unused-vars
 export const getCurrentUser = async (decoded, { token, type }) => {
-  // const { email, uid } = await adminApp.auth().verifyIdToken(token)
-  //check if user exists
-  // !user ? add user to db with TEACHER role : get all the roles and add to current user
-  // const roles = ['testing 1', 'testing 2']
-  // return { email, uid }
-  const verifiedUser = await adminApp.auth().verifyIdToken(token)
-  const existsInDb = await db.user.findOne({
-    where: { id: verifiedUser.uid },
+  const verifiedGoogleUser = await adminApp.auth().verifyIdToken(token)
+  const userInDb = await db.user.findOne({
+    where: { uid: verifiedGoogleUser.uid },
   })
-  // if (existsInDb === null) {
-  //   return await db.user.createUser({
-  //     firstName: verifiedUser.name.split(' ')[0],
-  //     lastName: verifiedUser.name.split(' ')[1],
-  //     email: verifiedUser.email,
-  //     id: verifiedUser.uid,
-  //   })
-  // }
-  // console.log(user)
-  // console.log(inDb)
-  return verifiedUser
+  if (userInDb === null) {
+    const newUser = await db.user.create({
+      data: {
+        firstName: verifiedGoogleUser.name.split(' ')[0],
+        lastName: verifiedGoogleUser.name.split(' ')[1],
+        email: verifiedGoogleUser.email,
+        uid: verifiedGoogleUser.uid,
+        profileImage: verifiedGoogleUser.picture,
+      },
+    })
+    // TODO add roles to new user here
+    // TODO then return use with roles
+    return newUser
+  }
+  // TODO add roles to user before returning
+  return userInDb
 }
 
 // Use this function in your services to check that a user is logged in, and
 // optionally raise an error if they're not.
-
 export const requireAuth = () => {
   if (!context.currentUser) {
     throw new AuthenticationError("You don't have permission to do that.")

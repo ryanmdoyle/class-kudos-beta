@@ -1,4 +1,5 @@
 import { db } from 'src/lib/db'
+import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const users = () => {
   return db.user.findMany()
@@ -12,13 +13,13 @@ export const user = ({ id }) => {
 
 export const createUser = ({ input }) => {
   return db.user.create({
-    data: input,
+    data: foreignKeyReplacement(input),
   })
 }
 
 export const updateUser = ({ id, input }) => {
   return db.user.update({
-    data: input,
+    data: foreignKeyReplacement(input),
     where: { id },
   })
 }
@@ -36,4 +37,12 @@ export const User = {
     db.user.findOne({ where: { id: root.id } }).Feedback(),
   Redeemed: (_obj, { root }) =>
     db.user.findOne({ where: { id: root.id } }).Redeemed(),
+  ClassEnrollment: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).ClassEnrollment(),
+  GroupEnrollment: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).GroupEnrollment(),
+  PrimaryGroup: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).PrimaryGroup(),
+  SecondaryGroup: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).SecondaryGroup(),
 }

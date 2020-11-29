@@ -6,9 +6,11 @@ export const QUERY = gql`
   query USERS {
     users {
       id
+      uid
       firstName
       lastName
       email
+      profileImage
       createdAt
       updatedAt
     }
