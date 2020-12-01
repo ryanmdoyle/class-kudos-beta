@@ -12,9 +12,12 @@ export const userRole = ({ id }) => {
 }
 
 export const createUserRole = ({ input }) => {
-  return db.userRole.create({
-    data: foreignKeyReplacement(input),
-  })
+  const roles = ['teacher', 'student', 'admin']
+  if (roles.includes(input.name)) {
+    return db.userRole.create({
+      data: foreignKeyReplacement(input),
+    })
+  }
 }
 
 export const updateUserRole = ({ id, input }) => {
@@ -33,4 +36,12 @@ export const deleteUserRole = ({ id }) => {
 export const UserRole = {
   user: (_obj, { root }) =>
     db.userRole.findOne({ where: { id: root.id } }).user(),
+}
+
+// Custom methods
+
+export const userRolesById = ({ id }) => {
+  return db.userRole.findMany({
+    where: { id },
+  })
 }

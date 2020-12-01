@@ -13,6 +13,7 @@ const LoginButton = () => {
           navigate('/')
         } else {
           await logIn()
+          navigate('/')
         }
       }}
     >

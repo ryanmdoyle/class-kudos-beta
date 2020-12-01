@@ -1,8 +1,24 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, navigate } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
 
 import LandingLayout from '../../layouts/LandingLayout'
 
 const WelcomePage = () => {
+  const { currentUser } = useAuth()
+
+  // temp routing (before apply route permissions to router)
+  const routeByRole = () => {
+    if (currentUser) {
+      if (currentUser.roles === null) {
+        navigate('/choose-role')
+      } else if (currentUser.roles.includes('teacher')) {
+        navigate('/teacher')
+      } else {
+        navigate('/student')
+      }
+    }
+  }
+  routeByRole()
   return (
     <LandingLayout>
       <h1 className="text-center text-3xl font-bold pb-4">

@@ -12,6 +12,7 @@ import { Router, Route, Private } from '@redwoodjs/router'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/choose-role" page={ChooseRolePage} name="chooseRole" />
       <Route path="/scaffolds/secondary-groups/new" page={ScaffoldsNewSecondaryGroupPage} name="scaffoldsNewSecondaryGroup" />
       <Route path="/scaffolds/secondary-groups/{id}/edit" page={ScaffoldsEditSecondaryGroupPage} name="scaffoldsEditSecondaryGroup" />
       <Route path="/scaffolds/secondary-groups/{id}" page={ScaffoldsSecondaryGroupPage} name="scaffoldsSecondaryGroup" />

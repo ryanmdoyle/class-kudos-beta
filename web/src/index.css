@@ -29,5 +29,6 @@
   @apply rounded-md;
   @apply shadow;
   @apply text-white;
+  @apply max-w-md;
   @apply hover:bg-green-500;
 }

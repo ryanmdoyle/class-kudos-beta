@@ -17,7 +17,7 @@ const SiteHeader = () => {
         {isAuthenticated && (
           <>
             <span className="text-normal text-white font-body pr-3">
-              {currentUser.email}
+              {`${currentUser.firstName} ${currentUser.lastName}`}
             </span>
             <img
               src="/profile.jpg"

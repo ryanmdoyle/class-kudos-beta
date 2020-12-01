@@ -1,7 +1,10 @@
 import StudentNav from 'src/components/StudentNav/StudentNav'
 import SiteHeader from 'src/components/SiteHeader/SiteHeader'
+import { useAuth } from '@redwoodjs/auth'
 
 const DashboardLayout = ({ children }) => {
+  const { currentUser } = useAuth()
+  console.log('User in Layout', currentUser)
   return (
     <div className="w-full h-screen">
       <SiteHeader />
@@ -9,9 +12,9 @@ const DashboardLayout = ({ children }) => {
         <nav className="w-1/5 h-full bg-white lg:w-dashboard">
           <StudentNav />
         </nav>
-        <content className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll">
+        <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll">
           {children}
-        </content>
+        </main>
       </div>
     </div>
   )
