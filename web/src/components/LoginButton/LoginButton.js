@@ -1,5 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
-import { navigate } from '@redwoodjs/router'
+import { navigate, routes } from '@redwoodjs/router'
 
 const LoginButton = () => {
   const { isAuthenticated, logIn, logOut } = useAuth()
@@ -10,10 +10,10 @@ const LoginButton = () => {
       onClick={async () => {
         if (isAuthenticated) {
           await logOut()
-          navigate('/')
+          navigate(routes.home())
         } else {
           await logIn()
-          navigate('/')
+          navigate(routes.login())
         }
       }}
     >
