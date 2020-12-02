@@ -1,10 +1,7 @@
 import StudentNav from 'src/components/StudentNav/StudentNav'
 import SiteHeader from 'src/components/SiteHeader/SiteHeader'
-import { useAuth } from '@redwoodjs/auth'
 
 const DashboardLayout = ({ children }) => {
-  const { currentUser } = useAuth()
-  console.log('User in Layout', currentUser)
   return (
     <div className="w-full h-screen">
       <SiteHeader />
