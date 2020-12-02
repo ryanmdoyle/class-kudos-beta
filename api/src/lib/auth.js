@@ -23,11 +23,18 @@ export const getCurrentUser = async (decoded, { token, type }) => {
     where: { uid: verifiedGoogleUser.uid },
   })
   if (userInDb === null) {
+    // Below check for a name (sometimes not returned from firebase?)
+    const first = verifiedGoogleUser?.name
+      ? verifiedGoogleUser?.name?.split(' ')[0]
+      : ''
+    const last = verifiedGoogleUser?.name
+      ? verifiedGoogleUser?.name?.split(' ')[1]
+      : ''
     const newUser = await db.user.create({
       data: {
-        firstName: verifiedGoogleUser.name.split(' ')[0],
-        lastName: verifiedGoogleUser.name.split(' ')[1],
-        email: verifiedGoogleUser.email,
+        firstName: first,
+        lastName: last,
+        email: verifiedGoogleUser?.email || '',
         uid: verifiedGoogleUser.uid,
         profileImage: verifiedGoogleUser.picture,
       },
