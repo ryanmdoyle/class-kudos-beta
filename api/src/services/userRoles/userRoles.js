@@ -40,8 +40,8 @@ export const UserRole = {
 
 // Custom methods
 
-export const userRolesById = ({ id }) => {
+export const userRolesById = (id) => {
   return db.userRole.findMany({
-    where: { id },
+    where: { userId: id },
   })
 }
