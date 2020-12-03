@@ -10,6 +10,8 @@ export const schema = gql`
   type Query {
     secondaryGroups: [SecondaryGroup!]!
     secondaryGroup(id: String!): SecondaryGroup
+    # Custom
+    secondaryGroupsOwned: [SecondaryGroup]!
   }
 
   input CreateSecondaryGroupInput {

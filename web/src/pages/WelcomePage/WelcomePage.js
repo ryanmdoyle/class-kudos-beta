@@ -1,8 +1,11 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, Redirect } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
 
 import LandingLayout from '../../layouts/LandingLayout'
 
 const WelcomePage = () => {
+  const { isAuthenticated } = useAuth()
+  if (isAuthenticated) return <Redirect to={routes.login()} />
   return (
     <LandingLayout>
       <h1 className="text-center text-3xl font-bold pb-4">

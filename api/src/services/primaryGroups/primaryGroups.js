@@ -40,9 +40,8 @@ export const PrimaryGroup = {
 
 // Custom methods
 
-// export const primaryGroupsOwned = () => {
-//   console.log(context.currentUser.uid)
-//   return db.primaryGroup.findMany({
-//     where: { ownerId: context.currentUser.uid },
-//   })
-// }
+export const primaryGroupsOwned = () => {
+  return db.primaryGroup.findMany({
+    where: { ownerId: context.currentUser.id },
+  })
+}
