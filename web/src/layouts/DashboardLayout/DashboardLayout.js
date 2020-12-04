@@ -4,12 +4,14 @@ import { ModalProvider } from 'src/context/ModalContext'
 import TeacherNav from 'src/components/TeacherNav/TeacherNav'
 import StudentNav from 'src/components/StudentNav/StudentNav'
 import SiteHeader from 'src/components/SiteHeader/SiteHeader'
+import Modal from 'src/components/Modal/Modal'
 
 const DashboardLayout = ({ children }) => {
   const { hasRole } = useAuth()
 
   return (
     <ModalProvider>
+      <Modal />
       <div className="w-full h-screen">
         <SiteHeader />
         <div className="flex w-full h-full-minusNav">
