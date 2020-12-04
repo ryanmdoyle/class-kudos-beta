@@ -35,3 +35,10 @@ export const SecondaryEnrollment = {
   secondaryGroup: (_obj, { root }) =>
     db.secondaryEnrollment.findOne({ where: { id: root.id } }).secondaryGroup(),
 }
+
+// custom
+export const secondaryEnrollmentsOfGroup = (id) => {
+  return db.secondaryEnrollment.findMany({
+    where: { secondaryGroupId: id },
+  })
+}

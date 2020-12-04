@@ -36,3 +36,10 @@ export const PrimaryEnrollment = {
   primaryGroup: (_obj, { root }) =>
     db.primaryEnrollment.findOne({ where: { id: root.id } }).primaryGroup(),
 }
+
+// custom
+export const primaryEnrollmentsOfGroup = (id) => {
+  return db.primaryEnrollment.findMany({
+    where: { primaryGroupId: id },
+  })
+}

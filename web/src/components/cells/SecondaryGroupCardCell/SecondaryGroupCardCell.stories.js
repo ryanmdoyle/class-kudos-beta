@@ -1,10 +1,5 @@
-import {
-  Loading,
-  Empty,
-  Failure,
-  Success,
-} from './PrimaryGroupsOwnedDetailsCell'
-import { standard } from './PrimaryGroupsOwnedDetailsCell.mock'
+import { Loading, Empty, Failure, Success } from './SecondaryGroupCardCell'
+import { standard } from './SecondaryGroupCardCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
@@ -22,4 +17,4 @@ export const success = () => {
   return Success ? <Success {...standard()} /> : null
 }
 
-export default { title: 'Cells/PrimaryGroupsOwnedDetailsCell' }
+export default { title: 'Cells/SecondaryGroupCardCell' }

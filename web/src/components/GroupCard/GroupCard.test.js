@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import ClassGroupItem from './ClassGroupItem'
+import GroupCard from './GroupCard'
 
-describe('ClassGroupItem', () => {
+describe('GroupCard', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<ClassGroupItem />)
+      render(<GroupCard />)
     }).not.toThrow()
   })
 })

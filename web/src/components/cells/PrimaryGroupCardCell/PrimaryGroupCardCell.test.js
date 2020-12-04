@@ -1,13 +1,8 @@
 import { render, screen } from '@redwoodjs/testing'
-import {
-  Loading,
-  Empty,
-  Failure,
-  Success,
-} from './PrimaryGroupsOwnedDetailsCell'
-import { standard } from './PrimaryGroupsOwnedDetailsCell.mock'
+import { Loading, Empty, Failure, Success } from './PrimaryGroupCardCell'
+import { standard } from './PrimaryGroupCardCell.mock'
 
-describe('PrimaryGroupsOwnedDetailsCell', () => {
+describe('PrimaryGroupCardCell', () => {
   test('Loading renders successfully', () => {
     expect(() => {
       render(<Loading />)
@@ -33,11 +28,7 @@ describe('PrimaryGroupsOwnedDetailsCell', () => {
 
   test('Success renders successfully', async () => {
     expect(() => {
-      render(
-        <Success
-          primaryGroupsOwnedDetails={standard().primaryGroupsOwnedDetails}
-        />
-      )
+      render(<Success groupCard={standard().groupCard} />)
     }).not.toThrow()
   })
 })

@@ -10,6 +10,8 @@ export const schema = gql`
   type Query {
     secondaryEnrollments: [SecondaryEnrollment!]!
     secondaryEnrollment(id: String!): SecondaryEnrollment
+    # custom
+    secondaryEnrollmentsOfGroup: [SecondaryEnrollment!]!
   }
 
   input CreateSecondaryEnrollmentInput {

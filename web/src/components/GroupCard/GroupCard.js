@@ -1,4 +1,4 @@
-const ClassGroupItem = () => {
+const GroupCard = ({ name, description, studentCount }) => {
   return (
     <div className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4">
       <div className="flex items-center">
@@ -7,12 +7,18 @@ const ClassGroupItem = () => {
           className="w-16 h-16 mr-4 rounded-full shadow-md"
         ></img>
         <div>
-          <h2 className="text-xl font-display">Class/Group Name</h2>
-          <span className="text-gray-500">Description of Class</span>
+          <h2 className="text-xl font-display">{name}</h2>
+          <span className="text-gray-500">{description}</span>
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="text-gray-500 mb-2"># Students</span>
+        <span className="text-gray-500 mb-2">
+          {studentCount
+            ? studentCount > 1
+              ? `${studentCount} students`
+              : `${studentCount} student`
+            : 'No Students'}
+        </span>
         <svg
           className="w-8 h-t stroke-current stroke-2 text-gray-400 hover:text-purple-800 self-end"
           viewBox="0 0 24 24"
@@ -29,4 +35,4 @@ const ClassGroupItem = () => {
   )
 }
 
-export default ClassGroupItem
+export default GroupCard
