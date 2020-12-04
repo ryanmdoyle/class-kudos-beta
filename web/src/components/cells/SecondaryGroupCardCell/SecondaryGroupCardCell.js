@@ -36,6 +36,7 @@ export const Success = ({
         name={group.name}
         description={group.description}
         studentCount={count}
+        groupType="secondary"
       />
     )
   })

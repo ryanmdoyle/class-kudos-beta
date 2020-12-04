@@ -33,6 +33,7 @@ export const Success = ({ primaryGroupsOwned, primaryEnrollmentsOfGroup }) => {
         name={group.name}
         description={group.description}
         studentCount={count}
+        groupType="primary"
       />
     )
   })
