@@ -32,6 +32,7 @@ export const Success = ({
     return (
       <GroupCard
         key={group.id}
+        id={group.id}
         name={group.name}
         description={group.description}
         studentCount={count}

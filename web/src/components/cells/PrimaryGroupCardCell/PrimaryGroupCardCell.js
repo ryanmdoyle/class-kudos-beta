@@ -29,6 +29,7 @@ export const Success = ({ primaryGroupsOwned, primaryEnrollmentsOfGroup }) => {
     return (
       <GroupCard
         key={group.id}
+        id={group.id}
         name={group.name}
         description={group.description}
         studentCount={count}
