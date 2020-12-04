@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState, useContext, createContext } from 'react'
 
-const ModalContext = React.createContext(null)
+const ModalContext = createContext(null)
 ModalContext.displayName = 'ModalContext'
 
 const ModalProvider = ({ children }) => {
@@ -17,6 +17,10 @@ const ModalProvider = ({ children }) => {
         isOpen: isOpen,
         open: () => setIsOpen(true),
         close: () => setIsOpen(false),
+        openModal: (component) => {
+          setChildComponent(component)
+          setIsOpen(true)
+        },
       }}
     >
       {children}
@@ -24,5 +28,7 @@ const ModalProvider = ({ children }) => {
   )
 }
 
-export { ModalProvider }
+const useModal = () => useContext(ModalContext)
+
+export { ModalProvider, useModal }
 export default ModalContext
