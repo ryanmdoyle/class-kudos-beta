@@ -65,6 +65,10 @@ const SecondaryGroup = ({ secondaryGroup }) => {
               <td>{secondaryGroup.name}</td>
             </tr>
             <tr>
+              <th>Description</th>
+              <td>{secondaryGroup.description}</td>
+            </tr>
+            <tr>
               <th>Owner id</th>
               <td>{secondaryGroup.ownerId}</td>
             </tr>

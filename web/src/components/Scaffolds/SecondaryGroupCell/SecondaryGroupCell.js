@@ -5,6 +5,7 @@ export const QUERY = gql`
     secondaryGroup: secondaryGroup(id: $id) {
       id
       name
+      description
       ownerId
     }
   }

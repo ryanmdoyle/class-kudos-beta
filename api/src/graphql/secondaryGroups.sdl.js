@@ -2,6 +2,7 @@ export const schema = gql`
   type SecondaryGroup {
     id: String!
     name: String!
+    description: String!
     owner: User!
     ownerId: String!
     SecondaryEnrollment: [SecondaryEnrollment]!
@@ -10,17 +11,18 @@ export const schema = gql`
   type Query {
     secondaryGroups: [SecondaryGroup!]!
     secondaryGroup(id: String!): SecondaryGroup
-    # Custom
     secondaryGroupsOwned: [SecondaryGroup]!
   }
 
   input CreateSecondaryGroupInput {
     name: String!
+    description: String!
     ownerId: String!
   }
 
   input UpdateSecondaryGroupInput {
     name: String
+    description: String
     ownerId: String
   }
 

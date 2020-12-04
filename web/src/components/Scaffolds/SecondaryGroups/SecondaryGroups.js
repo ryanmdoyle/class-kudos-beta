@@ -63,6 +63,7 @@ const SecondaryGroupsList = ({ secondaryGroups }) => {
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Description</th>
             <th>Owner id</th>
             <th>&nbsp;</th>
           </tr>
@@ -72,6 +73,7 @@ const SecondaryGroupsList = ({ secondaryGroups }) => {
             <tr key={secondaryGroup.id}>
               <td>{truncate(secondaryGroup.id)}</td>
               <td>{truncate(secondaryGroup.name)}</td>
+              <td>{truncate(secondaryGroup.description)}</td>
               <td>{truncate(secondaryGroup.ownerId)}</td>
               <td>
                 <nav className="rw-table-actions">

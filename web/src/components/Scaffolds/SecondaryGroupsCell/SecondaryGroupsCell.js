@@ -7,6 +7,7 @@ export const QUERY = gql`
     secondaryGroups {
       id
       name
+      description
       ownerId
     }
   }

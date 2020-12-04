@@ -65,6 +65,10 @@ const PrimaryGroup = ({ primaryGroup }) => {
               <td>{primaryGroup.name}</td>
             </tr>
             <tr>
+              <th>Description</th>
+              <td>{primaryGroup.description}</td>
+            </tr>
+            <tr>
               <th>Owner id</th>
               <td>{primaryGroup.ownerId}</td>
             </tr>

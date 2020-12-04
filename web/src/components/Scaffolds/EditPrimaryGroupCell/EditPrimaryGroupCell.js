@@ -7,6 +7,7 @@ export const QUERY = gql`
     primaryGroup: primaryGroup(id: $id) {
       id
       name
+      description
       ownerId
     }
   }
@@ -19,6 +20,7 @@ const UPDATE_PRIMARY_GROUP_MUTATION = gql`
     updatePrimaryGroup(id: $id, input: $input) {
       id
       name
+      description
       ownerId
     }
   }

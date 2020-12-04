@@ -7,6 +7,7 @@ export const QUERY = gql`
     secondaryGroup: secondaryGroup(id: $id) {
       id
       name
+      description
       ownerId
     }
   }
@@ -19,6 +20,7 @@ const UPDATE_SECONDARY_GROUP_MUTATION = gql`
     updateSecondaryGroup(id: $id, input: $input) {
       id
       name
+      description
       ownerId
     }
   }

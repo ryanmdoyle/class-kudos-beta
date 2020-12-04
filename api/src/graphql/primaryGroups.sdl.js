@@ -2,6 +2,7 @@ export const schema = gql`
   type PrimaryGroup {
     id: String!
     name: String!
+    description: String!
     owner: User!
     ownerId: String!
     PrimaryEnrollment: [PrimaryEnrollment]!
@@ -16,11 +17,13 @@ export const schema = gql`
 
   input CreatePrimaryGroupInput {
     name: String!
+    description: String!
     ownerId: String!
   }
 
   input UpdatePrimaryGroupInput {
     name: String
+    description: String
     ownerId: String
   }
 
