@@ -10,6 +10,8 @@ export const schema = gql`
   type Query {
     enrollments: [Enrollment!]!
     enrollment(id: String!): Enrollment
+    # Custom
+    enrollmentsOfGroup: [Enrollment!]!
   }
 
   input CreateEnrollmentInput {

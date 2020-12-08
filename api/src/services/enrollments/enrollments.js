@@ -35,3 +35,11 @@ export const Enrollment = {
   group: (_obj, { root }) =>
     db.enrollment.findOne({ where: { id: root.id } }).group(),
 }
+
+// custom
+
+export const enrollmentsOfGroup = (id) => {
+  return db.enrollment.findMany({
+    where: { groupId: id },
+  })
+}
