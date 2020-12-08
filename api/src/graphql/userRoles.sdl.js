@@ -27,5 +27,8 @@ export const schema = gql`
     createUserRole(input: CreateUserRoleInput!): UserRole!
     updateUserRole(id: String!, input: UpdateUserRoleInput!): UserRole!
     deleteUserRole(id: String!): UserRole!
+    # Custom
+    createAdminUserRole(input: CreateUserRoleInput!): UserRole!
+    createSuperUserRole(input: CreateUserRoleInput!): UserRole!
   }
 `
