@@ -1,14 +1,12 @@
 import { useModal } from 'src/context/ModalContext'
 
-import EditPrimaryGroupCell from 'src/components/Scaffolds/EditPrimaryGroupCell'
-import EditSecondaryGroupCell from 'src/components/Scaffolds/EditSecondaryGroupCell'
+import EditGroupCell from 'src/components/Scaffolds/EditGroupCell'
 
 const GroupCard = ({ id, name, description, studentCount, groupType }) => {
   const { openModal } = useModal()
 
   const settings = () => {
-    if (groupType === 'primary') openModal(<EditPrimaryGroupCell id={id} />) //needs to check for primary or secondary
-    if (groupType === 'secondary') openModal(<EditSecondaryGroupCell id={id} />) //needs to check for primary or secondary
+    openModal(<EditGroupCell id={id} />)
   }
 
   return (

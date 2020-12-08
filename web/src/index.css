@@ -49,7 +49,7 @@
   @apply text-base;
   @apply font-body;
   @apply font-bold;
-  @apply mt-2;
+  @apply mt-4;
 }
 
 .ck-label-error {

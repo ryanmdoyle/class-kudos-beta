@@ -24,15 +24,15 @@ const GroupForm = (props) => {
 
         <Label
           name="type"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
+          className="text-base font-body font-bold"
+          errorClassName="ck-label ck-label-error"
         >
           Type
         </Label>
         <TextField
           name="type"
           defaultValue={props.group?.type}
-          className="rw-input"
+          className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
@@ -40,15 +40,15 @@ const GroupForm = (props) => {
 
         <Label
           name="name"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
+          className="ck-label mt-4"
+          errorClassName="ck-label ck-label-error"
         >
           Name
         </Label>
         <TextField
           name="name"
           defaultValue={props.group?.name}
-          className="rw-input"
+          className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
@@ -56,15 +56,15 @@ const GroupForm = (props) => {
 
         <Label
           name="description"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
+          className="ck-label mt-4"
+          errorClassName="ck-label ck-label-error"
         >
           Description
         </Label>
         <TextField
           name="description"
           defaultValue={props.group?.description}
-          className="rw-input"
+          className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
@@ -72,15 +72,15 @@ const GroupForm = (props) => {
 
         <Label
           name="ownerId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
+          className="ck-label"
+          errorClassName="ck-label ck-label-error"
         >
           Owner id
         </Label>
         <TextField
           name="ownerId"
           defaultValue={props.group?.ownerId}
-          className="rw-input"
+          className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />

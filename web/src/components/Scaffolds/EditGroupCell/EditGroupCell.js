@@ -1,5 +1,5 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import GroupForm from 'src/components/Scaffolds/GroupForm'
 
 export const QUERY = gql`
@@ -28,10 +28,11 @@ const UPDATE_GROUP_MUTATION = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ group }) => {
+  const { close } = useModal()
   const { addMessage } = useFlash()
   const [updateGroup, { loading, error }] = useMutation(UPDATE_GROUP_MUTATION, {
     onCompleted: () => {
-      navigate(routes.scaffoldsGroups())
+      close()
       addMessage('Group updated.', { classes: 'rw-flash-success' })
     },
   })
@@ -41,20 +42,18 @@ export const Success = ({ group }) => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">
+    <div>
+      <header>
+        <h2 className="text-xl text-purple-800 font-display mb-6">
           Edit Group {group.id}
         </h2>
       </header>
-      <div className="rw-segment-main">
-        <GroupForm
-          group={group}
-          onSave={onSave}
-          error={error}
-          loading={loading}
-        />
-      </div>
+      <GroupForm
+        group={group}
+        onSave={onSave}
+        error={error}
+        loading={loading}
+      />
     </div>
   )
 }
