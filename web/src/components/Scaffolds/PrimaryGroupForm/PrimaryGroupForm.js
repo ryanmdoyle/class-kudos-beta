@@ -24,15 +24,15 @@ const PrimaryGroupForm = (props) => {
 
         <Label
           name="name"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
+          className="text-base font-body font-bold" //className="ck-label"
+          errorClassName="" // errorClassName="ck-label ck-label-error"
         >
           Name
         </Label>
         <TextField
           name="name"
           defaultValue={props.primaryGroup?.name}
-          className="rw-input"
+          className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
@@ -40,8 +40,8 @@ const PrimaryGroupForm = (props) => {
 
         <Label
           name="description"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
+          className="ck-label mt-4"
+          errorClassName="ck-label ck-label-error"
         >
           Description
         </Label>
@@ -54,24 +54,26 @@ const PrimaryGroupForm = (props) => {
         />
         <FieldError name="description" className="rw-field-error" />
 
-        <Label
-          name="ownerId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Owner id
-        </Label>
-        <TextField
-          name="ownerId"
-          defaultValue={props.primaryGroup?.ownerId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="ownerId" className="rw-field-error" />
+        <div className="hidden">
+          <Label
+            name="ownerId"
+            className="ck-label"
+            errorClassName="ck-label ck-label-error"
+          >
+            Owner id
+          </Label>
+          <TextField
+            name="ownerId"
+            defaultValue={props.primaryGroup?.ownerId}
+            className="rw-input"
+            errorClassName="rw-input rw-input-error"
+            // validation={{ required: true }}
+          />
+          <FieldError name="ownerId" className="rw-field-error" />
+        </div>
 
         <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
+          <Submit disabled={props.loading} className="button-purple">
             Save
           </Submit>
         </div>

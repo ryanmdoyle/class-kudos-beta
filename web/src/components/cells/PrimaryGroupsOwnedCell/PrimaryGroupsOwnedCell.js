@@ -14,7 +14,6 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ primaryGroupsOwned }) => {
-  console.log('PrimaryGroupsOwned', primaryGroupsOwned)
   return (
     <ul>
       {primaryGroupsOwned.map((group) => (

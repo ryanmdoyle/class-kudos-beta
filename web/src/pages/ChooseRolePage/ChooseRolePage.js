@@ -43,7 +43,7 @@ const ChooseRolePage = () => {
           Select Your Role
         </h1>
         <p className=" text-base text-center font-body w-full mb-8">
-          Are your a...
+          Are you a...
         </p>
         <button
           onClick={() => {

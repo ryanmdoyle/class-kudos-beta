@@ -1,5 +1,5 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import PrimaryGroupForm from 'src/components/Scaffolds/PrimaryGroupForm'
 
 export const QUERY = gql`
@@ -30,11 +30,13 @@ export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ primaryGroup }) => {
   const { addMessage } = useFlash()
+  const { close } = useModal()
   const [updatePrimaryGroup, { loading, error }] = useMutation(
     UPDATE_PRIMARY_GROUP_MUTATION,
     {
       onCompleted: () => {
-        navigate(routes.scaffoldsPrimaryGroups())
+        // navigate(routes.scaffoldsPrimaryGroups())
+        close()
         addMessage('PrimaryGroup updated.', { classes: 'rw-flash-success' })
       },
     }
@@ -45,20 +47,18 @@ export const Success = ({ primaryGroup }) => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">
-          Edit PrimaryGroup {primaryGroup.id}
+    <div>
+      <header>
+        <h2 className="text-xl text-purple-800 font-display mb-6">
+          Edit Primary Group {primaryGroup.name}
         </h2>
       </header>
-      <div className="rw-segment-main">
-        <PrimaryGroupForm
-          primaryGroup={primaryGroup}
-          onSave={onSave}
-          error={error}
-          loading={loading}
-        />
-      </div>
+      <PrimaryGroupForm
+        primaryGroup={primaryGroup}
+        onSave={onSave}
+        error={error}
+        loading={loading}
+      />
     </div>
   )
 }

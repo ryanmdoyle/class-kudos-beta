@@ -11,6 +11,18 @@
   @apply shadow;
 }
 
+.button-purple {
+  @apply h-8;
+  @apply bg-purple-500;
+  @apply px-8;
+  @apply rounded-md;
+  @apply shadow;
+  @apply text-white;
+  @apply ring-purple-500;
+  @apply hover:bg-purple-700;
+  @apply font-semibold;
+}
+
 .button-white {
   @apply h-8;
   @apply bg-white;
@@ -31,4 +43,16 @@
   @apply text-white;
   @apply max-w-md;
   @apply hover:bg-green-500;
+}
+
+.ck-label {
+  @apply text-base;
+  @apply font-body;
+  @apply font-bold;
+  @apply mt-4;
+}
+
+.ck-label-error {
+  @apply ring-red-500;
+  @apply ring-2;
 }

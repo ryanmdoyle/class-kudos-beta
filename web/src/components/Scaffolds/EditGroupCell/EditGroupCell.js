@@ -1,0 +1,59 @@
+import { useMutation, useFlash } from '@redwoodjs/web'
+import { useModal } from 'src/context/ModalContext'
+import GroupForm from 'src/components/Scaffolds/GroupForm'
+
+export const QUERY = gql`
+  query FIND_GROUP_BY_ID($id: String!) {
+    group: group(id: $id) {
+      id
+      type
+      name
+      description
+      ownerId
+    }
+  }
+`
+const UPDATE_GROUP_MUTATION = gql`
+  mutation UpdateGroupMutation($id: String!, $input: UpdateGroupInput!) {
+    updateGroup(id: $id, input: $input) {
+      id
+      type
+      name
+      description
+      ownerId
+    }
+  }
+`
+
+export const Loading = () => <div>Loading...</div>
+
+export const Success = ({ group }) => {
+  const { close } = useModal()
+  const { addMessage } = useFlash()
+  const [updateGroup, { loading, error }] = useMutation(UPDATE_GROUP_MUTATION, {
+    onCompleted: () => {
+      close()
+      addMessage('Group updated.', { classes: 'rw-flash-success' })
+    },
+  })
+
+  const onSave = (input, id) => {
+    updateGroup({ variables: { id, input } })
+  }
+
+  return (
+    <div>
+      <header>
+        <h2 className="text-xl text-purple-800 font-display mb-6">
+          Edit Group {group.id}
+        </h2>
+      </header>
+      <GroupForm
+        group={group}
+        onSave={onSave}
+        error={error}
+        loading={loading}
+      />
+    </div>
+  )
+}

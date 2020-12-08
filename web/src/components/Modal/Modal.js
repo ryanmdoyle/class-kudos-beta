@@ -1,16 +1,15 @@
-import { useContext } from 'react'
-import ModalContext from 'src/context/ModalContext'
+import { useModal } from 'src/context/ModalContext'
 
 const Modal = () => {
-  const modal = useContext(ModalContext)
+  const { child, isOpen, close } = useModal()
 
   const onClick = (e) => {
     if (e.target.id === 'modal-outside') {
-      modal.close()
+      close()
     }
   }
 
-  if (modal.isOpen) {
+  if (isOpen) {
     //modal context IS open
     return (
       <div
@@ -20,15 +19,17 @@ const Modal = () => {
       >
         <div
           id="modal-inside"
-          className="w-5/6 h-5/6 bg-white rounded-md p-4 relative"
+          className="w-5/6 h-5/6 bg-white rounded-md p-4 pt-6 relative"
         >
           <div
-            onClick={onClick}
+            onClick={() => {
+              close()
+            }}
             className="absolute top-4 right-4 w-8 h-8 bg-purple-500 rounded-full flex justify-center items-center shadow-md hover:bg-purple-700"
           >
-            <span className="text-white font-bold">X</span>
+            <span className="text-white font-bold cursor-default">X</span>
           </div>
-          {modal.child}
+          {child}
         </div>
       </div>
     )

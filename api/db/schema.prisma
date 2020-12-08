@@ -1,7 +1,5 @@
 datasource DS {
-  // optionally set multiple providers
-  // example: provider = ["sqlite", "postgresql"]
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -10,26 +8,22 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood db save` to create
-// migrations for them.
-// TODO: Please remove the following example:
+// MODELS //
 
 model User {
-  id              String                @id @default(uuid())
-  uid             String                @unique
-  firstName       String
-  lastName        String
-  email           String                @unique
-  profileImage    String?
-  createdAt       DateTime              @default(now())
-  updatedAt       DateTime              @default(now())
-  roles           UserRole[]
-  Feedback        Feedback[]
-  Redeemed        Redeemed[]
-  ClassEnrollment PrimaryEnrollment[]
-  GroupEnrollment SecondaryEnrollment[]
-  PrimaryGroup    PrimaryGroup[]
-  SecondaryGroup  SecondaryGroup[]
+  id           String       @id @default(uuid())
+  uid          String       @unique
+  firstName    String
+  lastName     String
+  email        String       @unique
+  profileImage String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @default(now())
+  roles        UserRole[]
+  feedback     Feedback[]
+  redeemed     Redeemed[]
+  groups       Group[]
+  enrollments  Enrollment[]
 }
 
 model UserRole {
@@ -37,8 +31,8 @@ model UserRole {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   name      String
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
 }
 
 model Feedback {
@@ -68,41 +62,23 @@ model Reward {
   id       String     @id @default(uuid())
   name     String
   cost     Int
-  Redeemed Redeemed[]
+  redeemed Redeemed[]
 }
 
-// Check below for working in scaffolds
-
-model PrimaryGroup {
-  id                String              @id @default(uuid())
-  name              String
-  description       String              @default("")
-  owner             User                @relation(fields: [ownerId], references: [id])
-  ownerId           String
-  PrimaryEnrollment PrimaryEnrollment[]
+model Group {
+  id          String       @id @default(uuid())
+  type        String
+  name        String
+  description String?      @default("")
+  owner       User         @relation(fields: [ownerId], references: [id])
+  ownerId     String
+  enrollments Enrollment[]
 }
 
-model SecondaryGroup {
-  id                  String                @id @default(uuid())
-  name                String
-  description         String                @default("")
-  owner               User                  @relation(fields: [ownerId], references: [id])
-  ownerId             String
-  SecondaryEnrollment SecondaryEnrollment[]
-}
-
-model PrimaryEnrollment {
-  id             String       @id @default(uuid())
-  user           User         @relation(fields: [userId], references: [id])
-  userId         String
-  primaryGroup   PrimaryGroup @relation(fields: [primaryGroupId], references: [id])
-  primaryGroupId String
-}
-
-model SecondaryEnrollment {
-  id               String         @id @default(uuid())
-  user             User           @relation(fields: [userId], references: [id])
-  userId           String
-  secondaryGroup   SecondaryGroup @relation(fields: [secondaryGroupId], references: [id])
-  secondaryGroupId String
+model Enrollment {
+  id      String @id @default(uuid())
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  group   Group  @relation(fields: [groupId], references: [id])
+  groupId String
 }
