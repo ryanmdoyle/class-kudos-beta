@@ -35,26 +35,10 @@ const Routes = () => {
         <Route path="/scaffolds/groups/{id}/edit" page={ScaffoldsEditGroupPage} name="scaffoldsEditGroup" />
         <Route path="/scaffolds/groups/{id}" page={ScaffoldsGroupPage} name="scaffoldsGroup" />
         <Route path="/scaffolds/groups" page={ScaffoldsGroupsPage} name="scaffoldsGroups" />
-        <Route path="/scaffolds/secondary-groups/new" page={ScaffoldsNewSecondaryGroupPage} name="scaffoldsNewSecondaryGroup" />
-        <Route path="/scaffolds/secondary-groups/{id}/edit" page={ScaffoldsEditSecondaryGroupPage} name="scaffoldsEditSecondaryGroup" />
-        <Route path="/scaffolds/secondary-groups/{id}" page={ScaffoldsSecondaryGroupPage} name="scaffoldsSecondaryGroup" />
-        <Route path="/scaffolds/secondary-groups" page={ScaffoldsSecondaryGroupsPage} name="scaffoldsSecondaryGroups" />
-        <Route path="/scaffolds/secondary-enrollments/new" page={ScaffoldsNewSecondaryEnrollmentPage} name="scaffoldsNewSecondaryEnrollment" />
-        <Route path="/scaffolds/secondary-enrollments/{id}/edit" page={ScaffoldsEditSecondaryEnrollmentPage} name="scaffoldsEditSecondaryEnrollment" />
-        <Route path="/scaffolds/secondary-enrollments/{id}" page={ScaffoldsSecondaryEnrollmentPage} name="scaffoldsSecondaryEnrollment" />
-        <Route path="/scaffolds/secondary-enrollments" page={ScaffoldsSecondaryEnrollmentsPage} name="scaffoldsSecondaryEnrollments" />
         <Route path="/scaffolds/users/new" page={ScaffoldsNewUserPage} name="scaffoldsNewUser" />
         <Route path="/scaffolds/users/{id}/edit" page={ScaffoldsEditUserPage} name="scaffoldsEditUser" />
         <Route path="/scaffolds/users/{id}" page={ScaffoldsUserPage} name="scaffoldsUser" />
         <Route path="/scaffolds/users" page={ScaffoldsUsersPage} name="scaffoldsUsers" />
-        <Route path="/scaffolds/primary-enrollments/new" page={ScaffoldsNewPrimaryEnrollmentPage} name="scaffoldsNewPrimaryEnrollment" />
-        <Route path="/scaffolds/primary-enrollments/{id}/edit" page={ScaffoldsEditPrimaryEnrollmentPage} name="scaffoldsEditPrimaryEnrollment" />
-        <Route path="/scaffolds/primary-enrollments/{id}" page={ScaffoldsPrimaryEnrollmentPage} name="scaffoldsPrimaryEnrollment" />
-        <Route path="/scaffolds/primary-enrollments" page={ScaffoldsPrimaryEnrollmentsPage} name="scaffoldsPrimaryEnrollments" />
-        <Route path="/scaffolds/primary-groups/new" page={ScaffoldsNewPrimaryGroupPage} name="scaffoldsNewPrimaryGroup" />
-        <Route path="/scaffolds/primary-groups/{id}/edit" page={ScaffoldsEditPrimaryGroupPage} name="scaffoldsEditPrimaryGroup" />
-        <Route path="/scaffolds/primary-groups/{id}" page={ScaffoldsPrimaryGroupPage} name="scaffoldsPrimaryGroup" />
-        <Route path="/scaffolds/primary-groups" page={ScaffoldsPrimaryGroupsPage} name="scaffoldsPrimaryGroups" />
         <Route path="/scaffolds/rewards/new" page={ScaffoldsNewRewardPage} name="scaffoldsNewReward" />
         <Route path="/scaffolds/rewards/{id}/edit" page={ScaffoldsEditRewardPage} name="scaffoldsEditReward" />
         <Route path="/scaffolds/rewards/{id}" page={ScaffoldsRewardPage} name="scaffoldsReward" />
