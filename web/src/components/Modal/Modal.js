@@ -19,7 +19,7 @@ const Modal = () => {
       >
         <div
           id="modal-inside"
-          className="w-5/6 h-5/6 bg-white rounded-md p-4 pt-6 relative"
+          className="w-5/6 bg-white rounded-md p-4 pt-6 relative"
         >
           <div
             onClick={() => {
