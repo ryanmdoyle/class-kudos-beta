@@ -23,22 +23,6 @@ const GroupForm = (props) => {
         />
 
         <Label
-          name="type"
-          className="text-base font-body font-bold"
-          errorClassName="ck-label ck-label-error"
-        >
-          Type
-        </Label>
-        <TextField
-          name="type"
-          defaultValue={props.group?.type}
-          className="rw-input mb-2"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="type" className="rw-field-error" />
-
-        <Label
           name="name"
           className="ck-label mt-4"
           errorClassName="ck-label ck-label-error"
@@ -71,6 +55,22 @@ const GroupForm = (props) => {
         <FieldError name="description" className="rw-field-error" />
 
         <Label
+          name="type"
+          className="text-base font-body font-bold"
+          errorClassName="ck-label ck-label-error"
+        >
+          Type
+        </Label>
+        <TextField
+          name="type"
+          defaultValue={props.group?.type}
+          className="rw-input mb-2"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="type" className="rw-field-error" />
+
+        {/* <Label
           name="ownerId"
           className="ck-label"
           errorClassName="ck-label ck-label-error"
@@ -84,7 +84,7 @@ const GroupForm = (props) => {
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-        <FieldError name="ownerId" className="rw-field-error" />
+        <FieldError name="ownerId" className="rw-field-error" /> */}
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
