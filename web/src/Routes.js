@@ -17,6 +17,15 @@ const Routes = () => {
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/choose-role" page={ChooseRolePage} name="chooseRole" />
       </Private>
+      <Private unauthenticated="studentHome" role="teacher">
+        <Route path="/teacher" page={TeacherHomePage} name="teacherHome" />
+        <Route path="/teacher/{groupId}" page={ListPage} name="group" />
+        <Route path="/teacher/{groupId}/list" page={ListPage} name="groupList" />
+        <Route path="/teacher/{groupId}/grid" page={GridPage} name="groupGrid" />
+      </Private>
+      <Private unauthenticated="home" role="student">
+        <Route path="/student" page={StudentHomePage} name="studentHome" />
+      </Private>
       <Private unauthenticated="home">
         <Route path="/scaffolds/enrollments/new" page={ScaffoldsNewEnrollmentPage} name="scaffoldsNewEnrollment" />
         <Route path="/scaffolds/enrollments/{id}/edit" page={ScaffoldsEditEnrollmentPage} name="scaffoldsEditEnrollment" />
@@ -66,14 +75,6 @@ const Routes = () => {
         <Route path="/scaffolds/user-roles/{id}/edit" page={ScaffoldsEditUserRolePage} name="scaffoldsEditUserRole" />
         <Route path="/scaffolds/user-roles/{id}" page={ScaffoldsUserRolePage} name="scaffoldsUserRole" />
         <Route path="/scaffolds/user-roles" page={ScaffoldsUserRolesPage} name="scaffoldsUserRoles" />
-      </Private>
-      <Private unauthenticated="studentHome" role="teacher">
-        <Route path="/list" page={ListPage} name="list" />
-        <Route path="/grid" page={GridPage} name="grid" />
-        <Route path="/teacher" page={TeacherHomePage} name="teacherHome" />
-      </Private>
-      <Private unauthenticated="home" role="student">
-        <Route path="/student" page={StudentHomePage} name="studentHome" />
       </Private>
       <Route notfound page={NotFoundPage} />
     </Router>

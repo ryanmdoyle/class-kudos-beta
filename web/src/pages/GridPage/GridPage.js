@@ -3,10 +3,11 @@ import GridStudentSquare from 'src/components/GridStudentSquare/GridStudentSquar
 import SubNav from 'src/components/SubNav/SubNav'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 
-const GridPage = () => {
+const GridPage = ({ groupId }) => {
   return (
     <DashboardLayout>
       <SubNav />
+      <h1>Group {groupId}</h1>
       <div className="w-full h-sub-full p-4">
         <div className="w-full flex justify-between mb-6">
           <div>

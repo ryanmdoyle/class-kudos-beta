@@ -5,10 +5,11 @@ import SubNav from 'src/components/SubNav/SubNav'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import ListViewRecentItem from '../../components/ListViewRecentItem/ListViewRecentItem'
 
-const ListPage = () => {
+const ListPage = ({ groupId }) => {
   return (
     <DashboardLayout>
       <SubNav />
+      {groupId}
       <div className="w-full h-sub-full p-4 grid grid-cols-12 gap-4">
         <ul className="col-span-4 overflow-scroll p-1 2xl:col-span-5">
           <ListViewStudentItem />
@@ -48,9 +49,9 @@ const ListPage = () => {
               </div>
             </div>
           </div>
-          <div className="h-full white-box">
+          <div className="white-box">
             <h2 className="font-display text-lg">Award Feedback</h2>
-            <div className="h-full w-full flex flex-wrap justify-evenly">
+            <div className="h-full w-full flex flex-wrap justify-evenly content-start">
               <FeedbackButton />
               <FeedbackButton />
               <FeedbackButton />
@@ -62,16 +63,18 @@ const ListPage = () => {
             </div>
           </div>
         </div>
-        <div className="white-box col-span-4 2xl:col-span-4">
-          <h2 className="font-display text-lg mb-2">
-            Recent Feedback for _______
-          </h2>
-          <ul>
-            <ListViewRecentItem />
-            <ListViewRecentItem />
-            <ListViewRecentItem />
-            <ListViewRecentItem />
-          </ul>
+        <div className="mt-12 col-span-4 2xl:col-span-4 flex flex-col">
+          <div className="white-box">
+            <h2 className="font-display text-lg mb-2">
+              Recent Feedback for _______
+            </h2>
+            <ul>
+              <ListViewRecentItem />
+              <ListViewRecentItem />
+              <ListViewRecentItem />
+              <ListViewRecentItem />
+            </ul>
+          </div>
         </div>
       </div>
     </DashboardLayout>
