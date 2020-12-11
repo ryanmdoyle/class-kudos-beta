@@ -33,16 +33,12 @@ export const deleteUser = ({ id }) => {
 export const User = {
   roles: (_obj, { root }) =>
     db.user.findOne({ where: { id: root.id } }).roles(),
-  Feedback: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).Feedback(),
-  Redeemed: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).Redeemed(),
-  ClassEnrollment: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).ClassEnrollment(),
-  GroupEnrollment: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).GroupEnrollment(),
-  PrimaryGroup: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).PrimaryGroup(),
-  SecondaryGroup: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).SecondaryGroup(),
+  feedback: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).feedback(),
+  redeemed: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).redeemed(),
+  groups: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).groups(),
+  enrollments: (_obj, { root }) =>
+    db.user.findOne({ where: { id: root.id } }).enrollments(),
 }

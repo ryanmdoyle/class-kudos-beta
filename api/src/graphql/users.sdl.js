@@ -9,12 +9,10 @@ export const schema = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     roles: [UserRole]!
-    Feedback: [Feedback]!
-    Redeemed: [Redeemed]!
-    ClassEnrollment: [PrimaryEnrollment]!
-    GroupEnrollment: [SecondaryEnrollment]!
-    PrimaryGroup: [PrimaryGroup]!
-    SecondaryGroup: [SecondaryGroup]!
+    feedback: [Feedback]!
+    redeemed: [Redeemed]!
+    groups: [Group]!
+    enrollments: [Enrollment]!
   }
 
   type Query {

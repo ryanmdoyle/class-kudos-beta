@@ -1,3 +1,5 @@
+import TeacherNavLink from 'src/components/TeacherNavLink/TeacherNavLink'
+
 export const QUERY = gql`
   query GroupsOwnedQuery {
     groupsOwned {
@@ -24,9 +26,7 @@ export const Success = ({ groupsOwned, groupType }) => {
   return (
     <ul>
       {groupsOfType.map((group) => (
-        <li className="text-normal font-body pl-4 mb-2" key={group.id}>
-          {group.name}
-        </li>
+        <TeacherNavLink id={group.id} key={group.id} text={group.name} />
       ))}
     </ul>
   )
