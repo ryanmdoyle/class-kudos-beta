@@ -1,4 +1,5 @@
 import { db } from 'src/lib/db'
+import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const enrollments = () => {
   return db.enrollment.findMany()
@@ -12,13 +13,13 @@ export const enrollment = ({ id }) => {
 
 export const createEnrollment = ({ input }) => {
   return db.enrollment.create({
-    data: input,
+    data: foreignKeyReplacement(input),
   })
 }
 
 export const updateEnrollment = ({ id, input }) => {
   return db.enrollment.update({
-    data: input,
+    data: foreignKeyReplacement(input),
     where: { id },
   })
 }
@@ -38,8 +39,8 @@ export const Enrollment = {
 
 // custom
 
-export const enrollmentsOfGroup = (id) => {
+export const enrollmentsOfGroup = ({ groupId }) => {
   return db.enrollment.findMany({
-    where: { groupId: id },
+    where: { groupId: groupId },
   })
 }

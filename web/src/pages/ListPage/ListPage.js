@@ -4,11 +4,13 @@ import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStud
 import SubNav from 'src/components/SubNav/SubNav'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import ListViewRecentItem from '../../components/ListViewRecentItem/ListViewRecentItem'
+import GroupListCell from 'src/components/cells/GroupListCell'
 
 const ListPage = ({ groupId }) => {
   return (
     <DashboardLayout>
       <SubNav />
+      <GroupListCell id={groupId} />
       {groupId}
       <div className="w-full h-sub-full p-4 grid grid-cols-12 gap-4">
         <ul className="col-span-4 overflow-scroll p-1 2xl:col-span-5">
