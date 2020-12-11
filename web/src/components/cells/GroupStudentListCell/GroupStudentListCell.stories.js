@@ -1,5 +1,5 @@
-import { Loading, Empty, Failure, Success } from './GroupListCell'
-import { standard } from './GroupListCell.mock'
+import { Loading, Empty, Failure, Success } from './GroupStudentListCell'
+import { standard } from './GroupStudentListCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
@@ -17,4 +17,4 @@ export const success = () => {
   return Success ? <Success {...standard()} /> : null
 }
 
-export default { title: 'Cells/GroupListCell' }
+export default { title: 'Cells/GroupStudentListCell' }

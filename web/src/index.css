@@ -56,3 +56,12 @@
   @apply ring-red-500;
   @apply ring-2;
 }
+
+.text-loading {
+  color: transparent;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.img-loading {
+  filter: blur(5px);
+}

@@ -1,8 +1,8 @@
 import { render, screen } from '@redwoodjs/testing'
-import { Loading, Empty, Failure, Success } from './GroupListCell'
-import { standard } from './GroupListCell.mock'
+import { Loading, Empty, Failure, Success } from './GroupStudentListCell'
+import { standard } from './GroupStudentListCell.mock'
 
-describe('GroupListCell', () => {
+describe('GroupStudentListCell', () => {
   test('Loading renders successfully', () => {
     expect(() => {
       render(<Loading />)
