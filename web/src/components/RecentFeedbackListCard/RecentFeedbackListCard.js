@@ -1,15 +1,12 @@
 import ListViewRecentItem from '../../components/ListViewRecentItem/ListViewRecentItem'
 
-const RecentFeedbackListCard = () => {
+const RecentFeedbackListCard = ({ firstName }) => {
   return (
     <div className="white-box mb-4 max-h-96 overflow-scroll">
-      <h2 className="font-display text-lg mb-2">Recent Feedback for _______</h2>
+      <h2 className="font-display text-lg mb-2">
+        Recent Feedback for {firstName}
+      </h2>
       <ul>
-        <ListViewRecentItem />
-        <ListViewRecentItem />
-        <ListViewRecentItem />
-        <ListViewRecentItem />
-        <ListViewRecentItem />
         <ListViewRecentItem />
         <ListViewRecentItem />
         <ListViewRecentItem />

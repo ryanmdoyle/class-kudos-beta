@@ -1,4 +1,4 @@
-import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStudentItem'
+import GroupList from 'src/components/GroupList/GroupList'
 
 export const QUERY = gql`
   query GroupStudentListQuery($id: String!) {
@@ -40,22 +40,6 @@ export const Empty = () => (
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ enrollmentsOfGroup, setEnrollee }) => {
-  const setCurrent = (user) => {
-    setEnrollee(user)
-  }
-  return (
-    <ul className="col-span-4 overflow-scroll 2xl:col-span-5 p-1">
-      {enrollmentsOfGroup.map((enrollment) => (
-        <ListViewStudentItem
-          key={enrollment.id}
-          name={`${enrollment.user.firstName} ${enrollment.user.lastName}`}
-          points={'5'}
-          onClick={() => {
-            setCurrent(enrollment.user)
-          }}
-        />
-      ))}
-    </ul>
-  )
+export const Success = ({ enrollmentsOfGroup }) => {
+  return <GroupList enrollmentsOfGroup={enrollmentsOfGroup} />
 }

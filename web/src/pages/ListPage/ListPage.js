@@ -20,7 +20,7 @@ const ListPage = ({ groupId }) => {
           setEnrollee={setEnrollee}
         />
 
-        <div className="h-full flex flex-col col-span-8 2xl:col-span-3">
+        {/* <div className="h-full flex flex-col col-span-8 2xl:col-span-3">
           {currentEnrollee && (
             <>
               <StudentPointsCard
@@ -34,7 +34,7 @@ const ListPage = ({ groupId }) => {
               <RecentFeedbackListCard />
             </>
           )}
-        </div>
+        </div> */}
       </div>
     </DashboardLayout>
   )
