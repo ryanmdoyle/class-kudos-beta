@@ -7,7 +7,7 @@ import RedeemedView from 'src/components/RedeemedView/RedeemedView'
 import FeedbackView from 'src/components/FeedbackView/FeedbackView'
 
 const GroupPage = ({ groupId }) => {
-  const [view, setView] = useState('list')
+  const [view, setView] = useState('grid')
 
   const viewList = () => {
     setView('list')
