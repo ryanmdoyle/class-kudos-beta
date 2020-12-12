@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing'
 
-import ListPage from './ListPage'
+import RedeemedView from './RedeemedView'
 
-describe('ListPage', () => {
+describe('RedeemedView', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<ListPage />)
+      render(<RedeemedView />)
     }).not.toThrow()
   })
 })

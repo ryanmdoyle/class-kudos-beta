@@ -1,7 +1,12 @@
-const SubNav = () => {
+const SubNav = ({ view, viewList, viewGrid, viewFeedback, viewRedeemed }) => {
   return (
     <div className="w-full h-12 bg-purple-500 px-4 flex text-white">
-      <div className="h-full flex items-center mr-12 relative">
+      <div
+        className="h-full flex items-center mr-12 relative"
+        onClick={() => {
+          viewList()
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -17,9 +22,17 @@ const SubNav = () => {
           />
         </svg>
         <span>List</span>
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
+        {view === 'list' && (
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
+        )}
       </div>
-      <div className="h-full flex items-center mr-12">
+
+      <div
+        className="h-full flex items-center mr-12 relative"
+        onClick={() => {
+          viewGrid()
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -35,8 +48,17 @@ const SubNav = () => {
           />
         </svg>
         <span>Grid</span>
+        {view === 'grid' && (
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
+        )}
       </div>
-      <div className="h-full flex items-center mr-12">
+
+      <div
+        className="h-full flex items-center mr-12"
+        onClick={() => {
+          viewFeedback()
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -53,7 +75,13 @@ const SubNav = () => {
         </svg>
         <span>Feedback</span>
       </div>
-      <div className="h-full flex items-center">
+
+      <div
+        className="h-full flex items-center"
+        onClick={() => {
+          viewRedeemed()
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

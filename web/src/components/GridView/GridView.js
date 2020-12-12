@@ -1,12 +1,8 @@
-// import { Link, routes } from '@redwoodjs/router'
 import GridStudentSquare from 'src/components/GridStudentSquare/GridStudentSquare'
-import SubNav from 'src/components/SubNav/SubNav'
-import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 
-const GridPage = ({ groupId }) => {
+const GridView = ({ groupId }) => {
   return (
-    <DashboardLayout>
-      <SubNav />
+    <>
       <h1>Group {groupId}</h1>
       <div className="w-full h-sub-full p-4">
         <div className="w-full flex justify-between mb-6">
@@ -35,8 +31,8 @@ const GridPage = ({ groupId }) => {
           <GridStudentSquare />
         </div>
       </div>
-    </DashboardLayout>
+    </>
   )
 }
 
-export default GridPage
+export default GridView
