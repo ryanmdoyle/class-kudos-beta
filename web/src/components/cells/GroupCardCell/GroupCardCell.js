@@ -1,5 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
-
 import GroupCard from 'src/components/GroupCard/GroupCard'
 
 export const QUERY = gql`
@@ -34,15 +32,14 @@ export const Success = ({ groupsOwned, groupType }) => {
   }
   return groupsOfType.map((group) => {
     return (
-      <Link to={routes.groupList({ groupId: group.id })} key={group.id}>
-        <GroupCard
-          id={group.id}
-          name={group.name}
-          description={group.description}
-          studentCount={group.enrollments.length}
-          groupType={groupType || null}
-        />
-      </Link>
+      <GroupCard
+        id={group.id}
+        key={group.id}
+        name={group.name}
+        description={group.description}
+        studentCount={group.enrollments.length}
+        groupType={groupType || null}
+      />
     )
   })
 }
