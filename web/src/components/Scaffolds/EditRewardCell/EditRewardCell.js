@@ -8,6 +8,7 @@ export const QUERY = gql`
       id
       name
       cost
+      groupId
     }
   }
 `
@@ -17,6 +18,7 @@ const UPDATE_REWARD_MUTATION = gql`
       id
       name
       cost
+      groupId
     }
   }
 `

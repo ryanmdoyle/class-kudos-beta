@@ -64,6 +64,7 @@ const BehaviorsList = ({ behaviors }) => {
             <th>Id</th>
             <th>Name</th>
             <th>Value</th>
+            <th>Group id</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -73,6 +74,7 @@ const BehaviorsList = ({ behaviors }) => {
               <td>{truncate(behavior.id)}</td>
               <td>{truncate(behavior.name)}</td>
               <td>{truncate(behavior.value)}</td>
+              <td>{truncate(behavior.groupId)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

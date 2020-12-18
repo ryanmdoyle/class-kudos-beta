@@ -28,3 +28,10 @@ export const deleteBehavior = ({ id }) => {
     where: { id },
   })
 }
+
+export const Behavior = {
+  group: (_obj, { root }) =>
+    db.behavior.findOne({ where: { id: root.id } }).group(),
+  feedback: (_obj, { root }) =>
+    db.behavior.findOne({ where: { id: root.id } }).feedback(),
+}

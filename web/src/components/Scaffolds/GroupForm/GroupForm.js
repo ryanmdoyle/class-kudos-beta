@@ -5,6 +5,7 @@ import {
   Label,
   TextField,
   Submit,
+  SelectField,
 } from '@redwoodjs/forms'
 
 const GroupForm = (props) => {
@@ -61,14 +62,25 @@ const GroupForm = (props) => {
         >
           Type
         </Label>
-        <TextField
+        {/* <TextField
           name="type"
           defaultValue={props.group?.type}
           className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-        <FieldError name="type" className="rw-field-error" />
+        <FieldError name="type" className="rw-field-error" /> */}
+
+        <SelectField
+          name="type"
+          defaultValue={props.group?.type}
+          className="rw-input mb-2"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        >
+          <option value="primary">Class</option>
+          <option value="secondary">Group</option>
+        </SelectField>
 
         {/* <Label
           name="ownerId"

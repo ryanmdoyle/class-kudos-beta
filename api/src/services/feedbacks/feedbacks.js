@@ -1,5 +1,4 @@
 import { db } from 'src/lib/db'
-import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const feedbacks = () => {
   return db.feedback.findMany()
@@ -13,13 +12,13 @@ export const feedback = ({ id }) => {
 
 export const createFeedback = ({ input }) => {
   return db.feedback.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
 export const updateFeedback = ({ id, input }) => {
   return db.feedback.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }
@@ -33,4 +32,6 @@ export const deleteFeedback = ({ id }) => {
 export const Feedback = {
   user: (_obj, { root }) =>
     db.feedback.findOne({ where: { id: root.id } }).user(),
+  behavior: (_obj, { root }) =>
+    db.feedback.findOne({ where: { id: root.id } }).behavior(),
 }

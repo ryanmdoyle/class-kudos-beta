@@ -64,6 +64,7 @@ const RewardsList = ({ rewards }) => {
             <th>Id</th>
             <th>Name</th>
             <th>Cost</th>
+            <th>Group id</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -73,6 +74,7 @@ const RewardsList = ({ rewards }) => {
               <td>{truncate(reward.id)}</td>
               <td>{truncate(reward.name)}</td>
               <td>{truncate(reward.cost)}</td>
+              <td>{truncate(reward.groupId)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

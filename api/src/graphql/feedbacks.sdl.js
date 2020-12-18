@@ -5,6 +5,8 @@ export const schema = gql`
     createdAt: DateTime!
     user: User!
     userId: String!
+    behavior: Behavior!
+    behaviorId: String!
   }
 
   type Query {
@@ -15,11 +17,13 @@ export const schema = gql`
   input CreateFeedbackInput {
     type: String!
     userId: String!
+    behaviorId: String!
   }
 
   input UpdateFeedbackInput {
     type: String
     userId: String
+    behaviorId: String
   }
 
   type Mutation {

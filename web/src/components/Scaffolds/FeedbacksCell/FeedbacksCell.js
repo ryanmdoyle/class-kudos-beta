@@ -9,6 +9,7 @@ export const QUERY = gql`
       type
       createdAt
       userId
+      behaviorId
     }
   }
 `

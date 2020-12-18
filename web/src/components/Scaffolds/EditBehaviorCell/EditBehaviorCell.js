@@ -8,6 +8,7 @@ export const QUERY = gql`
       id
       name
       value
+      groupId
     }
   }
 `
@@ -17,6 +18,7 @@ const UPDATE_BEHAVIOR_MUTATION = gql`
       id
       name
       value
+      groupId
     }
   }
 `

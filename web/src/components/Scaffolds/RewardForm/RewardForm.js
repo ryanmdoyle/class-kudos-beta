@@ -55,6 +55,22 @@ const RewardForm = (props) => {
         />
         <FieldError name="cost" className="rw-field-error" />
 
+        <Label
+          name="groupId"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Group id
+        </Label>
+        <TextField
+          name="groupId"
+          defaultValue={props.reward?.groupId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="groupId" className="rw-field-error" />
+
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save

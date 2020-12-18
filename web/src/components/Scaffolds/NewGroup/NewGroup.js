@@ -1,4 +1,5 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
+import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import GroupForm from 'src/components/Scaffolds/GroupForm'
 
@@ -13,6 +14,7 @@ const CREATE_GROUP_MUTATION = gql`
 `
 
 const NewGroup = () => {
+  const { currentUser } = useAuth()
   const { addMessage } = useFlash()
   const [createGroup, { loading, error }] = useMutation(CREATE_GROUP_MUTATION, {
     onCompleted: () => {
@@ -22,6 +24,8 @@ const NewGroup = () => {
   })
 
   const onSave = (input) => {
+    input.ownerId = currentUser.id
+    console.log('INPUT IN NEWGROUP', input)
     createGroup({ variables: { input } })
   }
 

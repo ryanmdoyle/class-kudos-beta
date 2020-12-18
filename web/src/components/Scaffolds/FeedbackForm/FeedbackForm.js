@@ -54,6 +54,22 @@ const FeedbackForm = (props) => {
         />
         <FieldError name="userId" className="rw-field-error" />
 
+        <Label
+          name="behaviorId"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Behavior id
+        </Label>
+        <TextField
+          name="behaviorId"
+          defaultValue={props.feedback?.behaviorId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="behaviorId" className="rw-field-error" />
+
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save

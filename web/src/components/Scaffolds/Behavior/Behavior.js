@@ -38,11 +38,6 @@ const Behavior = ({ behavior }) => {
       navigate(routes.scaffoldsBehaviors())
       addMessage('Behavior deleted.', { classes: 'rw-flash-success' })
     },
-    // This refetches the query on the list page. Read more about other ways to
-    // update the cache over here:
-    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
-    refetchQueries: [{ query: QUERY }],
-    awaitRefetchQueries: true,
   })
 
   const onDeleteClick = (id) => {
@@ -72,6 +67,10 @@ const Behavior = ({ behavior }) => {
             <tr>
               <th>Value</th>
               <td>{behavior.value}</td>
+            </tr>
+            <tr>
+              <th>Group id</th>
+              <td>{behavior.groupId}</td>
             </tr>
           </tbody>
         </table>

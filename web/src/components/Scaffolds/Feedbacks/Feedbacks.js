@@ -65,6 +65,7 @@ const FeedbacksList = ({ feedbacks }) => {
             <th>Type</th>
             <th>Created at</th>
             <th>User id</th>
+            <th>Behavior id</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -75,6 +76,7 @@ const FeedbacksList = ({ feedbacks }) => {
               <td>{truncate(feedback.type)}</td>
               <td>{timeTag(feedback.createdAt)}</td>
               <td>{truncate(feedback.userId)}</td>
+              <td>{truncate(feedback.behaviorId)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

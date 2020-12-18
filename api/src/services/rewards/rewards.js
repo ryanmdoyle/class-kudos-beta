@@ -30,6 +30,8 @@ export const deleteReward = ({ id }) => {
 }
 
 export const Reward = {
-  Redeemed: (_obj, { root }) =>
-    db.reward.findOne({ where: { id: root.id } }).Redeemed(),
+  group: (_obj, { root }) =>
+    db.reward.findOne({ where: { id: root.id } }).group(),
+  redeemed: (_obj, { root }) =>
+    db.reward.findOne({ where: { id: root.id } }).redeemed(),
 }

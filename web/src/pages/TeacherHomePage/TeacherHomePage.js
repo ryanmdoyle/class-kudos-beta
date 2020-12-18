@@ -1,4 +1,5 @@
-// import { Link, routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
+
 import GroupCardCell from 'src/components/cells/GroupCardCell/GroupCardCell'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 
@@ -17,6 +18,11 @@ const TeacherHomePage = () => {
           </div>
         </div>
       </div>
+      <Link to={routes.scaffoldsNewGroup()}>
+        <button className="button-green absolute bottom-5 right-5">
+          Create New
+        </button>
+      </Link>
     </DashboardLayout>
   )
 }

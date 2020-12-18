@@ -3,6 +3,9 @@ export const schema = gql`
     id: String!
     name: String!
     value: Int!
+    group: Group!
+    groupId: String!
+    feedback: [Feedback]!
   }
 
   type Query {
@@ -13,11 +16,13 @@ export const schema = gql`
   input CreateBehaviorInput {
     name: String!
     value: Int!
+    groupId: String!
   }
 
   input UpdateBehaviorInput {
     name: String
     value: Int
+    groupId: String
   }
 
   type Mutation {

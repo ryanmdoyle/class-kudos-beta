@@ -15,13 +15,13 @@ export const group = ({ id }) => {
 
 export const createGroup = ({ input }) => {
   requireAuth({ role: 'teacher' })
-  // if role == teacher
-  if (input.type !== 'primary' || input.type !== 'secondary') {
+  if (input.type === 'primary' || input.type === 'secondary') {
+    return db.group.create({
+      data: foreignKeyReplacement(input),
+    })
+  } else {
     throw new UserInputError('Cannot create group, invalid group type.')
   }
-  return db.group.create({
-    data: foreignKeyReplacement(input),
-  })
 }
 
 export const updateGroup = ({ id, input }) => {
