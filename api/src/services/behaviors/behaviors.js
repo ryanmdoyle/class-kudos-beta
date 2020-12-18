@@ -1,4 +1,5 @@
 import { db } from 'src/lib/db'
+import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const behaviors = () => {
   return db.behavior.findMany()
@@ -12,13 +13,13 @@ export const behavior = ({ id }) => {
 
 export const createBehavior = ({ input }) => {
   return db.behavior.create({
-    data: input,
+    data: foreignKeyReplacement(input),
   })
 }
 
 export const updateBehavior = ({ id, input }) => {
   return db.behavior.update({
-    data: input,
+    data: foreignKeyReplacement(input),
     where: { id },
   })
 }

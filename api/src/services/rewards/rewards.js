@@ -1,4 +1,5 @@
 import { db } from 'src/lib/db'
+import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const rewards = () => {
   return db.reward.findMany()
@@ -12,13 +13,13 @@ export const reward = ({ id }) => {
 
 export const createReward = ({ input }) => {
   return db.reward.create({
-    data: input,
+    data: foreignKeyReplacement(input),
   })
 }
 
 export const updateReward = ({ id, input }) => {
   return db.reward.update({
-    data: input,
+    data: foreignKeyReplacement(input),
     where: { id },
   })
 }
