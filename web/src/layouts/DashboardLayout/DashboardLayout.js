@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }) => {
             {hasRole('teacher') && <TeacherNav />}
             {hasRole('student') && <StudentNav />}
           </nav>
-          <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll">
+          <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll relative">
             {children}
           </main>
         </div>
