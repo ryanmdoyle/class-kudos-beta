@@ -1,4 +1,11 @@
-const SubNav = ({ view, viewList, viewGrid, viewFeedback, viewRedeemed }) => {
+const SubNav = ({
+  view,
+  viewList,
+  viewGrid,
+  viewFeedback,
+  viewRedeemed,
+  viewOptions,
+}) => {
   return (
     <div className="w-full h-12 bg-purple-500 px-4 flex text-white">
       <div
@@ -54,7 +61,7 @@ const SubNav = ({ view, viewList, viewGrid, viewFeedback, viewRedeemed }) => {
       </div>
 
       <div
-        className="h-full flex items-center mr-12"
+        className="h-full flex items-center mr-12 relative"
         onClick={() => {
           viewFeedback()
         }}
@@ -74,10 +81,13 @@ const SubNav = ({ view, viewList, viewGrid, viewFeedback, viewRedeemed }) => {
           />
         </svg>
         <span>Feedback</span>
+        {view === 'feedback' && (
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
+        )}
       </div>
 
       <div
-        className="h-full flex items-center"
+        className="h-full flex items-center mr-12 relative"
         onClick={() => {
           viewRedeemed()
         }}
@@ -97,6 +107,42 @@ const SubNav = ({ view, viewList, viewGrid, viewFeedback, viewRedeemed }) => {
           />
         </svg>
         <span>Redeemed</span>
+        {view === 'redeemed' && (
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
+        )}
+      </div>
+
+      <div
+        className="h-full flex items-center mr-12 relative"
+        onClick={() => {
+          viewOptions()
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 mr-1"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="6" cy="10" r="2" />
+          <line x1="6" y1="4" x2="6" y2="8" />
+          <line x1="6" y1="12" x2="6" y2="20" />
+          <circle cx="12" cy="16" r="2" />
+          <line x1="12" y1="4" x2="12" y2="14" />
+          <line x1="12" y1="18" x2="12" y2="20" />
+          <circle cx="18" cy="7" r="2" />
+          <line x1="18" y1="4" x2="18" y2="5" />
+          <line x1="18" y1="9" x2="18" y2="20" />
+        </svg>
+        <span>Options</span>
+        {view === 'options' && (
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
+        )}
       </div>
     </div>
   )
