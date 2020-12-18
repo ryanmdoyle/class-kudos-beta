@@ -42,6 +42,10 @@ export const Group = {
     db.group.findOne({ where: { id: root.id } }).owner(),
   enrollments: (_obj, { root }) =>
     db.group.findOne({ where: { id: root.id } }).enrollments(),
+  behaviors: (_obj, { root }) =>
+    db.group.findOne({ where: { id: root.id } }).behaviors(),
+  rewards: (_obj, { root }) =>
+    db.group.findOne({ where: { id: root.id } }).rewards(),
 }
 
 // Custom methods
