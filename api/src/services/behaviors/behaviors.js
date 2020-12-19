@@ -36,3 +36,9 @@ export const Behavior = {
   feedback: (_obj, { root }) =>
     db.behavior.findOne({ where: { id: root.id } }).feedback(),
 }
+
+export const behaviorsOfGroup = ({ groupId }) => {
+  return db.behavior.findMany({
+    where: { groupId: groupId },
+  })
+}

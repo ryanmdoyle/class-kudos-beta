@@ -8,7 +8,7 @@ import FeedbackView from 'src/components/FeedbackView/FeedbackView'
 import OptionsView from 'src/components/OptionsView/OptionsView'
 
 const GroupPage = ({ groupId }) => {
-  const [view, setView] = useState('grid')
+  const [view, setView] = useState('options')
 
   const viewList = () => {
     setView('list')

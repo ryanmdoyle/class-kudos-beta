@@ -12,7 +12,7 @@ const CREATE_BEHAVIOR_MUTATION = gql`
   }
 `
 
-const NewBehavior = () => {
+const NewBehavior = ({ groupId }) => {
   const { addMessage } = useFlash()
   const [createBehavior, { loading, error }] = useMutation(
     CREATE_BEHAVIOR_MUTATION,
@@ -25,6 +25,7 @@ const NewBehavior = () => {
   )
 
   const onSave = (input) => {
+    input.groupId = groupId
     createBehavior({ variables: { input } })
   }
 
@@ -34,7 +35,12 @@ const NewBehavior = () => {
         <h2 className="rw-heading rw-heading-secondary">New Behavior</h2>
       </header>
       <div className="rw-segment-main">
-        <BehaviorForm onSave={onSave} loading={loading} error={error} />
+        <BehaviorForm
+          onSave={onSave}
+          loading={loading}
+          error={error}
+          groupId={groupId}
+        />
       </div>
     </div>
   )
