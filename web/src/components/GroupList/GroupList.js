@@ -5,7 +5,7 @@ import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCar
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
 
-const GroupList = ({ enrollmentsOfGroup }) => {
+const GroupList = ({ enrollmentsOfGroup, groupId }) => {
   const [student, setStudent] = useState(null)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const GroupList = ({ enrollmentsOfGroup }) => {
           name={`${student?.firstName} ${student?.lastName}`}
           points={5}
         />
-        <AwardFeedbackCard />
+        <AwardFeedbackCard groupId={groupId} student={student} />
         <RecentFeedbackListCard firstName={student?.firstName} />
       </div>
     </>

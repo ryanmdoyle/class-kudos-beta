@@ -41,6 +41,6 @@ export const Empty = () => (
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ enrollmentsOfGroup }) => {
-  return <GroupList enrollmentsOfGroup={enrollmentsOfGroup} />
+export const Success = ({ enrollmentsOfGroup, id }) => {
+  return <GroupList enrollmentsOfGroup={enrollmentsOfGroup} groupId={id} />
 }
