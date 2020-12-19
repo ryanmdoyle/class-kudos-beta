@@ -2,6 +2,7 @@ import { db } from 'src/lib/db'
 import { context, UserInputError } from '@redwoodjs/api'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 import { requireAuth } from 'src/lib/auth'
+import createStarterBehaviors from 'src/lib/createStarterBehaviors'
 
 export const groups = () => {
   return db.group.findMany()
@@ -16,9 +17,11 @@ export const group = ({ id }) => {
 export const createGroup = ({ input }) => {
   requireAuth({ role: 'teacher' })
   if (input.type === 'primary' || input.type === 'secondary') {
-    return db.group.create({
+    const group = db.group.create({
       data: foreignKeyReplacement(input),
     })
+    group.then((data) => createStarterBehaviors(data.id))
+    return group
   } else {
     throw new UserInputError('Cannot create group, invalid group type.')
   }
