@@ -9,6 +9,13 @@ export const QUERY = gql`
         firstName
         lastName
         profileImage
+        feedback {
+          id
+          behavior {
+            id
+            value
+          }
+        }
       }
     }
   }

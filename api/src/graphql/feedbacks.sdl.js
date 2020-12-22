@@ -12,6 +12,7 @@ export const schema = gql`
   type Query {
     feedbacks: [Feedback!]!
     feedback(id: String!): Feedback
+    feedbacksOfUser(userId: String!): [Feedback!]!
   }
 
   input CreateFeedbackInput {

@@ -36,3 +36,11 @@ export const Feedback = {
   behavior: (_obj, { root }) =>
     db.feedback.findOne({ where: { id: root.id } }).behavior(),
 }
+
+// Custom
+
+export const feedbacksOfUser = ({ userId }) => {
+  return db.feedback.findMany({
+    where: { userId },
+  })
+}

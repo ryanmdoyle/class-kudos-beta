@@ -4,6 +4,7 @@ import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStud
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
+import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
 const GroupList = ({ enrollmentsOfGroup, groupId }) => {
   const [student, setStudent] = useState(null)
@@ -19,8 +20,7 @@ const GroupList = ({ enrollmentsOfGroup, groupId }) => {
           return (
             <ListViewStudentItem
               key={enrollment.id}
-              name={`${enrollment.user.firstName} ${enrollment.user.lastName}`}
-              points={'5'}
+              student={enrollment.user}
               onClick={() => {
                 setStudent(enrollment.user)
               }}
@@ -32,10 +32,13 @@ const GroupList = ({ enrollmentsOfGroup, groupId }) => {
         <StudentPointsCard
           userId={student?.id}
           name={`${student?.firstName} ${student?.lastName}`}
-          points={5}
+          points={<FeedbackPointsCell userId={student?.id} />}
         />
         <AwardFeedbackCard groupId={groupId} student={student} />
-        <RecentFeedbackListCard firstName={student?.firstName} />
+        <RecentFeedbackListCard
+          userId={student?.id}
+          firstName={student?.firstName}
+        />
       </div>
     </>
   )
