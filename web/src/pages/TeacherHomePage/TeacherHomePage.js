@@ -1,14 +1,19 @@
-import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
+import { usePageLoadingContext } from '@redwoodjs/router'
 
 import GroupCardCell from 'src/components/cells/GroupCardCell/GroupCardCell'
+import NewGroupButton from 'src/components/NewGroupButton/NewGroupButton'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
+import PageLoader from 'src/components/PageLoader/PageLoader'
 
 const TeacherHomePage = () => {
   const { currentUser } = useAuth()
   const { firstName } = currentUser
+  const { loading } = usePageLoadingContext
+
   return (
     <DashboardLayout>
+      {loading && <PageLoader />}
       <div className="p-4">
         <h1 className="text-3xl font-display mb-4">
           Welcome Back{currentUser ? `, ${firstName}` : null}! 👋
@@ -24,11 +29,7 @@ const TeacherHomePage = () => {
           </div>
         </div>
       </div>
-      <Link to={routes.scaffoldsNewGroup()}>
-        <button className="button-green absolute top-5 right-5">
-          Create New
-        </button>
-      </Link>
+      <NewGroupButton />
     </DashboardLayout>
   )
 }

@@ -1,9 +1,10 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { useAuth } from '@redwoodjs/auth'
-import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import GroupForm from 'src/components/Scaffolds/GroupForm'
+import PageLoader from 'src/components/PageLoader/PageLoader'
 
-import { QUERY } from 'src/components/Scaffolds/GroupsCell'
+import { QUERY } from 'src/components/cells/GroupCardCell'
 
 const CREATE_GROUP_MUTATION = gql`
   mutation CreateGroupMutation($input: CreateGroupInput!) {
@@ -14,23 +15,26 @@ const CREATE_GROUP_MUTATION = gql`
 `
 
 const NewGroup = () => {
+  const { close } = useModal()
   const { currentUser } = useAuth()
   const { addMessage } = useFlash()
   const [createGroup, { loading, error }] = useMutation(CREATE_GROUP_MUTATION, {
+    refetchQueries: [{ query: QUERY }],
+    awaitRefetchQueries: true,
     onCompleted: () => {
-      navigate(routes.scaffoldsGroups())
+      close()
       addMessage('Group created.', { classes: 'rw-flash-success' })
     },
   })
 
   const onSave = (input) => {
     input.ownerId = currentUser.id
-    console.log('INPUT IN NEWGROUP', input)
     createGroup({ variables: { input } })
   }
 
   return (
     <div className="rw-segment">
+      {loading && <PageLoader />}
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">New Group</h2>
       </header>

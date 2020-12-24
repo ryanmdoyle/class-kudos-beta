@@ -1,6 +1,6 @@
 import { useState, useContext, createContext } from 'react'
 
-const ModalContext = createContext(null)
+const ModalContext = createContext(<></>)
 ModalContext.displayName = 'ModalContext'
 
 const ModalProvider = ({ children }) => {

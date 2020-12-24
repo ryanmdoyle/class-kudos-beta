@@ -1,7 +1,11 @@
 import { useModal } from 'src/context/ModalContext'
 
+import { usePageLoadingContext } from '@redwoodjs/router'
+import PageLoader from 'src/components/PageLoader/PageLoader'
+
 const Modal = () => {
   const { child, isOpen, close } = useModal()
+  const { loading } = usePageLoadingContext
 
   const onClick = (e) => {
     if (e.target.id === 'modal-outside') {
@@ -21,6 +25,7 @@ const Modal = () => {
           id="modal-inside"
           className="w-5/6 bg-white rounded-md p-4 pt-6 relative"
         >
+          {loading && <PageLoader />}
           <div
             onClick={() => {
               close()
