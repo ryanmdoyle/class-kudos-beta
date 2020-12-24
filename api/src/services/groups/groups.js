@@ -34,7 +34,10 @@ export const updateGroup = ({ id, input }) => {
   })
 }
 
-export const deleteGroup = ({ id }) => {
+export const deleteGroup = async ({ id }) => {
+  await db.behavior.deleteMany({
+    where: { groupId: id },
+  })
   return db.group.delete({
     where: { id },
   })

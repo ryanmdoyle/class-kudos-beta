@@ -42,3 +42,9 @@ export const behaviorsOfGroup = ({ groupId }) => {
     where: { groupId: groupId },
   })
 }
+
+export const deleteBehaviorsOfGroup = ({ groupId }) => {
+  return db.behavior.delete({
+    where: { id: groupId },
+  })
+}
