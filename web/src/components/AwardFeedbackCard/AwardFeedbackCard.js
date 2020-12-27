@@ -1,7 +1,6 @@
 import BehaviorButtons from '../BehaviorButtons/BehaviorButtons'
 
 const AwardFeedbackCard = ({ groupId, student, behaviorsOfGroup }) => {
-  console.log('behaviorsOfGroup in award card', behaviorsOfGroup)
   return (
     <div className="white-box mb-4">
       <h2 className="font-display text-lg">
