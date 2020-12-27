@@ -6,7 +6,7 @@ const RecentFeedbackListCard = ({ userId, firstName }) => {
       <h2 className="font-display text-lg mb-2">
         Recent Feedback for {firstName}
       </h2>
-      <RecentUserFeedbackCell userId={userId} />
+      {userId && <RecentUserFeedbackCell userId={userId} />}
     </div>
   )
 }
