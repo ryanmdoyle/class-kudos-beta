@@ -18,6 +18,10 @@ export const QUERY = gql`
         }
       }
     }
+    behaviorsOfGroup(groupId: $id) {
+      id
+      name
+    }
   }
 `
 
@@ -48,6 +52,12 @@ export const Empty = () => (
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ enrollmentsOfGroup, id }) => {
-  return <GroupList enrollmentsOfGroup={enrollmentsOfGroup} groupId={id} />
+export const Success = ({ id, enrollmentsOfGroup, behaviorsOfGroup }) => {
+  return (
+    <GroupList
+      groupId={id}
+      enrollmentsOfGroup={enrollmentsOfGroup}
+      behaviorsOfGroup={behaviorsOfGroup}
+    />
+  )
 }

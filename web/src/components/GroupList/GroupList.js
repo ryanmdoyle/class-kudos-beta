@@ -6,9 +6,8 @@ import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCar
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
 import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
-const GroupList = ({ enrollmentsOfGroup, groupId }) => {
+const GroupList = ({ groupId, enrollmentsOfGroup, behaviorsOfGroup }) => {
   const [student, setStudent] = useState(null)
-
   useEffect(() => {
     setStudent(enrollmentsOfGroup[0].user)
   }, [enrollmentsOfGroup])
@@ -34,7 +33,11 @@ const GroupList = ({ enrollmentsOfGroup, groupId }) => {
           student={student}
           points={<FeedbackPointsCell userId={student?.id} />}
         />
-        <AwardFeedbackCard groupId={groupId} student={student} />
+        <AwardFeedbackCard
+          groupId={groupId}
+          student={student}
+          behaviorsOfGroup={behaviorsOfGroup}
+        />
         <RecentFeedbackListCard
           userId={student?.id}
           firstName={student?.firstName}
