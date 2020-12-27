@@ -31,7 +31,7 @@ const GroupList = ({ enrollmentsOfGroup, groupId }) => {
       <div className="h-full flex flex-col col-span-8 2xl:col-span-3">
         <StudentPointsCard
           userId={student?.id}
-          name={`${student?.firstName} ${student?.lastName}`}
+          student={student}
           points={<FeedbackPointsCell userId={student?.id} />}
         />
         <AwardFeedbackCard groupId={groupId} student={student} />

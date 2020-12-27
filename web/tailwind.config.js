@@ -27,6 +27,14 @@ module.exports = {
         'full-minusNav': 'calc(100% - 4rem)',
         'sub-full': 'calc(100% - 3rem)',
       },
+      colors: {
+        green: {
+          DEFAULT: '#34D399',
+        },
+        red: {
+          DEFAULT: '#EF4444',
+        },
+      },
     },
   },
   variants: {
