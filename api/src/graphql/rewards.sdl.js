@@ -11,6 +11,7 @@ export const schema = gql`
   type Query {
     rewards: [Reward!]!
     reward(id: String!): Reward
+    rewardsOfGroup(groupId: String!): [Reward!]!
   }
 
   input CreateRewardInput {

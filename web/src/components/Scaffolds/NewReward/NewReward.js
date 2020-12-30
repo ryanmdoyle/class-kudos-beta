@@ -1,8 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import RewardForm from 'src/components/Scaffolds/RewardForm'
 
-import { QUERY } from 'src/components/Scaffolds/RewardsCell'
+import { QUERY } from 'src/components/cells/RewardsListCell'
 
 const CREATE_REWARD_MUTATION = gql`
   mutation CreateRewardMutation($input: CreateRewardInput!) {
@@ -12,13 +12,16 @@ const CREATE_REWARD_MUTATION = gql`
   }
 `
 
-const NewReward = () => {
+const NewReward = ({ groupId }) => {
+  const { close } = useModal()
   const { addMessage } = useFlash()
   const [createReward, { loading, error }] = useMutation(
     CREATE_REWARD_MUTATION,
     {
+      awaitRefetchQueries: true,
+      refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
       onCompleted: () => {
-        navigate(routes.scaffoldsRewards())
+        close()
         addMessage('Reward created.', { classes: 'rw-flash-success' })
       },
     }
@@ -34,7 +37,12 @@ const NewReward = () => {
         <h2 className="rw-heading rw-heading-secondary">New Reward</h2>
       </header>
       <div className="rw-segment-main">
-        <RewardForm onSave={onSave} loading={loading} error={error} />
+        <RewardForm
+          onSave={onSave}
+          loading={loading}
+          error={error}
+          groupId={groupId}
+        />
       </div>
     </div>
   )

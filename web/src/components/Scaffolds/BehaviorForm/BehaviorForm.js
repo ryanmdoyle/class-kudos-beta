@@ -12,7 +12,7 @@ const BehaviorForm = (props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.behavior?.id)
   }
-
+  const { groupId } = props
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>
@@ -57,15 +57,15 @@ const BehaviorForm = (props) => {
 
         <Label
           name="groupId"
-          className="rw-label"
+          className="rw-label hidden"
           errorClassName="rw-label rw-label-error"
         >
           Group id
         </Label>
         <TextField
           name="groupId"
-          defaultValue={props.behavior?.groupId}
-          className="rw-input"
+          defaultValue={props.behavior?.groupId || groupId}
+          className="rw-input hidden"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />

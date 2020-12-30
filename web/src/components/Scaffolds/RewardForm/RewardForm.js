@@ -12,7 +12,7 @@ const RewardForm = (props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.reward?.id)
   }
-
+  const { groupId } = props
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>
@@ -64,7 +64,7 @@ const RewardForm = (props) => {
         </Label>
         <TextField
           name="groupId"
-          defaultValue={props.reward?.groupId}
+          defaultValue={props.reward?.groupId || groupId}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}

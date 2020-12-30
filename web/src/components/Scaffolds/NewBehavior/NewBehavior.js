@@ -1,8 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import BehaviorForm from 'src/components/Scaffolds/BehaviorForm'
 
-import { QUERY } from 'src/components/Scaffolds/BehaviorsCell'
+import { QUERY } from 'src/components/cells/BehaviorsListCell'
 
 const CREATE_BEHAVIOR_MUTATION = gql`
   mutation CreateBehaviorMutation($input: CreateBehaviorInput!) {
@@ -13,12 +13,15 @@ const CREATE_BEHAVIOR_MUTATION = gql`
 `
 
 const NewBehavior = ({ groupId }) => {
+  const { close } = useModal()
   const { addMessage } = useFlash()
   const [createBehavior, { loading, error }] = useMutation(
     CREATE_BEHAVIOR_MUTATION,
     {
+      awaitRefetchQueries: true,
+      refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
       onCompleted: () => {
-        navigate(routes.scaffoldsBehaviors())
+        close()
         addMessage('Behavior created.', { classes: 'rw-flash-success' })
       },
     }
