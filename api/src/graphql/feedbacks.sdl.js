@@ -1,7 +1,6 @@
 export const schema = gql`
   type Feedback {
     id: String!
-    type: String!
     createdAt: DateTime!
     user: User!
     userId: String!
@@ -12,17 +11,14 @@ export const schema = gql`
   type Query {
     feedbacks: [Feedback!]!
     feedback(id: String!): Feedback
-    feedbacksOfUser(userId: String!): [Feedback!]!
   }
 
   input CreateFeedbackInput {
-    type: String!
     userId: String!
     behaviorId: String!
   }
 
   input UpdateFeedbackInput {
-    type: String
     userId: String
     behaviorId: String
   }

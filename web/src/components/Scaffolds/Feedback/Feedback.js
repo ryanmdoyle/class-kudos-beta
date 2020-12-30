@@ -61,10 +61,6 @@ const Feedback = ({ feedback }) => {
               <td>{feedback.id}</td>
             </tr>
             <tr>
-              <th>Type</th>
-              <td>{feedback.type}</td>
-            </tr>
-            <tr>
               <th>Created at</th>
               <td>{timeTag(feedback.createdAt)}</td>
             </tr>

@@ -11,14 +11,14 @@ export const feedback = ({ id }) => {
   })
 }
 
-export const createFeedback = ({ input }) => {
-  return db.feedback.create({
+export const createEnrollment = ({ input }) => {
+  return db.enrollment.create({
     data: foreignKeyReplacement(input),
   })
 }
 
-export const updateFeedback = ({ id, input }) => {
-  return db.feedback.update({
+export const updateEnrollment = ({ id, input }) => {
+  return db.enrollment.update({
     data: foreignKeyReplacement(input),
     where: { id },
   })

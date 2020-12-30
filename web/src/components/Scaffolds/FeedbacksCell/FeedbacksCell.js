@@ -6,7 +6,6 @@ export const QUERY = gql`
   query FEEDBACKS {
     feedbacks {
       id
-      type
       createdAt
       userId
       behaviorId

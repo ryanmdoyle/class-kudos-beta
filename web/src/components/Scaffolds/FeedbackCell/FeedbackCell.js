@@ -4,7 +4,6 @@ export const QUERY = gql`
   query FIND_FEEDBACK_BY_ID($id: String!) {
     feedback: feedback(id: $id) {
       id
-      type
       createdAt
       userId
       behaviorId

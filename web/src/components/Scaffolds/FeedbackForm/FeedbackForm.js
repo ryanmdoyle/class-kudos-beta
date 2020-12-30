@@ -23,22 +23,6 @@ const FeedbackForm = (props) => {
         />
 
         <Label
-          name="type"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Type
-        </Label>
-        <TextField
-          name="type"
-          defaultValue={props.feedback?.type}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="type" className="rw-field-error" />
-
-        <Label
           name="userId"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

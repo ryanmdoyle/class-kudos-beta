@@ -62,7 +62,6 @@ const FeedbacksList = ({ feedbacks }) => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Type</th>
             <th>Created at</th>
             <th>User id</th>
             <th>Behavior id</th>
@@ -73,7 +72,6 @@ const FeedbacksList = ({ feedbacks }) => {
           {feedbacks.map((feedback) => (
             <tr key={feedback.id}>
               <td>{truncate(feedback.id)}</td>
-              <td>{truncate(feedback.type)}</td>
               <td>{timeTag(feedback.createdAt)}</td>
               <td>{truncate(feedback.userId)}</td>
               <td>{truncate(feedback.behaviorId)}</td>
