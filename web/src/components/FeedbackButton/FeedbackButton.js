@@ -58,7 +58,7 @@ const FeedbackButton = ({ name, studentId, behaviorId }) => {
           />
         </svg>
       </span>
-      <span className="text-gray-500">{name || '?'}</span>
+      <span className="text-gray-500 text-center text-sm">{name || '?'}</span>
     </div>
   )
 }
