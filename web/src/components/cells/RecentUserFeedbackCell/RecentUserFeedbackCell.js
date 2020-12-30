@@ -21,9 +21,15 @@ export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ feedbacksOfUser }) => {
+  const sorted = feedbacksOfUser
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
   return (
     <ul>
-      {feedbacksOfUser.map((feedback) => (
+      {sorted.map((feedback) => (
         <ListViewRecentItem
           key={feedback.id}
           name={feedback.behavior.name}
