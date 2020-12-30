@@ -12,7 +12,7 @@ const StudentPointsCard = ({ student }) => {
       </h1>
       <div className="flex justify-end absolute bottom-2 right-4">
         <span className="font-display text-9xl text-green mr-8">{points}</span>
-        <div className="w-12 flex flex-col justify-center">
+        {/* <div className="w-12 flex flex-col justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -37,7 +37,7 @@ const StudentPointsCard = ({ student }) => {
               clipRule="evenodd"
             />
           </svg>
-        </div>
+        </div> */}
       </div>
     </div>
   )
