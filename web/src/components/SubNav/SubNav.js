@@ -34,7 +34,7 @@ const SubNav = ({
         )}
       </div>
 
-      <div
+      {/* <div
         className="h-full flex items-center mr-12 relative"
         onClick={() => {
           viewGrid()
@@ -58,7 +58,7 @@ const SubNav = ({
         {view === 'grid' && (
           <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
         )}
-      </div>
+      </div> */}
 
       <div
         className="h-full flex items-center mr-12 relative"
