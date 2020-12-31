@@ -57,7 +57,7 @@ const RewardForm = (props) => {
 
         <Label
           name="groupId"
-          className="rw-label"
+          className="rw-label hidden"
           errorClassName="rw-label rw-label-error"
         >
           Group id
@@ -65,7 +65,7 @@ const RewardForm = (props) => {
         <TextField
           name="groupId"
           defaultValue={props.reward?.groupId || groupId}
-          className="rw-input"
+          className="rw-input hidden"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
