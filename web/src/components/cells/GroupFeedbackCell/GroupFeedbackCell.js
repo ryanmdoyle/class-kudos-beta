@@ -26,7 +26,11 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ feedbacksOfGroup }) => {
-  console.log(feedbacksOfGroup)
-  return <RecentGroupFeedback feedbacksOfGroup={feedbacksOfGroup} />
+export const Success = ({ feedbacksOfGroup, groupId }) => {
+  return (
+    <RecentGroupFeedback
+      feedbacksOfGroup={feedbacksOfGroup}
+      groupId={groupId}
+    />
+  )
 }

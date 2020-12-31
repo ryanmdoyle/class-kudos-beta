@@ -1,4 +1,14 @@
-import { Link, routes } from '@redwoodjs/router'
+import { useMutation, useFlash } from '@redwoodjs/web'
+
+import { QUERY } from 'src/components/cells/GroupFeedbackCell/GroupFeedbackCell'
+
+const DELETE_FEEDBACK_MUTATION = gql`
+  mutation DeleteFeedbackMutation($id: String!) {
+    deleteFeedback(id: $id) {
+      id
+    }
+  }
+`
 
 const MAX_STRING_LENGTH = 150
 
@@ -13,12 +23,31 @@ const truncate = (text) => {
 const timeTag = (datetime) => {
   return (
     <time dateTime={datetime} title={datetime}>
-      {new Date(datetime).toUTCString()}
+      {new Date(datetime).toLocaleTimeString()} on{' '}
+      {new Date(datetime).toLocaleDateString()}
     </time>
   )
 }
 
-const RecentGroupFeedback = ({ feedbacksOfGroup }) => {
+const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
+  const { addMessage } = useFlash()
+  const [deleteFeedback] = useMutation(DELETE_FEEDBACK_MUTATION, {
+    onCompleted: () => {
+      addMessage('Feedback deleted.', { classes: 'rw-flash-success' })
+    },
+    // This refetches the query on the list page. Read more about other ways to
+    // update the cache over here:
+    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
+    refetchQueries: [{ query: QUERY, variables: { groupId } }],
+    awaitRefetchQueries: true,
+  })
+
+  const onDeleteClick = (id) => {
+    if (confirm('Are you sure you want to delete feedback ' + id + '?')) {
+      deleteFeedback({ variables: { id } })
+    }
+  }
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
@@ -44,25 +73,12 @@ const RecentGroupFeedback = ({ feedbacksOfGroup }) => {
               <td>{truncate(feedback.behavior.value)}</td>
               <td>
                 <nav className="rw-table-actions">
-                  <Link
-                    to={routes.scaffoldsFeedback({ id: feedback.id })}
-                    title={'Show feedback ' + feedback.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.scaffoldsEditFeedback({ id: feedback.id })}
-                    title={'Edit feedback ' + feedback.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
                   <a
                     href="#"
                     title={'Delete feedback ' + feedback.id}
                     className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(feedback.id)}
+                    // onClick={() => console.log(feedback.id)}
                   >
                     Delete
                   </a>
