@@ -11,14 +11,14 @@ export const feedback = ({ id }) => {
   })
 }
 
-export const createEnrollment = ({ input }) => {
-  return db.enrollment.create({
+export const createFeedback = ({ input }) => {
+  return db.feedback.create({
     data: foreignKeyReplacement(input),
   })
 }
 
-export const updateEnrollment = ({ id, input }) => {
-  return db.enrollment.update({
+export const updateFeedback = ({ id, input }) => {
+  return db.feedback.update({
     data: foreignKeyReplacement(input),
     where: { id },
   })
@@ -35,6 +35,8 @@ export const Feedback = {
     db.feedback.findOne({ where: { id: root.id } }).user(),
   behavior: (_obj, { root }) =>
     db.feedback.findOne({ where: { id: root.id } }).behavior(),
+  group: (_obj, { root }) =>
+    db.feedback.findOne({ where: { id: root.id } }).group(),
 }
 
 // Custom

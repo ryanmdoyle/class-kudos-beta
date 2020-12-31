@@ -1,3 +1,4 @@
+import RecentGroupFeedback from 'src/components/RecentGroupFeedback/RecentGroupFeedback'
 import Feedbacks from 'src/components/Scaffolds/Feedbacks'
 
 export const QUERY = gql`
@@ -26,5 +27,6 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ feedbacksOfGroup }) => {
-  return JSON.parse(feedbacksOfGroup)
+  console.log(feedbacksOfGroup)
+  return <RecentGroupFeedback feedbacksOfGroup={feedbacksOfGroup} />
 }

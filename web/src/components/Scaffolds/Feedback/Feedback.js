@@ -72,6 +72,10 @@ const Feedback = ({ feedback }) => {
               <th>Behavior id</th>
               <td>{feedback.behaviorId}</td>
             </tr>
+            <tr>
+              <th>Group id</th>
+              <td>{feedback.groupId}</td>
+            </tr>
           </tbody>
         </table>
       </div>

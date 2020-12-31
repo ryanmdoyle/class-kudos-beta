@@ -9,6 +9,7 @@ export const QUERY = gql`
       createdAt
       userId
       behaviorId
+      groupId
     }
   }
 `
@@ -19,6 +20,7 @@ const UPDATE_FEEDBACK_MUTATION = gql`
       createdAt
       userId
       behaviorId
+      groupId
     }
   }
 `

@@ -7,7 +7,11 @@ const AwardFeedbackCard = ({ groupId, student, behaviorsOfGroup }) => {
         Award Feedback{student?.firstName ? ` to ${student.firstName}` : null}
       </h2>
       <div className="h-full w-full flex flex-wrap justify-center content-start">
-        <BehaviorButtons behaviors={behaviorsOfGroup} studentId={student?.id} />
+        <BehaviorButtons
+          behaviors={behaviorsOfGroup}
+          studentId={student?.id}
+          groupId={groupId}
+        />
       </div>
     </div>
   )

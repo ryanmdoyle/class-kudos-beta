@@ -9,7 +9,7 @@ const CREATE_FEEDBACK = gql`
   }
 `
 
-const FeedbackButton = ({ name, studentId, behaviorId }) => {
+const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
   const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [{ query: QUERY, variables: { userId: studentId } }],
   })
@@ -18,9 +18,9 @@ const FeedbackButton = ({ name, studentId, behaviorId }) => {
     newFeedback({
       variables: {
         input: {
-          type: 'the type?',
           userId: studentId,
           behaviorId: behaviorId,
+          groupId: groupId,
         },
       },
     })
