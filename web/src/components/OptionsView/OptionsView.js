@@ -1,5 +1,6 @@
 import BehaviorOptions from '../BehaviorOptions/BehaviorOptions'
 import RewardOptions from '../RewardOptions/RewardOptions'
+import EnrolledListCell from '../cells/EnrolledListCell/EnrolledListCell'
 
 const OptionsView = ({ groupId }) => {
   return (
@@ -9,8 +10,7 @@ const OptionsView = ({ groupId }) => {
       <RewardOptions groupId={groupId} />
       <div className="white-box mt-4">
         <h2 className="text-xl font-display mb-2">Enrolled</h2>
-        <h2>{'OptionsView'}</h2>
-        <p>{'Find me in ./web/src/components/OptionsView/OptionsView.js'}</p>
+        <EnrolledListCell groupId={groupId} />
       </div>
     </div>
   )
