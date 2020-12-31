@@ -4,6 +4,7 @@ export const schema = gql`
     type: String!
     name: String!
     description: String
+    enrollId: String
     owner: User!
     ownerId: String!
     enrollments: [Enrollment]!
@@ -20,6 +21,7 @@ export const schema = gql`
     type: String!
     name: String!
     description: String
+    enrollId: String
     ownerId: String!
   }
 

@@ -3,7 +3,7 @@ import { useModal } from 'src/context/ModalContext'
 
 import EditGroupCell from 'src/components/Scaffolds/EditGroupCell'
 
-const GroupCard = ({ id, name, description, studentCount }) => {
+const GroupCard = ({ id, name, description, studentCount, enrollId }) => {
   const { openModal } = useModal()
 
   const settings = () => {
@@ -29,7 +29,15 @@ const GroupCard = ({ id, name, description, studentCount }) => {
         ></img>
         <div>
           <h2 className="text-xl font-display">{name}</h2>
-          <span className="text-gray-500">{description}</span>
+          <span className="text-gray-500 text-sm">{description}</span>
+          {enrollId && (
+            <>
+              <br></br>
+              <span className="text-gray-500 text-sm">
+                Enroll ID: {enrollId}
+              </span>
+            </>
+          )}
         </div>
       </div>
       <div className="flex flex-col">

@@ -7,6 +7,7 @@ export const QUERY = gql`
       type
       name
       description
+      enrollId
       enrollments {
         id
         user {
@@ -39,6 +40,7 @@ export const Success = ({ groupsOwned, groupType }) => {
         description={group.description}
         studentCount={group.enrollments.length}
         groupType={groupType || null}
+        enrollId={group.enrollId}
       />
     )
   })
