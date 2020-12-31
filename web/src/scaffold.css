@@ -273,7 +273,7 @@
   padding: 0.75rem;
 }
 .rw-table thead tr {
-  background-color: #e2e8f0;
+  background-color: white;
   color: #4a5568;
 }
 .rw-table th {
@@ -292,11 +292,14 @@
   }
 }
 .rw-table tbody tr {
-  background-color: #f7fafc;
+  background-color: #fff;
   border-top-width: 1px;
 }
 .rw-table tbody tr:nth-child(even) {
   background-color: #fff;
+}
+.rw-table tbody tr td:nth-child(n+2) {
+  color: #4a5568;
 }
 .rw-table input {
   margin-left: 0;
