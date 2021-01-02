@@ -10,6 +10,7 @@ export const QUERY = gql`
       name
       description
       ownerId
+      enrollId
     }
   }
 `
@@ -21,6 +22,7 @@ const UPDATE_GROUP_MUTATION = gql`
       name
       description
       ownerId
+      enrollId
     }
   }
 `
@@ -38,6 +40,7 @@ export const Success = ({ group }) => {
   })
 
   const onSave = (input, id) => {
+    console.log(input)
     updateGroup({ variables: { id, input } })
   }
 

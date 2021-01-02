@@ -56,21 +56,28 @@ const GroupForm = (props) => {
         <FieldError name="description" className="rw-field-error" />
 
         <Label
-          name="type"
+          name="enrollId"
           className="text-base font-body font-bold"
           errorClassName="ck-label ck-label-error"
         >
-          Type
+          Enroll Id
         </Label>
-        {/* <TextField
-          name="type"
-          defaultValue={props.group?.type}
+        <TextField
+          name="enrollId"
+          defaultValue={props.group?.enrollId}
           className="rw-input mb-2"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-        <FieldError name="type" className="rw-field-error" /> */}
+        <FieldError name="type" className="rw-field-error" />
 
+        <Label
+          name="type"
+          className="text-base font-body font-bold"
+          errorClassName="ck-label ck-label-error"
+        >
+          Group Type
+        </Label>
         <SelectField
           name="type"
           defaultValue={props.group?.type}

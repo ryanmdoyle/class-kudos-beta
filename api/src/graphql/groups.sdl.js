@@ -29,6 +29,7 @@ export const schema = gql`
     type: String
     name: String
     description: String
+    enrollId: String
     ownerId: String
   }
 

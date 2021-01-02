@@ -65,6 +65,7 @@ const GroupsList = ({ groups }) => {
             <th>Type</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Enroll Id</th>
             <th>Owner id</th>
             <th>&nbsp;</th>
           </tr>
@@ -76,6 +77,7 @@ const GroupsList = ({ groups }) => {
               <td>{truncate(group.type)}</td>
               <td>{truncate(group.name)}</td>
               <td>{truncate(group.description)}</td>
+              <td>{truncate(group.enrollId)}</td>
               <td>{truncate(group.ownerId)}</td>
               <td>
                 <nav className="rw-table-actions">
