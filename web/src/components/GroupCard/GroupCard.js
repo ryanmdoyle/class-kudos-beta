@@ -19,7 +19,7 @@ const GroupCard = ({ id, name, description, studentCount, enrollId }) => {
   }
   return (
     <div
-      className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4"
+      className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4 cursor-pointer"
       onClick={cardClick}
     >
       <div className="flex items-center">
