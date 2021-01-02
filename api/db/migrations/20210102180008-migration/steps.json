@@ -1,0 +1,77 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Feedback",
+      "field": "behavior",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Feedback",
+      "field": "behaviorId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Feedback",
+      "field": "group",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Feedback",
+      "field": "groupId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Behavior",
+      "field": "group",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Behavior",
+      "field": "groupId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Redeemed",
+      "field": "reward",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Redeemed",
+      "field": "rewardId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Reward",
+      "field": "group",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Reward",
+      "field": "groupId",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Enrollment",
+      "field": "group",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Enrollment",
+      "field": "groupId",
+      "arity": "Optional"
+    }
+  ]
+}
