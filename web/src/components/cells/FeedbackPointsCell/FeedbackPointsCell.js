@@ -12,12 +12,14 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>...</div>
+export const Loading = ({ loadingValue }) => loadingValue
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => 0
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ feedbacksOfUser }) => {
-  return feedbacksOfUser.length
+  return feedbacksOfUser.reduce((accumulator, currentFeedback) => {
+    return accumulator + currentFeedback.behavior.value
+  }, 0)
 }

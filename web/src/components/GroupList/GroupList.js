@@ -1,16 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStudentItem'
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
-import FeedbackPointsCell from 'src/components/cells/GroupListCell/FeedbackPointsCell/FeedbackPointsCell'
+import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
 const GroupList = ({ groupId, enrollmentsOfGroup, behaviorsOfGroup }) => {
-  const [student, setStudent] = useState(null)
-  useEffect(() => {
-    setStudent(enrollmentsOfGroup[0].user)
-  }, [enrollmentsOfGroup])
+  const [student, setStudent] = useState(enrollmentsOfGroup[0].user)
 
   return (
     <>
@@ -31,7 +28,9 @@ const GroupList = ({ groupId, enrollmentsOfGroup, behaviorsOfGroup }) => {
         <StudentPointsCard
           userId={student?.id}
           student={student}
-          points={<FeedbackPointsCell userId={student?.id} />}
+          points={student?.feedback.reduce((accumulator, currentFeedback) => {
+            return accumulator + currentFeedback.behavior.value
+          }, 0)}
         />
         <AwardFeedbackCard
           groupId={groupId}

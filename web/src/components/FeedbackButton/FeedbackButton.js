@@ -1,5 +1,6 @@
-import { Flash, useFlash, useMutation } from '@redwoodjs/web'
-import { QUERY } from 'src/components/cells/RecentUserFeedbackCell/RecentUserFeedbackCell'
+import { useFlash, useMutation } from '@redwoodjs/web'
+import { QUERY as recentUserFeedbackQuery } from 'src/components/cells/RecentUserFeedbackCell/RecentUserFeedbackCell'
+import { QUERY as pointsQuery } from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
 const CREATE_FEEDBACK = gql`
   mutation CreateFeedback($input: CreateFeedbackInput!) {
@@ -10,8 +11,16 @@ const CREATE_FEEDBACK = gql`
 `
 
 const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
+  const { addMessage } = useFlash()
   const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
-    refetchQueries: [{ query: QUERY, variables: { userId: studentId } }],
+    refetchQueries: [
+      { query: recentUserFeedbackQuery, variables: { userId: studentId } },
+      { query: pointsQuery, variables: { userId: studentId } },
+    ],
+    awaitRefetchQueries: true,
+    onCompleted: () => {
+      addMessage('Added feedback!', { className: 'rw-flash-success' })
+    },
   })
 
   const giveFeedback = () => {

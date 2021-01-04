@@ -1,5 +1,7 @@
+import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
+
 const ListViewStudentItem = ({ student, onClick }) => {
-  const { firstName, lastName, feedback } = student
+  const { id, firstName, lastName, feedback } = student
   let points = 0
   feedback.forEach((feedback) => (points += feedback.behavior.value))
   return (
@@ -17,7 +19,12 @@ const ListViewStudentItem = ({ student, onClick }) => {
       </div>
       <div>
         <span className="justify-self-end text-green-500 font-bold">
-          {points}
+          <FeedbackPointsCell
+            userId={id}
+            loadingValue={feedback.reduce((accumulator, currentFeedback) => {
+              return accumulator + currentFeedback.behavior.value
+            }, 0)}
+          />
         </span>
       </div>
     </li>
