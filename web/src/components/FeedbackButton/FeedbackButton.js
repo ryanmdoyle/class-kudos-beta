@@ -1,5 +1,6 @@
-import { Flash, useFlash, useMutation } from '@redwoodjs/web'
-import { QUERY } from 'src/components/cells/RecentUserFeedbackCell/RecentUserFeedbackCell'
+import { useMutation } from '@redwoodjs/web'
+import { QUERY as enrolledOfGroupQuery } from 'src/components/cells/GroupListCell/GroupListCell'
+import { QUERY as recentFeedbackOfStudent } from 'src/components/cells/RecentUserFeedbackCell/RecentUserFeedbackCell'
 
 const CREATE_FEEDBACK = gql`
   mutation CreateFeedback($input: CreateFeedbackInput!) {
@@ -11,7 +12,10 @@ const CREATE_FEEDBACK = gql`
 
 const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
   const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
-    refetchQueries: [{ query: QUERY, variables: { userId: studentId } }],
+    refetchQueries: [
+      { query: enrolledOfGroupQuery, variables: { groupId } },
+      { query: recentFeedbackOfStudent, variables: { userId: studentId } },
+    ],
   })
 
   const giveFeedback = () => {
@@ -30,7 +34,9 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
     <div
       className="h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-center items-center hover:ring-2 ring-purple-500"
       onClick={() => {
-        giveFeedback()
+        if (!loading) {
+          giveFeedback()
+        }
       }}
     >
       <span>
@@ -41,7 +47,7 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
           height="44"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="currentColor"
+          stroke={loading ? 'gray' : 'currentColor'}
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
