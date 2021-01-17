@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 export const QUERY = gql`
   query FeedbackPointsQuery($userId: String!) {
     feedbacksOfUser(userId: $userId) {

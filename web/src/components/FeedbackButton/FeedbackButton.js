@@ -1,5 +1,5 @@
 import { useMutation } from '@redwoodjs/web'
-import { QUERY as enrolledOfGroupQuery } from 'src/components/cells/GroupListCell/GroupListCell'
+import { QUERY as pointsQuery } from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 import { QUERY as recentFeedbackOfStudent } from 'src/components/cells/RecentUserFeedbackCell/RecentUserFeedbackCell'
 
 const CREATE_FEEDBACK = gql`
@@ -11,10 +11,10 @@ const CREATE_FEEDBACK = gql`
 `
 
 const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
-  const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
+  const [newFeedback, { loading }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
-      { query: enrolledOfGroupQuery, variables: { id: groupId } },
       { query: recentFeedbackOfStudent, variables: { userId: studentId } },
+      { query: pointsQuery, variables: { userId: studentId } },
     ],
   })
 

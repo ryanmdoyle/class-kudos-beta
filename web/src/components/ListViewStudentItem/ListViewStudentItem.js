@@ -1,7 +1,7 @@
+import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
+
 const ListViewStudentItem = ({ student, onClick }) => {
-  const { firstName, lastName, feedback } = student
-  let points = 0
-  feedback.forEach((feedback) => (points += feedback.behavior.value))
+  const { id, firstName, lastName } = student
   return (
     <li
       className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"
@@ -17,7 +17,7 @@ const ListViewStudentItem = ({ student, onClick }) => {
       </div>
       <div>
         <span className="justify-self-end text-green-500 font-bold">
-          {points}
+          <FeedbackPointsCell userId={id} />
         </span>
       </div>
     </li>
