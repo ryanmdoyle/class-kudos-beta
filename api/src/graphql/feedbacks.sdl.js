@@ -12,7 +12,6 @@ export const schema = gql`
   type Query {
     feedbacks: [Feedback!]!
     feedback(id: String!): Feedback
-    feedbacksOfUser(userId: String!): [Feedback!]!
     feedbacksOfGroup(groupId: String!): [Feedback!]!
   }
 

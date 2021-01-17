@@ -8,10 +8,11 @@ import {
 } from '@redwoodjs/forms'
 
 const EnrollmentForm = (props) => {
+  const { userId } = props
   const onSubmit = (data) => {
+    if (userId) data.userId = userId
     props.onSave(data, props?.enrollment?.id)
   }
-
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>
@@ -21,22 +22,25 @@ const EnrollmentForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-
-        <Label
-          name="userId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          User id
-        </Label>
-        <TextField
-          name="userId"
-          defaultValue={props.enrollment?.userId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="userId" className="rw-field-error" />
+        {!userId && (
+          <>
+            <Label
+              name="userId"
+              className="rw-label"
+              errorClassName="rw-label rw-label-error"
+            >
+              User id
+            </Label>
+            <TextField
+              name="userId"
+              defaultValue={props.enrollment?.userId || userId}
+              className="rw-input"
+              errorClassName="rw-input rw-input-error"
+              validation={{ required: true }}
+            />
+            <FieldError name="userId" className="rw-field-error" />
+          </>
+        )}
 
         <Label
           name="groupId"

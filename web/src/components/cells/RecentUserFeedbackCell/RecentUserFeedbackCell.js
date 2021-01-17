@@ -2,13 +2,16 @@ import ListViewRecentItem from 'src/components/ListViewRecentItem/ListViewRecent
 
 export const QUERY = gql`
   query RecentUserFeedbackQuery($userId: String!) {
-    feedbacksOfUser(userId: $userId) {
+    user(id: $userId) {
       id
-      createdAt
-      behavior {
+      feedback {
         id
-        name
-        value
+        createdAt
+        behavior {
+          id
+          name
+          value
+        }
       }
     }
   }
@@ -20,8 +23,8 @@ export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ feedbacksOfUser }) => {
-  const sorted = feedbacksOfUser
+export const Success = ({ user }) => {
+  const sorted = user.feedback
     .slice()
     .sort(
       (a, b) =>

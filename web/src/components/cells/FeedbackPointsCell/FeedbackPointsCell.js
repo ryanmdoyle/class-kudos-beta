@@ -1,12 +1,15 @@
 export const QUERY = gql`
   query FeedbackPointsQuery($userId: String!) {
-    feedbacksOfUser(userId: $userId) {
+    user(id: $userId) {
       id
-      createdAt
-      behavior {
+      feedback {
         id
-        name
-        value
+        createdAt
+        behavior {
+          id
+          name
+          value
+        }
       }
     }
   }
@@ -14,12 +17,12 @@ export const QUERY = gql`
 
 export const Loading = () => <div>...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <div>0</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ feedbacksOfUser }) => {
-  return feedbacksOfUser.reduce((accumulator, currentFeedback) => {
+export const Success = ({ user }) => {
+  return user.feedback.reduce((accumulator, currentFeedback) => {
     return accumulator + currentFeedback.behavior.value
   }, 0)
 }

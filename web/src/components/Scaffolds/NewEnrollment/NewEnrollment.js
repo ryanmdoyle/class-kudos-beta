@@ -12,7 +12,7 @@ const CREATE_ENROLLMENT_MUTATION = gql`
   }
 `
 
-const NewEnrollment = () => {
+const NewEnrollment = ({ userId }) => {
   const { addMessage } = useFlash()
   const [createEnrollment, { loading, error }] = useMutation(
     CREATE_ENROLLMENT_MUTATION,
@@ -34,7 +34,12 @@ const NewEnrollment = () => {
         <h2 className="rw-heading rw-heading-secondary">New Enrollment</h2>
       </header>
       <div className="rw-segment-main">
-        <EnrollmentForm onSave={onSave} loading={loading} error={error} />
+        <EnrollmentForm
+          onSave={onSave}
+          loading={loading}
+          error={error}
+          userId={userId}
+        />
       </div>
     </div>
   )

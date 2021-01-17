@@ -41,12 +41,6 @@ export const Feedback = {
 
 // Custom
 
-export const feedbacksOfUser = ({ userId }) => {
-  return db.feedback.findMany({
-    where: { userId },
-  })
-}
-
 export const feedbacksOfGroup = ({ groupId }) => {
   return db.feedback.findMany({
     where: { groupId },
