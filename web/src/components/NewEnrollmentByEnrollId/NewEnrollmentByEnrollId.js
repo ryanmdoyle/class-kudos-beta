@@ -24,7 +24,6 @@ const NewEnrollment = ({ userId }) => {
   )
 
   const onSave = (input) => {
-    console.log('onSave input', input, userId)
     input.userId = userId
     createEnrollment({ variables: { input } })
   }
