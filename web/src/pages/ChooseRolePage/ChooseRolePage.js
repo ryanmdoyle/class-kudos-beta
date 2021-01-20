@@ -2,7 +2,7 @@
 import LandingLayout from 'src/layouts/LandingLayout/LandingLayout'
 import { useAuth } from '@redwoodjs/auth'
 import { useMutation } from '@redwoodjs/web'
-import { navigate } from '@redwoodjs/router'
+import { routes, Redirect } from '@redwoodjs/router'
 
 // see https://github.com/redwoodjs/example-todo/blob/f29069c9dc89fa3734c6f99816442e14dc73dbf7/web/src/components/TodoListCell/TodoListCell.js#L26-L44
 const ADD_ROLE = gql`
@@ -17,6 +17,13 @@ const ChooseRolePage = () => {
   const { currentUser } = useAuth()
   const [addRole] = useMutation(ADD_ROLE)
 
+  // Reroutes user after adding role and win.loc.reload
+  // Using becuase redwood reroute() not working? (Maybe caching)
+  if (currentUser?.roles?.includes('teacher'))
+    return <Redirect to={routes.teacherHome()} />
+  if (currentUser?.roles?.includes('student'))
+    return <Redirect to={routes.studentHome()} />
+
   const addTeacher = async () => {
     await addRole({
       variables: {
@@ -24,7 +31,7 @@ const ChooseRolePage = () => {
         userId: currentUser.id,
       },
     })
-    navigate('/teacher')
+    window.location.reload()
   }
 
   const addStudent = async () => {
@@ -34,7 +41,7 @@ const ChooseRolePage = () => {
         userId: currentUser.id,
       },
     })
-    navigate('/student')
+    window.location.reload()
   }
   return (
     <LandingLayout>
