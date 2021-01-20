@@ -2,9 +2,8 @@ export const QUERY = gql`
   query FeedbackPointsQuery($userId: String!) {
     user(id: $userId) {
       id
+      createdAt
       feedback {
-        id
-        createdAt
         behavior {
           id
           name
@@ -15,9 +14,9 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>...</div>
+export const Loading = ({ loadingValue }) => loadingValue
 
-export const Empty = () => <div>0</div>
+export const Empty = () => 0
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
