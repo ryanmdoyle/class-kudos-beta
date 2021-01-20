@@ -1,24 +1,8 @@
-# Redwood
+# Class Karma
+This is a behavior tracking site for teachers/instructors. Based on similar sites such as ClassDojo, you can award points to students for behaviors.
 
-> **WARNING:** RedwoodJS software has not reached a stable version 1.0 and should not be considered suitable for production use. In the "make it work; make it right; make it fast" paradigm, Redwood is in the later stages of the "make it work" phase.
+## What's Different?
+What makes Class Karma different is the ability for students to redeem their own points for pre-set rewards. Teachers can see what has been redeeded by their students, or redeem awards for students on their own. Teachers can also created two types of groupings, "classes" and "groups".  This abstraction lets teachers create long term groupings of students in a "class" while also creating completely separate "groups" of students for the purposes of temporary groupings, small groups within a class, etc.
 
-## Getting Started
-- [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
-- [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
-- [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.
-
-### Setup
-
-We use Yarn as our package manager. To get the dependencies installed, just do this in the root directory:
-
-```terminal
-yarn install
-```
-
-### Fire it up
-
-```terminal
-yarn redwood dev
-```
-
-Your browser should open automatically to `http://localhost:8910` to see the web app. Lambda functions run on `http://localhost:8911` and are also proxied to `http://localhost:8910/.redwood/functions/*`. 
+## Tech Stuff
+Currently building using [Redwood.js](https://redwoodjs.com/).
