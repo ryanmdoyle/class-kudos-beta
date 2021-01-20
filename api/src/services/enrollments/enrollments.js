@@ -50,3 +50,14 @@ export const enrollmentsOfUser = ({ userId }) => {
     where: { userId: userId },
   })
 }
+
+export const createEnrollmentByEnrollId = async ({ input }) => {
+  const group = await db.group.findFirst({
+    where: { enrollId: input.enrollId },
+  })
+  input.groupId = group.id
+  delete input.enrollId // enrollId not a valid gql mutation input
+  return db.enrollment.create({
+    data: foreignKeyReplacement(input),
+  })
+}

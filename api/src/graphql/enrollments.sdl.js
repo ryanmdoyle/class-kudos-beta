@@ -25,9 +25,18 @@ export const schema = gql`
     groupId: String
   }
 
+  input CreateEnrollmentByEnrollIdInput {
+    userId: String!
+    enrollId: String!
+  }
+
   type Mutation {
     createEnrollment(input: CreateEnrollmentInput!): Enrollment!
     updateEnrollment(id: String!, input: UpdateEnrollmentInput!): Enrollment!
     deleteEnrollment(id: String!): Enrollment!
+    # Custom
+    createEnrollmentByEnrollId(
+      input: CreateEnrollmentByEnrollIdInput!
+    ): Enrollment!
   }
 `

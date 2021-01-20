@@ -1,4 +1,4 @@
-import NewEnrollment from 'src/components/Scaffolds/NewEnrollment/NewEnrollment'
+import NewEnrollmentByEnrollId from 'src/components/NewEnrollmentByEnrollId/NewEnrollmentByEnrollId'
 
 export const QUERY = gql`
   query StudentHomeQuery($userId: String!) {
@@ -10,7 +10,7 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = ({ userId }) => <NewEnrollment userId={userId} />
+export const Empty = ({ userId }) => <NewEnrollmentByEnrollId userId={userId} />
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
