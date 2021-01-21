@@ -44,12 +44,6 @@ export const UserRole = {
 
 // Custom methods
 
-export const userRolesById = (id) => {
-  return db.userRole.findMany({
-    where: { userId: id },
-  })
-}
-
 export const createAdminUserRole = ({ input }) => {
   requireAuth({ role: ['admin', 'super_admin'] })
   return db.userRole.create({
