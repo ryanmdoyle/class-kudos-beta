@@ -58,11 +58,3 @@ export const Group = {
   feedback: (_obj, { root }) =>
     db.group.findOne({ where: { id: root.id } }).feedback(),
 }
-
-// Custom methods
-
-export const groupsOwned = () => {
-  return db.group.findMany({
-    where: { ownerId: context.currentUser.id },
-  })
-}

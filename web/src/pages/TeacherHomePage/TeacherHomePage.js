@@ -21,11 +21,11 @@ const TeacherHomePage = () => {
         <div className="flex flex-col lg:flex-row">
           <div id="classes" className="w-100 lg:w-1/2 pr-2">
             <h1 className="text-2xl font-display mb-4">Classes</h1>
-            <GroupCardCell groupType="primary" />
+            <GroupCardCell groupType="primary" userId={currentUser.id} />
           </div>
           <div id="groups" className="w-100 lg:w-1/2 pl-2">
             <h1 className="text-2xl font-display mb-4">Groups</h1>
-            <GroupCardCell groupType="secondary" />
+            <GroupCardCell groupType="secondary" userId={currentUser.id} />
           </div>
         </div>
       </div>

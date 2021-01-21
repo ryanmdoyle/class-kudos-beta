@@ -1,19 +1,22 @@
 import GroupCard from 'src/components/GroupCard/GroupCard'
 
 export const QUERY = gql`
-  query GroupCardQuery {
-    groupsOwned {
+  query GroupCardQuery($userId: String!) {
+    user(id: $userId) {
       id
-      type
-      name
-      description
-      enrollId
-      enrollments {
+      groups {
         id
-        user {
+        type
+        name
+        description
+        enrollId
+        enrollments {
           id
-          firstName
-          lastName
+          user {
+            id
+            firstName
+            lastName
+          }
         }
       }
     }
@@ -26,10 +29,10 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ groupsOwned, groupType }) => {
-  let groupsOfType = [...groupsOwned]
+export const Success = ({ groupType, user }) => {
+  let groupsOfType = [...user.groups]
   if (groupType) {
-    groupsOfType = [...groupsOwned.filter((group) => group.type === groupType)]
+    groupsOfType = [...user.groups.filter((group) => group.type === groupType)]
   }
   return groupsOfType.map((group) => {
     return (
