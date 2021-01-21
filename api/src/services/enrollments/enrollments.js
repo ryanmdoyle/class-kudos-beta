@@ -39,12 +39,6 @@ export const Enrollment = {
 
 // custom
 
-export const enrollmentsOfUser = ({ userId }) => {
-  return db.enrollment.findMany({
-    where: { userId: userId },
-  })
-}
-
 export const createEnrollmentByEnrollId = async ({ input }) => {
   const group = await db.group.findFirst({
     where: { enrollId: input.enrollId },
