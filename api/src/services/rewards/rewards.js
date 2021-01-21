@@ -36,11 +36,3 @@ export const Reward = {
   redeemed: (_obj, { root }) =>
     db.reward.findOne({ where: { id: root.id } }).redeemed(),
 }
-
-// Custom
-
-export const rewardsOfGroup = ({ groupId }) => {
-  return db.reward.findMany({
-    where: { groupId: groupId },
-  })
-}
