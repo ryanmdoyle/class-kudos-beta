@@ -3,13 +3,15 @@ import GroupGrid from 'src/components/GroupGrid/GroupGrid'
 
 export const QUERY = gql`
   query GroupGridQuery($id: String!) {
-    enrollmentsOfGroup(groupId: $id) {
+    group(id: $id) {
       id
-      user {
+      enrollments {
         id
-        firstName
-        lastName
-        profileImage
+        user {
+          id
+          firstName
+          lastName
+        }
       }
     }
   }
@@ -21,6 +23,6 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ enrollmentsOfGroup }) => {
-  return <GroupGrid enrollmentsOfGroup={enrollmentsOfGroup} />
+export const Success = ({ group }) => {
+  return <GroupGrid enrollmentsOfGroup={group.enrollments} />
 }

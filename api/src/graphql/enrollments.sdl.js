@@ -11,7 +11,6 @@ export const schema = gql`
     enrollments: [Enrollment!]!
     enrollment(id: String!): Enrollment
     # Custom
-    enrollmentsOfGroup(groupId: String!): [Enrollment!]!
     enrollmentsOfUser(userId: String!): [Enrollment!]!
   }
 

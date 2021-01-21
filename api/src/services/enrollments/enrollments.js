@@ -39,12 +39,6 @@ export const Enrollment = {
 
 // custom
 
-export const enrollmentsOfGroup = ({ groupId }) => {
-  return db.enrollment.findMany({
-    where: { groupId: groupId },
-  })
-}
-
 export const enrollmentsOfUser = ({ userId }) => {
   return db.enrollment.findMany({
     where: { userId: userId },

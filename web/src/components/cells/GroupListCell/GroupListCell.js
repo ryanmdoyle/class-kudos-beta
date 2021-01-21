@@ -2,18 +2,21 @@ import GroupList from 'src/components/GroupList/GroupList'
 
 export const QUERY = gql`
   query GroupStudentListQuery($id: String!) {
-    enrollmentsOfGroup(groupId: $id) {
+    group(id: $id) {
       id
-      user {
+      enrollments {
         id
-        firstName
-        lastName
-        profileImage
-        feedback {
+        user {
           id
-          behavior {
+          firstName
+          lastName
+          profileImage
+          feedback {
             id
-            value
+            behavior {
+              id
+              value
+            }
           }
         }
       }
@@ -52,11 +55,11 @@ export const Empty = () => (
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ id, enrollmentsOfGroup, behaviorsOfGroup }) => {
+export const Success = ({ id, behaviorsOfGroup, group }) => {
   return (
     <GroupList
       groupId={id}
-      enrollmentsOfGroup={enrollmentsOfGroup}
+      enrollmentsOfGroup={group.enrollments}
       behaviorsOfGroup={behaviorsOfGroup}
     />
   )
