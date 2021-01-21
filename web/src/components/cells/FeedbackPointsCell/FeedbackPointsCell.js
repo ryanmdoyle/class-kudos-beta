@@ -14,7 +14,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = ({ loadingValue }) => loadingValue
+export const Loading = () => '...'
 
 export const Empty = () => 0
 

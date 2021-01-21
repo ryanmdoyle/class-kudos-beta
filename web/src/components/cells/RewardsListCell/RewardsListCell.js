@@ -1,9 +1,12 @@
 export const QUERY = gql`
   query RewardsListQuery($groupId: String!) {
-    rewardsOfGroup(groupId: $groupId) {
+    group(id: $groupId) {
       id
-      name
-      cost
+      rewards {
+        id
+        name
+        cost
+      }
     }
   }
 `
@@ -14,10 +17,10 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ rewardsOfGroup }) => {
+export const Success = ({ group }) => {
   return (
     <ul className="w-full">
-      {rewardsOfGroup.map((reward) => (
+      {group.rewards.map((reward) => (
         <li
           className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
           key={reward.id}

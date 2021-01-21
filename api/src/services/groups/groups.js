@@ -55,12 +55,6 @@ export const Group = {
     db.group.findOne({ where: { id: root.id } }).behaviors(),
   rewards: (_obj, { root }) =>
     db.group.findOne({ where: { id: root.id } }).rewards(),
-}
-
-// Custom methods
-
-export const groupsOwned = () => {
-  return db.group.findMany({
-    where: { ownerId: context.currentUser.id },
-  })
+  feedback: (_obj, { root }) =>
+    db.group.findOne({ where: { id: root.id } }).feedback(),
 }

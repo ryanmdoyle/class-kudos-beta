@@ -1,11 +1,15 @@
 import TeacherNavLink from 'src/components/TeacherNavLink/TeacherNavLink'
 
 export const QUERY = gql`
-  query GroupsOwnedQuery {
-    groupsOwned {
+  query GroupsOwnedQuery($userId: String!) {
+    user(id: $userId) {
       id
-      type
-      name
+      groups {
+        id
+        type
+        name
+        ownerId
+      }
     }
   }
 `
@@ -16,16 +20,18 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ groupsOwned, groupType }) => {
-  let groupsOfType = [...groupsOwned]
+export const Success = ({ userId, groupType, user }) => {
+  let groups = [...user.groups]
   // Optionally filter by type, if prop is passed
   if (groupType) {
-    const filtered = groupsOfType.filter((group) => group.type === groupType)
-    groupsOfType = [...filtered]
+    const filtered = groups.filter(
+      (group) => group.type === groupType && group.ownerId === userId
+    )
+    groups = [...filtered]
   }
   return (
     <ul>
-      {groupsOfType.map((group) => (
+      {groups.map((group) => (
         <TeacherNavLink id={group.id} key={group.id} text={group.name} />
       ))}
     </ul>

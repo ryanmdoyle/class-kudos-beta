@@ -8,13 +8,14 @@ export const schema = gql`
     owner: User!
     ownerId: String!
     enrollments: [Enrollment]!
+    behaviors: [Behavior]!
+    rewards: [Reward]!
+    feedback: [Feedback]!
   }
 
   type Query {
     groups: [Group!]!
     group(id: String!): Group
-    # Custom
-    groupsOwned: [Group]!
   }
 
   input CreateGroupInput {

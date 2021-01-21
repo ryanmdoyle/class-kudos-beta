@@ -2,7 +2,6 @@ import { AuthenticationError } from '@redwoodjs/api'
 import admin from 'firebase-admin'
 
 import { db } from './db'
-import { userRolesById } from 'src/services/userRoles/userRoles'
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -43,7 +42,9 @@ export const getCurrentUser = async (decoded, { token, type }) => {
     return newUser
   }
   userInDb.roles = null
-  const userRoles = await userRolesById(userInDb.id)
+  const userRoles = await db.user
+    .findOne({ where: { id: userInDb.id } })
+    .roles()
   if (userRoles.length > 0) {
     const populatedRoles = userRoles.map((role) => role.name)
     userInDb.roles = populatedRoles

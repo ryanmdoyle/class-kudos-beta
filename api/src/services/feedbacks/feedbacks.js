@@ -38,11 +38,3 @@ export const Feedback = {
   group: (_obj, { root }) =>
     db.feedback.findOne({ where: { id: root.id } }).group(),
 }
-
-// Custom
-
-export const feedbacksOfGroup = ({ groupId }) => {
-  return db.feedback.findMany({
-    where: { groupId },
-  })
-}

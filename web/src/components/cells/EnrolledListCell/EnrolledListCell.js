@@ -1,11 +1,14 @@
 export const QUERY = gql`
   query EnrolledListQuery($groupId: String!) {
-    enrollmentsOfGroup(groupId: $groupId) {
+    group(id: $groupId) {
       id
-      user {
+      enrollments {
         id
-        firstName
-        lastName
+        user {
+          id
+          firstName
+          lastName
+        }
       }
     }
   }
@@ -17,10 +20,10 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ enrollmentsOfGroup }) => {
+export const Success = ({ group }) => {
   return (
     <ul className="w-full">
-      {enrollmentsOfGroup.map((enrolled) => (
+      {group.enrollments.map((enrolled) => (
         <li
           className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
           key={enrolled.user.id}
