@@ -8,6 +8,9 @@ export const schema = gql`
     owner: User!
     ownerId: String!
     enrollments: [Enrollment]!
+    behaviors: [Behavior]!
+    rewards: [Reward]!
+    feedback: [Feedback]!
   }
 
   type Query {

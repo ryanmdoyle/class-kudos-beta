@@ -55,6 +55,8 @@ export const Group = {
     db.group.findOne({ where: { id: root.id } }).behaviors(),
   rewards: (_obj, { root }) =>
     db.group.findOne({ where: { id: root.id } }).rewards(),
+  feedback: (_obj, { root }) =>
+    db.group.findOne({ where: { id: root.id } }).feedback(),
 }
 
 // Custom methods

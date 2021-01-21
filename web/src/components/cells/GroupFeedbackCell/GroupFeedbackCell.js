@@ -1,20 +1,22 @@
 import RecentGroupFeedback from 'src/components/RecentGroupFeedback/RecentGroupFeedback'
-import Feedbacks from 'src/components/Scaffolds/Feedbacks'
 
 export const QUERY = gql`
   query GroupFeedbackQuery($groupId: String!) {
-    feedbacksOfGroup(groupId: $groupId) {
+    group(id: $groupId) {
       id
-      createdAt
-      user {
+      feedback {
         id
-        firstName
-        lastName
-      }
-      behavior {
-        id
-        name
-        value
+        createdAt
+        user {
+          id
+          firstName
+          lastName
+        }
+        behavior {
+          id
+          name
+          value
+        }
       }
     }
   }
@@ -26,11 +28,8 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ feedbacksOfGroup, groupId }) => {
+export const Success = ({ groupId, group }) => {
   return (
-    <RecentGroupFeedback
-      feedbacksOfGroup={feedbacksOfGroup}
-      groupId={groupId}
-    />
+    <RecentGroupFeedback feedbacksOfGroup={group.feedback} groupId={groupId} />
   )
 }
