@@ -1,14 +1,15 @@
+import { useAuth } from '@redwoodjs/auth'
+
+import EnrolledNavCell from 'src/components/cells/EnrolledNavCell/EnrolledNavCell'
+
 const StudentNav = () => {
+  const { currentUser } = useAuth()
   return (
     <div className="w-full flex flex-col justify-between p-4">
       <span className="text-lg font-display mb-2">Classes</span>
-      <ul>
-        <li className="text-normal font-body pl-4 mb-2">primary holder</li>
-      </ul>
+      <EnrolledNavCell groupType="primary" userId={currentUser.id} />
       <span className="text-lg font-display mb-2 mt-2">Groups</span>
-      <ul>
-        <li className="text-normal font-body pl-4 mb-2">secondary holder</li>
-      </ul>
+      <EnrolledNavCell groupType="secondary" userId={currentUser.id} />
     </div>
   )
 }

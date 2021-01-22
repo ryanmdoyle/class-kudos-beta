@@ -10,16 +10,18 @@ const StudentHomePage = () => {
   console.log('STUDENT', currentUser)
   return (
     <DashboardLayout>
-      <h1>Hello, {firstName}, StudentHomePage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/StudentHomePage/StudentHomePage.js</code>
-      </p>
-      <p>
-        My default route is named <code>studentHome</code>, link to me with `
-        <Link to={routes.studentHome()}>StudentHome</Link>`
-      </p>
-      <StudentHomeCell userId={id} />
+      <div className="p-4">
+        <h1>Hello, {firstName}, StudentHomePage</h1>
+        <p>
+          Find me in{' '}
+          <code>./web/src/pages/StudentHomePage/StudentHomePage.js</code>
+        </p>
+        <p>
+          My default route is named <code>studentHome</code>, link to me with `
+          <Link to={routes.studentHome()}>StudentHome</Link>`
+        </p>
+        <StudentHomeCell userId={id} />
+      </div>
     </DashboardLayout>
   )
 }

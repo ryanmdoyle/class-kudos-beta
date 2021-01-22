@@ -23,6 +23,7 @@ const Routes = () => {
       </Private>
       <Private unauthenticated="home" role="student">
         <Route path="/student" page={StudentHomePage} name="studentHome" />
+        <Route path="/student/group/{groupId}" page={StudentGroupPage} name="studentGroup" />
       </Private>
       <Private unauthenticated="home">
         <Route path="/scaffolds/enrollments/new" page={ScaffoldsNewEnrollmentPage} name="scaffoldsNewEnrollment" />

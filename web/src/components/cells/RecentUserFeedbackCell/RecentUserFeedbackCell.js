@@ -23,7 +23,8 @@ export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ user }) => {
+export const Success = ({ user, feedback }) => {
+  if (user.feedback.length === 0) return <Empty />
   const sorted = user.feedback
     .slice()
     .sort(

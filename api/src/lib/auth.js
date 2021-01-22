@@ -25,7 +25,7 @@ export const getCurrentUser = async (decoded, { token, type }) => {
     // Below check for a name (sometimes not returned from firebase?)
     const first = verifiedGoogleUser?.name
       ? verifiedGoogleUser?.name?.split(' ')[0]
-      : ''
+      : verifiedGoogleUser?.email
     const last = verifiedGoogleUser?.name
       ? verifiedGoogleUser?.name?.split(' ')[1]
       : ''
