@@ -33,14 +33,22 @@ export const Success = ({ groupType, user }) => {
   }
   if (enrollments.length === 0) return <Empty />
   return (
-    <ul>
-      {enrollments.map((enrollment) => (
-        <StudentNavLink
-          id={enrollment.group.id}
-          key={enrollment.group.id}
-          text={enrollment.group.name}
-        />
-      ))}
-    </ul>
+    <>
+      {groupType === 'primary' && (
+        <span className="text-lg font-display mb-2">Classes</span>
+      )}
+      {groupType === 'secondary' && (
+        <span className="text-lg font-display mb-2">Groups</span>
+      )}
+      <ul>
+        {enrollments.map((enrollment) => (
+          <StudentNavLink
+            id={enrollment.group.id}
+            key={enrollment.group.id}
+            text={enrollment.group.name}
+          />
+        ))}
+      </ul>
+    </>
   )
 }

@@ -30,10 +30,18 @@ export const Success = ({ userId, groupType, user }) => {
     groups = [...filtered]
   }
   return (
-    <ul>
-      {groups.map((group) => (
-        <TeacherNavLink id={group.id} key={group.id} text={group.name} />
-      ))}
-    </ul>
+    <>
+      {groupType === 'primary' && (
+        <span className="text-lg font-display mb-2 mt-2">Classes</span>
+      )}
+      {groupType === 'secondary' && (
+        <span className="text-lg font-display mb-2 mt-2">Groups</span>
+      )}
+      <ul>
+        {groups.map((group) => (
+          <TeacherNavLink id={group.id} key={group.id} text={group.name} />
+        ))}
+      </ul>
+    </>
   )
 }
