@@ -1,4 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
@@ -7,19 +6,12 @@ import StudentHomeCell from 'src/components/cells/StudentHomeCell/StudentHomeCel
 const StudentHomePage = () => {
   const { currentUser } = useAuth()
   const { id, firstName } = currentUser
-  console.log('STUDENT', currentUser)
   return (
     <DashboardLayout>
       <div className="p-4">
-        <h1>Hello, {firstName}, StudentHomePage</h1>
-        <p>
-          Find me in{' '}
-          <code>./web/src/pages/StudentHomePage/StudentHomePage.js</code>
-        </p>
-        <p>
-          My default route is named <code>studentHome</code>, link to me with `
-          <Link to={routes.studentHome()}>StudentHome</Link>`
-        </p>
+        <h1 className="text-3xl font-display mb-4">
+          Welcome Back{currentUser ? `, ${firstName}` : null}! 👋
+        </h1>
         <StudentHomeCell userId={id} />
       </div>
     </DashboardLayout>
