@@ -1,5 +1,3 @@
-import { useAuth } from '@redwoodjs/auth'
-
 import NewEnrollmentByEnrollId from 'src/components/NewEnrollmentByEnrollId/NewEnrollmentByEnrollId'
 import StudentGroupCard from 'src/components/StudentGroupCard/StudentGroupCard'
 
@@ -28,9 +26,7 @@ export const Empty = ({ userId }) => <NewEnrollmentByEnrollId userId={userId} />
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ user }) => {
-  const { currentUser } = useAuth()
-  const { id } = currentUser
+export const Success = ({ user, userId }) => {
   if (user.enrollments.length === 0) return <Empty />
   const primaryEnrollments = user.enrollments.filter(
     (enrollment) => enrollment.group.type === 'primary'
@@ -49,7 +45,7 @@ export const Success = ({ user }) => {
               name={enrollment.group.name}
               description={enrollment.group.description}
               groupType={enrollment.group.type}
-              userId={id}
+              userId={userId}
             />
           ))}
         </div>
@@ -63,7 +59,7 @@ export const Success = ({ user }) => {
               name={enrollment.group.name}
               description={enrollment.group.description}
               groupType={enrollment.group.type}
-              userId={id}
+              userId={userId}
             />
           ))}
         </div>
