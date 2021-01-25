@@ -37,12 +37,6 @@ export const Behavior = {
     db.behavior.findOne({ where: { id: root.id } }).feedback(),
 }
 
-export const behaviorsOfGroup = ({ groupId }) => {
-  return db.behavior.findMany({
-    where: { groupId: groupId },
-  })
-}
-
 export const deleteBehaviorsOfGroup = ({ groupId }) => {
   return db.behavior.delete({
     where: { id: groupId },
