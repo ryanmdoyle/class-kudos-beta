@@ -20,28 +20,34 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ userId, groupType, user }) => {
-  let groups = [...user.groups]
-  // Optionally filter by type, if prop is passed
-  if (groupType) {
-    const filtered = groups.filter(
-      (group) => group.type === groupType && group.ownerId === userId
-    )
-    groups = [...filtered]
-  }
+export const Success = ({ userId, user }) => {
+  const ownedGroups = user.groups.filter((group) => group.ownerId === userId)
+  const primaryOwned = ownedGroups.filter((group) => group.type === 'primary')
+  const secondaryOwned = ownedGroups.filter(
+    (group) => group.type === 'secondary'
+  )
   return (
     <>
-      {groupType === 'primary' && (
-        <span className="text-lg font-display mb-2 mt-2">Classes</span>
+      {primaryOwned.length > 0 && (
+        <>
+          <span className="text-lg font-display mb-2 mt-2">Classes</span>
+          <ul>
+            {primaryOwned.map((group) => (
+              <TeacherNavLink id={group.id} key={group.id} text={group.name} />
+            ))}
+          </ul>
+        </>
       )}
-      {groupType === 'secondary' && (
-        <span className="text-lg font-display mb-2 mt-2">Groups</span>
+      {secondaryOwned.length > 0 && (
+        <>
+          <span className="text-lg font-display mb-2 mt-2">Groups</span>
+          <ul>
+            {secondaryOwned.map((group) => (
+              <TeacherNavLink id={group.id} key={group.id} text={group.name} />
+            ))}
+          </ul>
+        </>
       )}
-      <ul>
-        {groups.map((group) => (
-          <TeacherNavLink id={group.id} key={group.id} text={group.name} />
-        ))}
-      </ul>
     </>
   )
 }
