@@ -4,7 +4,7 @@ import { usePageLoadingContext } from '@redwoodjs/router'
 import NewGroupButton from 'src/components/NewGroupButton/NewGroupButton'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import PageLoader from 'src/components/PageLoader/PageLoader'
-import TeacherHomeCell from 'src/components/TeacherHomeCell/TeacherHomeCell'
+import TeacherHomeCell from 'src/components/cells/TeacherHomeCell/TeacherHomeCell'
 
 const TeacherHomePage = () => {
   const { currentUser } = useAuth()

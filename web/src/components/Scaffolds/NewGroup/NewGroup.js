@@ -4,7 +4,7 @@ import { useModal } from 'src/context/ModalContext'
 import GroupForm from 'src/components/Scaffolds/GroupForm'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
-import { QUERY } from 'src/components/cells/GroupCardCell'
+import { QUERY } from 'src/components/cells/TeacherHomeCell/TeacherHomeCell'
 
 const CREATE_GROUP_MUTATION = gql`
   mutation CreateGroupMutation($input: CreateGroupInput!) {
@@ -19,7 +19,7 @@ const NewGroup = () => {
   const { currentUser } = useAuth()
   const { addMessage } = useFlash()
   const [createGroup, { loading, error }] = useMutation(CREATE_GROUP_MUTATION, {
-    refetchQueries: [{ query: QUERY }],
+    refetchQueries: [{ query: QUERY, variables: { userId: currentUser.id } }],
     awaitRefetchQueries: true,
     onCompleted: () => {
       close()
