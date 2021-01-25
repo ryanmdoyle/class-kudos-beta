@@ -4,10 +4,9 @@ import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStud
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
-import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
 const GroupList = ({ groupId, enrollmentsOfGroup, behaviorsOfGroup }) => {
-  const [student, setStudent] = useState(enrollmentsOfGroup[0].user)
+  const [student, setStudent] = useState(enrollmentsOfGroup[0]?.user)
 
   return (
     <>

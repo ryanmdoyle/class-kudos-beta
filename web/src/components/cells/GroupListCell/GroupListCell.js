@@ -4,6 +4,7 @@ export const QUERY = gql`
   query GroupStudentListQuery($id: String!) {
     group(id: $id) {
       id
+      enrollId
       enrollments {
         id
         user {
@@ -20,10 +21,10 @@ export const QUERY = gql`
           }
         }
       }
-    }
-    behaviorsOfGroup(groupId: $id) {
-      id
-      name
+      behaviors {
+        id
+        name
+      }
     }
   }
 `
@@ -47,20 +48,23 @@ export const Loading = () => (
   </div>
 )
 
-export const Empty = () => (
-  <div className="col-span-4 overflow-scroll 2xl:col-span-5 p-1">
-    No Students
+export const Empty = ({ enrollId }) => (
+  <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
+    No Students! Enroll new students with the code:{' '}
+    <span className="font-bold">{enrollId}</span>
   </div>
 )
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ id, behaviorsOfGroup, group }) => {
+export const Success = ({ id, group }) => {
+  if (group.enrollments.length === 0)
+    return <Empty enrollId={group?.enrollId} />
   return (
     <GroupList
       groupId={id}
       enrollmentsOfGroup={group.enrollments}
-      behaviorsOfGroup={behaviorsOfGroup}
+      behaviorsOfGroup={group.behaviors}
     />
   )
 }
