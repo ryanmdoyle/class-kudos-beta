@@ -22,33 +22,44 @@ export const Empty = () => null
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ groupType, user }) => {
-  let enrollments = [...user.enrollments]
-  // Optionally filter by type, if prop is passed
-  if (groupType) {
-    const filtered = enrollments.filter(
-      (enrollment) => enrollment.group.type === groupType
-    )
-    enrollments = [...filtered]
-  }
-  if (enrollments.length === 0) return <Empty />
+export const Success = ({ user }) => {
+  if (user.enrollments.length === 0) return <Empty />
+  const primaryEnrolled = user.enrollments.filter(
+    (enrollment) => enrollment.group.type === 'primary'
+  )
+  const secondaryEnrolled = user.enrollments.filter(
+    (enrollment) => enrollment.group.type === 'secondary'
+  )
   return (
     <>
-      {groupType === 'primary' && (
-        <span className="text-lg font-display mb-2">Classes</span>
+      {primaryEnrolled.length > 0 && (
+        <>
+          <span className="text-lg font-display mb-2">Classes</span>
+          <ul>
+            {primaryEnrolled.map((enrollment) => (
+              <StudentNavLink
+                id={enrollment.group.id}
+                key={enrollment.group.id}
+                text={enrollment.group.name}
+              />
+            ))}
+          </ul>
+        </>
       )}
-      {groupType === 'secondary' && (
-        <span className="text-lg font-display mb-2">Groups</span>
+      {secondaryEnrolled.length > 0 && (
+        <>
+          <span className="text-lg font-display mb-2">Groups</span>
+          <ul>
+            {secondaryEnrolled.map((enrollment) => (
+              <StudentNavLink
+                id={enrollment.group.id}
+                key={enrollment.group.id}
+                text={enrollment.group.name}
+              />
+            ))}
+          </ul>
+        </>
       )}
-      <ul>
-        {enrollments.map((enrollment) => (
-          <StudentNavLink
-            id={enrollment.group.id}
-            key={enrollment.group.id}
-            text={enrollment.group.name}
-          />
-        ))}
-      </ul>
     </>
   )
 }
