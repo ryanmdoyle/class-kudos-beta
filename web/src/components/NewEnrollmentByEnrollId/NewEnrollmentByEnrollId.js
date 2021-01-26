@@ -1,6 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
-import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import EnrollmentByEnrollIdForm from 'src/components/EnrollmentByEnrollIdForm/EnrollmentByEnrollIdForm'
+
+import { QUERY } from 'src/components/cells/StudentHomeCell/StudentHomeCell'
 
 const CREATE_ENROLLMENT_BY_ENROLLID_MUTATION = gql`
   mutation CreateEnrollmentByEnrollIdMutation(
@@ -14,10 +16,13 @@ const CREATE_ENROLLMENT_BY_ENROLLID_MUTATION = gql`
 
 const NewEnrollment = ({ userId }) => {
   const { addMessage } = useFlash()
+  const { close } = useModal()
   const [createEnrollment, { loading, error }] = useMutation(
     CREATE_ENROLLMENT_BY_ENROLLID_MUTATION,
     {
+      refetchQueries: [{ query: QUERY, variables: { userId } }],
       onCompleted: () => {
+        close()
         addMessage('Enrollment created.', { classes: 'rw-flash-success' })
       },
     }

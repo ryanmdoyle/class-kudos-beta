@@ -2,6 +2,7 @@ import { useAuth } from '@redwoodjs/auth'
 
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import StudentHomeCell from 'src/components/cells/StudentHomeCell/StudentHomeCell'
+import NewEnrollmentButton from 'src/components/NewEnrollmentButton/NewEnrollmentButton'
 
 const StudentHomePage = () => {
   const { currentUser } = useAuth()
@@ -14,6 +15,7 @@ const StudentHomePage = () => {
         </h1>
         <StudentHomeCell userId={id} />
       </div>
+      <NewEnrollmentButton userId={id} />
     </DashboardLayout>
   )
 }
