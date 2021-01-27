@@ -1,5 +1,5 @@
 import { db } from 'src/lib/db'
-import { UserInputError } from '@redwoodjs/api'
+import { UserInputError, context } from '@redwoodjs/api'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const enrollments = () => {
@@ -40,8 +40,11 @@ export const Enrollment = {
 
 // custom
 
-const validateEnrollId = (input) => {
-  if (!input) {
+export const createEnrollmentByEnrollId = async ({ input }) => {
+  const group = await db.group.findFirst({
+    where: { enrollId: input.enrollId },
+  })
+  if (!group) {
     throw new UserInputError(
       'Cannot find a class or group with entered Enroll ID.',
       {
@@ -51,13 +54,19 @@ const validateEnrollId = (input) => {
       }
     )
   }
-}
-
-export const createEnrollmentByEnrollId = async ({ input }) => {
-  const group = await db.group.findFirst({
-    where: { enrollId: input.enrollId },
-  })
-  validateEnrollId(group)
+  const userEnrollments = await db.user
+    .findOne({
+      where: { id: context.currentUser.id },
+    })
+    .enrollments()
+  const enrollments = userEnrollments.map((e) => e.groupId)
+  if (enrollments.includes(group.id)) {
+    throw new UserInputError('Already Enrolled', {
+      messages: {
+        enrollId: ['Already enrolled with this Enroll ID'],
+      },
+    })
+  }
   input.groupId = group.id
   delete input.enrollId // enrollId not a valid gql mutation input
   return db.enrollment.create({
