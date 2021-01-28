@@ -6,7 +6,7 @@ export const feedbacks = () => {
 }
 
 export const feedback = ({ id }) => {
-  return db.feedback.findOne({
+  return db.feedback.findUnique({
     where: { id },
   })
 }
@@ -32,9 +32,9 @@ export const deleteFeedback = ({ id }) => {
 
 export const Feedback = {
   user: (_obj, { root }) =>
-    db.feedback.findOne({ where: { id: root.id } }).user(),
+    db.feedback.findUnique({ where: { id: root.id } }).user(),
   behavior: (_obj, { root }) =>
-    db.feedback.findOne({ where: { id: root.id } }).behavior(),
+    db.feedback.findUnique({ where: { id: root.id } }).behavior(),
   group: (_obj, { root }) =>
-    db.feedback.findOne({ where: { id: root.id } }).group(),
+    db.feedback.findUnique({ where: { id: root.id } }).group(),
 }

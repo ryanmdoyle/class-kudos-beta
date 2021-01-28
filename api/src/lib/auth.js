@@ -18,7 +18,7 @@ const adminApp = admin.initializeApp(config)
 // eslint-disable-next-line no-unused-vars
 export const getCurrentUser = async (decoded, { token, type }) => {
   const verifiedGoogleUser = await adminApp.auth().verifyIdToken(token)
-  const userInDb = await db.user.findOne({
+  const userInDb = await db.user.findUnique({
     where: { uid: verifiedGoogleUser.uid },
   })
   if (userInDb === null) {
@@ -43,7 +43,7 @@ export const getCurrentUser = async (decoded, { token, type }) => {
   }
   userInDb.roles = null
   const userRoles = await db.user
-    .findOne({ where: { id: userInDb.id } })
+    .findUnique({ where: { id: userInDb.id } })
     .roles()
   if (userRoles.length > 0) {
     const populatedRoles = userRoles.map((role) => role.name)

@@ -7,7 +7,7 @@ export const enrollments = () => {
 }
 
 export const enrollment = ({ id }) => {
-  return db.enrollment.findOne({
+  return db.enrollment.findUnique({
     where: { id },
   })
 }
@@ -33,9 +33,9 @@ export const deleteEnrollment = ({ id }) => {
 
 export const Enrollment = {
   user: (_obj, { root }) =>
-    db.enrollment.findOne({ where: { id: root.id } }).user(),
+    db.enrollment.findUnique({ where: { id: root.id } }).user(),
   group: (_obj, { root }) =>
-    db.enrollment.findOne({ where: { id: root.id } }).group(),
+    db.enrollment.findUnique({ where: { id: root.id } }).group(),
 }
 
 // custom
@@ -55,7 +55,7 @@ export const createEnrollmentByEnrollId = async ({ input }) => {
     )
   }
   const userEnrollments = await db.user
-    .findOne({
+    .findUnique({
       where: { id: context.currentUser.id },
     })
     .enrollments()

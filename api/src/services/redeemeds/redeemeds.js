@@ -6,7 +6,7 @@ export const redeemeds = () => {
 }
 
 export const redeemed = ({ id }) => {
-  return db.redeemed.findOne({
+  return db.redeemed.findUnique({
     where: { id },
   })
 }
@@ -32,7 +32,7 @@ export const deleteRedeemed = ({ id }) => {
 
 export const Redeemed = {
   user: (_obj, { root }) =>
-    db.redeemed.findOne({ where: { id: root.id } }).user(),
+    db.redeemed.findUnique({ where: { id: root.id } }).user(),
   reward: (_obj, { root }) =>
-    db.redeemed.findOne({ where: { id: root.id } }).reward(),
+    db.redeemed.findUnique({ where: { id: root.id } }).reward(),
 }
