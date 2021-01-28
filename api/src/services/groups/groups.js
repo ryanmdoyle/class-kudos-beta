@@ -10,7 +10,7 @@ export const groups = () => {
 }
 
 export const group = ({ id }) => {
-  return db.group.findOne({
+  return db.group.findUnique({
     where: { id },
   })
 }
@@ -48,13 +48,13 @@ export const deleteGroup = async ({ id }) => {
 
 export const Group = {
   owner: (_obj, { root }) =>
-    db.group.findOne({ where: { id: root.id } }).owner(),
+    db.group.findUnique({ where: { id: root.id } }).owner(),
   enrollments: (_obj, { root }) =>
-    db.group.findOne({ where: { id: root.id } }).enrollments(),
+    db.group.findUnique({ where: { id: root.id } }).enrollments(),
   behaviors: (_obj, { root }) =>
-    db.group.findOne({ where: { id: root.id } }).behaviors(),
+    db.group.findUnique({ where: { id: root.id } }).behaviors(),
   rewards: (_obj, { root }) =>
-    db.group.findOne({ where: { id: root.id } }).rewards(),
+    db.group.findUnique({ where: { id: root.id } }).rewards(),
   feedback: (_obj, { root }) =>
-    db.group.findOne({ where: { id: root.id } }).feedback(),
+    db.group.findUnique({ where: { id: root.id } }).feedback(),
 }

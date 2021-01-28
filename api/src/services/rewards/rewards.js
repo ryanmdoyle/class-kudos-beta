@@ -6,7 +6,7 @@ export const rewards = () => {
 }
 
 export const reward = ({ id }) => {
-  return db.reward.findOne({
+  return db.reward.findUnique({
     where: { id },
   })
 }
@@ -32,7 +32,7 @@ export const deleteReward = ({ id }) => {
 
 export const Reward = {
   group: (_obj, { root }) =>
-    db.reward.findOne({ where: { id: root.id } }).group(),
+    db.reward.findUnique({ where: { id: root.id } }).group(),
   redeemed: (_obj, { root }) =>
-    db.reward.findOne({ where: { id: root.id } }).redeemed(),
+    db.reward.findUnique({ where: { id: root.id } }).redeemed(),
 }

@@ -6,7 +6,7 @@ export const behaviors = () => {
 }
 
 export const behavior = ({ id }) => {
-  return db.behavior.findOne({
+  return db.behavior.findUnique({
     where: { id },
   })
 }
@@ -32,9 +32,9 @@ export const deleteBehavior = ({ id }) => {
 
 export const Behavior = {
   group: (_obj, { root }) =>
-    db.behavior.findOne({ where: { id: root.id } }).group(),
+    db.behavior.findUnique({ where: { id: root.id } }).group(),
   feedback: (_obj, { root }) =>
-    db.behavior.findOne({ where: { id: root.id } }).feedback(),
+    db.behavior.findUnique({ where: { id: root.id } }).feedback(),
 }
 
 export const deleteBehaviorsOfGroup = ({ groupId }) => {

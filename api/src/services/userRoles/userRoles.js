@@ -8,7 +8,7 @@ export const userRoles = () => {
 }
 
 export const userRole = ({ id }) => {
-  return db.userRole.findOne({
+  return db.userRole.findUnique({
     where: { id },
   })
 }
@@ -39,7 +39,7 @@ export const deleteUserRole = ({ id }) => {
 
 export const UserRole = {
   user: (_obj, { root }) =>
-    db.userRole.findOne({ where: { id: root.id } }).user(),
+    db.userRole.findUnique({ where: { id: root.id } }).user(),
 }
 
 // Custom methods

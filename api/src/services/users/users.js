@@ -6,7 +6,7 @@ export const users = () => {
 }
 
 export const user = ({ id }) => {
-  return db.user.findOne({
+  return db.user.findUnique({
     where: { id },
   })
 }
@@ -32,13 +32,13 @@ export const deleteUser = ({ id }) => {
 
 export const User = {
   roles: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).roles(),
+    db.user.findUnique({ where: { id: root.id } }).roles(),
   feedback: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).feedback(),
+    db.user.findUnique({ where: { id: root.id } }).feedback(),
   redeemed: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).redeemed(),
+    db.user.findUnique({ where: { id: root.id } }).redeemed(),
   groups: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).groups(),
+    db.user.findUnique({ where: { id: root.id } }).groups(),
   enrollments: (_obj, { root }) =>
-    db.user.findOne({ where: { id: root.id } }).enrollments(),
+    db.user.findUnique({ where: { id: root.id } }).enrollments(),
 }
