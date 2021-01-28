@@ -24,5 +24,5 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ group }) => {
-  return <GroupGrid enrollmentsOfGroup={group.enrollments} />
+  return <GroupGrid enrollmentsOfGroup={group?.enrollments} />
 }

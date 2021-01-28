@@ -30,6 +30,6 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ groupId, group }) => {
   return (
-    <RecentGroupFeedback feedbacksOfGroup={group.feedback} groupId={groupId} />
+    <RecentGroupFeedback feedbacksOfGroup={group?.feedback} groupId={groupId} />
   )
 }

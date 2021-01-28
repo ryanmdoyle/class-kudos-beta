@@ -1,6 +1,6 @@
 import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
-const ListViewStudentItem = ({ student, onClick }) => {
+const ListViewStudentItem = ({ student = {}, onClick }) => {
   const { id, firstName, lastName } = student
   return (
     <li

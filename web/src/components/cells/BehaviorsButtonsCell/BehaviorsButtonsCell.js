@@ -19,6 +19,7 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ group, studentId }) => {
+  if (!group) return <Empty />
   return group.behaviors.map((behavior) => (
     <FeedbackButton
       name={behavior.name}

@@ -20,7 +20,7 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 export const Success = ({ group }) => {
   return (
     <ul className="w-full">
-      {group.behaviors.map((behavior) => (
+      {group?.behaviors?.map((behavior) => (
         <li
           className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
           key={behavior.id}

@@ -21,14 +21,14 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ userId, user }) => {
-  const ownedGroups = user.groups.filter((group) => group.ownerId === userId)
-  const primaryOwned = ownedGroups.filter((group) => group.type === 'primary')
-  const secondaryOwned = ownedGroups.filter(
+  const ownedGroups = user?.groups.filter((group) => group.ownerId === userId)
+  const primaryOwned = ownedGroups?.filter((group) => group.type === 'primary')
+  const secondaryOwned = ownedGroups?.filter(
     (group) => group.type === 'secondary'
   )
   return (
     <>
-      {primaryOwned.length > 0 && (
+      {primaryOwned?.length > 0 && (
         <>
           <span className="text-lg font-display mb-2 mt-2">Classes</span>
           <ul>
@@ -38,7 +38,7 @@ export const Success = ({ userId, user }) => {
           </ul>
         </>
       )}
-      {secondaryOwned.length > 0 && (
+      {secondaryOwned?.length > 0 && (
         <>
           <span className="text-lg font-display mb-2 mt-2">Groups</span>
           <ul>

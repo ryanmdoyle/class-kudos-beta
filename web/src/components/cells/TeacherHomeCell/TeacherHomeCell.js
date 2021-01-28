@@ -31,11 +31,11 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ user, userId }) => {
-  if (user.groups.length === 0) return <Empty />
-  const primaryOwned = user.groups.filter(
+  if (!user || user.groups.length === 0) return <Empty />
+  const primaryOwned = user?.groups.filter(
     (group) => group.type === 'primary' && group.ownerId === userId
   )
-  const secondaryOwned = user.groups.filter(
+  const secondaryOwned = user?.groups.filter(
     (group) => group.type === 'secondary' && group.ownerId === userId
   )
   return (

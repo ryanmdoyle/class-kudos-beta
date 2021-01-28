@@ -23,7 +23,7 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 export const Success = ({ group }) => {
   return (
     <ul className="w-full">
-      {group.enrollments.map((enrolled) => (
+      {group?.enrollments.map((enrolled) => (
         <li
           className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
           key={enrolled.user.id}

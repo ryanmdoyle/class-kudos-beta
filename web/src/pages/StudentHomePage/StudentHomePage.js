@@ -6,16 +6,15 @@ import NewEnrollmentButton from 'src/components/NewEnrollmentButton/NewEnrollmen
 
 const StudentHomePage = () => {
   const { currentUser } = useAuth()
-  const { id, firstName } = currentUser
   return (
     <DashboardLayout>
       <div className="p-4">
         <h1 className="text-3xl font-display mb-4">
-          Welcome Back{currentUser ? `, ${firstName}` : null}! 👋
+          Welcome Back{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
         </h1>
-        <StudentHomeCell userId={id} />
+        <StudentHomeCell userId={currentUser?.id} />
       </div>
-      <NewEnrollmentButton userId={id} />
+      <NewEnrollmentButton userId={currentUser?.id} />
     </DashboardLayout>
   )
 }

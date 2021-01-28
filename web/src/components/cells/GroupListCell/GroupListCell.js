@@ -58,7 +58,7 @@ export const Empty = ({ enrollId }) => (
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ id, group }) => {
-  if (group.enrollments.length === 0)
+  if (group?.enrollments.length === 0 || !group)
     return <Empty enrollId={group?.enrollId} />
   return (
     <GroupList

@@ -61,23 +61,23 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
           </tr>
         </thead>
         <tbody>
-          {feedbacksOfGroup.map((feedback) => (
-            <tr key={feedback.id}>
+          {feedbacksOfGroup?.map((feedback) => (
+            <tr key={feedback?.id}>
               <td>
                 {truncate(
-                  `${feedback.user.firstName} ${feedback.user.lastName}`
+                  `${feedback?.user.firstName} ${feedback?.user.lastName}`
                 )}
               </td>
-              <td>{truncate(feedback.behavior.name)}</td>
-              <td>{timeTag(feedback.createdAt)}</td>
-              <td>{truncate(feedback.behavior.value)}</td>
+              <td>{truncate(feedback?.behavior.name)}</td>
+              <td>{timeTag(feedback?.createdAt)}</td>
+              <td>{truncate(feedback?.behavior.value)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <a
                     href="#"
-                    title={'Delete feedback ' + feedback.id}
+                    title={'Delete feedback ' + feedback?.id}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(feedback.id)}
+                    onClick={() => onDeleteClick(feedback?.id)}
                     // onClick={() => console.log(feedback.id)}
                   >
                     Delete

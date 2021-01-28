@@ -5,7 +5,11 @@ import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCar
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
 
-const GroupList = ({ groupId, enrollmentsOfGroup, behaviorsOfGroup }) => {
+const GroupList = ({
+  groupId,
+  enrollmentsOfGroup = [],
+  behaviorsOfGroup = [],
+}) => {
   const [student, setStudent] = useState(enrollmentsOfGroup[0]?.user)
 
   return (

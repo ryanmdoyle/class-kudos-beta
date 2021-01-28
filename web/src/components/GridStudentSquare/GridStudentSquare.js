@@ -9,7 +9,7 @@ const GridStudentSquare = ({
   return (
     <div
       className={`w-32 h-32 white-box flex flex-col justify-center items-center relative m-2 hover:ring-2 ring-purple-500 ${
-        selected.includes(userId) ? 'ring-2 ring-purple-500' : null
+        selected?.includes(userId) ? 'ring-2 ring-purple-500' : null
       }`}
       onClick={() => {
         handleSelect(userId)

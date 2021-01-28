@@ -6,7 +6,7 @@ const TeacherNav = () => {
   const { currentUser } = useAuth()
   return (
     <div className="w-full flex flex-col justify-between p-4">
-      <GroupsOwnedCell userId={currentUser.id} />
+      <GroupsOwnedCell userId={currentUser?.id} />
     </div>
   )
 }

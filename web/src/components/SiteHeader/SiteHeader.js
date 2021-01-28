@@ -17,10 +17,10 @@ const SiteHeader = () => {
         {isAuthenticated && (
           <>
             <span className="text-normal text-white font-body pr-3">
-              {`${currentUser.firstName} ${currentUser.lastName}`}
+              {`${currentUser?.firstName} ${currentUser?.lastName}`}
             </span>
             <img
-              src={currentUser.profileImage}
+              src={currentUser?.profileImage}
               className="w-10 h-10 rounded-full transform scale-100 hover:scale-125"
             ></img>
           </>

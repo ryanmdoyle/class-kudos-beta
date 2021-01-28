@@ -23,11 +23,11 @@ export const Empty = () => null
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ user }) => {
-  if (user.enrollments.length === 0) return <Empty />
-  const primaryEnrolled = user.enrollments.filter(
+  if (user?.enrollments.length === 0 || !user) return <Empty />
+  const primaryEnrolled = user?.enrollments.filter(
     (enrollment) => enrollment.group.type === 'primary'
   )
-  const secondaryEnrolled = user.enrollments.filter(
+  const secondaryEnrolled = user?.enrollments.filter(
     (enrollment) => enrollment.group.type === 'secondary'
   )
   return (

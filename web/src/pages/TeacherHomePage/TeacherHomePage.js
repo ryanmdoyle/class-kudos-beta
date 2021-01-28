@@ -8,7 +8,6 @@ import TeacherHomeCell from 'src/components/cells/TeacherHomeCell/TeacherHomeCel
 
 const TeacherHomePage = () => {
   const { currentUser } = useAuth()
-  const { id, firstName } = currentUser
   const { loading } = usePageLoadingContext
 
   return (
@@ -16,9 +15,9 @@ const TeacherHomePage = () => {
       {loading && <PageLoader />}
       <div className="p-4">
         <h1 className="text-3xl font-display mb-4">
-          Welcome Back{currentUser ? `, ${firstName}` : null}! 👋
+          Welcome Back{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
         </h1>
-        <TeacherHomeCell userId={id} />
+        <TeacherHomeCell userId={currentUser?.id} />
       </div>
       <NewGroupButton />
     </DashboardLayout>

@@ -16,8 +16,6 @@ const GroupGrid = ({ enrollmentsOfGroup }) => {
         const added = [...selected, userId]
         setSelected(added)
       }
-    } else {
-      console.log('OPEN MODAL!', userId)
     }
   }
 
@@ -44,7 +42,7 @@ const GroupGrid = ({ enrollmentsOfGroup }) => {
         </div>
 
         <div className="w-full flex flex-wrap justify-center">
-          {enrollmentsOfGroup.map((enrolled) => {
+          {enrollmentsOfGroup?.map((enrolled) => {
             const {
               id,
               firstName: first,

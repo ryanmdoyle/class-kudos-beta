@@ -1,6 +1,7 @@
 import { NavLink, routes } from '@redwoodjs/router'
 
 const StudentNavLink = ({ id, text }) => {
+  if (!id) return null
   return (
     <li className="mb-2 w-full">
       <NavLink
