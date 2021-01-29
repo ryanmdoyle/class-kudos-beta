@@ -37,6 +37,8 @@ export const Behavior = {
     db.behavior.findUnique({ where: { id: root.id } }).feedback(),
 }
 
+// Custom
+
 export const deleteBehaviorsOfGroup = ({ groupId }) => {
   return db.behavior.delete({
     where: { id: groupId },
