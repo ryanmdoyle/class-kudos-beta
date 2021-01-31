@@ -2,16 +2,13 @@ import ListViewRecentItem from 'src/components/ListViewRecentItem/ListViewRecent
 
 export const QUERY = gql`
   query RecentUserFeedbackQuery($userId: String!) {
-    user(id: $userId) {
+    feedbackOfUser(userId: $userId) {
       id
-      feedback {
+      createdAt
+      behavior {
         id
-        createdAt
-        behavior {
-          id
-          name
-          value
-        }
+        name
+        value
       }
     }
   }
@@ -23,24 +20,29 @@ export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ user, feedback }) => {
-  if (!user || user?.feedback.length === 0) return <Empty />
-  const sorted = user?.feedback
-    .slice()
-    .sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    )
+export const Success = ({ feedbackOfUser }) => {
+  const sorted = feedbackOfUser
+    ? feedbackOfUser
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+    : null
   return (
-    <ul>
-      {sorted.map((feedback) => (
-        <ListViewRecentItem
-          key={feedback.id}
-          name={feedback.behavior.name}
-          value={feedback.behavior.value}
-          createdAt={feedback.createdAt}
-        />
-      ))}
-    </ul>
+    <>
+      {sorted ? (
+        <ul>
+          {sorted.map((feedback) => (
+            <ListViewRecentItem
+              key={feedback.id}
+              name={feedback.behavior.name}
+              value={feedback.behavior.value}
+              createdAt={feedback.createdAt}
+            />
+          ))}
+        </ul>
+      ) : null}
+    </>
   )
 }

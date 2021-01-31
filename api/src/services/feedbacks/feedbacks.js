@@ -39,6 +39,13 @@ export const Feedback = {
     db.feedback.findUnique({ where: { id: root.id } }).group(),
 }
 
+// Custom
+export const feedbackOfUser = ({ userId }) => {
+  return db.feedback.findMany({
+    where: { userId: userId },
+  })
+}
+
 export const feedbackOfUserForGroup = ({ userId, groupId }) => {
   return db.feedback.findMany({
     where: { userId: userId, groupId: groupId },
