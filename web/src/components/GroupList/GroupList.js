@@ -37,6 +37,7 @@ const GroupList = ({
         <RecentFeedbackListCard
           userId={student?.id}
           firstName={student?.firstName}
+          groupId={groupId}
         />
       </div>
     </>
