@@ -10,7 +10,7 @@ const BehaviorButtons = ({ studentId, behaviors, groupId }) => {
   }
 
   return (
-    <div>
+    <>
       {behaviors?.map((behavior) => (
         <FeedbackButton
           name={behavior.name}
@@ -20,7 +20,7 @@ const BehaviorButtons = ({ studentId, behaviors, groupId }) => {
           key={behavior.id}
         />
       ))}
-    </div>
+    </>
   )
 }
 
