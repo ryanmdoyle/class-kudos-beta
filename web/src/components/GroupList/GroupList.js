@@ -27,7 +27,7 @@ const GroupList = ({
           )
         })}
       </ul>
-      <div className="h-full flex flex-col col-span-8 2xl:col-span-3">
+      <div className="flex flex-col col-span-8 2xl:col-span-3 overflow-y-auto">
         <StudentPointsCard userId={student?.id} student={student} />
         <AwardFeedbackCard
           groupId={groupId}
