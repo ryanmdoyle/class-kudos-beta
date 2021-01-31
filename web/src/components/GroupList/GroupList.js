@@ -28,13 +28,7 @@ const GroupList = ({
         })}
       </ul>
       <div className="h-full flex flex-col col-span-8 2xl:col-span-3">
-        <StudentPointsCard
-          userId={student?.id}
-          student={student}
-          points={student?.feedback.reduce((accumulator, currentFeedback) => {
-            return accumulator + currentFeedback.behavior.value
-          }, 0)}
-        />
+        <StudentPointsCard userId={student?.id} student={student} />
         <AwardFeedbackCard
           groupId={groupId}
           student={student}
