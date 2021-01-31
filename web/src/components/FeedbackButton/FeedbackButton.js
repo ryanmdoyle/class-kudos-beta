@@ -1,5 +1,5 @@
 import { useFlash, useMutation } from '@redwoodjs/web'
-import { QUERY as recentUserFeedbackQuery } from 'src/components/cells/RecentUserFeedbackCell/RecentUserFeedbackCell'
+import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/RecentUserFeedbackOfGroupCell/RecentUserFeedbackOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
@@ -15,7 +15,10 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
   const { addMessage } = useFlash()
   const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
-      { query: recentUserFeedbackQuery, variables: { userId: studentId } },
+      {
+        query: recentUserFeedbackOfGroupQuery,
+        variables: { userId: studentId, groupId: groupId },
+      },
       { query: pointsQuery, variables: { userId: studentId } },
     ],
     awaitRefetchQueries: true,
