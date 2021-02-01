@@ -73,3 +73,9 @@ export const createEnrollmentByEnrollId = async ({ input }) => {
     data: foreignKeyReplacement(input),
   })
 }
+
+export const enrollmentsOfGroup = ({ groupId }) => {
+  return db.enrollment.findMany({
+    where: { groupId: groupId },
+  })
+}
