@@ -40,7 +40,6 @@ export const Success = ({ group }) => {
   })
 
   const onSave = (input, id) => {
-    console.log(input)
     updateGroup({ variables: { id, input } })
   }
 
