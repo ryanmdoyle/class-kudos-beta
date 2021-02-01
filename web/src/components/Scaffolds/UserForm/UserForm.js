@@ -24,7 +24,7 @@ const UserForm = (props) => {
 
         <Label
           name="uid"
-          className="rw-label"
+          className="rw-label hidden"
           errorClassName="rw-label rw-label-error"
         >
           Uid
@@ -32,7 +32,7 @@ const UserForm = (props) => {
         <TextField
           name="uid"
           defaultValue={props.user?.uid}
-          className="rw-input"
+          className="rw-input hidden"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
