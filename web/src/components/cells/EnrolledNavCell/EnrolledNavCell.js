@@ -2,15 +2,12 @@ import StudentNavLink from 'src/components/StudentNavLink/StudentNavLink'
 
 export const QUERY = gql`
   query EnrolledNavQuery($userId: String!) {
-    user(id: $userId) {
+    enrollmentsOfUser(userId: $userId) {
       id
-      enrollments {
+      group {
         id
-        group {
-          id
-          name
-          type
-        }
+        name
+        type
       }
     }
   }
@@ -22,17 +19,16 @@ export const Empty = () => null
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ user }) => {
-  if (user?.enrollments.length === 0 || !user) return <Empty />
-  const primaryEnrolled = user?.enrollments.filter(
+export const Success = ({ enrollmentsOfUser }) => {
+  const primaryEnrolled = enrollmentsOfUser?.filter(
     (enrollment) => enrollment.group.type === 'primary'
   )
-  const secondaryEnrolled = user?.enrollments.filter(
+  const secondaryEnrolled = enrollmentsOfUser?.filter(
     (enrollment) => enrollment.group.type === 'secondary'
   )
   return (
     <>
-      {primaryEnrolled.length > 0 && (
+      {primaryEnrolled?.length > 0 && (
         <>
           <span className="text-lg font-display mb-2">Classes</span>
           <ul>
@@ -46,7 +42,7 @@ export const Success = ({ user }) => {
           </ul>
         </>
       )}
-      {secondaryEnrolled.length > 0 && (
+      {secondaryEnrolled?.length > 0 && (
         <>
           <span className="text-lg font-display mb-2">Groups</span>
           <ul>
