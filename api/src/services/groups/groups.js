@@ -58,3 +58,11 @@ export const Group = {
   feedback: (_obj, { root }) =>
     db.group.findUnique({ where: { id: root.id } }).feedback(),
 }
+
+// Custom
+
+export const groupsOwned = ({ userId }) => {
+  return db.group.findMany({
+    where: { ownerId: userId },
+  })
+}
