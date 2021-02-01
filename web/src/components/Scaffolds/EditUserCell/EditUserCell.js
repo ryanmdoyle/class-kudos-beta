@@ -1,5 +1,6 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import UserForm from 'src/components/Scaffolds/UserForm'
 
 export const QUERY = gql`
@@ -35,9 +36,10 @@ export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ user }) => {
   const { addMessage } = useFlash()
+  const { close } = useModal()
   const [updateUser, { loading, error }] = useMutation(UPDATE_USER_MUTATION, {
     onCompleted: () => {
-      navigate(routes.scaffoldsUsers())
+      close()
       addMessage('User updated.', { classes: 'rw-flash-success' })
     },
   })
@@ -47,13 +49,13 @@ export const Success = ({ user }) => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit User {user.id}</h2>
+    <div>
+      <header>
+        <h2 className="text-xl text-purple-800 font-display mb-6">
+          Edit User {user.id}
+        </h2>
       </header>
-      <div className="rw-segment-main">
-        <UserForm user={user} onSave={onSave} error={error} loading={loading} />
-      </div>
+      <UserForm user={user} onSave={onSave} error={error} loading={loading} />
     </div>
   )
 }
