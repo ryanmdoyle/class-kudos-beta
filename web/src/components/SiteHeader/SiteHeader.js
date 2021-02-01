@@ -1,10 +1,18 @@
 import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
+
+import { useModal } from 'src/context/ModalContext'
 import LoginButton from '../LoginButton/LoginButton'
+import EditUserCell from 'src/components/Scaffolds/EditUserCell'
 
 const SiteHeader = () => {
   const { isAuthenticated, currentUser } = useAuth()
-  console.log('USER IN HEADER', currentUser)
+  const { openModal } = useModal()
+
+  const openProfile = () => {
+    openModal(<EditUserCell id={currentUser.id} />)
+  }
+
   return (
     <header className="w-full h-16 flex bg-purple-800 px-4 py-3 justify-between items-center">
       <Link to={routes.home()}>
@@ -22,6 +30,9 @@ const SiteHeader = () => {
             <img
               src={currentUser?.profileImage}
               className="w-10 h-10 rounded-full transform scale-100 hover:scale-125"
+              onClick={() => {
+                openProfile()
+              }}
             ></img>
           </>
         )}
