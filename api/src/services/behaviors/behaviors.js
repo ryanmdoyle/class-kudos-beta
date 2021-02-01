@@ -42,7 +42,7 @@ export const Behavior = {
 export const behaviorsOfGroup = ({ groupId }) => {
   return db.behavior.findMany({
     where: { groupId: groupId },
-    orderBy: { name: 'desc' },
+    orderBy: { name: 'asc' },
   })
 }
 
