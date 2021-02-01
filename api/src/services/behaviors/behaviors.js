@@ -39,6 +39,13 @@ export const Behavior = {
 
 // Custom
 
+export const behaviorsOfGroup = ({ groupId }) => {
+  return db.behavior.findMany({
+    where: { groupId: groupId },
+    orderBy: { name: 'desc' },
+  })
+}
+
 export const deleteBehaviorsOfGroup = ({ groupId }) => {
   return db.behavior.delete({
     where: { id: groupId },

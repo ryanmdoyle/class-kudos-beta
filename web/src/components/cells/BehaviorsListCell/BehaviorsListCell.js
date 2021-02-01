@@ -1,12 +1,9 @@
 export const QUERY = gql`
   query BehaviorsListQuery($groupId: String!) {
-    group(id: $groupId) {
+    behaviorsOfGroup(groupId: $groupId) {
       id
-      behaviors {
-        id
-        name
-        value
-      }
+      name
+      value
     }
   }
 `
@@ -17,10 +14,10 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ group }) => {
+export const Success = ({ behaviorsOfGroup }) => {
   return (
     <ul className="w-full">
-      {group?.behaviors?.map((behavior) => (
+      {behaviorsOfGroup?.map((behavior) => (
         <li
           className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
           key={behavior.id}
