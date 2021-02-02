@@ -1,5 +1,5 @@
 import { useFlash, useMutation } from '@redwoodjs/web'
-import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/RecentUserFeedbackOfGroupCell/RecentUserFeedbackOfGroupCell'
+import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 

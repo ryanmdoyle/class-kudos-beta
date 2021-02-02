@@ -1,21 +1,26 @@
 import { render, screen } from '@redwoodjs/testing'
-import { Loading, Empty, Failure, Success } from './RecentUserFeedbackCell'
-import { standard } from './RecentUserFeedbackCell.mock'
+import {
+  Loading,
+  Empty,
+  Failure,
+  Success,
+} from './UserFeedbackOfGroupCell'
+import { standard } from './UserFeedbackOfGroupCell.mock'
 
-describe('RecentUserFeedbackCell', () => {
-  test('Loading renders successfully', () => {
+describe('UserFeedbackOfGroupCell', () => {
+  it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)
     }).not.toThrow()
   })
 
-  test('Empty renders successfully', async () => {
+  it('renders Empty successfully', async () => {
     expect(() => {
       render(<Empty />)
     }).not.toThrow()
   })
 
-  test('Failure renders successfully', async () => {
+  it('renders Failure successfully', async () => {
     expect(() => {
       render(<Failure error={new Error('Oh no')} />)
     }).not.toThrow()
@@ -26,9 +31,13 @@ describe('RecentUserFeedbackCell', () => {
   //
   //   expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
-  test('Success renders successfully', async () => {
+  it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success recentUserFeedback={standard().recentUserFeedback} />)
+      render(
+        <Success
+          recentUserFeedbackOfGroup={standard().recentUserFeedbackOfGroup}
+        />
+      )
     }).not.toThrow()
   })
 })

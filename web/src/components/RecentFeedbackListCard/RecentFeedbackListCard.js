@@ -1,4 +1,4 @@
-import RecentUserFeedbackOfGroupCell from 'src/components/cells/RecentUserFeedbackOfGroupCell/RecentUserFeedbackOfGroupCell'
+import UserFeedbackOfGroupCell from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
 
 const RecentFeedbackListCard = ({ userId, firstName, groupId }) => {
   return (
@@ -6,7 +6,7 @@ const RecentFeedbackListCard = ({ userId, firstName, groupId }) => {
       <h2 className="font-display text-lg mb-2">
         Recent Feedback for {firstName}
       </h2>
-      <RecentUserFeedbackOfGroupCell userId={userId} groupId={groupId} />
+      <UserFeedbackOfGroupCell userId={userId} groupId={groupId} />
     </div>
   )
 }
