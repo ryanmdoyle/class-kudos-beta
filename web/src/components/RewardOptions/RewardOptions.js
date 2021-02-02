@@ -1,7 +1,7 @@
 import { useModal } from 'src/context/ModalContext'
 
 import NewReward from '../Scaffolds/NewReward/NewReward'
-import RewardsListCell from 'src/components/cells/RewardsListCell/RewardsListCell'
+import RewardsOfGroupCell from 'src/components/cells/RewardsOfGroupCell/RewardsOfGroupCell'
 
 const RewardOptions = ({ groupId }) => {
   const { openModal } = useModal()
@@ -12,7 +12,7 @@ const RewardOptions = ({ groupId }) => {
   return (
     <div className="white-box mt-4">
       <h2 className="text-xl font-display mb-2">Rewards</h2>
-      <RewardsListCell groupId={groupId} />
+      <RewardsOfGroupCell groupId={groupId} />
       <div className="flex w-full justify-end">
         <button
           className="button-green mt-2"

@@ -1,21 +1,21 @@
 import { render, screen } from '@redwoodjs/testing'
-import { Loading, Empty, Failure, Success } from './RewardsListCell'
-import { standard } from './RewardsListCell.mock'
+import { Loading, Empty, Failure, Success } from './RewardsOfGroupCell'
+import { standard } from './RewardsOfGroupCell.mock'
 
-describe('RewardsListCell', () => {
-  test('Loading renders successfully', () => {
+describe('RewardsOfGroupCell', () => {
+  it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)
     }).not.toThrow()
   })
 
-  test('Empty renders successfully', async () => {
+  it('renders Empty successfully', async () => {
     expect(() => {
       render(<Empty />)
     }).not.toThrow()
   })
 
-  test('Failure renders successfully', async () => {
+  it('renders Failure successfully', async () => {
     expect(() => {
       render(<Failure error={new Error('Oh no')} />)
     }).not.toThrow()
@@ -26,9 +26,9 @@ describe('RewardsListCell', () => {
   //
   //   expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
-  test('Success renders successfully', async () => {
+  it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success rewardsList={standard().rewardsList} />)
+      render(<Success rewardsOfGroup={standard().rewardsOfGroup} />)
     }).not.toThrow()
   })
 })
