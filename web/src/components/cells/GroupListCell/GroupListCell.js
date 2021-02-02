@@ -1,23 +1,24 @@
+import { Redirect, routes } from '@redwoodjs/router'
 import GroupList from 'src/components/GroupList/GroupList'
 
 export const QUERY = gql`
   query GroupStudentListQuery($id: String!) {
+    enrollmentsOfGroup(groupId: $id) {
+      id
+      user {
+        id
+        firstName
+        lastName
+        profileImage
+      }
+    }
+    behaviorsOfGroup(groupId: $id) {
+      id
+      name
+    }
     group(id: $id) {
       id
       enrollId
-      enrollments {
-        id
-        user {
-          id
-          firstName
-          lastName
-          profileImage
-        }
-      }
-      behaviors {
-        id
-        name
-      }
     }
   }
 `
@@ -41,24 +42,25 @@ export const Loading = () => (
   </div>
 )
 
-export const Empty = ({ enrollId }) => (
-  <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
-    No Students! Enroll new students with the code:{' '}
-    <span className="font-bold">{enrollId}</span>
-  </div>
-)
+export const Empty = () => <Redirect to={routes.teacherHome()} />
 
-export const Failure = ({ error }) => <div>Error: {error.message}</div>
+export const Failure = ({ error }) => {
+  console.error(error)
+  return <Redirect to={routes.teacherHome()} />
+}
 
-export const Success = ({ id, group }) => {
-  if (group?.enrollments.length === 0 || !group) {
-    return <Empty enrollId={group?.enrollId} />
-  }
+export const Success = ({
+  id,
+  enrollmentsOfGroup,
+  behaviorsOfGroup,
+  enrollId,
+}) => {
   return (
     <GroupList
       groupId={id}
-      enrollmentsOfGroup={group.enrollments}
-      behaviorsOfGroup={group.behaviors}
+      enrollId={enrollId}
+      enrollmentsOfGroup={enrollmentsOfGroup}
+      behaviorsOfGroup={behaviorsOfGroup}
     />
   )
 }

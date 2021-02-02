@@ -7,10 +7,20 @@ import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/Recent
 
 const GroupList = ({
   groupId,
+  enrollId,
   enrollmentsOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
   const [student, setStudent] = useState(enrollmentsOfGroup[0]?.user)
+
+  if (enrollmentsOfGroup.length === 0) {
+    return (
+      <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
+        No Students! Enroll new students with the code:{' '}
+        <span className="font-bold">{enrollId}</span>
+      </div>
+    )
+  }
 
   return (
     <>
