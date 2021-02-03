@@ -1,6 +1,6 @@
 import { render, screen } from '@redwoodjs/testing'
-import { Loading, Empty, Failure, Success } from './BehaviorsListCell'
-import { standard } from './BehaviorsListCell.mock'
+import { Loading, Empty, Failure, Success } from './BehaviorsOfGroupCell'
+import { standard } from './BehaviorsOfGroupCell.mock'
 
 describe('BehaviorsListCell', () => {
   test('Loading renders successfully', () => {

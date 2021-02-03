@@ -1,5 +1,6 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import BehaviorForm from 'src/components/Scaffolds/BehaviorForm'
 
 export const QUERY = gql`
@@ -27,11 +28,12 @@ export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ behavior }) => {
   const { addMessage } = useFlash()
+  const { close } = useModal()
   const [updateBehavior, { loading, error }] = useMutation(
     UPDATE_BEHAVIOR_MUTATION,
     {
       onCompleted: () => {
-        navigate(routes.scaffoldsBehaviors())
+        close()
         addMessage('Behavior updated.', { classes: 'rw-flash-success' })
       },
     }

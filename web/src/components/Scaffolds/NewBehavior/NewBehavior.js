@@ -2,7 +2,7 @@ import { useMutation, useFlash } from '@redwoodjs/web'
 import { useModal } from 'src/context/ModalContext'
 import BehaviorForm from 'src/components/Scaffolds/BehaviorForm'
 
-import { QUERY } from 'src/components/cells/BehaviorsListCell'
+import { QUERY } from 'src/components/cells/BehaviorsOfGroupCell'
 
 const CREATE_BEHAVIOR_MUTATION = gql`
   mutation CreateBehaviorMutation($input: CreateBehaviorInput!) {

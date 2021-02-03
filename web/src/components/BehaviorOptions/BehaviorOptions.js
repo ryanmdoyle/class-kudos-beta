@@ -1,7 +1,7 @@
 import { useModal } from 'src/context/ModalContext'
 
 import NewBehavior from '../Scaffolds/NewBehavior/NewBehavior'
-import BehaviorsListCell from 'src/components/cells/BehaviorsListCell/BehaviorsListCell'
+import BehaviorsOfGroupCell from 'src/components/cells/BehaviorsOfGroupCell/BehaviorsOfGroupCell'
 
 const BehaviorOptions = ({ groupId }) => {
   const { openModal } = useModal()
@@ -13,7 +13,7 @@ const BehaviorOptions = ({ groupId }) => {
   return (
     <div className="white-box">
       <h2 className="text-xl font-display mb-2">Behaviors</h2>
-      <BehaviorsListCell groupId={groupId} />
+      <BehaviorsOfGroupCell groupId={groupId} />
       <div className="flex w-full justify-end">
         <button
           className="button-green mt-2"

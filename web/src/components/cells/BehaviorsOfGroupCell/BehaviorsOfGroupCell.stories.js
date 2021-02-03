@@ -1,5 +1,5 @@
-import { Loading, Empty, Failure, Success } from './BehaviorsListCell'
-import { standard } from './BehaviorsListCell.mock'
+import { Loading, Empty, Failure, Success } from './BehaviorsOfGroupCell'
+import { standard } from './BehaviorsOfGroupCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
