@@ -1,5 +1,6 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
+import { useModal } from 'src/context/ModalContext'
 import RewardForm from 'src/components/Scaffolds/RewardForm'
 
 export const QUERY = gql`
@@ -27,11 +28,12 @@ export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ reward }) => {
   const { addMessage } = useFlash()
+  const { close } = useModal()
   const [updateReward, { loading, error }] = useMutation(
     UPDATE_REWARD_MUTATION,
     {
       onCompleted: () => {
-        navigate(routes.scaffoldsRewards())
+        close()
         addMessage('Reward updated.', { classes: 'rw-flash-success' })
       },
     }
