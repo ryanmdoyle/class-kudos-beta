@@ -7,14 +7,45 @@ import {
   Submit,
   SelectField,
 } from '@redwoodjs/forms'
+import { useMutation, useFlash } from '@redwoodjs/web'
+import { useModal } from 'src/context/ModalContext'
+
+import { QUERY } from 'src/components/cells/TeacherHomeCell'
+
+const DELETE_GROUP_MUTATION = gql`
+  mutation DeleteGroupMutation($id: String!) {
+    deleteGroup(id: $id) {
+      id
+    }
+  }
+`
 
 const GroupForm = (props) => {
+  const { addMessage } = useFlash()
+  const { close } = useModal()
+  const [deleteGroup] = useMutation(DELETE_GROUP_MUTATION, {
+    onCompleted: () => {
+      addMessage('Group deleted.', { classes: 'rw-flash-success' })
+    },
+    refetchQueries: [{ query: QUERY, variables: { userId: props.userId } }],
+    awaitRefetchQueries: true,
+  })
+
+  const onDeleteClick = (id) => {
+    if (
+      confirm('Are you sure you want to delete group ' + props.group.name + '?')
+    ) {
+      deleteGroup({ variables: { id } })
+      close()
+    }
+  }
+
   const onSubmit = (data) => {
     props.onSave(data, props?.group?.id)
   }
 
   return (
-    <div className="rw-form-wrapper">
+    <div className="rw-form-wrapper relative">
       <Form onSubmit={onSubmit} error={props.error}>
         <FormError
           error={props.error}
@@ -111,6 +142,14 @@ const GroupForm = (props) => {
           </Submit>
         </div>
       </Form>
+      <a
+        href="#"
+        title={'Delete group ' + props.id}
+        className="rw-button rw-button-small rw-button-red mt-2 w-28 h-6 absolute bottom-0 right-0"
+        onClick={() => onDeleteClick(props.group?.id)}
+      >
+        Delete Group
+      </a>
     </div>
   )
 }

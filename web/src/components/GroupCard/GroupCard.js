@@ -3,16 +3,23 @@ import { useModal } from 'src/context/ModalContext'
 
 import EditGroupCell from 'src/components/Scaffolds/EditGroupCell'
 
-const GroupCard = ({ id, name, description, studentCount, enrollId }) => {
+const GroupCard = ({
+  id,
+  name,
+  description,
+  studentCount,
+  enrollId,
+  userId,
+}) => {
   const { openModal } = useModal()
 
   const settings = () => {
-    openModal(<EditGroupCell id={id} />)
+    openModal(<EditGroupCell id={id} userId={userId} />)
   }
 
   const cardClick = (e) => {
     if (e.target.dataset.setting) {
-      openModal(<EditGroupCell id={id} />)
+      openModal(<EditGroupCell id={id} userId={userId} />)
     } else {
       navigate(routes.groupList({ groupId: id }))
     }

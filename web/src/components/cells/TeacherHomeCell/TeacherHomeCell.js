@@ -51,6 +51,7 @@ export const Success = ({ user, userId }) => {
               description={group.description}
               studentCount={group.enrollments.length}
               enrollId={group.enrollId}
+              userId={userId}
             />
           ))}
         </div>
@@ -66,6 +67,7 @@ export const Success = ({ user, userId }) => {
               description={group.description}
               studentCount={group.enrollments.length}
               enrollId={group.enrollId}
+              userId={userId}
             />
           ))}
         </div>

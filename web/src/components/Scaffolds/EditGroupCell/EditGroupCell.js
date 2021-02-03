@@ -29,7 +29,7 @@ const UPDATE_GROUP_MUTATION = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Success = ({ group }) => {
+export const Success = ({ group, userId }) => {
   const { close } = useModal()
   const { addMessage } = useFlash()
   const [updateGroup, { loading, error }] = useMutation(UPDATE_GROUP_MUTATION, {
@@ -55,6 +55,7 @@ export const Success = ({ group }) => {
         onSave={onSave}
         error={error}
         loading={loading}
+        userId={userId}
       />
     </div>
   )
