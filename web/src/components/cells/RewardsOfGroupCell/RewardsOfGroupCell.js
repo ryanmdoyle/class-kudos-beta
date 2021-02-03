@@ -17,7 +17,7 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 export const Success = ({ rewardsOfGroup }) => {
   return (
     <ul className="w-full">
-      {rewardsOfGroup.map((reward) => (
+      {rewardsOfGroup?.map((reward) => (
         <li
           className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
           key={reward.id}
