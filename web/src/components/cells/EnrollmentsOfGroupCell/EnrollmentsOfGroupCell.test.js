@@ -1,6 +1,6 @@
 import { render, screen } from '@redwoodjs/testing'
-import { Loading, Empty, Failure, Success } from './EnrolledListCell'
-import { standard } from './EnrolledListCell.mock'
+import { Loading, Empty, Failure, Success } from './EnrollmentsOfGroupCell'
+import { standard } from './EnrollmentsOfGroupCell.mock'
 
 describe('EnrolledListCell', () => {
   test('Loading renders successfully', () => {
