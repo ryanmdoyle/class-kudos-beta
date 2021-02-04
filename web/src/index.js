@@ -2,7 +2,8 @@ import { AuthProvider } from '@redwoodjs/auth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import ReactDOM from 'react-dom'
-import { RedwoodProvider, FatalErrorBoundary } from '@redwoodjs/web'
+import { FatalErrorBoundary } from '@redwoodjs/web'
+import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 
@@ -27,9 +28,9 @@ const firebaseClient = ((config) => {
 ReactDOM.render(
   <FatalErrorBoundary page={FatalErrorPage}>
     <AuthProvider client={firebaseClient} type="firebase">
-      <RedwoodProvider>
+      <RedwoodApolloProvider>
         <Routes />
-      </RedwoodProvider>
+      </RedwoodApolloProvider>
     </AuthProvider>
   </FatalErrorBoundary>,
   document.getElementById('redwood-app')
