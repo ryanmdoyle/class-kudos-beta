@@ -44,7 +44,7 @@ const BehaviorOptionsListItem = ({ id, name, value, groupId }) => {
         {value}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 ml-4 stroke-current text-gray-500 hover:text-gray-700"
+          className="h-6 w-6 ml-4 stroke-current text-gray-500 hover:text-gray-800"
           width="44"
           height="44"
           viewBox="0 0 24 24"
