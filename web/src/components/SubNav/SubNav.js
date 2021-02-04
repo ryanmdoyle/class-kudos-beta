@@ -9,7 +9,7 @@ const SubNav = ({
   return (
     <div className="w-full h-12 bg-purple-500 px-4 flex text-white">
       <div
-        className="h-full flex items-center mr-12 relative"
+        className="h-full flex items-center mr-12 relative cursor-pointer"
         onClick={() => {
           viewList()
         }}
@@ -61,7 +61,7 @@ const SubNav = ({
       </div> */}
 
       <div
-        className="h-full flex items-center mr-12 relative"
+        className="h-full flex items-center mr-12 relative cursor-pointer"
         onClick={() => {
           viewFeedback()
         }}
@@ -87,7 +87,7 @@ const SubNav = ({
       </div>
 
       <div
-        className="h-full flex items-center mr-12 relative"
+        className="h-full flex items-center mr-12 relative cursor-pointer"
         onClick={() => {
           viewRedeemed()
         }}
@@ -113,7 +113,7 @@ const SubNav = ({
       </div>
 
       <div
-        className="h-full flex items-center mr-12 relative"
+        className="h-full flex items-center mr-12 relative cursor-pointer"
         onClick={() => {
           viewOptions()
         }}
