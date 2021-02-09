@@ -10,7 +10,9 @@ import {
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { useModal } from 'src/context/ModalContext'
 
-import { QUERY } from 'src/components/cells/TeacherHomeCell'
+import { QUERY as teacherHomeQuery } from 'src/components/cells/TeacherHomeCell'
+import { QUERY as ownedQuery } from 'src/components/cells/GroupsOwnedCell'
+import { QUERY as enrolledQuery } from 'src/components/cells/EnrolledNavCell'
 
 const DELETE_GROUP_MUTATION = gql`
   mutation DeleteGroupMutation($id: String!) {
@@ -27,7 +29,11 @@ const GroupForm = (props) => {
     onCompleted: () => {
       addMessage('Group deleted.', { classes: 'rw-flash-success' })
     },
-    refetchQueries: [{ query: QUERY, variables: { userId: props.userId } }],
+    refetchQueries: [
+      { query: teacherHomeQuery, variables: { userId: props.userId } },
+      { query: ownedQuery, variables: { userId: props.userId } },
+      { query: enrolledQuery, variables: { userId: props.userId } },
+    ],
     awaitRefetchQueries: true,
   })
 
