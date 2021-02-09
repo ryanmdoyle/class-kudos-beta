@@ -83,6 +83,8 @@ const UserForm = (props) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
+          readonly="readonly"
+          disabled="disabled"
         />
         <FieldError name="email" className="rw-field-error" />
 
@@ -91,7 +93,7 @@ const UserForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Profile image
+          Profile image URL
         </Label>
         <TextField
           name="profileImage"
