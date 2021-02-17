@@ -13,7 +13,12 @@ const DELETE_ENROLLMENT_MUTATION = gql`
   }
 `
 const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
-  const { id: userId, firstName, lastName } = enrollment.user
+  if (!enrollment?.user) return null // replace with seed data for test
+  const {
+    id: userId = '1',
+    firstName = 'first',
+    lastName = 'last',
+  } = enrollment?.user
   const { openModal } = useModal()
   const { addMessage } = useFlash()
   const [deleteBehavior, { loading }] = useMutation(
