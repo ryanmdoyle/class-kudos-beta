@@ -21,7 +21,7 @@ const Routes = () => {
         <Route path="/teacher" page={TeacherHomePage} name="teacherHome" />
         <Route path="/teacher/groups/{groupId}" page={GroupPage} name="groupList" />
       </Private>
-      <Private unauthenticated="home" role="student">
+      <Private unauthenticated="home" role={['student', 'super_admin']}>
         <Route path="/student" page={StudentHomePage} name="studentHome" />
         <Route path="/student/group/{groupId}" page={StudentGroupPage} name="studentGroup" />
       </Private>

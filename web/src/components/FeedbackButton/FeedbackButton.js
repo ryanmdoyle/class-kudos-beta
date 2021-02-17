@@ -1,7 +1,6 @@
 import { useFlash, useMutation } from '@redwoodjs/web'
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
-import PageLoader from 'src/components/PageLoader/PageLoader'
 
 const CREATE_FEEDBACK = gql`
   mutation CreateFeedback($input: CreateFeedbackInput!) {
@@ -48,7 +47,6 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
         }
       }}
     >
-      {loading && <PageLoader />}
       <span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

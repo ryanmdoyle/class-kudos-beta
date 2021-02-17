@@ -6,7 +6,7 @@ const StudentGroupCard = ({ id, name, description }) => {
     <div
       className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4 cursor-pointer"
       onClick={() => {
-        navigate(routes.groupList({ groupId: id }))
+        navigate(routes.studentGroup({ groupId: id }))
       }}
     >
       <div className="flex items-center">
