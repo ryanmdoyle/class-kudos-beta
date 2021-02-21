@@ -10,12 +10,18 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <span className="animate-pulse text-green-500">...</span>
+)
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => 0
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ feedbackOfUserForGroup }) => {
-  return JSON.stringify(feedbackOfUserForGroup)
+  return (
+    feedbackOfUserForGroup?.reduce((accumulator, currentFeedback) => {
+      return accumulator + currentFeedback.behavior.value
+    }, 0) || 0
+  )
 }

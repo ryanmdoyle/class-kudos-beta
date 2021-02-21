@@ -26,6 +26,7 @@ module.exports = {
       height: {
         'full-minusNav': 'calc(100% - 4rem)',
         'sub-full': 'calc(100% - 3rem)',
+        'full-padded': 'calc(100% - 1rem)',
       },
       colors: {
         green: {

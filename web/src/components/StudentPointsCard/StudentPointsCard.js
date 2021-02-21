@@ -1,4 +1,4 @@
-import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
+import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 
 const StudentPointsCard = ({ student }) => {
   const { id, firstName, lastName } = student || {}
@@ -9,7 +9,7 @@ const StudentPointsCard = ({ student }) => {
       </h1>
       <div className="flex justify-end absolute bottom-2 right-4">
         <span className="font-display text-8xl text-green mr-8">
-          {id && <FeedbackPointsCell userId={id} />}
+          {id && <UserPointsCell userId={id} />}
         </span>
       </div>
     </div>

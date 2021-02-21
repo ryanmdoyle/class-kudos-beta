@@ -1,21 +1,21 @@
 import { render, screen } from '@redwoodjs/testing'
-import { Loading, Empty, Failure, Success } from './GroupPointsCell'
-import { standard } from './GroupPointsCell.mock'
+import { Loading, Empty, Failure, Success } from './UserPointsCell'
+import { standard } from './UserPointsCell.mock'
 
-describe('GroupPointsCell', () => {
-  it('renders Loading successfully', () => {
+describe('UserPointsCell', () => {
+  test('Loading renders successfully', () => {
     expect(() => {
       render(<Loading />)
     }).not.toThrow()
   })
 
-  it('renders Empty successfully', async () => {
+  test('Empty renders successfully', async () => {
     expect(() => {
       render(<Empty />)
     }).not.toThrow()
   })
 
-  it('renders Failure successfully', async () => {
+  test('Failure renders successfully', async () => {
     expect(() => {
       render(<Failure error={new Error('Oh no')} />)
     }).not.toThrow()
@@ -26,9 +26,9 @@ describe('GroupPointsCell', () => {
   //
   //   expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
-  it('renders Success successfully', async () => {
+  test('Success renders successfully', async () => {
     expect(() => {
-      render(<Success groupPoints={standard().groupPoints} />)
+      render(<Success feedbackPoints={standard().feedbackPoints} />)
     }).not.toThrow()
   })
 })

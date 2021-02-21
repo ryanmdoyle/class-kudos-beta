@@ -1,6 +1,6 @@
 import { useFlash, useMutation } from '@redwoodjs/web'
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
-import { QUERY as pointsQuery } from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
+import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
 
 const CREATE_FEEDBACK = gql`
   mutation CreateFeedback($input: CreateFeedbackInput!) {

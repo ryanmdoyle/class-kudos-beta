@@ -1,4 +1,4 @@
-import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
+import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 
 const ListViewStudentItem = ({ student = {}, onClick }) => {
   const { id, firstName, lastName } = student
@@ -17,7 +17,7 @@ const ListViewStudentItem = ({ student = {}, onClick }) => {
       </div>
       <div>
         <span className="justify-self-end text-green-500 font-bold">
-          <FeedbackPointsCell userId={id} />
+          <UserPointsCell userId={id} />
         </span>
       </div>
     </li>

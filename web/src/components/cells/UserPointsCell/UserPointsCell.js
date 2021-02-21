@@ -4,7 +4,6 @@ export const QUERY = gql`
       id
       behavior {
         id
-        name
         value
       }
     }
