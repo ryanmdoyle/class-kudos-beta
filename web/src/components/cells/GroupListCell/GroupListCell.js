@@ -44,8 +44,7 @@ export const Loading = () => (
 
 export const Empty = () => <Redirect to={routes.teacherHome()} />
 
-export const Failure = ({ error }) => {
-  console.error(error)
+export const Failure = () => {
   return <Redirect to={routes.teacherHome()} />
 }
 
