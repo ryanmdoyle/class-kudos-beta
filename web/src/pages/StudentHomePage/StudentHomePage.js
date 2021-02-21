@@ -3,6 +3,7 @@ import { useAuth } from '@redwoodjs/auth'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import StudentHomeCell from 'src/components/cells/StudentHomeCell/StudentHomeCell'
 import NewEnrollmentButton from 'src/components/NewEnrollmentButton/NewEnrollmentButton'
+import FeedbackPointsCell from 'src/components/cells/FeedbackPointsCell/FeedbackPointsCell'
 
 const StudentHomePage = () => {
   const { currentUser } = useAuth()
@@ -12,6 +13,12 @@ const StudentHomePage = () => {
         <h1 className="text-3xl font-display mb-4">
           Welcome Back{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
         </h1>
+        <div className="white-box w-full h-32 mb-4">
+          <span className="text-8xl text-green-400">
+            <FeedbackPointsCell userId={currentUser?.id} />
+          </span>
+          <span className="text-lg ml-2 text-gray-500">total points</span>
+        </div>
         <StudentHomeCell userId={currentUser?.id} />
       </div>
       <NewEnrollmentButton userId={currentUser?.id} />
