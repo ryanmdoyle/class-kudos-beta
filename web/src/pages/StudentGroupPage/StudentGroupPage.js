@@ -2,6 +2,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import UserPointsOfGroupCell from 'src/components/cells/UserPointsOfGroupCell/UserPointsOfGroupCell'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
+import RewardsOfGroupStudentCell from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
 
 const StudentGroupPage = ({ groupId }) => {
   const { currentUser } = useAuth()
@@ -20,6 +21,7 @@ const StudentGroupPage = ({ groupId }) => {
           </div>
           <div className="white-box w-1/2 h-full p-2">
             <h2 className="font-display text-2xl">Rewards Available</h2>
+            <RewardsOfGroupStudentCell groupId={groupId} />
           </div>
         </div>
       </div>
