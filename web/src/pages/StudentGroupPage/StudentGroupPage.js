@@ -1,4 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import UserPointsOfGroupCell from 'src/components/cells/UserPointsOfGroupCell/UserPointsOfGroupCell'
