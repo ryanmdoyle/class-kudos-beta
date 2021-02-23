@@ -38,12 +38,16 @@ export const Success = ({ user, userId }) => {
   const secondaryOwned = user?.groups.filter(
     (group) => group.type === 'secondary' && group.ownerId === userId
   )
+  const primarySorted = primaryOwned.sort((a, b) => (b.name - a.name ? 1 : -1))
+  const secondarySorted = secondaryOwned.sort((a, b) =>
+    b.name - a.name ? 1 : -1
+  )
   return (
     <div className="flex flex-col lg:flex-row">
-      {primaryOwned.length > 0 && (
+      {primarySorted.length > 0 && (
         <div id="classes" className="w-100 lg:w-1/2 pr-2">
           <h1 className="text-2xl font-display mb-4">Classes</h1>
-          {primaryOwned.map((group) => (
+          {primarySorted.map((group) => (
             <GroupCard
               id={group.id}
               key={group.id}
@@ -56,10 +60,10 @@ export const Success = ({ user, userId }) => {
           ))}
         </div>
       )}
-      {secondaryOwned.length > 0 && (
+      {secondarySorted.length > 0 && (
         <div id="classes" className="w-100 lg:w-1/2 pr-2">
           <h1 className="text-2xl font-display mb-4">Classes</h1>
-          {secondaryOwned.map((group) => (
+          {secondarySorted.map((group) => (
             <GroupCard
               id={group.id}
               key={group.id}

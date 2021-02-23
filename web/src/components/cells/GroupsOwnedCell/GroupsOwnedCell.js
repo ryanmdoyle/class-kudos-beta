@@ -11,8 +11,12 @@ export const QUERY = gql`
 `
 export const afterQuery = (data) => {
   return {
-    primary: data?.groupsOwned.filter((group) => group.type === 'primary'),
-    secondary: data?.groupsOwned.filter((group) => group.type === 'secondary'),
+    primary: data?.groupsOwned
+      .filter((group) => group.type === 'primary')
+      .sort((a, b) => (b.name - a.name ? 1 : -1)),
+    secondary: data?.groupsOwned
+      .filter((group) => group.type === 'secondary')
+      .sort((a, b) => (b.name - a.name ? 1 : -1)),
   }
 }
 
