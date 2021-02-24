@@ -2,7 +2,7 @@ import { useMutation, useFlash } from '@redwoodjs/web'
 import { useModal } from 'src/context/ModalContext'
 import RewardForm from 'src/components/Scaffolds/RewardForm'
 
-import { QUERY } from 'src/components/cells/RewardsofGroupCell'
+import { QUERY } from 'src/components/cells/RewardsOfGroupCell'
 
 const CREATE_REWARD_MUTATION = gql`
   mutation CreateRewardMutation($input: CreateRewardInput!) {
