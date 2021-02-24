@@ -24,19 +24,17 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="col-span-4 overflow-scroll2xl:col-span-5 p-1">
+  <div className="col-span-4 overflow-scroll2xl:col-span-5 p-1 animate-pulse">
     <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
       <div className="flex items-center">
         <img
           src="/profile.jpg"
           className="img-loading h-6 w-6 rounded-full mr-2"
         ></img>
-        <span className="text-normal text-loading">Student Name</span>
+        <div className="w-36 h-4 rounded bg-gray-200"></div>
       </div>
       <div>
-        <span className="justify-self-end text-green-500 font-bold text-loading">
-          79
-        </span>
+        <div className="justify-self-end text-green-500 font-bold text-loading bg-gray-200 w-6 h-4 rounded"></div>
       </div>
     </li>
   </div>
