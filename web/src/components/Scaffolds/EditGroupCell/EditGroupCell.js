@@ -47,7 +47,7 @@ export const Success = ({ group, userId }) => {
     <div>
       <header>
         <h2 className="text-xl text-purple-800 font-display mb-6">
-          Edit Group {group.id}
+          Edit {group.name}
         </h2>
       </header>
       <GroupForm
