@@ -15,6 +15,7 @@ export const QUERY = gql`
     behaviorsOfGroup(groupId: $id) {
       id
       name
+      value
     }
     group(id: $id) {
       id
