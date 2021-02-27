@@ -10,7 +10,7 @@ const CREATE_FEEDBACK = gql`
   }
 `
 
-const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
+const FeedbackButton = ({ name, value, studentId, behaviorId, groupId }) => {
   const { addMessage } = useFlash()
   const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
@@ -33,6 +33,8 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
           userId: studentId,
           behaviorId: behaviorId,
           groupId: groupId,
+          name: name,
+          value: value,
         },
       },
     })
@@ -40,7 +42,7 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
 
   return (
     <div
-      className="h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-center items-center hover:ring-2 ring-purple-500"
+      className="h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center hover:ring-2 ring-purple-500"
       onClick={() => {
         if (!loading) {
           giveFeedback()
@@ -51,8 +53,8 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="icon icon-tabler icon-tabler-award"
-          width="44"
-          height="44"
+          width="28"
+          height="28"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke={loading ? 'gray' : 'currentColor'}
@@ -72,7 +74,14 @@ const FeedbackButton = ({ name, studentId, behaviorId, groupId }) => {
           />
         </svg>
       </span>
-      <span className="text-gray-500 text-center text-sm">{name || '?'}</span>
+      <span className="text-gray-500 text-center text-sm">{name}</span>
+      <span
+        className={`${
+          value > 0 ? 'text-green-500' : 'text-red-500'
+        } font-bold text-center text-sm`}
+      >
+        {value}
+      </span>
     </div>
   )
 }
