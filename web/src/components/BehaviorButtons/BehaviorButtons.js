@@ -14,6 +14,7 @@ const BehaviorButtons = ({ studentId, behaviors, groupId }) => {
       {behaviors?.map((behavior) => (
         <FeedbackButton
           name={behavior.name}
+          value={behavior.value}
           studentId={studentId}
           behaviorId={behavior.id}
           groupId={groupId}
