@@ -68,9 +68,9 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
                   `${feedback?.user.firstName} ${feedback?.user.lastName}`
                 )}
               </td>
-              <td>{truncate(feedback?.behavior.name)}</td>
+              <td>{truncate(feedback?.name)}</td>
               <td>{timeTag(feedback?.createdAt)}</td>
-              <td>{truncate(feedback?.behavior.value)}</td>
+              <td>{truncate(feedback?.value)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <a
