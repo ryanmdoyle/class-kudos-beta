@@ -53,5 +53,8 @@ export const feedbackOfUserForGroup = ({ userId, groupId }) => {
 }
 
 export const feedbackOfGroup = ({ groupId }) => {
-  return db.feedback.findMany({ where: { groupId: groupId } })
+  return db.feedback.findMany({
+    where: { groupId: groupId },
+    orderBy: { createdAt: 'desc' },
+  })
 }
