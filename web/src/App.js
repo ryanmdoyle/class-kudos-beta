@@ -25,13 +25,14 @@ const firebaseClient = ((config) => {
   return firebase
 })(firebaseClientConfig)
 
-ReactDOM.render(
+const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <AuthProvider client={firebaseClient} type="firebase">
       <RedwoodApolloProvider>
         <Routes />
       </RedwoodApolloProvider>
     </AuthProvider>
-  </FatalErrorBoundary>,
-  document.getElementById('redwood-app')
+  </FatalErrorBoundary>
 )
+
+export default App
