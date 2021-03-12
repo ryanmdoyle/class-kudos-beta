@@ -5,11 +5,8 @@ export const QUERY = gql`
     feedbackOfUserForGroup(userId: $userId, groupId: $groupId) {
       id
       createdAt
-      behavior {
-        id
-        name
-        value
-      }
+      name
+      value
     }
   }
 `
@@ -36,8 +33,8 @@ export const Success = ({ feedbackOfUserForGroup }) => {
           {sorted.map((feedback) => (
             <ListViewRecentItem
               key={feedback.id}
-              name={feedback.behavior.name}
-              value={feedback.behavior.value}
+              name={feedback.name}
+              value={feedback.value}
               createdAt={feedback.createdAt}
             />
           ))}

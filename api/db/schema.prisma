@@ -38,6 +38,8 @@ model UserRole {
 model Feedback {
   id         String    @id @default(uuid())
   createdAt  DateTime  @default(now())
+  name       String    @default("Feedback")
+  value      Int       @default(1)
   user       User      @relation(fields: [userId], references: [id])
   userId     String
   behavior   Behavior? @relation(fields: [behaviorId], references: [id])

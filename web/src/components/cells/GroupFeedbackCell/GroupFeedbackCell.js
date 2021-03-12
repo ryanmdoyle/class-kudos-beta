@@ -5,15 +5,12 @@ export const QUERY = gql`
     feedbackOfGroup(groupId: $groupId) {
       id
       createdAt
+      name
+      value
       user {
         id
         firstName
         lastName
-      }
-      behavior {
-        id
-        name
-        value
       }
     }
   }
