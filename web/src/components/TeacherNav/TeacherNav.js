@@ -8,7 +8,7 @@ const TeacherNav = () => {
   return (
     <div className="w-full flex flex-col justify-between p-4">
       <div
-        className="w-full h-8 mb-2 flex justify-center align-items rounded-md hover:bg-purple-100 p-1"
+        className="w-full h-8 mb-2 flex justify-center align-items rounded-md p-1 cursor-pointer hover:bg-purple-100"
         onClick={() => {
           navigate(routes.teacherHome())
         }}
