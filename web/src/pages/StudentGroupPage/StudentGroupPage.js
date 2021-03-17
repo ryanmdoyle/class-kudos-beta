@@ -15,10 +15,10 @@ const StudentGroupPage = ({ groupId }) => {
             <UserPointsCell userId={currentUser?.id} />
           </span>
           <span className="text-lg ml-2 text-gray-500 mr-12">total points</span>
-          <span className="text-6xl text-green-400">
+          {/* <span className="text-6xl text-green-400">
             <UserPointsOfGroupCell groupId={groupId} userId={currentUser?.id} />
           </span>
-          <span className="text-lg ml-2 text-gray-500">group points</span>
+          <span className="text-lg ml-2 text-gray-500">group points</span> */}
         </div>
         <div className="h-5/6 w-full flex relative">
           <div className="white-box w-1/2 h-full p-2 mr-4">
