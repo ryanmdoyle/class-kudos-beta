@@ -3,7 +3,9 @@ const RewardButton = ({ reward, totalPoints }) => {
   return (
     <div
       className={`h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
-        totalPoints >= reward?.cost ? 'hover:ring-2 ring-purple-500' : null
+        totalPoints >= reward?.cost
+          ? 'hover:ring-2 ring-purple-500'
+          : 'cursor-not-allowed'
       }`}
       // onClick={() => {
       //   if (!loading) {
