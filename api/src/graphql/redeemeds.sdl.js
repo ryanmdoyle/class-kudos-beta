@@ -3,24 +3,31 @@ export const schema = gql`
     id: String!
     user: User!
     userId: String!
-    reward: Reward!
-    rewardId: String!
+    name: String!
+    cost: Int!
+    group: Group!
+    groupId: String!
     createdAt: DateTime!
   }
 
   type Query {
     redeemeds: [Redeemed!]!
     redeemed(id: String!): Redeemed
+    redeemedOfUser(userId: String!): [Redeemed!]!
   }
 
   input CreateRedeemedInput {
     userId: String!
-    rewardId: String!
+    groupId: String!
+    name: String!
+    cost: Int!
   }
 
   input UpdateRedeemedInput {
     userId: String
-    rewardId: String
+    groupId: String
+    name: String
+    cost: Int
   }
 
   type Mutation {

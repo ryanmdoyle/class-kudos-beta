@@ -63,7 +63,7 @@ const RedeemedsList = ({ redeemeds }) => {
           <tr>
             <th>Id</th>
             <th>User id</th>
-            <th>Reward id</th>
+            <th>name</th>
             <th>Created at</th>
             <th>&nbsp;</th>
           </tr>
@@ -73,7 +73,7 @@ const RedeemedsList = ({ redeemeds }) => {
             <tr key={redeemed.id}>
               <td>{truncate(redeemed.id)}</td>
               <td>{truncate(redeemed.userId)}</td>
-              <td>{truncate(redeemed.rewardId)}</td>
+              <td>{truncate(redeemed.name)}</td>
               <td>{timeTag(redeemed.createdAt)}</td>
               <td>
                 <nav className="rw-table-actions">

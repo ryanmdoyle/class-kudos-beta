@@ -33,6 +33,10 @@ export const deleteRedeemed = ({ id }) => {
 export const Redeemed = {
   user: (_obj, { root }) =>
     db.redeemed.findUnique({ where: { id: root.id } }).user(),
-  reward: (_obj, { root }) =>
-    db.redeemed.findUnique({ where: { id: root.id } }).reward(),
+  group: (_obj, { root }) =>
+    db.redeemed.findUnique({ where: { id: root.id } }).group(),
+}
+
+export const redeemedOfUser = ({ userId }) => {
+  return db.redeemed.findMany({ where: { userId: userId } })
 }

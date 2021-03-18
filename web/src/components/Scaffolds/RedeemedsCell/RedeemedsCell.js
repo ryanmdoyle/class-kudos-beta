@@ -7,7 +7,8 @@ export const QUERY = gql`
     redeemeds {
       id
       userId
-      rewardId
+      name
+      cost
       createdAt
     }
   }

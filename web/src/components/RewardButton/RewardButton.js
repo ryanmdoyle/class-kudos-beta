@@ -1,5 +1,44 @@
-const RewardButton = ({ reward, totalPoints }) => {
-  const loading = false
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
+const CREATE_REDEEMED = gql`
+  mutation CreateRedeemed($input: CreateRedeemedInput!) {
+    createRedeemed(input: $input) {
+      id
+    }
+  }
+`
+
+const RewardButton = ({ reward, groupId, userId, totalPoints }) => {
+  const [newRedeemed, { loading, error }] = useMutation(CREATE_REDEEMED, {
+    // refetchQueries: [
+    //   {
+    //     query: recentUserFeedbackOfGroupQuery,
+    //     variables: { userId: studentId, groupId: groupId },
+    //   },
+    //   { query: pointsQuery, variables: { userId: studentId } },
+    // ],
+    // awaitRefetchQueries: true,
+    onCompleted: () => {
+      toast.success(`Redeemed!`, {
+        className: 'rw-flash-success',
+      })
+    },
+  })
+
+  const claimReward = () => {
+    newRedeemed({
+      variables: {
+        input: {
+          userId: userId,
+          groupId: groupId,
+          name: reward?.name,
+          cost: reward?.cost,
+        },
+      },
+    })
+  }
+
   return (
     <div
       className={`h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
@@ -7,11 +46,11 @@ const RewardButton = ({ reward, totalPoints }) => {
           ? 'hover:ring-2 ring-purple-500'
           : 'cursor-not-allowed'
       }`}
-      // onClick={() => {
-      //   if (!loading) {
-      //     giveFeedback()
-      //   }
-      // }}
+      onClick={() => {
+        if (!loading) {
+          claimReward()
+        }
+      }}
     >
       {/* <span>
         <svg

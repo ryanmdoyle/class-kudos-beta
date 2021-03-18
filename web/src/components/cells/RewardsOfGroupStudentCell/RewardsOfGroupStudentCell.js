@@ -22,7 +22,12 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ rewardsOfGroup, feedbackOfUser }) => {
+export const Success = ({
+  rewardsOfGroup,
+  feedbackOfUser,
+  groupId,
+  userId,
+}) => {
   const totalPoints = feedbackOfUser?.reduce((accumulator, currentFeedback) => {
     return accumulator + currentFeedback.behavior.value
   }, 0)
@@ -30,8 +35,10 @@ export const Success = ({ rewardsOfGroup, feedbackOfUser }) => {
     <div className="w-full flex flex-wrap justify-center">
       {rewardsOfGroup?.map((reward) => (
         <RewardButton
-          reward={reward}
           key={reward?.id}
+          reward={reward}
+          groupId={groupId}
+          userId={userId}
           totalPoints={totalPoints}
         />
       ))}

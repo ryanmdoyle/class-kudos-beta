@@ -61,18 +61,19 @@ model Redeemed {
   id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  reward    Reward?  @relation(fields: [rewardId], references: [id])
-  rewardId  String?
+  name      String
+  cost      Int
+  group     Group    @relation(fields: [groupId], references: [id])
+  groupId   String
   createdAt DateTime @default(now())
 }
 
 model Reward {
-  id       String     @id @default(uuid())
-  name     String
-  cost     Int
-  group    Group?     @relation(fields: [groupId], references: [id])
-  groupId  String?
-  redeemed Redeemed[]
+  id      String  @id @default(uuid())
+  name    String
+  cost    Int
+  group   Group?  @relation(fields: [groupId], references: [id])
+  groupId String?
 }
 
 model Group {
@@ -87,6 +88,7 @@ model Group {
   behaviors   Behavior[]
   rewards     Reward[]
   feedback    Feedback[]
+  redeemed    Redeemed[]
 }
 
 model Enrollment {
