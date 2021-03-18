@@ -1,4 +1,4 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import UserRoleForm from 'src/components/Scaffolds/UserRoleForm'
 
@@ -13,13 +13,12 @@ const CREATE_USER_ROLE_MUTATION = gql`
 `
 
 const NewUserRole = () => {
-  const { addMessage } = useFlash()
   const [createUserRole, { loading, error }] = useMutation(
     CREATE_USER_ROLE_MUTATION,
     {
       onCompleted: () => {
         navigate(routes.scaffoldsUserRoles())
-        addMessage('UserRole created.', { classes: 'rw-flash-success' })
+        toast.success('UserRole created.', { classes: 'rw-flash-success' })
       },
       // This refetches the query on the list page. Read more about other ways to
       // update the cache over here:

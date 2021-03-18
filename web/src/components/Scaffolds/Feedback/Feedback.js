@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Scaffolds/FeedbacksCell'
@@ -32,11 +33,10 @@ const checkboxInputTag = (checked) => {
 }
 
 const Feedback = ({ feedback }) => {
-  const { addMessage } = useFlash()
   const [deleteFeedback] = useMutation(DELETE_FEEDBACK_MUTATION, {
     onCompleted: () => {
       navigate(routes.scaffoldsFeedbacks())
-      addMessage('Feedback deleted.', { classes: 'rw-flash-success' })
+      toast.success('Feedback deleted.', { classes: 'rw-flash-success' })
     },
   })
 

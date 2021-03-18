@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { Link, routes } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Scaffolds/BehaviorsCell'
@@ -38,10 +39,9 @@ const checkboxInputTag = (checked) => {
 }
 
 const BehaviorsList = ({ behaviors }) => {
-  const { addMessage } = useFlash()
   const [deleteBehavior] = useMutation(DELETE_BEHAVIOR_MUTATION, {
     onCompleted: () => {
-      addMessage('Behavior deleted.', { classes: 'rw-flash-success' })
+      toast.success('Behavior deleted.', { classes: 'rw-flash-success' })
     },
     // This refetches the query on the list page. Read more about other ways to
     // update the cache over here:

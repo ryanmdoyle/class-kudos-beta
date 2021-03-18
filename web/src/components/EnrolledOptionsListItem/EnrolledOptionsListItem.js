@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
 import EditUserCell from 'src/components/Scaffolds/EditUserCell'
@@ -20,12 +21,12 @@ const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
     lastName = 'last',
   } = enrollment?.user
   const { openModal } = useModal()
-  const { addMessage } = useFlash()
+
   const [deleteBehavior, { loading }] = useMutation(
     DELETE_ENROLLMENT_MUTATION,
     {
       onCompleted: () => {
-        addMessage('User removed.', { classes: 'rw-flash-success' })
+        toast.success('User removed.', { classes: 'rw-flash-success' })
       },
       refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
       awaitRefetchQueries: true,

@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Scaffolds/GroupsCell'
@@ -32,11 +33,10 @@ const checkboxInputTag = (checked) => {
 }
 
 const Group = ({ group }) => {
-  const { addMessage } = useFlash()
   const [deleteGroup] = useMutation(DELETE_GROUP_MUTATION, {
     onCompleted: () => {
       navigate(routes.scaffoldsGroups())
-      addMessage('Group deleted.', { classes: 'rw-flash-success' })
+      toast.success('Group deleted.', { classes: 'rw-flash-success' })
     },
   })
 

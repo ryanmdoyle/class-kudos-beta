@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import UserForm from 'src/components/Scaffolds/UserForm'
 
@@ -13,11 +14,10 @@ const CREATE_USER_MUTATION = gql`
 `
 
 const NewUser = () => {
-  const { addMessage } = useFlash()
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: () => {
       navigate(routes.scaffoldsUsers())
-      addMessage('User created.', { classes: 'rw-flash-success' })
+      toast.success('User created.', { classes: 'rw-flash-success' })
     },
   })
 

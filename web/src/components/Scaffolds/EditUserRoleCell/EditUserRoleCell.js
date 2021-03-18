@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import UserRoleForm from 'src/components/Scaffolds/UserRoleForm'
 
@@ -28,13 +29,12 @@ const UPDATE_USER_ROLE_MUTATION = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ userRole }) => {
-  const { addMessage } = useFlash()
   const [updateUserRole, { loading, error }] = useMutation(
     UPDATE_USER_ROLE_MUTATION,
     {
       onCompleted: () => {
         navigate(routes.scaffoldsUserRoles())
-        addMessage('UserRole updated.', { classes: 'rw-flash-success' })
+        toast.success('UserRole updated.', { classes: 'rw-flash-success' })
       },
     }
   )

@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
 import EditRewardCell from 'src/components/Scaffolds/EditRewardCell'
@@ -15,10 +16,10 @@ const DELETE_REWARD_MUTATION = gql`
 
 const RewardOptionsListItem = ({ id, name, cost, groupId }) => {
   const { openModal } = useModal()
-  const { addMessage } = useFlash()
+
   const [deleteBehavior] = useMutation(DELETE_REWARD_MUTATION, {
     onCompleted: () => {
-      addMessage('Behavior deleted.', { classes: 'rw-flash-success' })
+      toast.success('Behavior deleted.', { classes: 'rw-flash-success' })
     },
     refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
     awaitRefetchQueries: true,

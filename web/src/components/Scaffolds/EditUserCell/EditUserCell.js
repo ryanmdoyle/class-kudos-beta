@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
 import UserForm from 'src/components/Scaffolds/UserForm'
@@ -35,12 +36,11 @@ const UPDATE_USER_MUTATION = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ user }) => {
-  const { addMessage } = useFlash()
   const { close } = useModal()
   const [updateUser, { loading, error }] = useMutation(UPDATE_USER_MUTATION, {
     onCompleted: () => {
       close()
-      addMessage('User updated.', { classes: 'rw-flash-success' })
+      toast.success('User updated.', { classes: 'rw-flash-success' })
     },
   })
 

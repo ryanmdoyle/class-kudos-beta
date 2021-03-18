@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
 import RewardForm from 'src/components/Scaffolds/RewardForm'
@@ -27,14 +28,13 @@ const UPDATE_REWARD_MUTATION = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ reward }) => {
-  const { addMessage } = useFlash()
   const { close } = useModal()
   const [updateReward, { loading, error }] = useMutation(
     UPDATE_REWARD_MUTATION,
     {
       onCompleted: () => {
         close()
-        addMessage('Reward updated.', { classes: 'rw-flash-success' })
+        toast.success('Reward updated.', { classes: 'rw-flash-success' })
       },
     }
   )

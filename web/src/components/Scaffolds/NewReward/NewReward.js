@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 import RewardForm from 'src/components/Scaffolds/RewardForm'
 
@@ -14,7 +15,7 @@ const CREATE_REWARD_MUTATION = gql`
 
 const NewReward = ({ groupId }) => {
   const { close } = useModal()
-  const { addMessage } = useFlash()
+
   const [createReward, { loading, error }] = useMutation(
     CREATE_REWARD_MUTATION,
     {
@@ -22,7 +23,7 @@ const NewReward = ({ groupId }) => {
       refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
       onCompleted: () => {
         close()
-        addMessage('Reward created.', { classes: 'rw-flash-success' })
+        toast.success('Reward created.', { classes: 'rw-flash-success' })
       },
     }
   )

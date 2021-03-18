@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Scaffolds/UserRolesCell'
@@ -32,11 +33,10 @@ const checkboxInputTag = (checked) => {
 }
 
 const UserRole = ({ userRole }) => {
-  const { addMessage } = useFlash()
   const [deleteUserRole] = useMutation(DELETE_USER_ROLE_MUTATION, {
     onCompleted: () => {
       navigate(routes.scaffoldsUserRoles())
-      addMessage('UserRole deleted.', { classes: 'rw-flash-success' })
+      toast.success('UserRole deleted.', { classes: 'rw-flash-success' })
     },
     // This refetches the query on the list page. Read more about other ways to
     // update the cache over here:

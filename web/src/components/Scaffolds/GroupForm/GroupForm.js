@@ -7,7 +7,8 @@ import {
   Submit,
   SelectField,
 } from '@redwoodjs/forms'
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
 import { QUERY as teacherHomeQuery } from 'src/components/cells/TeacherHomeCell'
@@ -23,11 +24,10 @@ const DELETE_GROUP_MUTATION = gql`
 `
 
 const GroupForm = (props) => {
-  const { addMessage } = useFlash()
   const { close } = useModal()
   const [deleteGroup] = useMutation(DELETE_GROUP_MUTATION, {
     onCompleted: () => {
-      addMessage('Group deleted.', { classes: 'rw-flash-success' })
+      toast.success('Group deleted.', { classes: 'rw-flash-success' })
     },
     refetchQueries: [
       { query: teacherHomeQuery, variables: { userId: props.userId } },

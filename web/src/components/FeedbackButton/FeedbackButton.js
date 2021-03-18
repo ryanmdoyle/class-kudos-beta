@@ -1,4 +1,5 @@
-import { useFlash, useMutation } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
 
@@ -11,7 +12,6 @@ const CREATE_FEEDBACK = gql`
 `
 
 const FeedbackButton = ({ name, value, studentId, behaviorId, groupId }) => {
-  const { addMessage } = useFlash()
   const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
       {
@@ -22,7 +22,7 @@ const FeedbackButton = ({ name, value, studentId, behaviorId, groupId }) => {
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {
-      addMessage('Added feedback!', { className: 'rw-flash-success' })
+      toast.success('Added feedback!', { className: 'rw-flash-success' })
     },
   })
 

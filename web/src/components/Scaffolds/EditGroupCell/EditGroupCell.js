@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 import GroupForm from 'src/components/Scaffolds/GroupForm'
 
@@ -31,11 +32,11 @@ export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ group, userId }) => {
   const { close } = useModal()
-  const { addMessage } = useFlash()
+
   const [updateGroup, { loading, error }] = useMutation(UPDATE_GROUP_MUTATION, {
     onCompleted: () => {
       close()
-      addMessage('Group updated.', { classes: 'rw-flash-success' })
+      toast.success('Group updated.', { classes: 'rw-flash-success' })
     },
   })
 

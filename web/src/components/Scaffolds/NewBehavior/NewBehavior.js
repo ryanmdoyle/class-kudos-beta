@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 import BehaviorForm from 'src/components/Scaffolds/BehaviorForm'
 
@@ -14,7 +15,7 @@ const CREATE_BEHAVIOR_MUTATION = gql`
 
 const NewBehavior = ({ groupId }) => {
   const { close } = useModal()
-  const { addMessage } = useFlash()
+
   const [createBehavior, { loading, error }] = useMutation(
     CREATE_BEHAVIOR_MUTATION,
     {
@@ -22,7 +23,7 @@ const NewBehavior = ({ groupId }) => {
       refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
       onCompleted: () => {
         close()
-        addMessage('Behavior created.', { classes: 'rw-flash-success' })
+        toast.success('Behavior created.', { classes: 'rw-flash-success' })
       },
     }
   )

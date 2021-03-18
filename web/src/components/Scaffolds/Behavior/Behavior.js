@@ -1,5 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes, navigate } from '@redwoodjs/router'
+import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Scaffolds/BehaviorsCell'
 
@@ -32,11 +32,10 @@ const checkboxInputTag = (checked) => {
 }
 
 const Behavior = ({ behavior }) => {
-  const { addMessage } = useFlash()
   const [deleteBehavior] = useMutation(DELETE_BEHAVIOR_MUTATION, {
     onCompleted: () => {
       navigate(routes.scaffoldsBehaviors())
-      addMessage('Behavior deleted.', { classes: 'rw-flash-success' })
+      toast.success('Behavior deleted.', { classes: 'rw-flash-success' })
     },
   })
 

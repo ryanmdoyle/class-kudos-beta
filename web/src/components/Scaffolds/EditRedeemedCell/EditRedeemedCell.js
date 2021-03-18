@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import RedeemedForm from 'src/components/Scaffolds/RedeemedForm'
 
@@ -26,13 +27,12 @@ const UPDATE_REDEEMED_MUTATION = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ redeemed }) => {
-  const { addMessage } = useFlash()
   const [updateRedeemed, { loading, error }] = useMutation(
     UPDATE_REDEEMED_MUTATION,
     {
       onCompleted: () => {
         navigate(routes.scaffoldsRedeemeds())
-        addMessage('Redeemed updated.', { classes: 'rw-flash-success' })
+        toast.success('Redeemed updated.', { classes: 'rw-flash-success' })
       },
     }
   )

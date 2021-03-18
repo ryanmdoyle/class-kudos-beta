@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 import { useModal } from 'src/context/ModalContext'
 import GroupForm from 'src/components/Scaffolds/GroupForm'
@@ -17,13 +18,13 @@ const CREATE_GROUP_MUTATION = gql`
 const NewGroup = () => {
   const { close } = useModal()
   const { currentUser } = useAuth()
-  const { addMessage } = useFlash()
+
   const [createGroup, { loading, error }] = useMutation(CREATE_GROUP_MUTATION, {
     refetchQueries: [{ query: QUERY, variables: { userId: currentUser.id } }],
     awaitRefetchQueries: true,
     onCompleted: () => {
       close()
-      addMessage('Group created.', { classes: 'rw-flash-success' })
+      toast.success('Group created.', { classes: 'rw-flash-success' })
     },
   })
 

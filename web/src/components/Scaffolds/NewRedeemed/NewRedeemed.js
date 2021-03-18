@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import RedeemedForm from 'src/components/Scaffolds/RedeemedForm'
 
@@ -13,13 +14,12 @@ const CREATE_REDEEMED_MUTATION = gql`
 `
 
 const NewRedeemed = () => {
-  const { addMessage } = useFlash()
   const [createRedeemed, { loading, error }] = useMutation(
     CREATE_REDEEMED_MUTATION,
     {
       onCompleted: () => {
         navigate(routes.scaffoldsRedeemeds())
-        addMessage('Redeemed created.', { classes: 'rw-flash-success' })
+        toast.success('Redeemed created.', { classes: 'rw-flash-success' })
       },
       // This refetches the query on the list page. Read more about other ways to
       // update the cache over here:

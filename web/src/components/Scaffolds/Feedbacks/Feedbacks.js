@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { Link, routes } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Scaffolds/FeedbacksCell'
@@ -38,10 +39,9 @@ const checkboxInputTag = (checked) => {
 }
 
 const FeedbacksList = ({ feedbacks }) => {
-  const { addMessage } = useFlash()
   const [deleteFeedback] = useMutation(DELETE_FEEDBACK_MUTATION, {
     onCompleted: () => {
-      addMessage('Feedback deleted.', { classes: 'rw-flash-success' })
+      toast.success('Feedback deleted.', { classes: 'rw-flash-success' })
     },
     // This refetches the query on the list page. Read more about other ways to
     // update the cache over here:

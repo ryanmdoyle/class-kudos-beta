@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Scaffolds/UsersCell'
@@ -32,11 +33,10 @@ const checkboxInputTag = (checked) => {
 }
 
 const User = ({ user }) => {
-  const { addMessage } = useFlash()
   const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
     onCompleted: () => {
       navigate(routes.scaffoldsUsers())
-      addMessage('User deleted.', { classes: 'rw-flash-success' })
+      toast.success('User deleted.', { classes: 'rw-flash-success' })
     },
   })
 

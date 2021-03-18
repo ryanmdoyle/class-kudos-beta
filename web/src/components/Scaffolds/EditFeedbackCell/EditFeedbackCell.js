@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import FeedbackForm from 'src/components/Scaffolds/FeedbackForm'
 
@@ -28,13 +29,12 @@ const UPDATE_FEEDBACK_MUTATION = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Success = ({ feedback }) => {
-  const { addMessage } = useFlash()
   const [updateFeedback, { loading, error }] = useMutation(
     UPDATE_FEEDBACK_MUTATION,
     {
       onCompleted: () => {
         navigate(routes.scaffoldsFeedbacks())
-        addMessage('Feedback updated.', { classes: 'rw-flash-success' })
+        toast.success('Feedback updated.', { classes: 'rw-flash-success' })
       },
     }
   )

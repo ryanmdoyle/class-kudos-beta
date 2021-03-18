@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 import EnrollmentByEnrollIdForm from 'src/components/EnrollmentByEnrollIdForm/EnrollmentByEnrollIdForm'
 
@@ -15,7 +16,6 @@ const CREATE_ENROLLMENT_BY_ENROLLID_MUTATION = gql`
 `
 
 const NewEnrollment = ({ userId }) => {
-  const { addMessage } = useFlash()
   const { close } = useModal()
   const [createEnrollment, { loading, error }] = useMutation(
     CREATE_ENROLLMENT_BY_ENROLLID_MUTATION,
@@ -23,7 +23,7 @@ const NewEnrollment = ({ userId }) => {
       refetchQueries: [{ query: QUERY, variables: { userId } }],
       onCompleted: () => {
         close()
-        addMessage('Enrollment created.', { classes: 'rw-flash-success' })
+        toast.success('Enrollment created.', { classes: 'rw-flash-success' })
       },
     }
   )

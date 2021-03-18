@@ -1,5 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
-import { Flash } from '@redwoodjs/web'
+import { Toaster } from '@redwoodjs/web/toast'
 import { usePageLoadingContext } from '@redwoodjs/router'
 
 import { ModalProvider } from 'src/context/ModalContext'
@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <ModalProvider>
       <Modal />
-      <Flash timeout={4000} />
+      <Toaster timeout={4000} />
       <div className="w-full h-screen relative">
         <SiteHeader />
         <div className="flex w-full h-full-minusNav">

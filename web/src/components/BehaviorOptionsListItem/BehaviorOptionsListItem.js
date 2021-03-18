@@ -1,4 +1,5 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
 import EditBehaviorCell from 'src/components/Scaffolds/EditBehaviorCell'
@@ -15,10 +16,9 @@ const DELETE_BEHAVIOR_MUTATION = gql`
 
 const BehaviorOptionsListItem = ({ id, name, value, groupId }) => {
   const { openModal } = useModal()
-  const { addMessage } = useFlash()
   const [deleteBehavior] = useMutation(DELETE_BEHAVIOR_MUTATION, {
     onCompleted: () => {
-      addMessage('Behavior deleted.', { classes: 'rw-flash-success' })
+      toast.success('Behavior deleted.', { classes: 'rw-flash-success' })
     },
     refetchQueries: [{ query: QUERY, variables: { groupId: groupId } }],
     awaitRefetchQueries: true,
