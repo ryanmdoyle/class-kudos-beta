@@ -8,10 +8,7 @@ export const QUERY = gql`
     }
     feedbackOfUser(userId: $userId) {
       id
-      behavior {
-        id
-        value
-      }
+      value
     }
   }
 `
@@ -29,7 +26,7 @@ export const Success = ({
   userId,
 }) => {
   const totalPoints = feedbackOfUser?.reduce((accumulator, currentFeedback) => {
-    return accumulator + currentFeedback.behavior.value
+    return accumulator + currentFeedback.value
   }, 0)
   return (
     <div className="w-full flex flex-wrap justify-center">
