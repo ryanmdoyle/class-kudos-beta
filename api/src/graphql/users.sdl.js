@@ -18,6 +18,7 @@ export const schema = gql`
   type Query {
     users: [User!]!
     user(id: String!): User
+    totalUserPoints(id: String!): Int!
   }
 
   input CreateUserInput {

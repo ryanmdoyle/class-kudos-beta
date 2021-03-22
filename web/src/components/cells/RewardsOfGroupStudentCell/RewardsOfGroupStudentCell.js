@@ -6,14 +6,7 @@ export const QUERY = gql`
       name
       cost
     }
-    feedbackOfUser(userId: $userId) {
-      id
-      value
-    }
-    redeemedOfUser(userId: $userId) {
-      id
-      cost
-    }
+    totalUserPoints(id: $userId)
   }
 `
 
@@ -25,20 +18,10 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({
   rewardsOfGroup,
-  feedbackOfUser,
-  redeemedOfUser,
+  totalUserPoints,
   groupId,
   userId,
 }) => {
-  const feedbacks =
-    feedbackOfUser?.reduce((accumulator, currentFeedback) => {
-      return accumulator + currentFeedback.value
-    }, 0) || 0
-  const redeemeds =
-    redeemedOfUser?.reduce((accumulator, currentRedeemed) => {
-      return accumulator + currentRedeemed.cost
-    }, 0) || 0
-  const available = feedbacks - redeemeds >= 0 ? feedbacks - redeemeds : 0
   return (
     <div className="w-full flex flex-wrap justify-center">
       {rewardsOfGroup?.map((reward) => (
@@ -47,7 +30,7 @@ export const Success = ({
           reward={reward}
           groupId={groupId}
           userId={userId}
-          availablePoints={available}
+          availablePoints={totalUserPoints}
         />
       ))}
     </div>

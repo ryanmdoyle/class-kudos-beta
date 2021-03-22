@@ -13,28 +13,21 @@ export const redeemed = ({ id }) => {
 }
 
 export const createRedeemed = async ({ input }) => {
-  const userFeedback = await db.feedback.findMany({
+  const allFeedback = await db.feedback.aggregate({
     where: { userId: input.userId },
+    sum: { value: true },
   })
-  const userRedeemed = await db.redeemed.findMany({
+  const allRedeemed = await db.redeemed.aggregate({
     where: { userId: input.userId },
+    sum: { cost: true },
   })
-  const feedbacks =
-    userFeedback?.reduce((accumulator, currentFeedback) => {
-      return accumulator + currentFeedback.value
-    }, 0) || 0
-  const redeemeds =
-    userRedeemed?.reduce((accumulator, currentRedeemed) => {
-      return accumulator + currentRedeemed.cost
-    }, 0) || 0
-  if (feedbacks - redeemeds >= input.cost) {
+  const totalPoints = allFeedback.sum.value - allRedeemed.sum.cost
+  if (totalPoints >= input.cost) {
     return db.redeemed.create({
       data: foreignKeyReplacement(input),
     })
   } else {
-    throw new UserInputError(
-      'Cannot redeem more points than a user has earned.'
-    )
+    throw new UserInputError('Cannot redeem more points than a user has.')
   }
 }
 
