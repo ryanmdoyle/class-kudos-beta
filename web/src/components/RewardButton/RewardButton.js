@@ -1,6 +1,9 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { QUERY as userPointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
+import { QUERY as rewardsQuery } from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
+
 const CREATE_REDEEMED = gql`
   mutation CreateRedeemed($input: CreateRedeemedInput!) {
     createRedeemed(input: $input) {
@@ -9,20 +12,26 @@ const CREATE_REDEEMED = gql`
   }
 `
 
-const RewardButton = ({ reward, groupId, userId, totalPoints }) => {
-  const [newRedeemed, { loading, error }] = useMutation(CREATE_REDEEMED, {
-    // refetchQueries: [
-    //   {
-    //     query: recentUserFeedbackOfGroupQuery,
-    //     variables: { userId: studentId, groupId: groupId },
-    //   },
-    //   { query: pointsQuery, variables: { userId: studentId } },
-    // ],
-    // awaitRefetchQueries: true,
+const RewardButton = ({ reward, groupId, userId, availablePoints }) => {
+  const [newRedeemed, { loading }] = useMutation(CREATE_REDEEMED, {
+    refetchQueries: [
+      {
+        query: userPointsQuery,
+        variables: { userId: userId },
+      },
+      {
+        query: rewardsQuery,
+        variables: { userId: userId, groupId: groupId },
+      },
+    ],
+    awaitRefetchQueries: true,
     onCompleted: () => {
       toast.success(`Redeemed!`, {
         className: 'rw-flash-success',
       })
+    },
+    onError: (error) => {
+      toast.error(`${error}`)
     },
   })
 
@@ -42,12 +51,15 @@ const RewardButton = ({ reward, groupId, userId, totalPoints }) => {
   return (
     <div
       className={`h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
-        totalPoints >= reward?.cost
+        availablePoints >= reward?.cost
           ? 'hover:ring-2 ring-purple-500'
           : 'cursor-not-allowed'
       }`}
       onClick={() => {
-        if (!loading) {
+        if (availablePoints < reward?.cost) {
+          toast.error('You do not have enough points to claim that reward!')
+        }
+        if (!loading && availablePoints >= reward?.cost) {
           claimReward()
         }
       }}
@@ -79,7 +91,7 @@ const RewardButton = ({ reward, groupId, userId, totalPoints }) => {
       </span> */}
       <span
         className={`${
-          loading || totalPoints < reward?.cost
+          loading || availablePoints < reward?.cost
             ? 'text-gray-400'
             : 'text-gray-500'
         } text-center text-sm`}
@@ -88,12 +100,14 @@ const RewardButton = ({ reward, groupId, userId, totalPoints }) => {
       </span>
       <span
         className={`${
-          loading || totalPoints < reward?.cost
+          loading || availablePoints < reward?.cost
             ? 'text-gray-400'
             : 'text-red-400'
         } text-center text-sm font-bold`}
       >
         {reward?.cost || '?'}
+        {' of '}
+        {availablePoints}
       </span>
     </div>
   )

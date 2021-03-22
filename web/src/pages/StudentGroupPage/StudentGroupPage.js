@@ -7,7 +7,7 @@ import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 
 const StudentGroupPage = ({ groupId }) => {
   const { currentUser } = useAuth()
-  const points = <UserPointsCell userId={currentUser?.id} />
+  const totalPoints = <UserPointsCell userId={currentUser?.id} />
   return (
     <DashboardLayout>
       <div className="w-full h-full p-4 relative">
@@ -16,7 +16,7 @@ const StudentGroupPage = ({ groupId }) => {
             <UserPointsCell userId={currentUser?.id} />
           </span>
           <span className="text-lg ml-2 text-gray-500 mr-12">
-            total {`${points === 1 ? 'point' : 'points' || 'points'}`}
+            total {`${totalPoints === 1 ? 'point' : 'points' || 'points'}`}
           </span>
           {/* <span className="text-6xl text-green-400">
             <UserPointsOfGroupCell groupId={groupId} userId={currentUser?.id} />

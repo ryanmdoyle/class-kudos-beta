@@ -1,3 +1,4 @@
+import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
@@ -11,10 +12,30 @@ export const redeemed = ({ id }) => {
   })
 }
 
-export const createRedeemed = ({ input }) => {
-  return db.redeemed.create({
-    data: foreignKeyReplacement(input),
+export const createRedeemed = async ({ input }) => {
+  const userFeedback = await db.feedback.findMany({
+    where: { userId: input.userId },
   })
+  const userRedeemed = await db.redeemed.findMany({
+    where: { userId: input.userId },
+  })
+  const feedbacks =
+    userFeedback?.reduce((accumulator, currentFeedback) => {
+      return accumulator + currentFeedback.value
+    }, 0) || 0
+  const redeemeds =
+    userRedeemed?.reduce((accumulator, currentRedeemed) => {
+      return accumulator + currentRedeemed.cost
+    }, 0) || 0
+  if (feedbacks - redeemeds >= input.cost) {
+    return db.redeemed.create({
+      data: foreignKeyReplacement(input),
+    })
+  } else {
+    throw new UserInputError(
+      'Cannot redeem more points than a user has earned.'
+    )
+  }
 }
 
 export const updateRedeemed = ({ id, input }) => {
