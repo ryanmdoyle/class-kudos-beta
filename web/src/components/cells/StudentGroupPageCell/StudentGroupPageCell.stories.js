@@ -1,5 +1,5 @@
-import { Loading, Empty, Failure, Success } from './UserPointsWrapperCell'
-import { standard } from './UserPointsWrapperCell.mock'
+import { Loading, Empty, Failure, Success } from './StudentGroupPageCell'
+import { standard } from './StudentGroupPageCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
@@ -17,4 +17,4 @@ export const success = () => {
   return Success ? <Success {...standard()} /> : null
 }
 
-export default { title: 'Cells/UserPointsWrapperCell' }
+export default { title: 'Cells/StudentGroupPageCell' }

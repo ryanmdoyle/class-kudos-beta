@@ -2,8 +2,12 @@ import RewardsOfGroupStudentCell from 'src/components/cells/RewardsOfGroupStuden
 import UserFeedbackOfGroupCell from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
 
 export const QUERY = gql`
-  query UserPointsWrapperQuery($userId: String!) {
+  query UserPointsWrapperQuery($userId: String!, $groupId: String!) {
     totalUserPoints(id: $userId)
+    group(id: $groupId) {
+      id
+      name
+    }
   }
 `
 
@@ -13,7 +17,7 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ totalUserPoints, userId, groupId }) => {
+export const Success = ({ totalUserPoints, userId, groupId, group }) => {
   return (
     <div className="w-full h-full p-4 relative">
       <div className="white-box w-full h-32 mb-4 relative">
@@ -29,7 +33,7 @@ export const Success = ({ totalUserPoints, userId, groupId }) => {
       <div className="h-5/6 w-full flex relative">
         <div className="white-box w-1/2 h-full p-2 mr-4">
           <h2 className="font-display text-2xl mb-2">
-            Recent Feedback For Group
+            Recent Feedback {group.name ? `for ${group.name}` : null}
           </h2>
           <UserFeedbackOfGroupCell
             groupId={groupId}
