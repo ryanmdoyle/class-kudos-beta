@@ -44,10 +44,6 @@ export const Success = ({
         variables: { userId: userId },
       },
       {
-        query: QUERY,
-        variables: { userId: userId, groupId: groupId },
-      },
-      {
         query: activityQuery,
         variables: { userId: userId, groupId: groupId },
       },

@@ -26,7 +26,7 @@ const RewardButton = ({
       className={`h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
         availablePoints >= reward?.cost
           ? 'hover:ring-2 ring-purple-500'
-          : 'cursor-not-allowed'
+          : 'cursor-not-allowed opacity-70'
       }`}
       onClick={() => {
         if (availablePoints < reward?.cost) {
@@ -78,9 +78,7 @@ const RewardButton = ({
             : 'text-red-400'
         } text-center text-sm font-bold`}
       >
-        {reward?.cost || '?'}
-        {' of '}
-        {availablePoints}
+        - {reward?.cost || '?'}
       </span>
     </div>
   )
