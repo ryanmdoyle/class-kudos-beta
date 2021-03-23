@@ -1,12 +1,11 @@
 import RewardButton from 'src/components/RewardButton/RewardButton'
 export const QUERY = gql`
-  query RewardsOfGroupStudentQuery($groupId: String!, $userId: String!) {
+  query RewardsOfGroupStudentQuery($groupId: String!) {
     rewardsOfGroup(groupId: $groupId) {
       id
       name
       cost
     }
-    totalUserPoints(id: $userId)
   }
 `
 
@@ -18,7 +17,7 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({
   rewardsOfGroup,
-  totalUserPoints,
+  availablePoints,
   groupId,
   userId,
 }) => {
@@ -30,7 +29,7 @@ export const Success = ({
           reward={reward}
           groupId={groupId}
           userId={userId}
-          availablePoints={totalUserPoints}
+          availablePoints={availablePoints}
         />
       ))}
     </div>

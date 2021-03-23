@@ -43,7 +43,11 @@ export const Success = ({ totalUserPoints, userId, groupId, group }) => {
         </div>
         <div className="white-box w-1/2 h-full p-2">
           <h2 className="font-display text-2xl mb-2">Rewards Available</h2>
-          <RewardsOfGroupStudentCell groupId={groupId} userId={userId} />
+          <RewardsOfGroupStudentCell
+            groupId={groupId}
+            userId={userId}
+            availablePoints={totalUserPoints}
+          />
         </div>
       </div>
     </div>
