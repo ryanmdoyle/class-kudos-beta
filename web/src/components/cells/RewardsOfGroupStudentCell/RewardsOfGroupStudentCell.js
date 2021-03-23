@@ -4,7 +4,7 @@ import { toast } from '@redwoodjs/web/toast'
 import RewardButton from 'src/components/RewardButton/RewardButton'
 
 import { QUERY as userPointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
-import { QUERY as activityQuery } from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
+import { QUERY as activityQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 
 export const QUERY = gql`
   query RewardsOfGroupStudentQuery($groupId: String!, $userId: String!) {

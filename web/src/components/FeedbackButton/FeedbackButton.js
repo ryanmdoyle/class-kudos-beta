@@ -1,31 +1,12 @@
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
-import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
-import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
-
-const CREATE_FEEDBACK = gql`
-  mutation CreateFeedback($input: CreateFeedbackInput!) {
-    createFeedback(input: $input) {
-      id
-    }
-  }
-`
-
-const FeedbackButton = ({ name, value, studentId, behaviorId, groupId }) => {
-  const [newFeedback, { loading, error }] = useMutation(CREATE_FEEDBACK, {
-    refetchQueries: [
-      {
-        query: recentUserFeedbackOfGroupQuery,
-        variables: { userId: studentId, groupId: groupId },
-      },
-      { query: pointsQuery, variables: { userId: studentId } },
-    ],
-    awaitRefetchQueries: true,
-    onCompleted: () => {
-      toast.success('Added feedback!', { className: 'rw-flash-success' })
-    },
-  })
-
+const FeedbackButton = ({
+  name,
+  value,
+  studentId,
+  behaviorId,
+  groupId,
+  newFeedback,
+  loading,
+}) => {
   const giveFeedback = () => {
     newFeedback({
       variables: {
@@ -42,7 +23,9 @@ const FeedbackButton = ({ name, value, studentId, behaviorId, groupId }) => {
 
   return (
     <div
-      className="h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center hover:ring-2 ring-purple-500"
+      className={`h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center
+      ${loading && 'opacity-70'}
+      ${!loading && 'hover:ring-2'} ring-purple-500`}
       onClick={() => {
         if (!loading) {
           giveFeedback()

@@ -1,5 +1,5 @@
 import RewardsOfGroupStudentCell from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
-import UserFeedbackOfGroupCell from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
+import UserActivityOfGroupCell from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
@@ -37,7 +37,7 @@ export const Success = ({ userId, groupId, group }) => {
           <h2 className="font-display text-2xl mb-2">
             Recent Feedback {group.name ? `for ${group.name}` : null}
           </h2>
-          <UserFeedbackOfGroupCell groupId={groupId} userId={userId} />
+          <UserActivityOfGroupCell groupId={groupId} userId={userId} />
         </div>
         <div className="white-box w-1/2 h-full p-2">
           <h2 className="font-display text-2xl mb-2">Rewards Available</h2>
