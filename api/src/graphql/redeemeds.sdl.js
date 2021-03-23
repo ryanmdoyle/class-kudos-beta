@@ -14,6 +14,7 @@ export const schema = gql`
     redeemeds: [Redeemed!]!
     redeemed(id: String!): Redeemed
     redeemedOfUser(userId: String!): [Redeemed!]!
+    redeemedOfUserForGroup(userId: String!, groupId: String!): [Redeemed!]!
   }
 
   input CreateRedeemedInput {

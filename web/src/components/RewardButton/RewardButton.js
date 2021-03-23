@@ -1,40 +1,13 @@
-import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { QUERY as userPointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
-import { QUERY as rewardsQuery } from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
-
-const CREATE_REDEEMED = gql`
-  mutation CreateRedeemed($input: CreateRedeemedInput!) {
-    createRedeemed(input: $input) {
-      id
-    }
-  }
-`
-
-const RewardButton = ({ reward, groupId, userId, availablePoints }) => {
-  const [newRedeemed, { loading }] = useMutation(CREATE_REDEEMED, {
-    refetchQueries: [
-      {
-        query: userPointsQuery,
-        variables: { userId: userId },
-      },
-      {
-        query: rewardsQuery,
-        variables: { userId: userId, groupId: groupId },
-      },
-    ],
-    awaitRefetchQueries: true,
-    onCompleted: () => {
-      toast.success(`Redeemed!`, {
-        className: 'rw-flash-success',
-      })
-    },
-    onError: (error) => {
-      toast.error(`${error}`)
-    },
-  })
-
+const RewardButton = ({
+  reward,
+  groupId,
+  userId,
+  availablePoints,
+  newRedeemed,
+  loading,
+}) => {
   const claimReward = () => {
     newRedeemed({
       variables: {

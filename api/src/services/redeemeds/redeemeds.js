@@ -51,6 +51,21 @@ export const Redeemed = {
     db.redeemed.findUnique({ where: { id: root.id } }).group(),
 }
 
+// Custom
 export const redeemedOfUser = ({ userId }) => {
   return db.redeemed.findMany({ where: { userId: userId } })
+}
+
+export const redeemedOfUserForGroup = ({ userId, groupId }) => {
+  return db.redeemed.findMany({
+    where: { userId: userId, groupId: groupId },
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
+export const redeemedOfGroup = ({ groupId }) => {
+  return db.redeemed.findMany({
+    where: { groupId: groupId },
+    orderBy: { createdAt: 'desc' },
+  })
 }

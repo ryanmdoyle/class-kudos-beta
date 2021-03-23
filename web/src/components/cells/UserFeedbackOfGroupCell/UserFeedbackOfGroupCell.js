@@ -8,6 +8,12 @@ export const QUERY = gql`
       name
       value
     }
+    redeemedOfUserForGroup(userId: $userId, groupId: $groupId) {
+      id
+      createdAt
+      name
+      cost
+    }
   }
 `
 
@@ -17,9 +23,10 @@ export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ feedbackOfUserForGroup }) => {
-  const sorted = feedbackOfUserForGroup
-    ? feedbackOfUserForGroup
+export const Success = ({ feedbackOfUserForGroup, redeemedOfUserForGroup }) => {
+  const newArray = [...redeemedOfUserForGroup, ...feedbackOfUserForGroup]
+  const sorted = newArray
+    ? newArray
         .slice()
         .sort(
           (a, b) =>
@@ -34,7 +41,7 @@ export const Success = ({ feedbackOfUserForGroup }) => {
             <ListViewRecentItem
               key={feedback.id}
               name={feedback.name}
-              value={feedback.value}
+              value={feedback.value || feedback.cost || 'n/a'}
               createdAt={feedback.createdAt}
             />
           ))}
