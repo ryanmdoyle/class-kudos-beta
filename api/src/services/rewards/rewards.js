@@ -42,5 +42,6 @@ export const Reward = {
 export const rewardsOfGroup = ({ groupId }) => {
   return db.reward.findMany({
     where: { groupId: groupId },
+    orderBy: { cost: 'asc' },
   })
 }
