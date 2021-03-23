@@ -7,6 +7,7 @@ import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/Recent
 
 const GroupList = ({
   groupId,
+  name,
   enrollId,
   enrollmentsOfGroup = [],
   behaviorsOfGroup = [],
@@ -48,6 +49,7 @@ const GroupList = ({
           userId={student?.id}
           firstName={student?.firstName}
           groupId={groupId}
+          groupName={name}
         />
       </div>
     </>

@@ -20,6 +20,7 @@ export const QUERY = gql`
     group(id: $id) {
       id
       enrollId
+      name
     }
   }
 `
@@ -51,11 +52,13 @@ export const Success = ({
   id,
   enrollmentsOfGroup,
   behaviorsOfGroup,
+  group,
   enrollId,
 }) => {
   return (
     <GroupList
       groupId={id}
+      name={group.name}
       enrollId={enrollId}
       enrollmentsOfGroup={enrollmentsOfGroup}
       behaviorsOfGroup={behaviorsOfGroup}
