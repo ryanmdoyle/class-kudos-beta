@@ -4,10 +4,10 @@ import {
   Empty,
   Failure,
   Success,
-} from './UserFeedbackOfGroupCell'
-import { standard } from './UserFeedbackOfGroupCell.mock'
+} from './UserActivityOfGroupCell'
+import { standard } from './UserActivityOfGroupCell.mock'
 
-describe('UserFeedbackOfGroupCell', () => {
+describe('UserActivityOfGroupCell', () => {
   it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)

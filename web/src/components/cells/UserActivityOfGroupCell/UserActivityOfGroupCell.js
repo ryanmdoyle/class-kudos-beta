@@ -1,7 +1,7 @@
 import ListViewRecentItem from 'src/components/ListViewRecentItem/ListViewRecentItem'
 
 export const QUERY = gql`
-  query UserFeedbackOfGroupQuery($userId: String!, $groupId: String!) {
+  query UserActivityOfGroupQuery($userId: String!, $groupId: String!) {
     feedbackOfUserForGroup(userId: $userId, groupId: $groupId) {
       id
       createdAt

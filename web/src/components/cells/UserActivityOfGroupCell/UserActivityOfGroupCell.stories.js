@@ -3,8 +3,8 @@ import {
   Empty,
   Failure,
   Success,
-} from './UserFeedbackOfGroupCell'
-import { standard } from './UserFeedbackOfGroupCell.mock'
+} from './UserActivityOfGroupCell'
+import { standard } from './UserActivityOfGroupCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
@@ -22,4 +22,4 @@ export const success = () => {
   return Success ? <Success {...standard()} /> : null
 }
 
-export default { title: 'Cells/UserFeedbackOfGroupCell' }
+export default { title: 'Cells/UserActivityOfGroupCell' }
