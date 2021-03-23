@@ -1,5 +1,6 @@
 import RewardsOfGroupStudentCell from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
 import UserFeedbackOfGroupCell from 'src/components/cells/UserFeedbackOfGroupCell/UserFeedbackOfGroupCell'
+import PageLoader from 'src/components/PageLoader/PageLoader'
 
 export const QUERY = gql`
   query UserPointsWrapperQuery($userId: String!, $groupId: String!) {
@@ -11,7 +12,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <PageLoader />
 
 export const Empty = () => <div>Empty</div>
 

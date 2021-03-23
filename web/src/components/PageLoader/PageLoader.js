@@ -1,7 +1,7 @@
 const PageLoader = () => {
   return (
-    <div className="w-full h-full absolute top-0 left-0 bg-gray-800 bg-opacity-30 z-50 flex justify-center items-center">
-      <div className="w-32 h-32 bg-white bg-opacity-50 rounded-md flex justify-center items-center">
+    <div className="w-full h-full absolute top-0 left-0 bg-gray-100 bg-opacity-30 z-50 flex justify-center items-center">
+      <div className="w-32 h-32 rounded-md flex justify-center items-center">
         <svg
           width="76"
           height="76"
