@@ -1,3 +1,4 @@
+import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
@@ -11,10 +12,23 @@ export const feedback = ({ id }) => {
   })
 }
 
-export const createFeedback = ({ input }) => {
-  return db.feedback.create({
-    data: foreignKeyReplacement(input),
+export const createFeedback = async ({ input }) => {
+  const allFeedback = await db.feedback.aggregate({
+    where: { userId: input.userId },
+    sum: { value: true },
   })
+  const allRedeemed = await db.redeemed.aggregate({
+    where: { userId: input.userId },
+    sum: { cost: true },
+  })
+  const totalPoints = allFeedback.sum.value - allRedeemed.sum.cost
+  if (totalPoints + input.value >= 0) {
+    return db.feedback.create({
+      data: foreignKeyReplacement(input),
+    })
+  } else {
+    throw new UserInputError('User cannot be given less than 0 points.')
+  }
 }
 
 export const updateFeedback = ({ id, input }) => {

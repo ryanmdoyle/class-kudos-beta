@@ -1,9 +1,16 @@
 import FeedbackButton from 'src/components/FeedbackButton/FeedbackButton'
 
-import { useMutation } from '@redwoodjs/web'
+import { useMutation, useQuery } from '@redwoodjs/web'
+// import { useApolloClient } from '@apollo/client'
 import { toast } from '@redwoodjs/web/toast'
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
+
+const USER_POINTS = gql`
+  query FeedbackPointsQuery($userId: String!) {
+    totalUserPoints(id: $userId)
+  }
+`
 
 const CREATE_FEEDBACK = gql`
   mutation CreateFeedback($input: CreateFeedbackInput!) {
@@ -13,16 +20,19 @@ const CREATE_FEEDBACK = gql`
   }
 `
 
-const BehaviorButtons = ({ studentId, behaviors, groupId }) => {
+const BehaviorButtons = ({ userId, behaviors, groupId }) => {
+  const { data } = useQuery(USER_POINTS, {
+    variables: { userId: userId },
+  })
+  const totalUserPoints = data?.totalUserPoints
   const [newFeedback, { loading }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
       {
         query: recentUserFeedbackOfGroupQuery,
-        variables: { userId: studentId, groupId: groupId },
+        variables: { userId: userId, groupId: groupId },
       },
-      { query: pointsQuery, variables: { userId: studentId } },
+      { query: pointsQuery, variables: { userId: userId } },
     ],
-    awaitRefetchQueries: true,
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
     },
@@ -45,7 +55,8 @@ const BehaviorButtons = ({ studentId, behaviors, groupId }) => {
         <FeedbackButton
           name={behavior.name}
           value={behavior.value}
-          studentId={studentId}
+          totalUserPoints={totalUserPoints}
+          studentId={userId}
           behaviorId={behavior.id}
           groupId={groupId}
           newFeedback={newFeedback}

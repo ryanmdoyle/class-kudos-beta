@@ -1,6 +1,9 @@
+import { toast } from '@redwoodjs/web/toast'
+
 const FeedbackButton = ({
   name,
   value,
+  totalUserPoints,
   studentId,
   behaviorId,
   groupId,
@@ -8,6 +11,8 @@ const FeedbackButton = ({
   loading,
 }) => {
   const giveFeedback = () => {
+    // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
+    const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     newFeedback({
       variables: {
         input: {
@@ -15,19 +20,30 @@ const FeedbackButton = ({
           behaviorId: behaviorId,
           groupId: groupId,
           name: name,
-          value: value,
+          value: adjustedValue,
         },
       },
     })
   }
 
+  const wontReturnNegativeTotal = () => {
+    if (totalUserPoints === 0 && value > 0) return true
+    if (totalUserPoints > 0) return true // giveFeedback will auto-adjust neg values before query
+    return false
+  }
+
   return (
     <div
       className={`h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center
-      ${loading && 'opacity-70'}
+      ${
+        (loading || (totalUserPoints === 0 && value < 0)) &&
+        'opacity-70 cursor-not-allowed'
+      }
       ${!loading && 'hover:ring-2'} ring-purple-500`}
       onClick={() => {
-        if (!loading) {
+        if (!wontReturnNegativeTotal())
+          toast.error('User already has zero points.')
+        if (!loading && wontReturnNegativeTotal()) {
           giveFeedback()
         }
       }}

@@ -9,7 +9,7 @@ const AwardFeedbackCard = ({ groupId, student, behaviorsOfGroup }) => {
       <div className="w-full flex flex-wrap justify-center content-start">
         <BehaviorButtons
           behaviors={behaviorsOfGroup}
-          studentId={student?.id}
+          userId={student?.id}
           groupId={groupId}
         />
       </div>
