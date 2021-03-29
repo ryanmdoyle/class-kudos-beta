@@ -7,12 +7,7 @@ export const QUERY = gql`
 `
 
 export const Loading = ({ firstName, lastName }) => (
-  <li
-    className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"
-    // onClick={() => {
-    //   onClick()
-    // }}
-  >
+  <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
     <div className="flex items-center">
       <img
         src="/profile.jpg"
@@ -48,20 +43,25 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({
-  // userId,
-  // groupId,
+  userId,
+  // groupId, auto-import for query
   firstName,
   lastName,
   totalUserPoints,
-  onClick,
-  // feedbackOfUserForGroup,
-  // redeemedOfUserForGroup,
+  userZero,
+  setFirstName,
+  setLastName,
+  totalEmpty,
+  setTotalPoints,
 }) => {
+  if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
   return (
     <li
       className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"
       onClick={() => {
-        onClick(totalUserPoints)
+        setFirstName(firstName)
+        setLastName(lastName)
+        setTotalPoints(totalUserPoints)
       }}
     >
       <div className="flex items-center">

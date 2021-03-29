@@ -20,7 +20,7 @@ const GroupList = ({
     enrollmentsOfGroup[0]?.user.firstName
   )
   const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
-  const [totalPoints, setTotalPoints] = useState(0)
+  const [totalPoints, setTotalPoints] = useState(null)
 
   if (enrollmentsOfGroup.length === 0) {
     return (
@@ -37,17 +37,19 @@ const GroupList = ({
         {enrollmentsOfGroup.map((enrollment) => {
           return (
             <>
+              {/* new */}
               <UserListItemCell
                 userId={enrollment.user.id}
                 firstName={enrollment.user.firstName}
                 lastName={enrollment.user.lastName}
                 groupId={groupId}
-                onClick={(points) => {
-                  setFirstName(enrollment.user.firstName)
-                  setLastName(enrollment.user.lastName)
-                  setTotalPoints(points)
-                }}
+                userZero={enrollmentsOfGroup[0]?.user.id}
+                setFirstName={setFirstName}
+                setLastName={setLastName}
+                totalEmpty={totalPoints === null}
+                setTotalPoints={setTotalPoints}
               />
+              {/* old */}
               <ListViewStudentItem
                 key={enrollment.id}
                 student={enrollment.user}
