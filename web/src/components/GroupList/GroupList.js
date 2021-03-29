@@ -4,6 +4,7 @@ import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStud
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
+import UserListItemCell from 'src/components/cells/UserListItemCell/UserListItemCell'
 
 const GroupList = ({
   groupId,
@@ -13,6 +14,13 @@ const GroupList = ({
   behaviorsOfGroup = [],
 }) => {
   const [student, setStudent] = useState(enrollmentsOfGroup[0]?.user)
+
+  // new state
+  const [firstName, setFirstName] = useState(
+    enrollmentsOfGroup[0]?.user.firstName
+  )
+  const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
+  const [totalPoints, setTotalPoints] = useState(0)
 
   if (enrollmentsOfGroup.length === 0) {
     return (
@@ -28,18 +36,37 @@ const GroupList = ({
       <ul className="col-span-4 overflow-scroll 2xl:col-span-5 p-1">
         {enrollmentsOfGroup.map((enrollment) => {
           return (
-            <ListViewStudentItem
-              key={enrollment.id}
-              student={enrollment.user}
-              onClick={() => {
-                setStudent(enrollment.user)
-              }}
-            />
+            <>
+              <UserListItemCell
+                userId={enrollment.user.id}
+                firstName={enrollment.user.firstName}
+                lastName={enrollment.user.lastName}
+                groupId={groupId}
+                onClick={(points) => {
+                  setFirstName(enrollment.user.firstName)
+                  setLastName(enrollment.user.lastName)
+                  setTotalPoints(points)
+                }}
+              />
+              <ListViewStudentItem
+                key={enrollment.id}
+                student={enrollment.user}
+                onClick={() => {
+                  setStudent(enrollment.user)
+                }}
+              />
+            </>
           )
         })}
       </ul>
       <div className="flex flex-col col-span-8 2xl:col-span-3 overflow-y-auto">
-        <StudentPointsCard userId={student?.id} student={student} />
+        <StudentPointsCard
+          userId={student?.id}
+          student={student}
+          firstName={firstName}
+          lastName={lastName}
+          totalPoints={totalPoints}
+        />
         <AwardFeedbackCard
           groupId={groupId}
           student={student}

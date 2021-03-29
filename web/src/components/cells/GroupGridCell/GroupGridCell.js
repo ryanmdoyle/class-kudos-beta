@@ -1,4 +1,3 @@
-import GridStudentSquare from 'src/components/GridStudentSquare/GridStudentSquare'
 import GroupGrid from 'src/components/GroupGrid/GroupGrid'
 
 export const QUERY = gql`

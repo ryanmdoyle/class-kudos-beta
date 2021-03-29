@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 
 const ListViewStudentItem = ({ student = {}, onClick }) => {
@@ -10,7 +12,11 @@ const ListViewStudentItem = ({ student = {}, onClick }) => {
       }}
     >
       <div className="flex items-center">
-        <img src="/profile.jpg" className="h-6 w-6 rounded-full mr-2"></img>
+        <img
+          src="/profile.jpg"
+          alt="profile"
+          className="h-6 w-6 rounded-full mr-2"
+        ></img>
         <span className="text-normal">
           {firstName ? `${firstName} ${lastName}` : 'Anonymous'}
         </span>
