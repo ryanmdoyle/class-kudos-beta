@@ -1,5 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+import truncate from 'src/lib/truncate'
+import timeTag from 'src/lib/timeTag'
 
 import { QUERY } from 'src/components/cells/GroupFeedbackCell/GroupFeedbackCell'
 
@@ -10,25 +12,6 @@ const DELETE_FEEDBACK_MUTATION = gql`
     }
   }
 `
-
-const MAX_STRING_LENGTH = 150
-
-const truncate = (text) => {
-  let output = text
-  if (text && text.length > MAX_STRING_LENGTH) {
-    output = output.substring(0, MAX_STRING_LENGTH) + '...'
-  }
-  return output
-}
-
-const timeTag = (datetime) => {
-  return (
-    <time dateTime={datetime} title={datetime}>
-      {new Date(datetime).toLocaleTimeString()} on{' '}
-      {new Date(datetime).toLocaleDateString()}
-    </time>
-  )
-}
 
 const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
   const [deleteFeedback] = useMutation(DELETE_FEEDBACK_MUTATION, {
