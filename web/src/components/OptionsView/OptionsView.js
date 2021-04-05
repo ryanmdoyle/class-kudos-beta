@@ -4,7 +4,7 @@ import EnrolledOptions from 'src/components/EnrolledOptions/EnrolledOptions'
 
 const OptionsView = ({ groupId }) => {
   return (
-    <div className="p-4">
+    <div className="p-4 h-sub-full overflow-y-scroll">
       <h1 className="text-2xl font-display mb-2">Group Options</h1>
       <BehaviorOptions groupId={groupId} />
       <RewardOptions groupId={groupId} />

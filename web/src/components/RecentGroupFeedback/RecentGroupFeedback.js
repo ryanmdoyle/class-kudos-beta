@@ -35,9 +35,6 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
     onCompleted: () => {
       toast.success('Feedback deleted.', { classes: 'rw-flash-success' })
     },
-    // This refetches the query on the list page. Read more about other ways to
-    // update the cache over here:
-    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
     refetchQueries: [{ query: QUERY, variables: { groupId } }],
     awaitRefetchQueries: true,
   })
@@ -49,7 +46,7 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
+    <div className="rw-segment rw-table-wrapper-responsive h-sub-full overflow-y-scroll">
       <table className="rw-table">
         <thead>
           <tr>
@@ -73,15 +70,14 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
               <td>{truncate(feedback?.value)}</td>
               <td>
                 <nav className="rw-table-actions">
-                  <a
+                  <button
                     href="#"
                     title={'Delete feedback ' + feedback?.id}
                     className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(feedback?.id)}
-                    // onClick={() => console.log(feedback.id)}
                   >
                     Delete
-                  </a>
+                  </button>
                 </nav>
               </td>
             </tr>
