@@ -58,14 +58,16 @@ model Behavior {
 }
 
 model Redeemed {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  name      String
-  cost      Int
-  group     Group    @relation(fields: [groupId], references: [id])
-  groupId   String
-  createdAt DateTime @default(now())
+  id         String    @id @default(uuid())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
+  name       String
+  cost       Int
+  reviewed   Boolean   @default(false)
+  reviewedAt DateTime?
+  group      Group     @relation(fields: [groupId], references: [id])
+  groupId    String
+  createdAt  DateTime  @default(now())
 }
 
 model Reward {

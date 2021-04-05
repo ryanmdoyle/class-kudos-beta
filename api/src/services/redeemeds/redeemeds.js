@@ -69,3 +69,17 @@ export const redeemedOfGroup = ({ groupId }) => {
     orderBy: { createdAt: 'desc' },
   })
 }
+
+export const redeemedOfGroupToReview = ({ groupId }) => {
+  return db.redeemed.findMany({
+    where: { groupId: groupId, reviewed: false },
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
+export const redeemedOfGroupReviewed = ({ groupId }) => {
+  return db.redeemed.findMany({
+    where: { groupId: groupId, reviewed: true },
+    orderBy: { createdAt: 'desc' },
+  })
+}
