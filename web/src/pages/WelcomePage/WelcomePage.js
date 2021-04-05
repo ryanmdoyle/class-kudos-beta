@@ -9,7 +9,7 @@ const WelcomePage = () => {
   return (
     <LandingLayout>
       <h1 className="text-center text-3xl font-bold pb-4">
-        Welcome to Class Karma
+        Welcome to Class Kudos
       </h1>
       <p>
         This is a website that will eventually be for awarding and redeeming
