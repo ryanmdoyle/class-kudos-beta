@@ -51,6 +51,7 @@ export const Success = ({
   userZero,
   setFirstName,
   setLastName,
+  setStudentId,
   totalEmpty,
   setTotalPoints,
 }) => {
@@ -61,6 +62,7 @@ export const Success = ({
       onClick={() => {
         setFirstName(firstName)
         setLastName(lastName)
+        setStudentId(userId)
         setTotalPoints(totalUserPoints)
       }}
     >

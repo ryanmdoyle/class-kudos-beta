@@ -13,14 +13,13 @@ const GroupList = ({
   enrollmentsOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
-  const [student, setStudent] = useState(enrollmentsOfGroup[0]?.user)
-
-  // new state
+  const student = null
   const [firstName, setFirstName] = useState(
     enrollmentsOfGroup[0]?.user.firstName
   )
   const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
   const [totalPoints, setTotalPoints] = useState(null)
+  const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.user.id)
 
   if (enrollmentsOfGroup.length === 0) {
     return (
@@ -37,7 +36,6 @@ const GroupList = ({
         {enrollmentsOfGroup.map((enrollment) => {
           return (
             <>
-              {/* new */}
               <UserListItemCell
                 userId={enrollment.user.id}
                 firstName={enrollment.user.firstName}
@@ -46,16 +44,9 @@ const GroupList = ({
                 userZero={enrollmentsOfGroup[0]?.user.id}
                 setFirstName={setFirstName}
                 setLastName={setLastName}
+                setStudentId={setStudentId}
                 totalEmpty={totalPoints === null}
                 setTotalPoints={setTotalPoints}
-              />
-              {/* old */}
-              <ListViewStudentItem
-                key={enrollment.id}
-                student={enrollment.user}
-                onClick={() => {
-                  setStudent(enrollment.user)
-                }}
               />
             </>
           )
@@ -63,7 +54,7 @@ const GroupList = ({
       </ul>
       <div className="flex flex-col col-span-8 2xl:col-span-3 overflow-y-auto">
         <StudentPointsCard
-          userId={student?.id}
+          userId={studentId}
           student={student}
           firstName={firstName}
           lastName={lastName}
@@ -75,8 +66,8 @@ const GroupList = ({
           behaviorsOfGroup={behaviorsOfGroup}
         />
         <RecentFeedbackListCard
-          userId={student?.id}
-          firstName={student?.firstName}
+          userId={studentId}
+          firstName={firstName}
           groupId={groupId}
           groupName={name}
         />
