@@ -83,3 +83,17 @@ export const redeemedOfGroupReviewed = ({ groupId }) => {
     orderBy: { createdAt: 'desc' },
   })
 }
+
+export const approveRedeemed = ({ id }) => {
+  const now = new Date()
+  const input = {
+    id,
+    reviewed: true,
+    reviewedAt: now,
+  }
+  console.log('input to save', input)
+  return db.redeemed.update({
+    data: foreignKeyReplacement(input),
+    where: { id },
+  })
+}

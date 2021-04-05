@@ -5,6 +5,8 @@ export const schema = gql`
     userId: String!
     name: String!
     cost: Int!
+    reviewed: Boolean!
+    reviewedAt: DateTime
     group: Group!
     groupId: String!
     createdAt: DateTime!
@@ -32,11 +34,13 @@ export const schema = gql`
     groupId: String
     name: String
     cost: Int
+    reviewed: Boolean
   }
 
   type Mutation {
     createRedeemed(input: CreateRedeemedInput!): Redeemed!
     updateRedeemed(id: String!, input: UpdateRedeemedInput!): Redeemed!
     deleteRedeemed(id: String!): Redeemed!
+    approveRedeemed(id: String!): Redeemed!
   }
 `
