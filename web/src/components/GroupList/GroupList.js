@@ -54,8 +54,6 @@ const GroupList = ({
       </ul>
       <div className="flex flex-col col-span-8 2xl:col-span-3 overflow-y-auto">
         <StudentPointsCard
-          userId={studentId}
-          student={student}
           firstName={firstName}
           lastName={lastName}
           totalPoints={totalPoints}
