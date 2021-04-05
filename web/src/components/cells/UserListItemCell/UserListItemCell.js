@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useEffect } from 'react'
+
 export const QUERY = gql`
   query UserListItemQuery($userId: String!) {
     totalUserPoints(id: $userId)
@@ -55,7 +57,12 @@ export const Success = ({
   totalEmpty,
   setTotalPoints,
 }) => {
+  useEffect(() => {
+    setTotalPoints(totalUserPoints)
+  }, [totalUserPoints, setTotalPoints])
+
   if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
+
   return (
     <li
       className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"

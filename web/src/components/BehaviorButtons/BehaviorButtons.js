@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
+import { QUERY as userListItemQuery } from 'src/components/cells/UserListItemCell/UserListItemCell'
 
 const USER_POINTS = gql`
   query FeedbackPointsQuery($userId: String!) {
@@ -32,6 +33,7 @@ const BehaviorButtons = ({ userId, behaviors, groupId }) => {
         variables: { userId: userId, groupId: groupId },
       },
       { query: pointsQuery, variables: { userId: userId } },
+      { query: userListItemQuery, variables: { userId: userId } },
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })

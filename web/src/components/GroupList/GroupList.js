@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import ListViewStudentItem from 'src/components/ListViewStudentItem/ListViewStudentItem'
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
@@ -13,13 +12,12 @@ const GroupList = ({
   enrollmentsOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
-  const student = null
   const [firstName, setFirstName] = useState(
     enrollmentsOfGroup[0]?.user.firstName
   )
   const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
-  const [totalPoints, setTotalPoints] = useState(null)
   const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.user.id)
+  const [totalPoints, setTotalPoints] = useState(null)
 
   if (enrollmentsOfGroup.length === 0) {
     return (
@@ -37,6 +35,7 @@ const GroupList = ({
           return (
             <>
               <UserListItemCell
+                key={enrollment.user.id}
                 userId={enrollment.user.id}
                 firstName={enrollment.user.firstName}
                 lastName={enrollment.user.lastName}
@@ -60,7 +59,8 @@ const GroupList = ({
         />
         <AwardFeedbackCard
           groupId={groupId}
-          student={student}
+          userId={studentId}
+          firstName={firstName}
           behaviorsOfGroup={behaviorsOfGroup}
         />
         <RecentFeedbackListCard
