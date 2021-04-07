@@ -3,6 +3,11 @@ import GroupList from 'src/components/GroupList/GroupList'
 
 export const QUERY = gql`
   query GroupStudentListQuery($id: String!) {
+    group(id: $id) {
+      id
+      enrollId
+      name
+    }
     enrollmentsOfGroup(groupId: $id) {
       id
       user {
@@ -16,11 +21,6 @@ export const QUERY = gql`
       id
       name
       value
-    }
-    group(id: $id) {
-      id
-      enrollId
-      name
     }
   }
 `
@@ -43,8 +43,9 @@ export const Loading = () => (
   </div>
 )
 
+// In this component, empty/failure means the group filed to query.
+// the GroupList component handles display if enrollmentsOfGroup is empty
 export const Empty = () => <Redirect to={routes.teacherHome()} />
-
 export const Failure = () => {
   return <Redirect to={routes.teacherHome()} />
 }
@@ -54,13 +55,12 @@ export const Success = ({
   enrollmentsOfGroup,
   behaviorsOfGroup,
   group,
-  enrollId,
 }) => {
   return (
     <GroupList
       groupId={id}
       name={group.name}
-      enrollId={enrollId}
+      enrollId={group.enrollId}
       enrollmentsOfGroup={enrollmentsOfGroup}
       behaviorsOfGroup={behaviorsOfGroup}
     />

@@ -16,7 +16,6 @@ const ADD_ROLE = gql`
 const ChooseRolePage = () => {
   const { currentUser } = useAuth()
   const [addRole] = useMutation(ADD_ROLE)
-
   // Reroutes user after adding role and win.loc.reload
   // Using becuase redwood reroute() not working? (Maybe caching)
   if (currentUser?.roles?.includes('teacher'))

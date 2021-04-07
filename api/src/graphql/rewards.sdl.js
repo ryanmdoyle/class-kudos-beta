@@ -3,6 +3,8 @@ export const schema = gql`
     id: String!
     name: String!
     cost: Int!
+    responseRequired: Boolean!
+    responsePrompt: String
     group: Group!
     groupId: String!
     redeemed: [Redeemed]!

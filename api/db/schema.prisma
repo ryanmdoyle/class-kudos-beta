@@ -71,11 +71,13 @@ model Redeemed {
 }
 
 model Reward {
-  id      String  @id @default(uuid())
-  name    String
-  cost    Int
-  group   Group?  @relation(fields: [groupId], references: [id])
-  groupId String?
+  id               String  @id @default(uuid())
+  name             String
+  cost             Int
+  responseRequired Boolean @default(false)
+  responsePrompt   String
+  group            Group?  @relation(fields: [groupId], references: [id])
+  groupId          String?
 }
 
 model Group {
