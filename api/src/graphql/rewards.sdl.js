@@ -19,12 +19,14 @@ export const schema = gql`
   input CreateRewardInput {
     name: String!
     cost: Int!
+    responsePrompt: String
     groupId: String!
   }
 
   input UpdateRewardInput {
     name: String
     cost: Int
+    responsePrompt: String
     groupId: String
   }
 

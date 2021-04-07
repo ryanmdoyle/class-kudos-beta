@@ -12,6 +12,9 @@ export const reward = ({ id }) => {
 }
 
 export const createReward = ({ input }) => {
+  if (input.responsePrompt !== null && input.responsePrompt !== '') {
+    input.responseRequired = true
+  }
   return db.reward.create({
     data: foreignKeyReplacement(input),
   })
