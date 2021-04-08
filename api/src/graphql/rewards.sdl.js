@@ -19,6 +19,7 @@ export const schema = gql`
   input CreateRewardInput {
     name: String!
     cost: Int!
+    responseRequired: Boolean!
     responsePrompt: String
     groupId: String!
   }
@@ -26,6 +27,7 @@ export const schema = gql`
   input UpdateRewardInput {
     name: String
     cost: Int
+    responseRequired: Boolean
     responsePrompt: String
     groupId: String
   }

@@ -5,17 +5,28 @@ import {
   Label,
   TextField,
   NumberField,
+  SelectField,
   Submit,
 } from '@redwoodjs/forms'
+import { useForm } from 'react-hook-form'
 
 const RewardForm = (props) => {
+  const formMethods = useForm()
+  const watchDefault = props?.reward?.responseRequired
+    ? props?.reward?.responseRequired.toString()
+    : 'false'
+  const watchPrompt = formMethods.watch('responseRequired', watchDefault)
   const onSubmit = (data) => {
+    data.responseRequired = data.responseRequired === 'true'
+    if (!data.responseRequired) {
+      data.responsePrompt = null
+    }
     props.onSave(data, props?.reward?.id)
   }
   const { groupId } = props
   return (
     <div className="rw-form-wrapper">
-      <Form onSubmit={onSubmit} error={props.error}>
+      <Form onSubmit={onSubmit} formMethods={formMethods} error={props.error}>
         <FormError
           error={props.error}
           wrapperClassName="rw-form-error-wrapper"
@@ -23,6 +34,7 @@ const RewardForm = (props) => {
           listClassName="rw-form-error-list"
         />
 
+        {/* NAME */}
         <Label
           name="name"
           className="rw-label"
@@ -39,6 +51,7 @@ const RewardForm = (props) => {
         />
         <FieldError name="name" className="rw-field-error" />
 
+        {/* COST */}
         <Label
           name="cost"
           className="rw-label"
@@ -55,6 +68,7 @@ const RewardForm = (props) => {
         />
         <FieldError name="cost" className="rw-field-error" />
 
+        {/* GROUP ID */}
         <Label
           name="groupId"
           className="rw-label hidden"
@@ -71,17 +85,41 @@ const RewardForm = (props) => {
         />
         <FieldError name="groupId" className="rw-field-error" />
 
+        {/* RESPONSE REQUIRED? */}
         <Label
-          name="responsePrompt"
+          name="responseRequired"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Prompt for student when redeeming (optional)
+          Would you like to ask a question when this award is redeemed?
+        </Label>
+
+        <SelectField
+          name="responseRequired"
+          id="responseRequired"
+          defaultValue={props.reward?.responseRequired || false}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        >
+          <option value={false}>No, I need no further information.</option>
+          <option value={true}>
+            Yes, I would like student to answer a prompt.
+          </option>
+        </SelectField>
+        <FieldError name="responseRequired" className="rw-field-error" />
+
+        <Label
+          name="responsePrompt"
+          className={`rw-label ${watchPrompt === 'true' ? null : 'hidden'}`}
+          errorClassName="rw-label rw-label-error"
+        >
+          What do you want to ask when redeeming this award?
         </Label>
         <TextField
           name="responsePrompt"
           defaultValue={props.reward?.responsePrompt}
-          className="rw-input"
+          className={`rw-input ${watchPrompt === 'true' ? null : 'hidden'}`}
           errorClassName="rw-input rw-input-error"
           validation={{ required: false }}
         />

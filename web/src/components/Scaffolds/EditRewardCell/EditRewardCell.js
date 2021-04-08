@@ -10,6 +10,8 @@ export const QUERY = gql`
       id
       name
       cost
+      responseRequired
+      responsePrompt
       groupId
     }
   }
@@ -20,6 +22,8 @@ const UPDATE_REWARD_MUTATION = gql`
       id
       name
       cost
+      responseRequired
+      responsePrompt
       groupId
     }
   }
