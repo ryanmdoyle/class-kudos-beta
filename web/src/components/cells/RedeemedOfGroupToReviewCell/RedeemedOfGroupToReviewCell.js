@@ -13,6 +13,7 @@ export const QUERY = gql`
       createdAt
       name
       cost
+      response
       user {
         id
         firstName
@@ -117,13 +118,23 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
         </thead>
         <tbody>
           {redeemedOfGroupToReview?.map((redeemed) => (
-            <tr key={redeemed?.id}>
+            <tr key={redeemed?.id} className="h-16">
               <td>
                 {truncate(
                   `${redeemed?.user.firstName} ${redeemed?.user.lastName}`
                 )}
               </td>
-              <td>{truncate(redeemed?.name)}</td>
+              <td>
+                {truncate(redeemed?.name)}
+                {redeemed.response && (
+                  <>
+                    <br></br>
+                    <span className="text-gray-400">
+                      {truncate(redeemed?.response)}
+                    </span>
+                  </>
+                )}
+              </td>
               <td>{truncate(redeemed?.cost)}</td>
               <td>{timeTag(redeemed?.createdAt)}</td>
               <td>
