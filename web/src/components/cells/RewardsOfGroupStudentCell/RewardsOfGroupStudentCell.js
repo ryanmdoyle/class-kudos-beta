@@ -12,6 +12,8 @@ export const QUERY = gql`
       id
       name
       cost
+      responseRequired
+      responsePrompt
     }
     totalUserPoints(id: $userId)
   }
@@ -58,6 +60,7 @@ export const Success = ({
       toast.error(`${error}`)
     },
   })
+  console.log(rewardsOfGroup)
 
   return (
     <div className="w-full flex flex-wrap justify-center">

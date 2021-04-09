@@ -5,6 +5,7 @@ export const schema = gql`
     userId: String!
     name: String!
     cost: Int!
+    response: String
     reviewed: Boolean!
     reviewedAt: DateTime
     group: Group!
@@ -27,6 +28,7 @@ export const schema = gql`
     groupId: String!
     name: String!
     cost: Int!
+    response: String
   }
 
   input UpdateRedeemedInput {
@@ -34,6 +36,7 @@ export const schema = gql`
     groupId: String
     name: String
     cost: Int
+    response: String
     reviewed: Boolean
   }
 

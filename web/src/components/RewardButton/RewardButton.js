@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { toast } from '@redwoodjs/web/toast'
 
 const RewardButton = ({
@@ -8,15 +10,19 @@ const RewardButton = ({
   newRedeemed,
   loading,
 }) => {
-  const claimReward = () => {
+  const claimReward = (response) => {
+    const input = {
+      userId: userId,
+      groupId: groupId,
+      name: reward?.name,
+      cost: reward?.cost,
+    }
+    if (response) {
+      input.response = response
+    }
     newRedeemed({
       variables: {
-        input: {
-          userId: userId,
-          groupId: groupId,
-          name: reward?.name,
-          cost: reward?.cost,
-        },
+        input: input,
       },
     })
   }
@@ -29,11 +35,15 @@ const RewardButton = ({
           : 'cursor-not-allowed opacity-70'
       }`}
       onClick={() => {
+        let response = null
+        if (reward.responseRequired === true) {
+          response = window.prompt(reward.responsePrompt)
+        }
         if (availablePoints < reward?.cost) {
           toast.error('You do not have enough points to claim that reward!')
         }
         if (!loading && availablePoints >= reward?.cost) {
-          claimReward()
+          reward.responseRequired ? claimReward(response) : claimReward()
         }
       }}
     >
