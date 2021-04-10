@@ -34,7 +34,7 @@ const ListViewRecentItem = ({ name, value, createdAt, activityType }) => {
             redeemed ? 'text-red-500' : null
           } font-bold text-center w-10`}
         >
-          {redeemed || negFeedback ? '-' : null}
+          {redeemed ? '-' : null}
           {value}
         </span>
         <span className="text-normal ml-2">{name}</span>
