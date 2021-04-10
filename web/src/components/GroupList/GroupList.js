@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
-import RecentFeedbackListCard from 'src/components/RecentFeedbackListCard/RecentFeedbackListCard'
+import RecentActivityListCard from 'src/components/RecentActivityListCard/RecentActivityListCard'
 import UserListItemCell from 'src/components/cells/UserListItemCell/UserListItemCell'
 
 const GroupList = ({
@@ -63,7 +63,7 @@ const GroupList = ({
           firstName={firstName}
           behaviorsOfGroup={behaviorsOfGroup}
         />
-        <RecentFeedbackListCard
+        <RecentActivityListCard
           userId={studentId}
           firstName={firstName}
           groupId={groupId}

@@ -1,6 +1,6 @@
 import UserActivityOfGroupCell from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 
-const RecentFeedbackListCard = ({ userId, firstName, groupId, groupName }) => {
+const RecentActivityListCard = ({ userId, firstName, groupId, groupName }) => {
   return (
     <div className="white-box mb-4 overflow-scroll">
       <h2 className="font-display text-lg mb-2">
@@ -11,4 +11,4 @@ const RecentFeedbackListCard = ({ userId, firstName, groupId, groupName }) => {
   )
 }
 
-export default RecentFeedbackListCard
+export default RecentActivityListCard
