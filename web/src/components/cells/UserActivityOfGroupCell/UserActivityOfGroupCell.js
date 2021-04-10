@@ -37,12 +37,13 @@ export const Success = ({ feedbackOfUserForGroup, redeemedOfUserForGroup }) => {
     <>
       {sorted ? (
         <ul>
-          {sorted.map((feedback) => (
+          {sorted.map((activity) => (
             <ListViewRecentItem
-              key={feedback.id}
-              name={feedback.name}
-              value={feedback.value || feedback.cost || 'n/a'}
-              createdAt={feedback.createdAt}
+              key={activity.id}
+              name={activity.name}
+              value={activity.value || activity.cost || 'n/a'}
+              createdAt={activity.createdAt}
+              activityType={activity.__typename}
             />
           ))}
         </ul>
