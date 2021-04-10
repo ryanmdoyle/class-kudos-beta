@@ -30,7 +30,7 @@ const GroupList = ({
 
   return (
     <>
-      <ul className="col-span-4 overflow-scroll 2xl:col-span-5 p-1">
+      <ul className="col-span-4 overflow-scroll p-1">
         {enrollmentsOfGroup.map((enrollment) => {
           return (
             <>
@@ -51,7 +51,7 @@ const GroupList = ({
           )
         })}
       </ul>
-      <div className="flex flex-col col-span-8 2xl:col-span-3 overflow-y-auto">
+      <div className="flex flex-col col-span-8 overflow-y-auto">
         <StudentPointsCard
           firstName={firstName}
           lastName={lastName}

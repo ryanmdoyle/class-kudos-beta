@@ -26,7 +26,7 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="col-span-4 overflow-scroll2xl:col-span-5 p-1 animate-pulse">
+  <div className="col-span-4 overflow-scroll p-1 animate-pulse">
     <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
       <div className="flex items-center">
         <img
