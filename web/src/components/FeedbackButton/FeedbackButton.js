@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { toast } from '@redwoodjs/web/toast'
 
-import RibbonMedal from 'src/components/svg/RibbonMedal/RibbonMedal'
+import ThumbUp from 'src/components/svg/ThumbUp/ThumbUp'
+import ThumbDown from 'src/components/svg/ThumbDown/ThumbDown'
 
 const FeedbackButton = ({
   name,
@@ -35,6 +37,8 @@ const FeedbackButton = ({
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       className={`h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center
       ${
@@ -50,9 +54,16 @@ const FeedbackButton = ({
         }
       }}
     >
-      <span>
-        <RibbonMedal loading={loading} />
-      </span>
+      {value > 0 && (
+        <span className="text-green-500">
+          <ThumbUp loading={loading} />
+        </span>
+      )}
+      {value < 0 && (
+        <span className="text-red-500">
+          <ThumbDown loading={loading} />
+        </span>
+      )}
       <span className="text-gray-500 text-center text-sm">{name}</span>
       <span
         className={`${
