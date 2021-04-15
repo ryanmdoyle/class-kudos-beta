@@ -20,9 +20,11 @@ export const afterQuery = (data) => {
   }
 }
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className="animate-pulse ml-2">Loading...</div>
+)
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => null
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 

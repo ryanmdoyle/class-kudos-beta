@@ -30,10 +30,10 @@ const GroupCard = ({
       onClick={cardClick}
     >
       <div className="flex items-center">
-        <img
+        {/* <img
           src="/ClassKarmaLogo.svg"
           className="w-16 h-16 mr-4 rounded-full shadow-md"
-        ></img>
+        ></img> */}
         <div>
           <h2 className="text-xl font-display">{name}</h2>
           <span className="text-gray-500 text-sm">{description}</span>

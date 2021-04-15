@@ -26,7 +26,12 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => (
+  <div>
+    <p>Looks like you haven't created and classes or groups yet!</p>
+    <br></br> <p>Click the green "Create New" button to get started.</p>
+  </div>
+)
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
