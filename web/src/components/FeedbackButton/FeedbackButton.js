@@ -12,7 +12,11 @@ const FeedbackButton = ({
   behaviorId,
   groupId,
   newFeedback,
+  newFeedbacks,
+  selected,
+  selecting,
   loading,
+  loadings,
 }) => {
   const giveFeedback = () => {
     // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
@@ -26,6 +30,24 @@ const FeedbackButton = ({
           name: name,
           value: adjustedValue,
         },
+      },
+    })
+  }
+  const giveFeedbacks = () => {
+    // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
+    const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
+    const feedbacks = selected.map((userId) => {
+      return {
+        userId: userId,
+        behaviorId: behaviorId,
+        groupId: groupId,
+        name: name,
+        value: adjustedValue,
+      }
+    })
+    newFeedbacks({
+      variables: {
+        input: feedbacks,
       },
     })
   }
@@ -49,8 +71,11 @@ const FeedbackButton = ({
       onClick={() => {
         if (!wontReturnNegativeTotal())
           toast.error('User already has zero points.')
-        if (!loading && wontReturnNegativeTotal()) {
+        if (!loading && !selecting && wontReturnNegativeTotal()) {
           giveFeedback()
+        }
+        if (!loading && selecting && wontReturnNegativeTotal()) {
+          giveFeedbacks()
         }
       }}
     >

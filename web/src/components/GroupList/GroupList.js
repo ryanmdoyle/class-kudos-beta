@@ -36,8 +36,6 @@ const GroupList = ({
     }
   }
 
-  console.log(selected)
-
   if (enrollmentsOfGroup.length === 0) {
     return (
       <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
@@ -103,6 +101,9 @@ const GroupList = ({
           firstName={firstName}
           behaviorsOfGroup={behaviorsOfGroup}
           selecting={selecting}
+          selected={selected}
+          setSelecting={setSelecting}
+          setSelected={setSelected}
         />
         {!selecting && (
           <RecentActivityListCard

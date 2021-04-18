@@ -74,3 +74,14 @@ export const feedbackOfGroup = ({ groupId }) => {
     orderBy: { createdAt: 'desc' },
   })
 }
+
+export const createFeedbacks = async ({ input }) => {
+  const created = await db.feedback.createMany({
+    data: input,
+  })
+  if (created.count === input.length) {
+    created.id = created.count
+    return created
+  }
+  return UserInputError('Invalid Users')
+}

@@ -34,8 +34,14 @@ export const schema = gql`
     value: Int
   }
 
+  type CreatedManyReturn {
+    id: Int
+    count: Int
+  }
+
   type Mutation {
     createFeedback(input: CreateFeedbackInput!): Feedback!
+    createFeedbacks(input: [CreateFeedbackInput!]): CreatedManyReturn!
     updateFeedback(id: String!, input: UpdateFeedbackInput!): Feedback!
     deleteFeedback(id: String!): Feedback!
   }

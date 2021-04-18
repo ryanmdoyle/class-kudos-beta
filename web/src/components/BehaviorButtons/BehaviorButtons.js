@@ -21,11 +21,28 @@ const CREATE_FEEDBACK = gql`
   }
 `
 
-const BehaviorButtons = ({ userId, behaviors, groupId }) => {
+const CREATE_FEEDBACKS = gql`
+  mutation CreateFeedbacks($input: [CreateFeedbackInput!]!) {
+    createFeedbacks(input: $input) {
+      id
+    }
+  }
+`
+
+const BehaviorButtons = ({
+  userId,
+  behaviors,
+  groupId,
+  selected,
+  selecting,
+  setSelecting,
+  setSelected,
+}) => {
   const { data } = useQuery(USER_POINTS, {
     variables: { userId: userId },
   })
   const totalUserPoints = data?.totalUserPoints
+
   const [newFeedback, { loading }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
       {
@@ -37,6 +54,26 @@ const BehaviorButtons = ({ userId, behaviors, groupId }) => {
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
+    },
+    onError: () => {
+      toast.error('Oops, there was a problem. Please try again.')
+    },
+  })
+
+  const [newFeedbacks, { loading: loadings }] = useMutation(CREATE_FEEDBACKS, {
+    refetchQueries: [
+      {
+        query: recentUserFeedbackOfGroupQuery,
+        variables: { userId: userId, groupId: groupId },
+      },
+      { query: pointsQuery, variables: { userId: userId } },
+      { query: userListItemQuery, variables: { userId: userId } },
+    ],
+    awaitRefetchQueries: true,
+    onCompleted: () => {
+      toast.success('Added feedback!', { className: 'rw-flash-success' })
+      setSelected([])
+      setSelecting(false)
     },
     onError: () => {
       toast.error('Oops, there was a problem. Please try again.')
@@ -62,7 +99,11 @@ const BehaviorButtons = ({ userId, behaviors, groupId }) => {
           behaviorId={behavior.id}
           groupId={groupId}
           newFeedback={newFeedback}
+          newFeedbacks={newFeedbacks}
+          selected={selected}
+          selecting={selecting}
           loading={loading}
+          loadings={loadings}
           key={behavior.id}
         />
       ))}

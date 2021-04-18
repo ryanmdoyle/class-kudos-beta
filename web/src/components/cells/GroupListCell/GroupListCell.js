@@ -26,21 +26,29 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="col-span-4 overflow-scroll p-1 animate-pulse">
-    <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
-      <div className="flex items-center">
-        <img
-          src="/profile.jpg"
-          alt="profile"
-          className="img-loading h-6 w-6 rounded-full mr-2"
-        ></img>
-        <div className="w-36 h-4 rounded bg-gray-200"></div>
-      </div>
-      <div>
-        <div className="justify-self-end text-green-500 font-bold text-loading bg-gray-200 w-6 h-4 rounded"></div>
-      </div>
-    </li>
-  </div>
+  <>
+    <div className="col-span-4 overflow-scroll p-1">
+      <button className={`button-white mr-4 w-52 mb-4`}></button>
+      <ul className="">
+        <div>
+          <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
+            <div className="flex items-center">
+              <img
+                src="/profile.jpg"
+                alt="profile"
+                className="img-loading h-6 w-6 rounded-full mr-2"
+              ></img>
+              <div className="w-36 h-4 rounded bg-gray-200"></div>
+            </div>
+            <div>
+              <div className="justify-self-end text-green-500 font-bold text-loading bg-gray-200 w-6 h-4 rounded"></div>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div className="flex flex-col col-span-8 overflow-y-auto"></div>
+  </>
 )
 
 // In this component, empty/failure means the group filed to query.

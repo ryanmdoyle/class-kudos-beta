@@ -6,6 +6,9 @@ const AwardFeedbackCard = ({
   behaviorsOfGroup,
   firstName,
   selecting,
+  selected,
+  setSelecting,
+  setSelected,
 }) => {
   return (
     <div className="white-box mb-4">
@@ -18,6 +21,10 @@ const AwardFeedbackCard = ({
           behaviors={behaviorsOfGroup}
           userId={userId}
           groupId={groupId}
+          selecting={selecting}
+          selected={selected}
+          setSelecting={setSelecting}
+          setSelected={setSelected}
         />
       </div>
     </div>
