@@ -12,12 +12,31 @@ const GroupList = ({
   enrollmentsOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
+  const [selecting, setSelecting] = useState(false)
+  const [selected, setSelected] = useState([])
+
   const [firstName, setFirstName] = useState(
     enrollmentsOfGroup[0]?.user.firstName
   )
   const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
   const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.user.id)
   const [totalPoints, setTotalPoints] = useState(null)
+
+  const handleSelect = (userId) => {
+    if (selecting) {
+      if (selected.includes(userId)) {
+        const removed = [...selected]
+        const userLocation = removed.indexOf(userId)
+        removed.splice(userLocation, 1)
+        setSelected(removed)
+      } else {
+        const added = [...selected, userId]
+        setSelected(added)
+      }
+    }
+  }
+
+  console.log(selected)
 
   if (enrollmentsOfGroup.length === 0) {
     return (
@@ -30,45 +49,69 @@ const GroupList = ({
 
   return (
     <>
-      <ul className="col-span-4 overflow-scroll p-1">
-        {enrollmentsOfGroup.map((enrollment) => {
-          return (
-            <>
-              <UserListItemCell
+      <div className="col-span-4 overflow-scroll p-1">
+        <button
+          onClick={() => {
+            setSelecting(!selecting)
+          }}
+          className={`${
+            selecting ? 'button-purple' : 'button-white'
+          } mr-4 w-52 mb-4`}
+        >
+          {selecting ? 'Cancel' : 'Select Multiple'}
+        </button>
+        {selecting && <button className="button-green shadow-xl">Award</button>}
+        <ul className="">
+          {enrollmentsOfGroup.map((enrollment) => {
+            const userSelected = selected.includes(enrollment.user.id)
+            return (
+              <div
                 key={enrollment.user.id}
-                userId={enrollment.user.id}
-                firstName={enrollment.user.firstName}
-                lastName={enrollment.user.lastName}
-                groupId={groupId}
-                userZero={enrollmentsOfGroup[0]?.user.id}
-                setFirstName={setFirstName}
-                setLastName={setLastName}
-                setStudentId={setStudentId}
-                totalEmpty={totalPoints === null}
-                setTotalPoints={setTotalPoints}
-              />
-            </>
-          )
-        })}
-      </ul>
+                className={`${
+                  userSelected && selecting && 'ring-2'
+                } ring-purple-500 rounded-md`}
+              >
+                <UserListItemCell
+                  userId={enrollment.user.id}
+                  firstName={enrollment.user.firstName}
+                  lastName={enrollment.user.lastName}
+                  groupId={groupId}
+                  userZero={enrollmentsOfGroup[0]?.user.id}
+                  setFirstName={setFirstName}
+                  setLastName={setLastName}
+                  setStudentId={setStudentId}
+                  totalEmpty={totalPoints === null}
+                  setTotalPoints={setTotalPoints}
+                  handleSelect={handleSelect}
+                />
+              </div>
+            )
+          })}
+        </ul>
+      </div>
       <div className="flex flex-col col-span-8 overflow-y-auto">
-        <StudentPointsCard
-          firstName={firstName}
-          lastName={lastName}
-          totalPoints={totalPoints}
-        />
+        {!selecting && (
+          <StudentPointsCard
+            firstName={firstName}
+            lastName={lastName}
+            totalPoints={totalPoints}
+          />
+        )}
         <AwardFeedbackCard
           groupId={groupId}
           userId={studentId}
           firstName={firstName}
           behaviorsOfGroup={behaviorsOfGroup}
+          selecting={selecting}
         />
-        <RecentActivityListCard
-          userId={studentId}
-          firstName={firstName}
-          groupId={groupId}
-          groupName={name}
-        />
+        {!selecting && (
+          <RecentActivityListCard
+            userId={studentId}
+            firstName={firstName}
+            groupId={groupId}
+            groupName={name}
+          />
+        )}
       </div>
     </>
   )

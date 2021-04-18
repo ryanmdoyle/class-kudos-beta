@@ -56,21 +56,25 @@ export const Success = ({
   setStudentId,
   totalEmpty,
   setTotalPoints,
+  selecting,
+  handleSelect,
 }) => {
   useEffect(() => {
     setTotalPoints(totalUserPoints)
   }, [totalUserPoints, setTotalPoints])
 
   if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
-
   return (
     <li
       className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"
       onClick={() => {
-        setFirstName(firstName)
-        setLastName(lastName)
-        setStudentId(userId)
-        setTotalPoints(totalUserPoints)
+        if (!selecting) {
+          setFirstName(firstName)
+          setLastName(lastName)
+          setStudentId(userId)
+          setTotalPoints(totalUserPoints)
+        }
+        handleSelect(userId)
       }}
     >
       <div className="flex items-center">

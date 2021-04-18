@@ -56,6 +56,7 @@ const GroupGrid = ({ enrollmentsOfGroup }) => {
                 name={`${first} ${last}`}
                 profileImage={profileImage}
                 points={'987'}
+                selcting={selecting}
                 selected={selected}
                 handleSelect={handleSelect}
               />
