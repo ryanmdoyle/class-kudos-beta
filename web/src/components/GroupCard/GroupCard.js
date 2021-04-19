@@ -1,7 +1,7 @@
 import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
 
-import EditGroupCell from 'src/components/Scaffolds/EditGroupCell'
+import EditGroupCell from 'src/components/cells/EditGroupCell'
 
 const GroupCard = ({
   id,

@@ -1,4 +1,4 @@
-import NewGroup from 'src/components/Scaffolds/NewGroup/NewGroup'
+import NewGroup from 'src/components/NewGroup/NewGroup'
 import { useModal } from 'src/context/ModalContext'
 
 const NewGroupButton = () => {

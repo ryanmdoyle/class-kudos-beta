@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 import { useModal } from 'src/context/ModalContext'
-import GroupForm from 'src/components/Scaffolds/GroupForm'
+import NewGroupForm from 'src/components/NewGroupForm'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
 import { QUERY } from 'src/components/cells/TeacherHomeCell/TeacherHomeCell'
@@ -34,14 +34,12 @@ const NewGroup = () => {
   }
 
   return (
-    <div className="rw-segment">
+    <div>
       {loading && <PageLoader />}
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Group</h2>
+      <header>
+        <h2 className="text-xl text-purple-800 font-display mb-6">New Group</h2>
       </header>
-      <div className="rw-segment-main">
-        <GroupForm onSave={onSave} loading={loading} error={error} />
-      </div>
+      <NewGroupForm onSave={onSave} loading={loading} error={error} />
     </div>
   )
 }

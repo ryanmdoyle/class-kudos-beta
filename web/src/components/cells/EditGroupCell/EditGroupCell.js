@@ -1,7 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
-import GroupForm from 'src/components/Scaffolds/GroupForm'
+import EditGroupForm from 'src/components/EditGroupForm'
 
 export const QUERY = gql`
   query FIND_GROUP_BY_ID($id: String!) {
@@ -51,7 +51,7 @@ export const Success = ({ group, userId }) => {
           Edit {group.name}
         </h2>
       </header>
-      <GroupForm
+      <EditGroupForm
         group={group}
         onSave={onSave}
         error={error}
