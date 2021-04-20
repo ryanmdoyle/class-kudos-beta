@@ -21,15 +21,17 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 export const Success = ({ userId, groupId, group }) => {
   const points = <UserPointsCell userId={userId} />
   return (
-    <div className="w-full h-full p-4 relative">
-      <div className="white-box w-full h-1/6 mb-4 relative">
-        <span className="text-8xl text-green-400">{points}</span>
+    <div className="w-full h-full p-4 relative grid grid-cols-2 grid-rows-6 gap-2">
+      {/* Points */}
+      <div className="white-box relative col-span-1 row-span-1 p-2">
+        <span className="text-6xl text-green-400">{points}</span>
         <span className="text-lg ml-2 text-gray-500 mr-12">
           total {`${points === 1 ? 'point' : 'points' || 'points'}`}
         </span>
       </div>
-      <div className="h-5/6 w-full flex relative">
-        <div className="bg-white rounded-md shadow w-1/2 h-full mr-4 overflow-scroll">
+      {/* Activity */}
+      <div className="relative col-span-1 row-span-6">
+        <div className="bg-white rounded-md shadow h-full overflow-scroll">
           {/* use custom padding over 'white-box for list to scroll behind header */}
           <div className="w-full bg-white sticky top-0 mb-2 pl-4 pt-4">
             <h2 className="font-display text-2xl">
@@ -40,10 +42,11 @@ export const Success = ({ userId, groupId, group }) => {
             <UserActivityOfGroupCell groupId={groupId} userId={userId} />
           </div>
         </div>
-        <div className="white-box w-1/2 h-full p-2">
-          <h2 className="font-display text-2xl mb-2">Rewards Available</h2>
-          <RewardsOfGroupStudentCell groupId={groupId} userId={userId} />
-        </div>
+      </div>
+      {/* Rewards */}
+      <div className="white-box h-full p-2 col-span-1 row-span-5">
+        <h2 className="font-display text-2xl mb-2">Rewards Available</h2>
+        <RewardsOfGroupStudentCell groupId={groupId} userId={userId} />
       </div>
     </div>
   )
