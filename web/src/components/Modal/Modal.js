@@ -23,7 +23,7 @@ const Modal = () => {
       >
         <div
           id="modal-inside"
-          className="w-5/6 bg-white rounded-md p-4 pt-6 relative"
+          className="w-5/6 bg-white rounded-md p-4 pt-6 relative max-w-screen-md"
         >
           {loading && <PageLoader />}
           <div
