@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 import { useModal } from 'src/context/ModalContext'
-import GroupForm from 'src/components/scaffolds/GroupForm'
+import GroupForm from 'src/components/GroupForm'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
 import { QUERY } from 'src/components/cells/TeacherHomeCell/TeacherHomeCell'

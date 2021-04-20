@@ -1,7 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
-import GroupForm from 'src/components/scaffolds/GroupForm'
+import GroupForm from 'src/components/GroupForm'
 
 export const QUERY = gql`
   query FIND_GROUP_BY_ID($id: String!) {
