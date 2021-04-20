@@ -1,6 +1,6 @@
 import { useModal } from 'src/context/ModalContext'
 
-import NewReward from '../Scaffolds/NewReward/NewReward'
+import NewReward from 'src/components/NewReward/NewReward'
 import RewardsOfGroupCell from 'src/components/cells/RewardsOfGroupCell/RewardsOfGroupCell'
 
 const RewardOptions = ({ groupId }) => {
