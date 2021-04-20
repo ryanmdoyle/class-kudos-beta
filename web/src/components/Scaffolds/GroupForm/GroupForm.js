@@ -24,6 +24,7 @@ const DELETE_GROUP_MUTATION = gql`
 `
 
 const GroupForm = (props) => {
+  const { crud } = props
   const { close } = useModal()
   const [deleteGroup] = useMutation(DELETE_GROUP_MUTATION, {
     onCompleted: () => {
@@ -92,21 +93,25 @@ const GroupForm = (props) => {
         />
         <FieldError name="description" className="rw-field-error" />
 
-        <Label
-          name="enrollId"
-          className="text-base font-body font-bold"
-          errorClassName="ck-label ck-label-error"
-        >
-          Enroll Id
-        </Label>
-        <TextField
-          name="enrollId"
-          defaultValue={props.group?.enrollId}
-          className="rw-input mb-2"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="type" className="rw-field-error" />
+        {crud === 'edit' && (
+          <>
+            <Label
+              name="enrollId"
+              className="text-base font-body font-bold"
+              errorClassName="ck-label ck-label-error"
+            >
+              Enroll Id
+            </Label>
+            <TextField
+              name="enrollId"
+              defaultValue={props.group?.enrollId}
+              className="rw-input mb-2"
+              errorClassName="rw-input rw-input-error"
+              validation={{ required: true }}
+            />
+            <FieldError name="type" className="rw-field-error" />
+          </>
+        )}
 
         <Label
           name="type"
@@ -148,14 +153,16 @@ const GroupForm = (props) => {
           </Submit>
         </div>
       </Form>
-      <a
-        href="#"
-        title={'Delete group ' + props.id}
-        className="rw-button rw-button-small rw-button-red mt-2 w-28 h-6 absolute bottom-0 right-0"
-        onClick={() => onDeleteClick(props.group?.id)}
-      >
-        Delete Group
-      </a>
+      {crud === 'edit' && (
+        <button
+          href="#"
+          title={'Delete group ' + props.id}
+          className="rw-button rw-button-small rw-button-red mt-2 w-28 h-6 absolute bottom-0 right-0"
+          onClick={() => onDeleteClick(props.group?.id)}
+        >
+          Delete Group
+        </button>
+      )}
     </div>
   )
 }

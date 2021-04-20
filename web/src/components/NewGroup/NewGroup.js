@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 import { useModal } from 'src/context/ModalContext'
-import NewGroupForm from 'src/components/NewGroupForm'
+import GroupForm from 'src/components/scaffolds/GroupForm'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
 import { QUERY } from 'src/components/cells/TeacherHomeCell/TeacherHomeCell'
@@ -39,7 +39,7 @@ const NewGroup = () => {
       <header>
         <h2 className="text-xl text-purple-800 font-display mb-6">New Group</h2>
       </header>
-      <NewGroupForm onSave={onSave} loading={loading} error={error} />
+      <GroupForm onSave={onSave} loading={loading} error={error} />
     </div>
   )
 }
