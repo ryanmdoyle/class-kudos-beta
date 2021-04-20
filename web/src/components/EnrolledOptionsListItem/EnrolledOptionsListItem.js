@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
-import EditUserCell from 'src/components/Scaffolds/EditUserCell'
+import EditUserCell from 'src/components/cells/EditUserCell'
 
 import { QUERY } from 'src/components/cells/EnrollmentsOfGroupCell/EnrollmentsOfGroupCell'
 
