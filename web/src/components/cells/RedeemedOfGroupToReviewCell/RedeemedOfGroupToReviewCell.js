@@ -90,16 +90,18 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
     awaitRefetchQueries: true,
   })
 
-  const onApproveClick = (id) => {
-    if (
-      confirm('Are you sure you want to approve redeemed kudos ' + id + '?')
-    ) {
+  const onApproveClick = (id, name) => {
+    if (confirm('Are you sure you want to approve ' + name + '?')) {
       approveRedeemed({ variables: { id } })
     }
   }
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete redeemed kudos ' + id + '?')) {
+  const onDeleteClick = (id, name) => {
+    if (
+      confirm(
+        'Are you sure you want to delete the request to redeem ' + name + '?'
+      )
+    ) {
       deleteRedeemed({ variables: { id } })
     }
   }
@@ -141,17 +143,17 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
                 <nav className="rw-table-actions">
                   <button
                     href="#"
-                    title={'Approve redeemed ' + redeemed?.id}
+                    title={'Approve redeemed ' + redeemed?.name}
                     className="rw-button rw-button-small rw-button-green"
-                    onClick={() => onApproveClick(redeemed?.id)}
+                    onClick={() => onApproveClick(redeemed?.id, redeemed?.name)}
                   >
                     Approve
                   </button>
                   <button
                     href="#"
-                    title={'Delete redeemed ' + redeemed?.id}
+                    title={'Delete redeemed ' + redeemed?.name}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(redeemed?.id)}
+                    onClick={() => onDeleteClick(redeemed?.id, redeemed?.name)}
                   >
                     Delete
                   </button>
