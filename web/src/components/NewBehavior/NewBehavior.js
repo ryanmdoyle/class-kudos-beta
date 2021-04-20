@@ -1,7 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
-import BehaviorForm from 'src/components/Scaffolds/BehaviorForm'
+import BehaviorForm from 'src/components/BehaviorForm'
 
 import { QUERY } from 'src/components/cells/BehaviorsOfGroupCell'
 

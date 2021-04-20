@@ -1,6 +1,6 @@
 import { useModal } from 'src/context/ModalContext'
 
-import NewBehavior from '../Scaffolds/NewBehavior/NewBehavior'
+import NewBehavior from '../NewBehavior/NewBehavior'
 import BehaviorsOfGroupCell from 'src/components/cells/BehaviorsOfGroupCell/BehaviorsOfGroupCell'
 
 const BehaviorOptions = ({ groupId }) => {
