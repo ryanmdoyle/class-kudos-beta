@@ -60,6 +60,10 @@ const BehaviorButtons = ({
     },
   })
 
+  const selectedUsersToRefetch = selected.map((user) => ({
+    query: userListItemQuery,
+    variables: { userId: user },
+  }))
   const [newFeedbacks, { loading: loadings }] = useMutation(CREATE_FEEDBACKS, {
     refetchQueries: [
       {
@@ -67,7 +71,7 @@ const BehaviorButtons = ({
         variables: { userId: userId, groupId: groupId },
       },
       { query: pointsQuery, variables: { userId: userId } },
-      { query: userListItemQuery, variables: { userId: userId } },
+      ...selectedUsersToRefetch,
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {
