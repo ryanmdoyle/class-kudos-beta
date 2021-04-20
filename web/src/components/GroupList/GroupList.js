@@ -58,7 +58,6 @@ const GroupList = ({
         >
           {selecting ? 'Cancel' : 'Select Multiple'}
         </button>
-        {selecting && <button className="button-green shadow-xl">Award</button>}
         <ul className="">
           {enrollmentsOfGroup.map((enrollment) => {
             const userSelected = selected.includes(enrollment.user.id)
