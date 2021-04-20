@@ -1,7 +1,7 @@
 import { useAuth } from '@redwoodjs/auth'
 
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
-import EditUserCell from 'src/components/EditUserCell/EditUserCell'
+import EditUserCell from 'src/components/cells/EditUserCell/EditUserCell'
 
 const ProfilePage = () => {
   const { currentUser } = useAuth()
