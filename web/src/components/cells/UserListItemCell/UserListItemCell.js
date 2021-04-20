@@ -2,27 +2,28 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect } from 'react'
 
+import ProfileImageCircle from 'src/components/ProfileImageCircle/ProfileImageCircle'
+
 export const QUERY = gql`
   query UserListItemQuery($userId: String!) {
     totalUserPoints(id: $userId)
+    user(id: $userId) {
+      profileImage
+    }
   }
 `
 
 export const Loading = ({ firstName, lastName }) => (
   <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
     <div className="flex items-center">
-      <img
-        src="/profile.jpg"
-        alt="profile"
-        className="h-6 w-6 rounded-full mr-2"
-      ></img>
+      <div className="h-8 w-8 rounded-full mr-2 bg-gray-100"></div>
       <span className="text-normal">
         {firstName ? `${firstName} ${lastName}` : 'Anonymous'}
       </span>
     </div>
     <div>
       <span className="justify-self-end text-green-500 font-bold">
-        <div className="w-6 h-6 text-purple-100 animate-spin">
+        <div className="w-8 h-8 text-purple-100 animate-spin">
           <svg
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +48,7 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 export const Success = ({
   userId,
   // groupId, auto-import for query
+  user,
   firstName,
   lastName,
   totalUserPoints,
@@ -64,6 +66,8 @@ export const Success = ({
   }, [totalUserPoints, setTotalPoints])
 
   if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
+
+  const { profileImage } = user
   return (
     <li
       className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"
@@ -78,11 +82,12 @@ export const Success = ({
       }}
     >
       <div className="flex items-center">
-        <img
-          src="/profile.jpg"
-          alt={`${firstName} ${lastName} profile`}
-          className="h-6 w-6 rounded-full mr-2"
-        ></img>
+        <ProfileImageCircle
+          firstName={firstName}
+          lastName={lastName}
+          profileImage={profileImage}
+        />
+
         <span className="text-normal">
           {firstName ? `${firstName} ${lastName}` : 'Anonymous'}
         </span>
