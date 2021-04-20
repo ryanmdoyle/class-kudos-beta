@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
-import RewardForm from 'src/components/Scaffolds/RewardForm'
+import RewardForm from 'src/components/RewardForm'
 
 export const QUERY = gql`
   query FIND_REWARD_BY_ID($id: String!) {

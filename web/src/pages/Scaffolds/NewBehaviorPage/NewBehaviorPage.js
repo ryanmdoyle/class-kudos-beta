@@ -1,5 +1,5 @@
 import BehaviorsLayout from 'src/layouts/Scaffolds/BehaviorsLayout'
-import NewBehavior from 'src/components/Scaffolds/NewBehavior'
+import NewBehavior from 'src/components/NewBehavior'
 
 const NewBehaviorPage = () => {
   return (

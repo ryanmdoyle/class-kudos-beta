@@ -1,5 +1,5 @@
 import RewardsLayout from 'src/layouts/Scaffolds/RewardsLayout'
-import NewReward from 'src/components/Scaffolds/NewReward'
+import NewReward from 'src/components/NewReward'
 
 const NewRewardPage = () => {
   return (

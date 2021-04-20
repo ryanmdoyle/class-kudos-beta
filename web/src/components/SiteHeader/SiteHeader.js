@@ -5,7 +5,7 @@ import { useAuth } from '@redwoodjs/auth'
 
 import { useModal } from 'src/context/ModalContext'
 import LoginButton from '../LoginButton/LoginButton'
-import EditUserCell from 'src/components/Scaffolds/EditUserCell'
+import EditUserCell from 'src/components/cells/EditUserCell'
 
 const SiteHeader = () => {
   const { isAuthenticated, currentUser } = useAuth()

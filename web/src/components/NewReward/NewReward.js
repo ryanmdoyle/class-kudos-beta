@@ -1,7 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
-import RewardForm from 'src/components/Scaffolds/RewardForm'
+import RewardForm from 'src/components/RewardForm'
 
 import { QUERY } from 'src/components/cells/RewardsOfGroupCell'
 
