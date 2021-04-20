@@ -52,7 +52,7 @@ const GroupForm = (props) => {
   }
 
   return (
-    <div className="rw-form-wrapper relative">
+    <div className="relative">
       <Form onSubmit={onSubmit} error={props.error}>
         <FormError
           error={props.error}
@@ -63,7 +63,7 @@ const GroupForm = (props) => {
 
         <Label
           name="name"
-          className="ck-label mt-4"
+          className="ck-label"
           errorClassName="ck-label ck-label-error"
         >
           Name
@@ -79,7 +79,7 @@ const GroupForm = (props) => {
 
         <Label
           name="description"
-          className="ck-label mt-4"
+          className="ck-label"
           errorClassName="ck-label ck-label-error"
         >
           Description
@@ -97,7 +97,7 @@ const GroupForm = (props) => {
           <>
             <Label
               name="enrollId"
-              className="text-base font-body font-bold"
+              className="ck-label"
               errorClassName="ck-label ck-label-error"
             >
               Enroll Id
@@ -115,7 +115,7 @@ const GroupForm = (props) => {
 
         <Label
           name="type"
-          className="text-base font-body font-bold"
+          className="ck-label"
           errorClassName="ck-label ck-label-error"
         >
           Group Type

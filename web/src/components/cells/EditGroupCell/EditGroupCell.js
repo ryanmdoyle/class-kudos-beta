@@ -47,9 +47,7 @@ export const Success = ({ group, userId }) => {
   return (
     <div>
       <header>
-        <h2 className="text-xl text-purple-800 font-display mb-6">
-          Edit {group.name}
-        </h2>
+        <h2 className="ck-form-header">Edit {group.name}</h2>
       </header>
       <GroupForm
         group={group}

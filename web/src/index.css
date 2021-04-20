@@ -45,11 +45,17 @@
   @apply hover:bg-green-500;
 }
 
-.ck-label {
-  @apply text-base;
-  @apply font-body;
-  @apply font-bold;
+.ck-form-header {
+  @apply text-2xl;
+  @apply font-display;
   @apply mt-4;
+  @apply mb-6;
+}
+
+.ck-label {
+  @apply text-gray-600;
+  @apply font-body;
+  @apply mt-6;
 }
 
 .ck-label-error {
