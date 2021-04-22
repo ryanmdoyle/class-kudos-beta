@@ -7,7 +7,7 @@
 
 [web]
   port = 8910
-  apiProxyPath = "/.redwood/functions"
+  apiProxyPath = "/.netlify/functions"
   experimentalFastRefresh = true
 [api]
   port = 8911
