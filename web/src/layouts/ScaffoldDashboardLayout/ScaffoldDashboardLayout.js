@@ -5,12 +5,11 @@ import { usePageLoadingContext } from '@redwoodjs/router'
 import { ModalProvider } from 'src/context/ModalContext'
 import TeacherNav from 'src/components/TeacherNav/TeacherNav'
 import StudentNav from 'src/components/StudentNav/StudentNav'
-import ScaffoldNav from 'src/components/ScaffoldNav/ScaffoldNav'
 import SiteHeader from 'src/components/SiteHeader/SiteHeader'
 import Modal from 'src/components/Modal/Modal'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
-const DashboardLayout = ({ children }) => {
+const ScaffoldDashboardLayout = ({ children }) => {
   const { hasRole } = useAuth()
   const { loading } = usePageLoadingContext
 
@@ -24,7 +23,6 @@ const DashboardLayout = ({ children }) => {
           <nav className="w-1/5 h-full bg-white lg:w-dashboard">
             {hasRole('teacher') && <TeacherNav />}
             {hasRole('student') && <StudentNav />}
-            {hasRole('super_admin') && <ScaffoldNav />}
           </nav>
           <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll relative">
             {loading && <PageLoader />}
@@ -36,4 +34,4 @@ const DashboardLayout = ({ children }) => {
   )
 }
 
-export default DashboardLayout
+export default ScaffoldDashboardLayout
