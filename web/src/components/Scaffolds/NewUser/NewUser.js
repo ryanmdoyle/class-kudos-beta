@@ -1,7 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
-import UserForm from 'src/components/Scaffolds/UserForm'
+import UserForm from 'src/components/UserForm'
 
 import { QUERY } from 'src/components/Scaffolds/UsersCell'
 
