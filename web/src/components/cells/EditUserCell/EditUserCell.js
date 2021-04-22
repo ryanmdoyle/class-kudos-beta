@@ -52,7 +52,7 @@ export const Success = ({ user }) => {
     <div>
       <header>
         <h2 className="text-xl text-purple-800 font-display mb-6">
-          Edit User {user.id}
+          Edit User: {user.firstName} {user.lastName}
         </h2>
       </header>
       <UserForm user={user} onSave={onSave} error={error} loading={loading} />
