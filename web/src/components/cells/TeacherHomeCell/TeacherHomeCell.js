@@ -67,7 +67,7 @@ export const Success = ({ user, userId }) => {
       )}
       {secondarySorted.length > 0 && (
         <div id="classes" className="w-100 lg:w-1/2 pr-2">
-          <h1 className="text-2xl font-display mb-4">Classes</h1>
+          <h1 className="text-2xl font-display mb-4">Groups</h1>
           {secondarySorted.map((group) => (
             <GroupCard
               id={group.id}
