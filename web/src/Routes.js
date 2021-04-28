@@ -16,9 +16,7 @@ const Routes = () => {
     <Router pageLoadingDelay={500}>
       <Route path="/" page={WelcomePage} name="home" />
       <Route path="/login" page={LoginPage} name="login" />
-      <Private unauthenticated="/">
-        <Route path="/choose-role" page={ChooseRolePage} name="chooseRole" />
-      </Private>
+      <Route path="/choose-role" page={ChooseRolePage} name="chooseRole" />
       <Private unauthenticated="home" role="teacher">
         <Route path="/teacher" page={TeacherHomePage} name="teacherHome" />
         <Route path="/teacher/groups/{groupId}" page={GroupPage} name="groupList" />
