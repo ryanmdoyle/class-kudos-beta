@@ -17,10 +17,16 @@ export const createFeedback = async ({ input }) => {
     where: { userId: input.userId },
     sum: { value: true },
   })
+  if (allFeedback.sum.value === null) {
+    allFeedback.sum.value = 0
+  }
   const allRedeemed = await db.redeemed.aggregate({
     where: { userId: input.userId },
     sum: { cost: true },
   })
+  if (allRedeemed.sum.value === null) {
+    allRedeemed.sum.value = 0
+  }
   const totalPoints = allFeedback.sum.value - allRedeemed.sum.cost
   if (totalPoints + input.value >= 0) {
     return db.feedback.create({
