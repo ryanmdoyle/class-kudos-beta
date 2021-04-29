@@ -25,6 +25,9 @@ const NewEnrollment = ({ userId }) => {
         close()
         toast.success('Enrollment created.', { classes: 'rw-flash-success' })
       },
+      onError: () => {
+        console.error('Unable to find group with the enroll ID as entered.')
+      },
     }
   )
 
