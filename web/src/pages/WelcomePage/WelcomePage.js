@@ -13,7 +13,7 @@ const WelcomePage = () => {
   return (
     <LandingLayout>
       <h1 className="text-center text-5xl font-bold pb-4">
-        Kudos = Happy Students
+        Kudos = Happy Humans
       </h1>
       <section className="w-full h-full flex my-12">
         <div className="ml-10 w-2/3">
