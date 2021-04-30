@@ -1,6 +1,8 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
+import { useAuth } from '@redwoodjs/auth'
+
 import EnrollmentByEnrollIdForm from 'src/components/EnrollmentByEnrollIdForm/EnrollmentByEnrollIdForm'
 
 import { QUERY } from 'src/components/cells/StudentHomeCell/StudentHomeCell'
@@ -15,12 +17,13 @@ const CREATE_ENROLLMENT_BY_ENROLLID_MUTATION = gql`
   }
 `
 
-const NewEnrollment = ({ userId }) => {
+const NewEnrollment = () => {
   const { close } = useModal()
+  const { currentUser } = useAuth()
   const [createEnrollment, { loading, error }] = useMutation(
     CREATE_ENROLLMENT_BY_ENROLLID_MUTATION,
     {
-      refetchQueries: [{ query: QUERY, variables: { userId } }],
+      refetchQueries: [{ query: QUERY, variables: { userId: currentUser.id } }],
       onCompleted: () => {
         close()
         toast.success('Enrollment created.', { classes: 'rw-flash-success' })
@@ -32,7 +35,7 @@ const NewEnrollment = ({ userId }) => {
   )
 
   const onSave = (input) => {
-    input.userId = userId
+    input.userId = currentUser.id
     createEnrollment({ variables: { input } })
   }
 

@@ -34,8 +34,8 @@ export const Loading = () => (
   </div>
 )
 
-export const Empty = ({ userId }) => {
-  return <NewEnrollmentByEnrollId userId={userId} />
+export const Empty = () => {
+  return <NewEnrollmentByEnrollId />
 }
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
