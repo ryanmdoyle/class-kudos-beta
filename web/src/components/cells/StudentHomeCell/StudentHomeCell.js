@@ -56,7 +56,8 @@ export const Success = ({ user, userId }) => {
           {primaryEnrollments.map((enrollment) => (
             <StudentGroupCard
               key={enrollment.id}
-              id={enrollment.group.id}
+              enrollmentId={enrollment.id}
+              groupId={enrollment.group.id}
               name={enrollment.group.name}
               description={enrollment.group.description}
               groupType={enrollment.group.type}

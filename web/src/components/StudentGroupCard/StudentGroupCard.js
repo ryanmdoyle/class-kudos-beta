@@ -1,17 +1,36 @@
 import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
 
-const StudentGroupCard = ({ id, name, description }) => {
+import StudentDeleteEnrollment from 'src/components/StudentDeleteEnrollment/StudentDeleteEnrollment'
+
+const StudentGroupCard = ({
+  groupId,
+  enrollmentId,
+  userId,
+  name,
+  description,
+}) => {
+  const { openModal } = useModal()
+
+  const cardClick = (e) => {
+    if (e.target.dataset.setting) {
+      openModal(
+        <StudentDeleteEnrollment enrollmentId={enrollmentId} userId={userId} />
+      )
+    } else {
+      navigate(routes.studentGroup({ groupId: groupId }))
+    }
+  }
+
   return (
     <div
       className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4 cursor-pointer"
-      onClick={() => {
-        navigate(routes.studentGroup({ groupId: id }))
-      }}
+      onClick={cardClick}
     >
       <div className="flex items-center">
         <img
           src="/ClassKarmaLogo.svg"
+          alt="site logo"
           className="w-16 h-16 mr-4 rounded-full shadow-md"
         ></img>
         <div>
@@ -26,7 +45,6 @@ const StudentGroupCard = ({ id, name, description }) => {
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          // onClick={settings}
           data-setting="true"
         >
           <path

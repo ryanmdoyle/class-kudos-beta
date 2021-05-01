@@ -45,6 +45,17 @@
   @apply hover:bg-green-500;
 }
 
+.button-red {
+  @apply h-8;
+  @apply bg-red-400;
+  @apply px-8;
+  @apply rounded-md;
+  @apply shadow;
+  @apply text-white;
+  @apply max-w-md;
+  @apply hover:bg-red-500;
+}
+
 .ck-form-header {
   @apply text-2xl;
   @apply font-display;

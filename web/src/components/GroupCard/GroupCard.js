@@ -13,10 +13,6 @@ const GroupCard = ({
 }) => {
   const { openModal } = useModal()
 
-  const settings = () => {
-    openModal(<EditGroupCell id={id} userId={userId} />)
-  }
-
   const cardClick = (e) => {
     if (e.target.dataset.setting) {
       openModal(<EditGroupCell id={id} userId={userId} />)
@@ -24,16 +20,13 @@ const GroupCard = ({
       navigate(routes.groupList({ groupId: id }))
     }
   }
+
   return (
     <div
       className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4 cursor-pointer"
       onClick={cardClick}
     >
       <div className="flex items-center">
-        {/* <img
-          src="/ClassKarmaLogo.svg"
-          className="w-16 h-16 mr-4 rounded-full shadow-md"
-        ></img> */}
         <div>
           <h2 className="text-xl font-display">{name}</h2>
           <span className="text-gray-500 text-sm">{description}</span>
@@ -61,7 +54,6 @@ const GroupCard = ({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          onClick={settings}
           data-setting="true"
         >
           <path
