@@ -3,6 +3,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import truncate from 'src/lib/truncate'
 import timeTag from 'src/lib/timeTag'
+
 export const QUERY = gql`
   query RedeemedOfGroupReviewedQuery($groupId: String!) {
     redeemedOfGroupReviewed(groupId: $groupId) {
@@ -27,6 +28,10 @@ const DELETE_REDEEMED_MUTATION = gql`
     }
   }
 `
+
+export const beforeQuery = (props) => {
+  return { variables: props, pollInterval: 60000 }
+}
 
 export const Loading = () => <div>Loading...</div>
 
