@@ -1,6 +1,6 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import { context, UserInputError } from '@redwoodjs/api'
+import { UserInputError } from '@redwoodjs/api'
 import { nanoid } from 'nanoid'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 import createStarterBehaviors from 'src/lib/createStarterBehaviors'

@@ -27,6 +27,14 @@ const CREATE_REDEEMED = gql`
   }
 `
 
+const SEND_REDEEMED_NOTIFICATION_EMAIL = gql`
+  mutation sendRedeemedNotification($input: RedeemedNotification!) {
+    sendRedeemedNotification(input: $input) {
+      id
+    }
+  }
+`
+
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => <div>Empty</div>
@@ -61,6 +69,12 @@ export const Success = ({
     },
   })
 
+  const [sendEmail] = useMutation(SEND_REDEEMED_NOTIFICATION_EMAIL, {
+    onError: () => {
+      toast.error(`Failed to send notificaton email to instructor.`)
+    },
+  })
+
   return (
     <div className="w-full flex flex-wrap justify-center">
       {rewardsOfGroup?.map((reward) => (
@@ -71,6 +85,7 @@ export const Success = ({
           userId={userId}
           availablePoints={totalUserPoints}
           newRedeemed={newRedeemed}
+          sendEmail={sendEmail}
           loading={loading}
         />
       ))}

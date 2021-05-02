@@ -8,21 +8,34 @@ const RewardButton = ({
   userId,
   availablePoints,
   newRedeemed,
+  sendEmail,
   loading,
 }) => {
   const claimReward = (response) => {
-    const input = {
+    const redeemedInput = {
       userId: userId,
       groupId: groupId,
       name: reward?.name,
       cost: reward?.cost,
     }
     if (response) {
-      input.response = response
+      redeemedInput.response = response
     }
+
     newRedeemed({
       variables: {
-        input: input,
+        input: redeemedInput,
+      },
+    })
+
+    sendEmail({
+      variables: {
+        input: {
+          userId: userId,
+          groupId: groupId,
+          rewardId: reward?.id,
+          value: reward?.cost,
+        },
       },
     })
   }

@@ -11,13 +11,10 @@ export const schema = gql`
   }
 
   input RedeemedNotification {
-    studentEmail: String!
-    teacherEmail: String!
+    userId: String!
     groupId: String!
-    groupName: String!
-    message: String!
-    subject: String!
-    value: Int
+    rewardId: String!
+    value: Int!
   }
 
   type Query {
