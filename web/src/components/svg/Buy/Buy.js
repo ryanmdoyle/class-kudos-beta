@@ -62,7 +62,6 @@ const Buy = ({ width }) => {
           xlinkHref="#89bbdcf5-814f-445d-9d3e-b835a9e3988b"
         />
       </defs>
-      <title>happy birthday</title>
       <g opacity="0.5">
         <rect
           x="124.18"
