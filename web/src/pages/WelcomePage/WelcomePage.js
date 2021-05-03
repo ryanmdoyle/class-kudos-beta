@@ -53,7 +53,7 @@ const WelcomePage = () => {
             <Buy width={125} />
           </div>
           <p className="text-gray-800">
-            Students can see their total kudos on their own dsahboard, as well
+            Students can see their total kudos on their own dashboard, as well
             as redeem their kudos for rewards their teacher's have set up for
             them.
           </p>
