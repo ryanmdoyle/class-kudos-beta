@@ -52,39 +52,21 @@ const RewardButton = ({
         if (reward.responseRequired === true) {
           response = window.prompt(reward.responsePrompt)
         }
+        if (response === '') {
+          toast.error('You must enter a response!')
+        }
         if (availablePoints < reward?.cost) {
           toast.error('You do not have enough points to claim that reward!')
         }
         if (!loading && availablePoints >= reward?.cost) {
-          reward.responseRequired ? claimReward(response) : claimReward()
+          reward.responseRequired
+            ? response !== null && response !== ''
+              ? claimReward(response)
+              : toast.error('Redmeption canceled')
+            : claimReward()
         }
       }}
     >
-      {/* <span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-award"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke={loading ? 'gray' : 'currentColor'}
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="12" cy="9" r="6" />
-          <polyline
-            points="9 14.2 9 21 12 19 15 21 15 14.2"
-            transform="rotate(-30 12 9)"
-          />
-          <polyline
-            points="9 14.2 9 21 12 19 15 21 15 14.2"
-            transform="rotate(30 12 9)"
-          />
-        </svg>
-      </span> */}
       <span
         className={`${
           loading || availablePoints < reward?.cost
