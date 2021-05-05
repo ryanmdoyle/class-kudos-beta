@@ -97,9 +97,26 @@ export const approveRedeemed = ({ id }) => {
     reviewed: true,
     reviewedAt: now,
   }
-  console.log('input to save', input)
   return db.redeemed.update({
     data: foreignKeyReplacement(input),
     where: { id },
   })
+}
+
+export const approveRedeemeds = async ({ ids }) => {
+  // create array of ids for the "in" filter below
+  const idList = ids.map((id) => id.id)
+  const now = new Date()
+
+  const approvals = await db.redeemed.updateMany({
+    where: { id: { in: idList } },
+    data: {
+      reviewed: true,
+      reviewedAt: now,
+    },
+  })
+  if (approvals.count === ids.length) {
+    return ids
+  }
+  return new UserInputError('Invalid Users')
 }

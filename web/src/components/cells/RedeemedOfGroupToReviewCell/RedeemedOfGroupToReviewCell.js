@@ -31,6 +31,14 @@ const APPROVE_REDEEMED_MUTATION = gql`
   }
 `
 
+const APPROVE_REDEEMEDS_MUTATION = gql`
+  mutation ApproveRedeemedsMutation($ids: [UpdateRedeemedManyInput!]!) {
+    approveRedeemeds(ids: $ids) {
+      id
+    }
+  }
+`
+
 const DELETE_REDEEMED_MUTATION = gql`
   mutation DeleteRedeemedMutation($id: String!) {
     deleteRedeemed(id: $id) {
@@ -85,6 +93,19 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
     awaitRefetchQueries: true,
   })
 
+  const [approveRedeemeds] = useMutation(APPROVE_REDEEMEDS_MUTATION, {
+    onCompleted: () => {
+      toast.success('Accepted redemptions!', {
+        classes: 'rw-flash-success',
+      })
+    },
+    refetchQueries: [
+      { query: QUERY, variables: { groupId } },
+      { query: approvedQuery, variables: { groupId } },
+    ],
+    awaitRefetchQueries: true,
+  })
+
   const [deleteRedeemed] = useMutation(DELETE_REDEEMED_MUTATION, {
     onCompleted: () => {
       toast.success('Redeemed kudos deleted.', { classes: 'rw-flash-success' })
@@ -96,6 +117,21 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
   const onApproveClick = (id, name) => {
     if (confirm('Are you sure you want to approve ' + name + '?')) {
       approveRedeemed({ variables: { id } })
+    }
+  }
+
+  const onApproveAll = () => {
+    const ids = redeemedOfGroupToReview.map((redeemed) => {
+      return {
+        id: redeemed.id,
+      }
+    })
+    if (
+      confirm(
+        'Are you sure you want to approve all ' + ids.length + ' requests ?'
+      )
+    ) {
+      approveRedeemeds({ variables: { ids } })
     }
   }
 
@@ -118,7 +154,14 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
             <th>Award Redeemed</th>
             <th>Kudo Cost</th>
             <th>Requested On</th>
-            <th>&nbsp;</th>
+            <th className="text-right text-xs">
+              <span
+                className="p-2 bg-green-400 rounded-md text-white hover:bg-green-500"
+                onClick={onApproveAll}
+              >
+                APPROVE ALL
+              </span>
+            </th>
           </tr>
         </thead>
         <tbody>

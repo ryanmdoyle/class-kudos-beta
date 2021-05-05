@@ -38,6 +38,18 @@ export const schema = gql`
     cost: Int
     response: String
     reviewed: Boolean
+    reviewedAt: DateTime
+  }
+
+  input UpdateRedeemedManyInput {
+    id: String!
+    name: String
+    cost: Int
+    response: String
+    reviewed: Boolean
+    reviewedAt: DateTime
+    userId: String
+    groupId: String
   }
 
   type Mutation {
@@ -45,5 +57,6 @@ export const schema = gql`
     updateRedeemed(id: String!, input: UpdateRedeemedInput!): Redeemed!
     deleteRedeemed(id: String!): Redeemed!
     approveRedeemed(id: String!): Redeemed!
+    approveRedeemeds(ids: [UpdateRedeemedManyInput!]!): [Redeemed!]!
   }
 `

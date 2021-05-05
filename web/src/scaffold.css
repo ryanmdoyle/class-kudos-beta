@@ -283,7 +283,7 @@
 }
 .rw-table th {
   font-weight: 600;
-  text-align: left;
+  /* text-align: left; */
 }
 .rw-table thead th {
   text-align: left;
