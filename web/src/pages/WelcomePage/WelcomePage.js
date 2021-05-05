@@ -2,7 +2,7 @@ import { Link, routes, Redirect } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 
 import LandingLayout from '../../layouts/LandingLayout'
-import WelcomeGuy from 'src/components/svg/WelcomeGuy/WelcomeGuy'
+import HighFive from 'src/components/svg/HighFive/HighFive'
 import Give from 'src/components/svg/Give/Give'
 import Buy from 'src/components/svg/Buy/Buy'
 import Manage from 'src/components/svg/Manage/Manage'
@@ -33,7 +33,7 @@ const WelcomePage = () => {
           </p>
         </div>
         <div className="w-1/3 flex justify-center items-center">
-          <WelcomeGuy width="200" />
+          <HighFive width="200" />
         </div>
       </section>
       <section className="grid grid-cols-3 gap-4 my-12">
