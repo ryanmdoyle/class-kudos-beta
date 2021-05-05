@@ -63,7 +63,7 @@ export const Success = ({
 }) => {
   useEffect(() => {
     setTotalPoints(totalUserPoints)
-  }, [totalUserPoints, setTotalPoints, setTotal])
+  }, [totalUserPoints, setTotalPoints])
 
   if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
 
