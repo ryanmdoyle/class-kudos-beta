@@ -63,11 +63,11 @@ export const Success = ({
 }) => {
   useEffect(() => {
     setTotalPoints(totalUserPoints)
-  }, [totalUserPoints, setTotalPoints])
+  }, [totalUserPoints, setTotalPoints, setTotal])
 
   if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
 
-  const { profileImage } = user
+  const profileImage = user?.profileImage
   return (
     <li
       className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2"

@@ -11,7 +11,7 @@ const ProfilePage = () => {
         <h1 className="text-3xl font-display mb-4">
           Welcome Back{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
         </h1>
-        <EditUserCell id={currentUser.id} />
+        <EditUserCell id={currentUser?.id} />
       </div>
     </DashboardLayout>
   )
