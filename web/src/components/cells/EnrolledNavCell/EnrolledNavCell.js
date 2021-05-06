@@ -17,7 +17,7 @@ export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => null
 
-export const Failure = ({ error }) => <div>Error: {error.message}</div>
+export const Failure = () => null
 
 export const Success = ({ enrollmentsOfUser }) => {
   const primaryEnrolled = enrollmentsOfUser?.filter(

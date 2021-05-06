@@ -38,7 +38,15 @@ export const Empty = () => {
   return <NewEnrollmentByEnrollId />
 }
 
-export const Failure = ({ error }) => <div>Error: {error.message}</div>
+export const Failure = ({ error }) => (
+  <div>
+    <p className="py-4">
+      Looks like you are not enrolled in any classes or groups!
+    </p>
+
+    <NewEnrollmentByEnrollId />
+  </div>
+)
 
 export const Success = ({ user, userId }) => {
   if (!user || user.enrollments.length === 0) return <Empty />
