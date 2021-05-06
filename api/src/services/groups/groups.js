@@ -37,6 +37,7 @@ export const updateGroup = ({ id, input }) => {
   })
 }
 
+// archive should be used over delete to maintain references and future data queries
 export const deleteGroup = async ({ id }) => {
   await db.behavior.deleteMany({
     where: { groupId: id },
@@ -64,5 +65,14 @@ export const Group = {
 export const groupsOwned = ({ userId }) => {
   return db.group.findMany({
     where: { ownerId: userId },
+  })
+}
+
+export const archiveGroup = async ({ id }) => {
+  return db.group.update({
+    data: {
+      archived: true,
+    },
+    where: { id },
   })
 }

@@ -7,6 +7,7 @@ export const schema = gql`
     enrollId: String
     owner: User!
     ownerId: String!
+    archived: Boolean!
     enrollments: [Enrollment]!
     behaviors: [Behavior]!
     rewards: [Reward]!
@@ -39,5 +40,6 @@ export const schema = gql`
     createGroup(input: CreateGroupInput!): Group!
     updateGroup(id: String!, input: UpdateGroupInput!): Group!
     deleteGroup(id: String!): Group!
+    archiveGroup(id: String!): Group!
   }
 `

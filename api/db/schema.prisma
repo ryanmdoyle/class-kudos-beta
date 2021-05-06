@@ -89,6 +89,7 @@ model Group {
   enrollId    String?      @unique
   owner       User         @relation(fields: [ownerId], references: [id])
   ownerId     String
+  archived    Boolean      @default(false)
   enrollments Enrollment[]
   behaviors   Behavior[]
   rewards     Reward[]

@@ -26,9 +26,9 @@ const DELETE_GROUP_MUTATION = gql`
 const GroupForm = (props) => {
   const { crud } = props
   const { close } = useModal()
-  const [deleteGroup] = useMutation(DELETE_GROUP_MUTATION, {
+  const [archiveGroup] = useMutation(ARCHIVE_GROUP_MUTATION, {
     onCompleted: () => {
-      toast.success('Group deleted.', { classes: 'rw-flash-success' })
+      toast.success('Group archived.', { classes: 'rw-flash-success' })
     },
     refetchQueries: [
       { query: teacherHomeQuery, variables: { userId: props.userId } },
@@ -38,11 +38,13 @@ const GroupForm = (props) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onArchiveClick = (id) => {
     if (
-      confirm('Are you sure you want to delete group ' + props.group.name + '?')
+      confirm(
+        'Are you sure you want to archive group ' + props.group.name + '?'
+      )
     ) {
-      deleteGroup({ variables: { id } })
+      archiveGroup({ variables: { id } })
       close()
     }
   }
@@ -157,10 +159,10 @@ const GroupForm = (props) => {
         <button
           href="#"
           title={'Delete group ' + props.id}
-          className="rw-button rw-button-small rw-button-red mt-2 w-28 h-6 absolute bottom-0 right-0"
-          onClick={() => onDeleteClick(props.group?.id)}
+          className="rw-button rw-button-small rw-button-red mt-2 w-32 h-6 absolute bottom-0 right-0"
+          onClick={() => onArchiveClick(props.group?.id)}
         >
-          Delete Group
+          Archive Group
         </button>
       )}
     </div>
