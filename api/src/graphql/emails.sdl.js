@@ -17,10 +17,6 @@ export const schema = gql`
     value: Int!
   }
 
-  type Query {
-    getReddemedNotifications: [Email!]!
-  }
-
   type Mutation {
     sendRedeemedNotification(input: RedeemedNotification!): Email!
   }
