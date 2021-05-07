@@ -8,15 +8,12 @@ export const QUERY = gql`
       id
       firstName
       lastName
-      enrollments {
-        id
-        group {
-          id
-          name
-          description
-          type
-        }
-      }
+    }
+    groupsEnrolled(userId: $userId) {
+      id
+      name
+      description
+      type
     }
   }
 `
@@ -48,42 +45,39 @@ export const Failure = ({ error }) => (
   </div>
 )
 
-export const Success = ({ user, userId }) => {
-  if (!user || user.enrollments.length === 0) return <Empty />
-  const primaryEnrollments = user?.enrollments.filter(
-    (enrollment) => enrollment.group.type === 'primary'
-  )
-  const secondaryEnrollments = user?.enrollments.filter(
-    (enrollment) => enrollment.group.type === 'secondary'
-  )
+export const Success = ({ user, userId, groupsEnrolled }) => {
+  if (!user || groupsEnrolled.length === 0) return <Empty />
+  const primary = groupsEnrolled.filter((group) => group.type === 'primary')
+  const secondary = groupsEnrolled.filter((group) => group.type === 'secondary')
   return (
     <div className="flex flex-col lg:flex-row">
-      {primaryEnrollments.length > 0 && (
+      {primary.length > 0 && (
         <div id="classes" className="w-100 lg:w-1/2 pr-2">
           <h1 className="text-2xl font-display mb-4">Classes</h1>
-          {primaryEnrollments.map((enrollment) => (
+          {primary.map((group) => (
             <StudentGroupCard
-              key={enrollment.id}
-              enrollmentId={enrollment.id}
-              groupId={enrollment.group.id}
-              name={enrollment.group.name}
-              description={enrollment.group.description}
-              groupType={enrollment.group.type}
+              key={group.id}
+              enrollmentId={'fix'}
+              groupId={group.id}
+              name={group.name}
+              description={group.description}
+              groupType={group.type}
               userId={userId}
             />
           ))}
         </div>
       )}
-      {secondaryEnrollments.length > 0 && (
+      {secondary.length > 0 && (
         <div id="classes" className="w-100 lg:w-1/2 pr-2">
           <h1 className="text-2xl font-display mb-4">Groups</h1>
-          {secondaryEnrollments.map((enrollment) => (
+          {secondary.map((group) => (
             <StudentGroupCard
-              key={enrollment.id}
-              id={enrollment.group.id}
-              name={enrollment.group.name}
-              description={enrollment.group.description}
-              groupType={enrollment.group.type}
+              key={group.id}
+              enrollmentId={'fix'}
+              groupId={group.id}
+              name={group.name}
+              description={group.description}
+              groupType={group.type}
               userId={userId}
             />
           ))}

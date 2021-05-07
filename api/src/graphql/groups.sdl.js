@@ -18,6 +18,7 @@ export const schema = gql`
     groups: [Group!]!
     group(id: String!): Group
     groupsOwned(userId: String!): [Group!]!
+    groupsEnrolled(userId: String!): [Group!]!
   }
 
   input CreateGroupInput {

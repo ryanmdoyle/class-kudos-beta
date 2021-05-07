@@ -85,3 +85,12 @@ export const enrollmentsOfUser = ({ userId }) => {
     where: { userId: userId },
   })
 }
+
+export const deleteEnrollmentByStudent = async ({ userId, groupId }) => {
+  const group = await db.enrollment.findFirst({
+    where: { userId: { equals: userId }, groupId: { equals: groupId } },
+  })
+  return db.enrollment.delete({
+    where: { id: group.id },
+  })
+}

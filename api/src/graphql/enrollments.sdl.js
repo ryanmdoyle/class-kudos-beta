@@ -37,5 +37,6 @@ export const schema = gql`
     createEnrollmentByEnrollId(
       input: CreateEnrollmentByEnrollIdInput!
     ): Enrollment!
+    deleteEnrollmentByStudent(userId: String!, groupId: String!): Enrollment!
   }
 `

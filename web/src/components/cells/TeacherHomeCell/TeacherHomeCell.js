@@ -4,20 +4,20 @@ export const QUERY = gql`
   query TeacherHomeQuery($userId: String!) {
     user(id: $userId) {
       id
-      groups {
+    }
+    groupsOwned(userId: $userId) {
+      id
+      type
+      name
+      description
+      enrollId
+      ownerId
+      enrollments {
         id
-        type
-        name
-        description
-        enrollId
-        ownerId
-        enrollments {
+        user {
           id
-          user {
-            id
-            firstName
-            lastName
-          }
+          firstName
+          lastName
         }
       }
     }
@@ -35,12 +35,12 @@ export const Empty = () => (
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ user, userId }) => {
-  if (!user || user.groups.length === 0) return <Empty />
-  const primaryOwned = user?.groups.filter(
+export const Success = ({ user, userId, groupsOwned }) => {
+  if (!user || groupsOwned.length === 0) return <Empty />
+  const primaryOwned = groupsOwned.filter(
     (group) => group.type === 'primary' && group.ownerId === userId
   )
-  const secondaryOwned = user?.groups.filter(
+  const secondaryOwned = groupsOwned.filter(
     (group) => group.type === 'secondary' && group.ownerId === userId
   )
   const primarySorted = primaryOwned.sort((a, b) => (b.name - a.name ? 1 : -1))

@@ -14,9 +14,7 @@ const StudentGroupCard = ({
 
   const cardClick = (e) => {
     if (e.target.dataset.setting) {
-      openModal(
-        <StudentDeleteEnrollment enrollmentId={enrollmentId} userId={userId} />
-      )
+      openModal(<StudentDeleteEnrollment groupId={groupId} userId={userId} />)
     } else {
       navigate(routes.studentGroup({ groupId: groupId }))
     }

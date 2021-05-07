@@ -5,31 +5,37 @@ import { useModal } from 'src/context/ModalContext'
 import { QUERY } from 'src/components/cells/StudentHomeCell/StudentHomeCell'
 
 const DELETE_ENROLLMENT = gql`
-  mutation DeleteEnrollment($id: String!) {
-    deleteEnrollment(id: $id) {
+  mutation DeleteEnrollment($userId: String!, $groupId: String!) {
+    deleteEnrollmentByStudent(userId: $userId, groupId: $groupId) {
       id
     }
   }
 `
 
-const StudentDeleteEnrollment = ({ enrollmentId, userId }) => {
+const StudentDeleteEnrollment = ({ groupId, userId }) => {
+  console.log('In unenroll modal', groupId, userId)
   const { close } = useModal()
 
-  const [deleteEnrollment, { loading }] = useMutation(DELETE_ENROLLMENT, {
-    variables: { id: enrollmentId },
-    refetchQueries: [
-      {
-        query: QUERY,
-        variables: { userId: userId },
+  const [deleteEnrollmentByStudent, { loading }] = useMutation(
+    DELETE_ENROLLMENT,
+    {
+      variables: { userId: userId, groupId: groupId },
+      refetchQueries: [
+        {
+          query: QUERY,
+          variables: { userId: userId },
+        },
+      ],
+      onCompleted: () => {
+        toast.success('Successfully Unenrolled!', {
+          className: 'rw-flash-success',
+        })
       },
-    ],
-    onCompleted: () => {
-      toast.success('Added feedback!', { className: 'rw-flash-success' })
-    },
-    onError: () => {
-      toast.error('Oops, there was a problem. Please try again.')
-    },
-  })
+      onError: () => {
+        toast.error('Oops, there was a problem. Please try again.')
+      },
+    }
+  )
 
   return (
     <div>
@@ -46,7 +52,7 @@ const StudentDeleteEnrollment = ({ enrollmentId, userId }) => {
         <button className="button-green" onClick={close}>
           No thanks, keep me enrolled.
         </button>
-        <button className="button-red" onClick={deleteEnrollment}>
+        <button className="button-red" onClick={deleteEnrollmentByStudent}>
           Yes, Remove Me
         </button>
       </div>

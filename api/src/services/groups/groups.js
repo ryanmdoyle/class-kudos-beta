@@ -64,7 +64,17 @@ export const Group = {
 
 export const groupsOwned = ({ userId }) => {
   return db.group.findMany({
-    where: { ownerId: userId },
+    where: { ownerId: userId, archived: false },
+  })
+}
+
+export const groupsEnrolled = async ({ userId }) => {
+  const enrolledGroups = await db.enrollment.findMany({
+    where: { userId: userId },
+  })
+  const groupIds = enrolledGroups.map((group) => group.groupId)
+  return db.group.findMany({
+    where: { id: { in: groupIds }, archived: false },
   })
 }
 
