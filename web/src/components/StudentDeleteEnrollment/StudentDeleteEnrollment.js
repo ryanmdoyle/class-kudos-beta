@@ -30,6 +30,7 @@ const StudentDeleteEnrollment = ({ groupId, userId }) => {
         toast.success('Successfully Unenrolled!', {
           className: 'rw-flash-success',
         })
+        close()
       },
       onError: () => {
         toast.error('Oops, there was a problem. Please try again.')
