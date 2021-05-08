@@ -13,7 +13,6 @@ const DELETE_ENROLLMENT = gql`
 `
 
 const StudentDeleteEnrollment = ({ groupId, userId }) => {
-  console.log('In unenroll modal', groupId, userId)
   const { close } = useModal()
 
   const [deleteEnrollmentByStudent, { loading }] = useMutation(
