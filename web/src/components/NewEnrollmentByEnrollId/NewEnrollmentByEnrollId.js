@@ -23,7 +23,7 @@ const NewEnrollment = () => {
   const [createEnrollment, { loading, error }] = useMutation(
     CREATE_ENROLLMENT_BY_ENROLLID_MUTATION,
     {
-      refetchQueries: [{ query: QUERY, variables: { userId: currentUser.id } }],
+      refetchQueries: [{ query: QUERY, variables: { userId: currentUser?.id } }],
       onCompleted: () => {
         close()
         toast.success('Enrollment created.', { classes: 'rw-flash-success' })

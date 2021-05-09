@@ -35,7 +35,7 @@ export const Success = ({ userId, groupId, group }) => {
           {/* use custom padding over 'white-box for list to scroll behind header */}
           <div className="w-full bg-white sticky top-0 mb-2 pl-4 pt-4">
             <h2 className="font-display text-2xl">
-              Recent Feedback {group.name ? `for ${group.name}` : null}
+              Recent Feedback {group?.name ? `for ${group.name}` : null}
             </h2>
           </div>
           <div className="px-4">
