@@ -67,8 +67,8 @@ export const Success = ({
   return (
     <GroupList
       groupId={id}
-      name={group.name}
-      enrollId={group.enrollId}
+      name={group?.name}
+      enrollId={group?.enrollId}
       enrollmentsOfGroup={enrollmentsOfGroup}
       behaviorsOfGroup={behaviorsOfGroup}
     />

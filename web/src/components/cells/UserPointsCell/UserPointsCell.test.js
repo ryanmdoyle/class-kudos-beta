@@ -28,7 +28,7 @@ describe('UserPointsCell', () => {
 
   test('Success renders successfully', async () => {
     expect(() => {
-      render(<Success feedbackPoints={standard().feedbackPoints} />)
+      render(<Success totalUserPoints={standard().totalUserPoints} />)
     }).not.toThrow()
   })
 })
