@@ -5,7 +5,7 @@ import Manage from './Manage'
 describe('Manage', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Manage />)
+      render(<Manage width='100' />)
     }).not.toThrow()
   })
 })

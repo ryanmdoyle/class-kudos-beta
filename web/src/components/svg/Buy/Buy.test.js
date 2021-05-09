@@ -5,7 +5,7 @@ import Buy from './Buy'
 describe('Buy', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Buy />)
+      render(<Buy width='100' />)
     }).not.toThrow()
   })
 })
