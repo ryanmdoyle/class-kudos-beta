@@ -47,7 +47,7 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({
   userId,
-  // groupId, auto-import for query
+  groupId, // auto-import for query
   user,
   firstName,
   lastName,
@@ -56,8 +56,8 @@ export const Success = ({
   setFirstName,
   setLastName,
   setStudentId,
-  totalEmpty,
-  setTotalPoints,
+  totalIsNull,
+  setTotalPoints = () => {}, // default for passing test within useEffect()
   selecting,
   handleSelect,
 }) => {
@@ -65,7 +65,7 @@ export const Success = ({
     setTotalPoints(totalUserPoints)
   }, [totalUserPoints, setTotalPoints])
 
-  if (userId === userZero && totalEmpty) setTotalPoints(totalUserPoints)
+  if (userId === userZero && totalIsNull) setTotalPoints(totalUserPoints)
 
   const profileImage = user?.profileImage
   return (

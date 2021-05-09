@@ -77,7 +77,7 @@ const GroupList = ({
                   setFirstName={setFirstName}
                   setLastName={setLastName}
                   setStudentId={setStudentId}
-                  totalEmpty={totalPoints === null}
+                  totalIsNull={totalPoints === null}
                   setTotalPoints={setTotalPoints}
                   handleSelect={handleSelect}
                 />
