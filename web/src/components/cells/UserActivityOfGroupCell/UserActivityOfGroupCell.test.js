@@ -35,7 +35,8 @@ describe('UserActivityOfGroupCell', () => {
     expect(() => {
       render(
         <Success
-          recentUserFeedbackOfGroup={standard().recentUserFeedbackOfGroup}
+          feedbackOfUserForGroup={standard().feedbackOfUserForGroup}
+          redeemedOfUserForGroup={standard().redeemedOfUserForGroup}
         />
       )
     }).not.toThrow()

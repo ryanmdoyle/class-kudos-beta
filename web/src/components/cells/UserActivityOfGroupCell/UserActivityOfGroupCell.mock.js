@@ -10,7 +10,7 @@ export const standard = (/* vars, { ctx, req } */) => ({
     }
     ,{
       "__typename": "Feedback 2",
-      "id": "11e10a68-8837-4863-96cf-0547865549af",
+      "id": "11e10a68-8837-4863-96cf-0547865549f",
       "createdAt": "2021-04-21T20:16:42.427Z",
       "name": "Working Hard",
       "value": 6
@@ -19,7 +19,7 @@ export const standard = (/* vars, { ctx, req } */) => ({
   redeemedOfUserForGroup: [
     {
       "__typename": "Redeemed",
-      "id": "146fc837-e4f6-4a46-a467-b2000e41f511",
+      "id": "146fc837-e4f6-4a46-a467-b2000e411",
       "createdAt": "2021-05-05T22:00:59.474Z",
       "name": "Homework Pass",
       "cost": 15
