@@ -24,6 +24,7 @@ export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ feedbackOfUserForGroup, redeemedOfUserForGroup }) => {
+  console.log(feedbackOfUserForGroup, redeemedOfUserForGroup)
   const newArray = [...redeemedOfUserForGroup, ...feedbackOfUserForGroup]
   const sorted = newArray
     ? newArray
