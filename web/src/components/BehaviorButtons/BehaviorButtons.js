@@ -60,7 +60,7 @@ const BehaviorButtons = ({
     },
   })
 
-  const selectedUsersToRefetch = selected.map((user) => ({
+  const selectedUsersToRefetch = selected?.map((user) => ({
     query: userListItemQuery,
     variables: { userId: user },
   }))
