@@ -1,6 +1,6 @@
 import EnrolledOptionsListItem from 'src/components/EnrolledOptionsListItem/EnrolledOptionsListItem'
 export const QUERY = gql`
-  query EnrolledListQuery($groupId: String!) {
+  query EnrollmentsOfGroupQuery($groupId: String!) {
     enrollmentsOfGroup(groupId: $groupId) {
       id
       user {
