@@ -11,6 +11,14 @@ const GroupCard = ({
   enrollId,
   userId,
 }) => {
+  console.log({
+    id,
+    name,
+    description,
+    studentCount,
+    enrollId,
+    userId,
+  })
   const { openModal } = useModal()
 
   const cardClick = (e) => {
