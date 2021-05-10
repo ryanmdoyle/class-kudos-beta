@@ -1,7 +1,9 @@
 import FeedbackButton from './FeedbackButton'
 
+import { standard } from './FeedbackButton.mock'
+
 export const generated = () => {
-  return <FeedbackButton />
+  return <FeedbackButton {...standard()} />
 }
 
 export default { title: 'Components/FeedbackButton' }
