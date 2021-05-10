@@ -1,10 +1,16 @@
+import { useState } from 'react'
+
 const ProfileImageCircle = ({ profileImage, firstName, lastName }) => {
+  let [image, isImage] = useState(true)
   return (
     <>
-      {profileImage ? (
+      {profileImage && image ? (
         <img
           src={profileImage}
           alt={`${firstName} ${lastName} profile`}
+          onError={() => {
+            isImage(false)
+          }}
           className="h-8 w-8 rounded-full mr-2"
         ></img>
       ) : (
