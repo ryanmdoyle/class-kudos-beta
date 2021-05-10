@@ -28,7 +28,7 @@ describe('EnrolledNavCell', () => {
 
   test('Success renders successfully', async () => {
     expect(() => {
-      render(<Success enrolledNav={standard().enrolledNav} />)
+      render(<Success groupsEnrolled={standard().groupsEnrolled} />)
     }).not.toThrow()
   })
 })

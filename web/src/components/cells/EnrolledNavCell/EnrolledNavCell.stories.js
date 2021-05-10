@@ -14,7 +14,11 @@ export const failure = () => {
 }
 
 export const success = () => {
-  return Success ? <Success {...standard()} /> : null
+  return Success ? (
+    <div className='w-48'>
+      <Success {...standard()} />
+    </div>
+  ) : null
 }
 
 export default { title: 'Cells/EnrolledNavCell' }
