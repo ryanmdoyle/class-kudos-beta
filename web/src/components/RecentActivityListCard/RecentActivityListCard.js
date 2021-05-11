@@ -8,7 +8,7 @@ const RecentActivityListCard = ({ userId, firstName, groupId, groupName }) => {
           Recent Activity in {groupName} for {firstName}
         </h2>
       </div>
-      <div className="px-4 pb-2">
+      <div className="px-4 pb-2 m-auto">
         <UserActivityOfGroupCell userId={userId} groupId={groupId} />
       </div>
     </div>

@@ -1,4 +1,5 @@
 import ListViewRecentItem from 'src/components/ListViewRecentItem/ListViewRecentItem'
+import LoadingOptionsListItem from 'src/components/LoadingOptionsListItem/LoadingOptionsListItem'
 
 export const QUERY = gql`
   query UserActivityOfGroupQuery($userId: String!, $groupId: String!) {
@@ -17,9 +18,11 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <LoadingOptionsListItem />
 
-export const Empty = () => <div className="text-gray-500">No feedback yet!</div>
+export const Empty = () => (
+  <div className="flex justify-center text-gray-500 mb-2">No feedback yet!</div>
+)
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 

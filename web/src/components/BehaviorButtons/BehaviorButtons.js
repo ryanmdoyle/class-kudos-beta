@@ -38,15 +38,6 @@ const BehaviorButtons = ({
   setSelecting,
   setSelected,
 }) => {
-  console.log(
-    userId,
-    behaviors,
-    groupId,
-    selected,
-    selecting,
-    setSelecting,
-    setSelected
-  )
   const { data } = useQuery(USER_POINTS, {
     variables: { userId: userId },
   })
