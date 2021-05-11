@@ -5,6 +5,7 @@ import { useAuth } from '@redwoodjs/auth'
 
 import { useModal } from 'src/context/ModalContext'
 import LoginButton from '../LoginButton/LoginButton'
+import LogoutButton from '../LogoutButton/LogoutButton'
 import EditUserCell from 'src/components/cells/EditUserCell'
 
 const SiteHeader = () => {
@@ -39,7 +40,8 @@ const SiteHeader = () => {
             ></img>
           </>
         )}
-        <LoginButton />
+        {isAuthenticated && <LogoutButton />}
+        {!isAuthenticated && <LoginButton />}
       </div>
     </header>
   )

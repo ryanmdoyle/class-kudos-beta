@@ -3,20 +3,20 @@
 import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 
-const LoginButton = () => {
-  const { logIn } = useAuth()
+const LogoutButton = () => {
+  const { logOut } = useAuth()
 
   return (
     <button
       className="mx-4 text-center text-white font-medium bg-purple-600 hover:bg-purple-500 rounded-md py-2 px-4 cursor-pointer"
       onClick={async () => {
-        await logIn()
-        navigate(routes.login())
+        await logOut()
+        navigate(routes.home())
       }}
     >
-      Log In
+      Log Out
     </button>
   )
 }
 
-export default LoginButton
+export default LogoutButton
