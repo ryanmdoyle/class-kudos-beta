@@ -1,4 +1,6 @@
 import RewardOptionsListItem from 'src/components/RewardOptionsListItem/RewardOptionsListItem'
+import LoadingOptionsListItem from 'src/components/LoadingOptionsListItem/LoadingOptionsListItem'
+
 export const QUERY = gql`
   query RewardsOfGroupQuery($groupId: String!) {
     rewardsOfGroup(groupId: $groupId) {
@@ -9,10 +11,12 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <LoadingOptionsListItem />
 
 export const Empty = () => (
-  <div>No rewards yet! Give 'em something to work for!</div>
+  <div className="text-gray-400">
+    No rewards yet! Give 'em something to work for!
+  </div>
 )
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>

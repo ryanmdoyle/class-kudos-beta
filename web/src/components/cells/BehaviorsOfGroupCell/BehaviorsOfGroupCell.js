@@ -1,4 +1,5 @@
 import BehaviorOptionsListItem from 'src/components/BehaviorOptionsListItem/BehaviorOptionsListItem'
+import LoadingOptionsListItem from 'src/components/LoadingOptionsListItem/LoadingOptionsListItem'
 
 export const QUERY = gql`
   query BehaviorsListQuery($groupId: String!) {
@@ -10,9 +11,11 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <LoadingOptionsListItem />
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => (
+  <div className="text-gray-400">No behaviors created.</div>
+)
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
