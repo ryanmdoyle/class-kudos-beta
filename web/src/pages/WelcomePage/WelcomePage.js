@@ -16,7 +16,7 @@ const WelcomePage = () => {
         Kudos = Happy Humans
       </h1>
       <section className="w-full h-full flex my-12">
-        <div className="ml-10 w-2/3">
+        <div className="px-4 md:ml-10 w-2/3">
           <h2 className="font-display text-2xl mb-4">
             Welcome to Class Kudos!
           </h2>
@@ -36,7 +36,7 @@ const WelcomePage = () => {
           <HighFive width="200" />
         </div>
       </section>
-      <section className="grid grid-cols-3 gap-4 my-12">
+      <section className="grid grid-rows-3 md:grid-cols-3 px-4 gap-4 my-12">
         <div className="flex flex-col justify-start items-center">
           <h2 className="font-display text-2xl mb-4">Teacher Gives Kudos</h2>
           <div className="h-36 w-64 flex justify-center items-center mb-4">
