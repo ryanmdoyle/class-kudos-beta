@@ -18,9 +18,9 @@ const DashboardLayout = ({ children }) => {
     <ModalProvider>
       <Modal />
       <Toaster timeout={4000} />
-      <div className="w-full h-screen relative">
+      <div className="w-full h-screen relative overflow-y-scroll">
         <SiteHeader />
-        <div className="flex w-full h-full-minusNav">
+        <div className="flex w-full h-full-minusNav bg-gray-100">
           <nav className="w-1/5 h-full bg-white lg:w-dashboard">
             {hasRole('teacher') && <TeacherNav />}
             {hasRole('student') && <StudentNav />}
