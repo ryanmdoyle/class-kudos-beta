@@ -15,9 +15,10 @@ const WelcomePage = () => {
       <h1 className="text-center text-5xl font-bold pb-4">
         Kudos = Happy Humans
       </h1>
-      <section className="w-full h-full flex my-12">
-        <div className="px-4 md:ml-10 w-2/3">
-          <h2 className="font-display text-2xl mb-4">
+      {/* Welcome Text */}
+      <section className="w-full h-full flex flex-col-reverse items-center md:flex-row my-12">
+        <div className="px-4 md:ml-10 w-full md:w-2/3">
+          <h2 className="font-display text-2xl mb-4 text-center md:text-left">
             Welcome to Class Kudos!
           </h2>
           <p className="text-xl text-gray-800">
@@ -47,6 +48,7 @@ const WelcomePage = () => {
           <HighFive width="200" />
         </div>
       </section>
+      {/* Descriptions */}
       <section className="grid grid-rows-1 md:grid-cols-3 px-4 gap-4 my-12">
         <div className="flex flex-col justify-start items-center">
           <h2 className="font-display text-2xl mb-4">Teacher Gives Kudos</h2>
@@ -70,7 +72,9 @@ const WelcomePage = () => {
           </p>
         </div>
         <div className="flex flex-col justify-start items-center">
-          <h2 className="font-display text-2xl mb-4">Teacher Manges Rewards</h2>
+          <h2 className="font-display text-2xl mb-4">
+            Teacher Manages Rewards
+          </h2>
           <div className="h-36 w-64 flex justify-center items-center mb-4">
             <Manage width={200} />
           </div>
