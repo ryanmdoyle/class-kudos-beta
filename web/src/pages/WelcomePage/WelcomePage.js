@@ -1,4 +1,4 @@
-import { Link, routes, Redirect } from '@redwoodjs/router'
+import { routes, Redirect } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 
 import LandingLayout from '../../layouts/LandingLayout'
@@ -24,12 +24,23 @@ const WelcomePage = () => {
             Behavior management websites are too bloated and opinionated.
           </p>
           <br></br>
-          <p className="text-xl text-gray-800">Social media features? 😑</p>
           <p className="text-xl text-gray-800">
-            Digital "walls" of classroom work? 🧐
+            Social media features?{' '}
+            <span role="img" aria-label="merp">
+              😑
+            </span>
+          </p>
+          <p className="text-xl text-gray-800">
+            Digital &quot;walls&quot; of classroom work?{' '}
+            <span role="img" aria-label="questioning">
+              🧐
+            </span>
           </p>
           <p className="text-xl font-bold text-gray-800">
-            You just want to give some kudos! 🥳{' '}
+            You just want to give some kudos!{' '}
+            <span role="img" aria-label="party">
+              🥳
+            </span>{' '}
           </p>
         </div>
         <div className="w-1/3 flex justify-center items-center">
@@ -43,8 +54,8 @@ const WelcomePage = () => {
             <Give width={220} />
           </div>
           <p className="text-gray-800">
-            Award students "kudos" they can use to redeem rewards. You can set
-            custom rewards for your own classes or student groups.
+            Award students &quot;kudos&quot; they can use to redeem rewards. You
+            can set custom rewards for your own classes or student groups.
           </p>
         </div>
         <div className="flex flex-col justify-start items-center">
@@ -54,8 +65,8 @@ const WelcomePage = () => {
           </div>
           <p className="text-gray-800">
             Students can see their total kudos on their own dashboard, as well
-            as redeem their kudos for rewards their teacher's have set up for
-            them.
+            as redeem their kudos for rewards their teacher&apos;s have set up
+            for them.
           </p>
         </div>
         <div className="flex flex-col justify-start items-center">
