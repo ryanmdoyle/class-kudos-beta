@@ -6,8 +6,8 @@ export const schema = gql`
     value: Int!
     user: User!
     userId: String!
-    behavior: Behavior!
-    behaviorId: String!
+    behavior: Behavior
+    behaviorId: String
     groupId: String!
   }
 
@@ -21,7 +21,7 @@ export const schema = gql`
 
   input CreateFeedbackInput {
     userId: String!
-    behaviorId: String!
+    behaviorId: String
     groupId: String!
     name: String!
     value: Int!

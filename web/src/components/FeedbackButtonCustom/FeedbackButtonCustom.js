@@ -1,11 +1,10 @@
 import { toast } from '@redwoodjs/web/toast'
+import { useModal } from 'src/context/ModalContext'
 
-import ThumbUp from 'src/components/svg/ThumbUp/ThumbUp'
-import ThumbDown from 'src/components/svg/ThumbDown/ThumbDown'
+import Pencil from 'src/components/svg/Pencil/Pencil'
+import FeedbackCustomForm from 'src/components/FeedbackCustomForm/FeedbackCustomForm'
 
-const FeedbackButton = ({
-  name,
-  value,
+const FeedbackButtonCustom = ({
   totalUserPoints,
   studentId,
   behaviorId,
@@ -16,7 +15,8 @@ const FeedbackButton = ({
   selecting,
   loading,
 }) => {
-  const giveFeedback = () => {
+  const { openModal } = useModal()
+  const giveFeedback = (name, value) => {
     // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
     const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     newFeedback({
@@ -31,7 +31,7 @@ const FeedbackButton = ({
       },
     })
   }
-  const giveFeedbacks = () => {
+  const giveFeedbacks = (name, value) => {
     // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
     const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     const feedbacks = selected.map((userId) => {
@@ -50,51 +50,44 @@ const FeedbackButton = ({
     })
   }
 
-  const wontReturnNegativeTotal = () => {
+  const wontReturnNegativeTotal = (value) => {
     if (totalUserPoints === 0 && value > 0) return true
     if (totalUserPoints > 0) return true // giveFeedback will auto-adjust neg values before query
     return false
   }
 
+  const handleAwardSave = (name, value) => {
+    if (!wontReturnNegativeTotal(value))
+      toast.error('User already has zero points.')
+    if (!loading && !selecting && wontReturnNegativeTotal(value)) {
+      giveFeedback(name, value)
+    }
+    if (!loading && selecting && wontReturnNegativeTotal(value)) {
+      giveFeedbacks(name, value)
+    }
+  }
+
   return (
     <button
       className={`h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center
-      ${
-        (loading || (totalUserPoints === 0 && value < 0)) &&
-        'opacity-70 cursor-not-allowed'
-      }
+      ${loading && 'opacity-70 cursor-not-allowed'}
       ${!loading && 'hover:ring-2'} ring-purple-500`}
       onClick={() => {
-        if (!wontReturnNegativeTotal())
-          toast.error('User already has zero points.')
-        if (!loading && !selecting && wontReturnNegativeTotal()) {
-          giveFeedback()
-        }
-        if (!loading && selecting && wontReturnNegativeTotal()) {
-          giveFeedbacks()
-        }
+        openModal(
+          <>
+            <h2 className="text-xl font-bold">Custom Feedback</h2>
+            <FeedbackCustomForm handleAwardSave={handleAwardSave} />
+          </>
+        )
       }}
     >
-      {value > 0 && (
-        <span className="text-green-500">
-          <ThumbUp loading={loading} />
-        </span>
-      )}
-      {value < 0 && (
-        <span className="text-red-500">
-          <ThumbDown loading={loading} />
-        </span>
-      )}
-      <span className="text-gray-500 text-center text-sm">{name}</span>
-      <span
-        className={`${
-          value > 0 ? 'text-green-500' : 'text-red-500'
-        } font-bold text-center text-sm`}
-      >
-        {value}
+      <span className="text-purple-400">
+        <Pencil />
       </span>
+
+      <span className="text-gray-500 text-center text-sm">Custom Value</span>
     </button>
   )
 }
 
-export default FeedbackButton
+export default FeedbackButtonCustom

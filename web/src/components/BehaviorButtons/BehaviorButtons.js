@@ -1,8 +1,11 @@
 import FeedbackButton from 'src/components/FeedbackButton/FeedbackButton'
+import FeedbackButtonCustom from 'src/components/FeedbackButtonCustom/FeedbackButtonCustom'
 
 import { useMutation, useQuery } from '@redwoodjs/web'
 // import { useApolloClient } from '@apollo/client'
 import { toast } from '@redwoodjs/web/toast'
+import { useModal } from 'src/context/ModalContext'
+
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
 import { QUERY as userListItemQuery } from 'src/components/cells/UserListItemCell/UserListItemCell'
@@ -38,6 +41,7 @@ const BehaviorButtons = ({
   setSelecting,
   setSelected,
 }) => {
+  const { isOpen, close } = useModal()
   const { data } = useQuery(USER_POINTS, {
     variables: { userId: userId },
   })
@@ -54,6 +58,7 @@ const BehaviorButtons = ({
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
+      if (isOpen) close()
     },
     onError: () => {
       toast.error('Oops, there was a problem. Please try again.')
@@ -78,6 +83,7 @@ const BehaviorButtons = ({
       toast.success('Added feedback!', { className: 'rw-flash-success' })
       setSelected([])
       setSelecting(false)
+      if (isOpen) close()
     },
     onError: () => {
       toast.error('Oops, there was a problem. Please try again.')
@@ -111,6 +117,18 @@ const BehaviorButtons = ({
           key={behavior.id}
         />
       ))}
+      <FeedbackButtonCustom
+        totalUserPoints={totalUserPoints}
+        studentId={userId}
+        groupId={groupId}
+        newFeedback={newFeedback}
+        newFeedbacks={newFeedbacks}
+        selected={selected}
+        selecting={selecting}
+        loading={loading}
+        loadings={loadings}
+        key={'custom'}
+      />
     </>
   )
 }
