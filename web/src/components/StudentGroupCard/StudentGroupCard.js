@@ -26,11 +26,6 @@ const StudentGroupCard = ({
       onClick={cardClick}
     >
       <div className="flex items-center">
-        <img
-          src="/ClassKarmaLogo.svg"
-          alt="site logo"
-          className="w-16 h-16 mr-4 rounded-full shadow-md"
-        ></img>
         <div>
           <h2 className="text-xl font-display">{name}</h2>
           <span className="text-gray-500 text-sm">{description}</span>
