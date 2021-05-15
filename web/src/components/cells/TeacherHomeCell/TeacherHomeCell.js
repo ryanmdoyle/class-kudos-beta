@@ -28,8 +28,9 @@ export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => (
   <div>
-    <p>Looks like you haven't created and classes or groups yet!</p>
-    <br></br> <p>Click the green "Create New" button to get started.</p>
+    <p>Looks like you haven&apos;t created any classes or groups yet!</p>
+    <br></br>{' '}
+    <p>Click the green &quot;Create New&quot; button to get started.</p>
   </div>
 )
 

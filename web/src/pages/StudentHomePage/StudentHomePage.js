@@ -11,7 +11,7 @@ const StudentHomePage = () => {
     <DashboardLayout>
       <div className="p-4">
         <h1 className="text-3xl font-display mb-4">
-          Welcome Back{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
+          Welcome{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
         </h1>
         <div className="white-box w-full h-32 mb-4">
           <span className="text-8xl text-green-400">

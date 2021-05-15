@@ -33,15 +33,10 @@ export const Loading = () => (
         <div>
           <li className="h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2">
             <div className="flex items-center">
-              <img
-                src="/profile.jpg"
-                alt="profile"
-                className="img-loading h-6 w-6 rounded-full mr-2"
-              ></img>
-              <div className="w-36 h-4 rounded bg-gray-200"></div>
+              <div className="w-36 h-4 rounded bg-purple-100"></div>
             </div>
             <div>
-              <div className="justify-self-end text-green-500 font-bold text-loading bg-gray-200 w-6 h-4 rounded"></div>
+              <div className="justify-self-end text-green-500 font-bold text-loading bg-purple-100 w-6 h-4 rounded"></div>
             </div>
           </li>
         </div>
