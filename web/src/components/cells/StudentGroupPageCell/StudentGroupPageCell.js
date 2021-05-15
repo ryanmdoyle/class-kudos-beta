@@ -12,6 +12,10 @@ export const QUERY = gql`
   }
 `
 
+export const beforeQuery = (props) => {
+  return { variables: props, pollInterval: 60000 }
+}
+
 export const Loading = () => <PageLoader />
 
 export const Empty = () => <div>Empty</div>

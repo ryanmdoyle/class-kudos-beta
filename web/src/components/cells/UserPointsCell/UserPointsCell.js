@@ -7,6 +7,7 @@ export const beforeQuery = (props) => {
   return {
     variables: props,
     fetchPolicy: 'cache-first',
+    pollInterval: 120000,
   }
 }
 

@@ -18,6 +18,10 @@ export const QUERY = gql`
   }
 `
 
+export const beforeQuery = (props) => {
+  return { variables: props, pollInterval: 60000 }
+}
+
 export const Loading = () => (
   <div className="flex flex-col lg:flex-row">
     <div id="classes" className="w-100 lg:w-1/2 pr-2">
