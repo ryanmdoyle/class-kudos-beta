@@ -52,7 +52,10 @@ const FeedbackCustomForm = (props) => {
           defaultValue={1}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
+          validation={{
+            required: true,
+            min: { value: 1, message: 'Must be a positive value' },
+          }}
         />
         <FieldError name="value" className="rw-field-error" />
 

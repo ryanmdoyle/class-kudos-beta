@@ -32,15 +32,13 @@ const FeedbackButtonCustom = ({
     })
   }
   const giveFeedbacks = (name, value) => {
-    // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
-    const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     const feedbacks = selected.map((userId) => {
       return {
         userId: userId,
         behaviorId: behaviorId,
         groupId: groupId,
         name: name,
-        value: adjustedValue,
+        value: value,
       }
     })
     newFeedbacks({
@@ -62,7 +60,7 @@ const FeedbackButtonCustom = ({
     if (!loading && !selecting && wontReturnNegativeTotal(value)) {
       giveFeedback(name, value)
     }
-    if (!loading && selecting && wontReturnNegativeTotal(value)) {
+    if (!loading && selecting && wontReturnNegativeTotal(value) && value > 0) {
       giveFeedbacks(name, value)
     }
   }
