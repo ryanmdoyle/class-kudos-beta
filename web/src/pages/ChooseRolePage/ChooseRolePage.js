@@ -1,8 +1,10 @@
-// import { Link, routes } from '@redwoodjs/router'
-import LandingLayout from 'src/layouts/LandingLayout/LandingLayout'
 import { useAuth } from '@redwoodjs/auth'
 import { useMutation } from '@redwoodjs/web'
 import { routes, Redirect } from '@redwoodjs/router'
+
+import LandingLayout from 'src/layouts/LandingLayout/LandingLayout'
+import Student from 'src/components/svg/Student/Student'
+import Teacher from 'src/components/svg/Teacher/Teacher'
 
 // see https://github.com/redwoodjs/example-todo/blob/f29069c9dc89fa3734c6f99816442e14dc73dbf7/web/src/components/TodoListCell/TodoListCell.js#L26-L44
 const ADD_ROLE = gql`
@@ -51,22 +53,40 @@ const ChooseRolePage = () => {
         <p className=" text-base text-center font-body w-full mb-8">
           Are you a...
         </p>
-        <button
-          onClick={() => {
-            addTeacher()
-          }}
-          className="button-green mb-4"
-        >
-          Teacher
-        </button>
-        <button
-          onClick={() => {
-            addStudent()
-          }}
-          className="button-green"
-        >
-          Student
-        </button>
+        <div className="flex flex-col md:flex-row w-full lg:w-2/3 justify-evenly lg:justify-between items-center">
+          <div className="flex flex-col justify-center">
+            <Student />
+            <button
+              onClick={() => {
+                const response = window.confirm(
+                  'Are you sure you want to create a STUDENT account?'
+                )
+                if (response) {
+                  addStudent()
+                }
+              }}
+              className="button-green"
+            >
+              Student
+            </button>
+          </div>
+          <div className="flex flex-col justify-between">
+            <Teacher />
+            <button
+              onClick={() => {
+                const response = window.confirm(
+                  'Are you sure you want to create a TEACHER account?'
+                )
+                if (response) {
+                  addTeacher()
+                }
+              }}
+              className="button-green"
+            >
+              Teacher
+            </button>
+          </div>
+        </div>
       </div>
     </LandingLayout>
   )
