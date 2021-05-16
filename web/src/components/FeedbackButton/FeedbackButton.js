@@ -15,6 +15,7 @@ const FeedbackButton = ({
   selected,
   selecting,
   loading,
+  loadings,
 }) => {
   const giveFeedback = () => {
     // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
@@ -60,7 +61,11 @@ const FeedbackButton = ({
     <button
       className={`h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center
       ${
-        (loading || (totalUserPoints === 0 && value < 0)) &&
+        (loading ||
+          loadings ||
+          (selecting && selected.length === 0) ||
+          (totalUserPoints === 0 && value < 0) ||
+          (selecting && value < 0)) &&
         'opacity-70 cursor-not-allowed'
       }
       ${!loading && 'hover:ring-2'} ring-purple-500`}
@@ -70,7 +75,8 @@ const FeedbackButton = ({
         if (!loading && !selecting && wontReturnNegativeTotal()) {
           giveFeedback()
         }
-        if (!loading && selecting && wontReturnNegativeTotal()) {
+        // only allow positive feedbacks (when giving many feedbacks)
+        if (!loadings && selecting && selected.length > 0 && value > 0) {
           giveFeedbacks()
         }
       }}
