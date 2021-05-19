@@ -20,7 +20,7 @@ const SiteHeader = () => {
     <header className="w-full h-16 flex bg-purple-800 px-4 py-3 justify-between items-center">
       <Link to={routes.home()}>
         <div className="flex items-center">
-          <img src="/ClassKarma.svg" alt="profile" className="w-12 h-12"></img>
+          <img src="/ClassKudos.svg" alt="profile" className="w-12 h-12"></img>
           <span className="text-xl text-white font-display">Class Kudos</span>
         </div>
       </Link>
