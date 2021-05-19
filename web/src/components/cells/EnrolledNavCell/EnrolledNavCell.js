@@ -1,4 +1,6 @@
 import StudentNavLink from 'src/components/StudentNavLink/StudentNavLink'
+import StudentHomeButton from 'src/components/StudentHomeButton/StudentHomeButton'
+
 
 export const QUERY = gql`
   query EnrolledNavQuery($userId: String!) {
@@ -10,9 +12,19 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+    <>
+      <StudentHomeButton />
+      <div className="animate-pulse">Loading...</div>
+    </>
+  )
 
-export const Empty = () => null
+export const Empty = () => (
+  <>
+    <StudentHomeButton />
+    <div className="text-gray-500">No enrollments</div>
+  </>
+)
 
 export const Failure = () => null
 
@@ -23,6 +35,7 @@ export const Success = ({ groupsEnrolled }) => {
   )
   return (
     <>
+    <StudentHomeButton />
       {primary?.length > 0 && (
         <>
           <span className="text-lg font-display mb-2">Classes</span>

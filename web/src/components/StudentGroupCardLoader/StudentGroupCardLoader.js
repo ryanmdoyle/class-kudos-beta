@@ -3,7 +3,7 @@ const StudentGroupCardLoader = () => {
     <div className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4 cursor-pointer animate-pulse">
       <div className="flex items-center">
         <img
-          src="/ClassKarmaLogo.svg"
+          src="/ClassKudosLogo.svg"
           className="w-16 h-16 mr-4 rounded-full shadow-md"
         ></img>
         <div className="w-48 h-12 flex-col">
