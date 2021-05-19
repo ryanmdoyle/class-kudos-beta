@@ -36,12 +36,18 @@ const SEND_REDEEMED_NOTIFICATION_EMAIL = gql`
 `
 
 export const beforeQuery = (props) => {
-  return { variables: props, pollInterval: 120000 }
+  return { variables: props, pollInterval: 60000 }
 }
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => (
+  <div className='flex flex-col items-center'>
+    <p className="text-gray-700">Hmm...Doesn&apos;t look like there are any rewards for you yet...</p>
+    <p className="text-gray-700">(Your teacher can make some)</p>
+    <img src='/huh.gif' className="h-48 w-48 rounded-full my-8"></img>
+  </div>
+  )
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 

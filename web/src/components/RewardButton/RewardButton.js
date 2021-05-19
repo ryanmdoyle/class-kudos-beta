@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { toast } from '@redwoodjs/web/toast'
 
 const RewardButton = ({
@@ -41,37 +39,40 @@ const RewardButton = ({
   }
 
   return (
-    <div
-      className={`h-24 w-24 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
+    <button
+      className={`h-24 w-48 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
         availablePoints >= reward?.cost
           ? 'hover:ring-2 ring-purple-500'
           : 'cursor-not-allowed opacity-70'
       }`}
       onClick={() => {
         let response = null
-        if (reward.responseRequired === true) {
-          response = window.prompt(reward.responsePrompt)
-        }
-        if (response === '') {
-          toast.error('You must enter a response!')
-        }
-        if (availablePoints < reward?.cost) {
+        if (availablePoints < reward?.cost) { // not enough points, throw error
           toast.error('You do not have enough points to claim that reward!')
-        }
-        if (!loading && availablePoints >= reward?.cost) {
-          reward.responseRequired
-            ? response !== null && response !== ''
-              ? claimReward(response)
-              : toast.error('Redmeption canceled')
-            : claimReward()
+        } else { // if enough points...
+          // prompt is needed
+          if (reward.responseRequired === true && availablePoints > reward?.cost) {
+            response = window.prompt(reward.responsePrompt)
+          }
+          if (response === '') {
+            toast.error('You must enter a response!')
+          }
+          // claim or cancel based on reponse
+          if (!loading && availablePoints >= reward?.cost) {
+            reward.responseRequired
+              ? response !== null && response !== ''
+                ? claimReward(response)
+                : toast.error('Redmeption canceled')
+              : claimReward()
+          }
         }
       }}
     >
       <span
         className={`${
           loading || availablePoints < reward?.cost
-            ? 'text-gray-400'
-            : 'text-gray-500'
+            ? 'text-gray-500'
+            : 'text-gray-700'
         } text-center text-sm`}
       >
         {reward?.name || '?'}
@@ -85,7 +86,7 @@ const RewardButton = ({
       >
         - {reward?.cost || '?'}
       </span>
-    </div>
+    </button>
   )
 }
 
