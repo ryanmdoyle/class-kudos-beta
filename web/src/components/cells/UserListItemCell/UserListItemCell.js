@@ -58,14 +58,21 @@ export const Success = ({
   setStudentId,
   totalIsNull,
   setTotalPoints = () => {}, // default for passing test within useEffect()
+  userZeroPoints,
+  setUserZeroPoints = () => {},
   selecting,
   handleSelect,
 }) => {
+  // matches points cell for first user after query
   useEffect(() => {
-    setTotalPoints(totalUserPoints)
+    if (userId === userZero) {
+      setUserZeroPoints(totalUserPoints)
+    } else {
+      setTotalPoints(totalUserPoints)
+    }
   }, [totalUserPoints, setTotalPoints])
 
-  if (userId === userZero && totalIsNull) setTotalPoints(totalUserPoints)
+  // if (userId === userZero && totalIsNull) setTotalPoints(totalUserPoints)
 
   const profileImage = user?.profileImage
   return (

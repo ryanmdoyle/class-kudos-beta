@@ -21,6 +21,7 @@ const GroupList = ({
   const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
   const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.user.id)
   const [totalPoints, setTotalPoints] = useState(null)
+  const [userZeroPoints, setUserZeroPoints] = useState(null)
 
   const handleSelect = (userId) => {
     if (selecting) {
@@ -79,6 +80,8 @@ const GroupList = ({
                   setStudentId={setStudentId}
                   totalIsNull={totalPoints === null}
                   setTotalPoints={setTotalPoints}
+                  userZeroPoints={userZeroPoints}
+                  setUserZeroPoints={setUserZeroPoints}
                   handleSelect={handleSelect}
                 />
               </div>
@@ -91,7 +94,7 @@ const GroupList = ({
           <StudentPointsCard
             firstName={firstName}
             lastName={lastName}
-            totalPoints={totalPoints}
+            totalPoints={studentId === enrollmentsOfGroup[0]?.user.id ? userZeroPoints : totalPoints}
           />
         )}
         <AwardFeedbackCard
