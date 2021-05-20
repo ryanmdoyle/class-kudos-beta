@@ -59,12 +59,17 @@ export const Success = ({
   behaviorsOfGroup,
   group,
 }) => {
+  let sorted = enrollmentsOfGroup?.slice().sort((a, b) => {
+    const nameA =  a?.user?.firstName?.toLowerCase()
+    const nameB =  b?.user?.firstName?.toLowerCase()
+    return nameA < nameB ? -1 : 1
+  })
   return (
     <GroupList
       groupId={id}
       name={group?.name}
       enrollId={group?.enrollId}
-      enrollmentsOfGroup={enrollmentsOfGroup}
+      enrollmentsOfGroup={sorted || enrollmentsOfGroup}
       behaviorsOfGroup={behaviorsOfGroup}
     />
   )
