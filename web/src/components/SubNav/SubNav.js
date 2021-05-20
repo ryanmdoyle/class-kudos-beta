@@ -1,3 +1,5 @@
+import RedeemedOfGroupToReviewCountCell from 'src/components/cells/RedeemedOfGroupToReviewCountCell'
+
 const SubNav = ({
   view,
   viewList,
@@ -5,6 +7,7 @@ const SubNav = ({
   viewFeedback,
   viewRedeemed,
   viewOptions,
+  groupId
 }) => {
   return (
     <div className="w-full h-12 bg-purple-500 px-4 flex text-white">
@@ -33,33 +36,6 @@ const SubNav = ({
           <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
         )}
       </div>
-
-      {/* <div
-        className="h-full flex items-center mr-12 relative"
-        onClick={() => {
-          viewGrid()
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="h-5 w-5 mr-1"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-          />
-        </svg>
-        <span>Grid</span>
-        {view === 'grid' && (
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
-        )}
-      </div> */}
-
       <div
         className="h-full flex items-center mr-12 relative cursor-pointer"
         onClick={() => {
@@ -107,6 +83,7 @@ const SubNav = ({
           />
         </svg>
         <span>Redeemed</span>
+        <RedeemedOfGroupToReviewCountCell groupId={groupId} subNav />
         {view === 'redeemed' && (
           <div className="absolute bottom-0 left-0 w-full h-1 bg-white rounded-t"></div>
         )}

@@ -34,6 +34,7 @@ const GroupPage = ({ groupId }) => {
         viewFeedback={viewFeedback}
         viewRedeemed={viewRedeemed}
         viewOptions={viewOptions}
+        groupId={groupId}
       />
       {view === 'list' && <ListView groupId={groupId} />}
       {view === 'grid' && <GridView groupId={groupId} />}
