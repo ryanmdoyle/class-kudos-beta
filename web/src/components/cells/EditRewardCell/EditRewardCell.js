@@ -2,24 +2,28 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
-import BehaviorForm from 'src/components/BehaviorForm'
+import RewardForm from 'src/components/RewardForm'
 
 export const QUERY = gql`
-  query FIND_BEHAVIOR_BY_ID($id: String!) {
-    behavior: behavior(id: $id) {
+  query FIND_REWARD_BY_ID($id: String!) {
+    reward: reward(id: $id) {
       id
       name
-      value
+      cost
+      responseRequired
+      responsePrompt
       groupId
     }
   }
 `
-const UPDATE_BEHAVIOR_MUTATION = gql`
-  mutation UpdateBehaviorMutation($id: String!, $input: UpdateBehaviorInput!) {
-    updateBehavior(id: $id, input: $input) {
+const UPDATE_REWARD_MUTATION = gql`
+  mutation UpdateRewardMutation($id: String!, $input: UpdateRewardInput!) {
+    updateReward(id: $id, input: $input) {
       id
       name
-      value
+      cost
+      responseRequired
+      responsePrompt
       groupId
     }
   }
@@ -27,32 +31,32 @@ const UPDATE_BEHAVIOR_MUTATION = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Success = ({ behavior }) => {
+export const Success = ({ reward }) => {
   const { close } = useModal()
-  const [updateBehavior, { loading, error }] = useMutation(
-    UPDATE_BEHAVIOR_MUTATION,
+  const [updateReward, { loading, error }] = useMutation(
+    UPDATE_REWARD_MUTATION,
     {
       onCompleted: () => {
         close()
-        toast.success('Behavior updated.', { classes: 'rw-flash-success' })
+        toast.success('Reward updated.', { classes: 'rw-flash-success' })
       },
     }
   )
 
   const onSave = (input, id) => {
-    updateBehavior({ variables: { id, input } })
+    updateReward({ variables: { id, input } })
   }
 
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
         <h2 className="rw-heading rw-heading-secondary">
-          Edit Behavior {behavior.id}
+          Edit Reward: "{reward.name}"
         </h2>
       </header>
       <div className="rw-segment-main">
-        <BehaviorForm
-          behavior={behavior}
+        <RewardForm
+          reward={reward}
           onSave={onSave}
           error={error}
           loading={loading}
