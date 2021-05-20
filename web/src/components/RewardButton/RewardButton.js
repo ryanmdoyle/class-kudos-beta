@@ -51,7 +51,7 @@ const RewardButton = ({
           toast.error('You do not have enough points to claim that reward!')
         } else { // if enough points...
           // prompt is needed
-          if (reward.responseRequired === true && availablePoints > reward?.cost) {
+          if (reward.responseRequired === true && availablePoints >= reward?.cost) {
             response = window.prompt(reward.responsePrompt)
           }
           if (response === '') {
