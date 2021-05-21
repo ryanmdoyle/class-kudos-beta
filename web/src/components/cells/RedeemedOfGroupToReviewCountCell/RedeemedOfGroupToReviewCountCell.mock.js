@@ -1,6 +1,14 @@
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
-  redeemedOfGroupToReviewCount: {
-    id: 42,
+  redeemedOfGroupToReview: [
+    {
+    id: 1,
   },
+  {
+    id: 2,
+  },
+  {
+    id: 3,
+  }
+],
 })

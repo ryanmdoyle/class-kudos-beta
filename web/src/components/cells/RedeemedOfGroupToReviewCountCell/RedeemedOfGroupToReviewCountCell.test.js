@@ -35,7 +35,7 @@ describe('RedeemedOfGroupToReviewCountCell', () => {
     expect(() => {
       render(
         <Success
-          redeemedOfGroupToReviewCount={standard().redeemedOfGroupToReviewCount}
+          redeemedOfGroupToReview={standard().redeemedOfGroupToReview}
         />
       )
     }).not.toThrow()
