@@ -1,5 +1,5 @@
 import RewardsLayout from 'src/layouts/Scaffolds/RewardsLayout'
-import EditRewardCell from 'src/components/Scaffolds/EditRewardCell'
+import EditRewardCell from 'src/components/cells/EditRewardCell'
 
 const EditRewardPage = ({ id }) => {
   return (

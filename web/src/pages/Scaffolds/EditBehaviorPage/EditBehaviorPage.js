@@ -1,5 +1,5 @@
 import BehaviorsLayout from 'src/layouts/Scaffolds/BehaviorsLayout'
-import EditBehaviorCell from 'src/components/Scaffolds/EditBehaviorCell'
+import EditBehaviorCell from 'src/components/cells/EditBehaviorCell'
 
 const EditBehaviorPage = ({ id }) => {
   return (
