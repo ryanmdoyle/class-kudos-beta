@@ -33,7 +33,7 @@ export const createFeedback = async ({ input }) => {
       data: foreignKeyReplacement(input),
     })
   } else {
-    throw new UserInputError('User cannot be given less than 0 points.')
+    throw new UserInputError('User cannot be given less than 0 kudos.')
   }
 }
 

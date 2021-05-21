@@ -56,7 +56,7 @@ const FeedbackButtonCustom = ({
 
   const handleAwardSave = (name, value) => {
     if (!wontReturnNegativeTotal(value))
-      toast.error('User already has zero points.')
+      toast.error('User already has zero kudos.')
     if (!loading && !selecting && wontReturnNegativeTotal(value)) {
       giveFeedback(name, value)
     }

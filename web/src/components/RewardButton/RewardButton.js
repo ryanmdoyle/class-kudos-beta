@@ -48,7 +48,7 @@ const RewardButton = ({
       onClick={() => {
         let response = null
         if (availablePoints < reward?.cost) { // not enough points, throw error
-          toast.error('You do not have enough points to claim that reward!')
+          toast.error('You do not have enough kudos to claim that reward!')
         } else { // if enough points...
           // prompt is needed
           if (reward.responseRequired === true && availablePoints >= reward?.cost) {

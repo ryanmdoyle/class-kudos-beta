@@ -33,7 +33,7 @@ export const createRedeemed = async ({ input }) => {
       data: foreignKeyReplacement(input),
     })
   } else {
-    throw new UserInputError('Cannot redeem more points than a user has.')
+    throw new UserInputError('Cannot redeem more kudos than a user has.')
   }
 }
 

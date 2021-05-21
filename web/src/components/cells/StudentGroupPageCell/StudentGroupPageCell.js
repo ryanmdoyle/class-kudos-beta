@@ -31,7 +31,7 @@ export const Success = ({ userId, groupId, group }) => {
       <div className="pl-4">
         <span className="text-6xl text-green-400">{points}</span>
         <span className="text-lg ml-2 text-gray-500 mr-12">
-          total {`${points === 1 ? 'point' : 'points' || 'points'}`}
+          total {`${points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
         </span>
       </div>
       </div>

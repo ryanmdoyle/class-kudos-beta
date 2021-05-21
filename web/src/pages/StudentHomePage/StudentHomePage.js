@@ -17,7 +17,7 @@ const StudentHomePage = () => {
           <span className="text-8xl text-green-400">
             <UserPointsCell userId={currentUser?.id} />
           </span>
-          <span className="text-lg ml-2 text-gray-500">total points</span>
+          <span className="text-lg ml-2 text-gray-500">total kudos</span>
         </div>
         <StudentHomeCell userId={currentUser?.id} />
       </div>

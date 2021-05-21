@@ -71,7 +71,7 @@ const FeedbackButton = ({
       ${!loading && 'hover:ring-2'} ring-purple-500`}
       onClick={() => {
         if (!wontReturnNegativeTotal())
-          toast.error('User already has zero points.')
+          toast.error('User already has zero kudos.')
         if (!loading && !selecting && wontReturnNegativeTotal()) {
           giveFeedback()
         }

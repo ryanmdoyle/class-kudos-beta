@@ -44,7 +44,7 @@ const StudentDeleteEnrollment = ({ groupId, userId }) => {
           Are you sure you would like to unenroll from this class/group?
         </p>
         <p className="text-gray-600">
-          You will still have all points earned for this group after you
+          You will still have all kudos earned for this group after you
           unenroll.
         </p>
       </div>
