@@ -21,7 +21,9 @@ const firebaseClientConfig = {
 }
 
 const firebaseClient = ((config) => {
-  firebase.initializeApp(config)
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config)
+  }
   return firebase
 })(firebaseClientConfig)
 
