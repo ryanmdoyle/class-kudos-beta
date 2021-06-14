@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
+import { useState } from 'react'
 
 import { useModal } from 'src/context/ModalContext'
 import LoginButton from '../LoginButton/LoginButton'
@@ -11,6 +12,8 @@ import EditUserCell from 'src/components/cells/EditUserCell'
 const SiteHeader = () => {
   const { isAuthenticated, currentUser } = useAuth()
   const { openModal } = useModal()
+
+  const [isImgError, setImgError] = useState(false)
 
   const openProfile = () => {
     openModal(<EditUserCell id={currentUser.id} />)
@@ -30,14 +33,17 @@ const SiteHeader = () => {
             <span className="text-normal text-white font-body pr-3">
               {`${currentUser?.firstName} ${currentUser?.lastName}`}
             </span>
-            <img
-              src={currentUser?.profileImage}
-              alt="user profile"
-              className="w-10 h-10 rounded-full transform scale-100 hover:scale-125"
-              onClick={() => {
-                openProfile()
-              }}
-            ></img>
+            {!isImgError && (
+              <img
+                src={currentUser?.profileImage}
+                alt="user profile"
+                className="w-10 h-10 rounded-full transform scale-100 hover:scale-125"
+                onClick={() => {
+                  openProfile()
+                }}
+                onError={() => setImgError(true)}
+              ></img>
+            )}
           </>
         )}
         {isAuthenticated && <LogoutButton />}
@@ -48,3 +54,5 @@ const SiteHeader = () => {
 }
 
 export default SiteHeader
+
+// https://lh3.googleusercontent.com/a-/AOh14GjsUiMOvvrQWRV-MZIH-7YOtbpD90mUT7z3rmJwBQ=s96-c
