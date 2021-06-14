@@ -115,9 +115,7 @@ export const Success = ({ redeemedOfGroupToReview, groupId }) => {
   })
 
   const onApproveClick = (id, name) => {
-    if (confirm('Are you sure you want to approve ' + name + '?')) {
-      approveRedeemed({ variables: { id } })
-    }
+    approveRedeemed({ variables: { id } })
   }
 
   const onApproveAll = () => {
