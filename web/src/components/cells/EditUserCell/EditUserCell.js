@@ -1,6 +1,5 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
 import UserForm from 'src/components/UserForm'
 
@@ -47,12 +46,11 @@ export const Success = ({ user }) => {
   const onSave = (input, id) => {
     updateUser({ variables: { id, input } })
   }
-
   return (
     <div>
       <header>
         <h2 className="text-xl text-purple-800 font-display mb-6">
-          Edit User: {user.firstName} {user.lastName}
+          Edit Profile - {user.firstName} {user.lastName}
         </h2>
       </header>
       <UserForm user={user} onSave={onSave} error={error} loading={loading} />

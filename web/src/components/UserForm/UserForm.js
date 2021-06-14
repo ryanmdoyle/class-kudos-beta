@@ -6,8 +6,10 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
+import { useAuth } from '@redwoodjs/auth'
 
 const UserForm = (props) => {
+  const { hasRole } = useAuth()
   const onSubmit = (data) => {
     props.onSave(data, props?.user?.id)
   }
@@ -51,6 +53,7 @@ const UserForm = (props) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
+          disabled={!hasRole(['teacher', 'super_admin'])}
         />
         <FieldError name="firstName" className="rw-field-error" />
 
@@ -67,6 +70,7 @@ const UserForm = (props) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
+          disabled={!hasRole(['teacher', 'super_admin'])}
         />
         <FieldError name="lastName" className="rw-field-error" />
 
