@@ -9,6 +9,7 @@ import { useModal } from 'src/context/ModalContext'
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
 import { QUERY as userListItemQuery } from 'src/components/cells/UserListItemCell/UserListItemCell'
+import { QUERY as studentListQuery } from 'src/components/cells/GroupListCell/GroupListCell'
 
 const USER_POINTS = gql`
   query FeedbackPointsQuery($userId: String!) {
@@ -17,9 +18,17 @@ const USER_POINTS = gql`
 `
 
 const CREATE_FEEDBACK = gql`
-  mutation CreateFeedback($input: CreateFeedbackInput!) {
-    createFeedback(input: $input) {
+  mutation CreateFeedback(
+    $userId: String!
+    $createFeedbackInput: CreateFeedbackInput!
+    $updateUserInput: UpdateUserInput!
+  ) {
+    createFeedback(input: $createFeedbackInput) {
       id
+    }
+    updateUser(id: $userId, input: $updateUserInput) {
+      id
+      points
     }
   }
 `
@@ -53,8 +62,9 @@ const BehaviorButtons = ({
         query: recentUserFeedbackOfGroupQuery,
         variables: { userId: userId, groupId: groupId },
       },
-      { query: pointsQuery, variables: { userId: userId } },
-      { query: userListItemQuery, variables: { userId: userId } },
+      // { query: pointsQuery, variables: { userId: userId } },
+      // { query: userListItemQuery, variables: { userId: userId } },
+      { query: studentListQuery, variables: { id: groupId } },
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })

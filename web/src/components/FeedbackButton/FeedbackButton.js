@@ -22,12 +22,16 @@ const FeedbackButton = ({
     const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     newFeedback({
       variables: {
-        input: {
+        userId: studentId,
+        createFeedbackInput: {
           userId: studentId,
           behaviorId: behaviorId,
           groupId: groupId,
           name: name,
           value: adjustedValue,
+        },
+        updateUserInput: {
+          points: totalUserPoints + adjustedValue,
         },
       },
     })
