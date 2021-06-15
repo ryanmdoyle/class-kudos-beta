@@ -15,6 +15,7 @@ export const QUERY = gql`
         firstName
         lastName
         profileImage
+        points
       }
     }
     behaviorsOfGroup(groupId: $id) {
@@ -60,8 +61,8 @@ export const Success = ({
   group,
 }) => {
   let sorted = enrollmentsOfGroup?.slice().sort((a, b) => {
-    const nameA =  a?.user?.firstName?.toLowerCase()
-    const nameB =  b?.user?.firstName?.toLowerCase()
+    const nameA = a?.user?.firstName?.toLowerCase()
+    const nameB = b?.user?.firstName?.toLowerCase()
     return nameA < nameB ? -1 : 1
   })
   return (

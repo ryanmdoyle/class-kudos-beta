@@ -8,6 +8,7 @@ export const schema = gql`
     profileImage: String
     createdAt: DateTime!
     updatedAt: DateTime!
+    points: Int!
     roles: [UserRole]!
     feedback: [Feedback]!
     redeemed: [Redeemed]!
@@ -35,6 +36,7 @@ export const schema = gql`
     lastName: String
     email: String
     profileImage: String
+    points: Int
   }
 
   type Mutation {
