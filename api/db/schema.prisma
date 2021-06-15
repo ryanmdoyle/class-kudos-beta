@@ -19,6 +19,7 @@ model User {
   profileImage String?
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @default(now())
+  points       Int          @default(0)
   roles        UserRole[]
   feedback     Feedback[]
   redeemed     Redeemed[]
@@ -103,4 +104,11 @@ model Enrollment {
   userId  String
   group   Group?  @relation(fields: [groupId], references: [id])
   groupId String?
+}
+
+model RW_DataMigration {
+  version    String   @id
+  name       String
+  startedAt  DateTime
+  finishedAt DateTime
 }
