@@ -3,7 +3,6 @@ import { useState } from 'react'
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentActivityListCard from 'src/components/RecentActivityListCard/RecentActivityListCard'
-// import UserListItemCell from 'src/components/cells/UserListItemCell/UserListItemCell'
 import ListViewStudentItem from '../ListViewStudentItem/ListViewStudentItem'
 
 const GroupList = ({
@@ -67,6 +66,7 @@ const GroupList = ({
         >
           {selecting ? 'Cancel' : 'Select Multiple'}
         </button>
+        {/* STUDENT LIST */}
         <ul className="">
           {enrollmentsOfGroup.map((enrollment) => {
             const userSelected = selected.includes(enrollment.user.id)
@@ -91,21 +91,6 @@ const GroupList = ({
                   userZero={enrollmentsOfGroup[0]?.user.id}
                   setUserZeroPoints={setUserZeroPoints}
                 />
-                {/* <UserListItemCell
-                  userId={enrollment.user.id}
-                  firstName={enrollment.user.firstName}
-                  lastName={enrollment.user.lastName}
-                  groupId={groupId}
-                  userZero={enrollmentsOfGroup[0]?.user.id}
-                  setFirstName={setFirstName}
-                  setLastName={setLastName}
-                  setStudentId={setStudentId}
-                  totalIsNull={totalPoints === null}
-                  setTotalPoints={setTotalPoints}
-                  userZeroPoints={userZeroPoints}
-                  setUserZeroPoints={setUserZeroPoints}
-                  handleSelect={handleSelect}
-                /> */}
               </div>
             )
           })}
@@ -132,6 +117,9 @@ const GroupList = ({
           selected={selected}
           setSelecting={setSelecting}
           setSelected={setSelected}
+          totalPoints={totalPoints}
+          setCurrentStudent={setCurrentStudent}
+          studentId={studentId}
         />
         {!selecting && (
           <RecentActivityListCard

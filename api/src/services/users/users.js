@@ -24,6 +24,20 @@ export const updateUser = ({ id, input }) => {
   })
 }
 
+export const updateUsersPoints = ({ input }) => {
+  const updated = input.map(async (user) => {
+    // find each selected user
+    const userInDb = await db.user.findUnique({ where: { id: user.id } })
+    // Add feedback value to the existing users points
+    user.points += userInDb.points
+    return db.user.update({
+      data: foreignKeyReplacement(user),
+      where: { id: user.id },
+    })
+  })
+  return updated
+}
+
 export const deleteUser = ({ id }) => {
   return db.user.delete({
     where: { id },
@@ -43,20 +57,20 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).enrollments(),
 }
 
-export const totalUserPoints = async ({ id }) => {
-  const allFeedback = await db.feedback.aggregate({
-    where: { userId: id },
-    sum: { value: true },
-  })
-  if (allFeedback.sum.value === null) {
-    allFeedback.sum.value = 0
-  }
-  const allRedeemed = await db.redeemed.aggregate({
-    where: { userId: id },
-    sum: { cost: true },
-  })
-  if (allRedeemed.sum.value === null) {
-    allRedeemed.sum.value = 0
-  }
-  return allFeedback.sum.value - allRedeemed.sum.cost
-}
+// export const totalUserPoints = async ({ id }) => {
+//   const allFeedback = await db.feedback.aggregate({
+//     where: { userId: id },
+//     sum: { value: true },
+//   })
+//   if (allFeedback.sum.value === null) {
+//     allFeedback.sum.value = 0
+//   }
+//   const allRedeemed = await db.redeemed.aggregate({
+//     where: { userId: id },
+//     sum: { cost: true },
+//   })
+//   if (allRedeemed.sum.value === null) {
+//     allRedeemed.sum.value = 0
+//   }
+//   return allFeedback.sum.value - allRedeemed.sum.cost
+// }

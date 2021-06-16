@@ -37,20 +37,25 @@ const FeedbackButton = ({
     })
   }
   const giveFeedbacks = () => {
-    // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
-    const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     const feedbacks = selected.map((userId) => {
       return {
         userId: userId,
         behaviorId: behaviorId,
         groupId: groupId,
         name: name,
-        value: adjustedValue,
+        value: value,
+      }
+    })
+    const usersToUpdate = selected.map((userId) => {
+      return {
+        id: userId,
+        points: value,
       }
     })
     newFeedbacks({
       variables: {
-        input: feedbacks,
+        feedbackInput: feedbacks,
+        usersInput: usersToUpdate,
       },
     })
   }

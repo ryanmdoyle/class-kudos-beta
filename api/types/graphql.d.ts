@@ -184,6 +184,7 @@ export type Mutation = {
   updateReward: Reward;
   updateUser: User;
   updateUserRole: UserRole;
+  updateUsersPoints: Array<User>;
 };
 
 
@@ -358,6 +359,11 @@ export type MutationUpdateUserArgs = {
 export type MutationUpdateUserRoleArgs = {
   id: Scalars['String'];
   input: UpdateUserRoleInput;
+};
+
+
+export type MutationUpdateUsersPointsArgs = {
+  input: Array<UpdateUsersPointsInput>;
 };
 
 export type Query = {
@@ -624,6 +630,11 @@ export type UpdateUserRoleInput = {
   userId?: Maybe<Scalars['String']>;
 };
 
+export type UpdateUsersPointsInput = {
+  id: Scalars['String'];
+  points: Scalars['Int'];
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['String'];
@@ -768,6 +779,7 @@ export type ResolversTypes = {
   UpdateRewardInput: UpdateRewardInput;
   UpdateUserInput: UpdateUserInput;
   UpdateUserRoleInput: UpdateUserRoleInput;
+  UpdateUsersPointsInput: UpdateUsersPointsInput;
   User: ResolverTypeWrapper<User>;
   UserRole: ResolverTypeWrapper<UserRole>;
 };
@@ -812,6 +824,7 @@ export type ResolversParentTypes = {
   UpdateRewardInput: UpdateRewardInput;
   UpdateUserInput: UpdateUserInput;
   UpdateUserRoleInput: UpdateUserRoleInput;
+  UpdateUsersPointsInput: UpdateUsersPointsInput;
   User: User;
   UserRole: UserRole;
 };
@@ -932,6 +945,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateReward?: Resolver<ResolversTypes['Reward'], ParentType, ContextType, RequireFields<MutationUpdateRewardArgs, 'id' | 'input'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id' | 'input'>>;
   updateUserRole?: Resolver<ResolversTypes['UserRole'], ParentType, ContextType, RequireFields<MutationUpdateUserRoleArgs, 'id' | 'input'>>;
+  updateUsersPoints?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUsersPointsArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

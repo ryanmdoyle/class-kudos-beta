@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect } from 'react'
 
-import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 import ProfileImageCircle from 'src/components/ProfileImageCircle/ProfileImageCircle'
 
 const ListViewStudentItem = ({
