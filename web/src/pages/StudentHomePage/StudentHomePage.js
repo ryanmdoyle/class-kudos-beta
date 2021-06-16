@@ -13,11 +13,13 @@ const StudentHomePage = () => {
         <h1 className="text-3xl font-display mb-4">
           Welcome{currentUser ? `, ${currentUser?.firstName}` : null}! 👋
         </h1>
-        <div className="white-box w-full h-32 mb-4">
+        <div className="white-box w-full h-32 mb-4 flex">
           <span className="text-8xl text-green-400">
             <UserPointsCell userId={currentUser?.id} />
           </span>
-          <span className="text-lg ml-2 text-gray-500">total kudos</span>
+          <span className="text-lg ml-2 text-gray-500 self-end">
+            total kudos
+          </span>
         </div>
         <StudentHomeCell userId={currentUser?.id} />
       </div>

@@ -1,13 +1,16 @@
 import RewardsOfGroupStudentCell from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
 import UserActivityOfGroupCell from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
-import UserPointsCell from 'src/components/cells/UserPointsCell/UserPointsCell'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
 export const QUERY = gql`
-  query UserPointsWrapperQuery($groupId: String!) {
+  query UserPointsWrapperQuery($groupId: String!, $userId: String!) {
     group(id: $groupId) {
       id
       name
+    }
+    user(id: $userId) {
+      id
+      points
     }
   }
 `
@@ -22,18 +25,17 @@ export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ userId, groupId, group }) => {
-  const points = <UserPointsCell userId={userId} />
+export const Success = ({ userId, groupId, group, user }) => {
   return (
     <div className="w-full h-full p-4 relative grid grid-cols-2 grid-rows-6 gap-2">
       {/* Points */}
       <div className="white-box relative col-span-1 row-span-1 p-2 flex items-center">
-      <div className="pl-4">
-        <span className="text-6xl text-green-400">{points}</span>
-        <span className="text-lg ml-2 text-gray-500 mr-12">
-          total {`${points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
-        </span>
-      </div>
+        <div className="pl-4">
+          <span className="text-6xl text-green-400">{user.points}</span>
+          <span className="text-lg ml-2 text-gray-500 mr-12">
+            total {`${user.points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
+          </span>
+        </div>
       </div>
       {/* Activity */}
       <div className="relative col-span-1 row-span-6">
@@ -52,7 +54,11 @@ export const Success = ({ userId, groupId, group }) => {
       {/* Rewards */}
       <div className="white-box h-full p-2 col-span-1 row-span-5">
         <h2 className="font-display text-2xl mb-2 p-2">Rewards Available</h2>
-        <RewardsOfGroupStudentCell groupId={groupId} userId={userId} />
+        <RewardsOfGroupStudentCell
+          groupId={groupId}
+          userId={userId}
+          availablePoints={user.points}
+        />
       </div>
     </div>
   )

@@ -1,6 +1,9 @@
 export const QUERY = gql`
-  query FeedbackPointsQuery($userId: String!) {
-    totalUserPoints(id: $userId)
+  query UserPointsQuery($userId: String!) {
+    user(id: $userId) {
+      id
+      points
+    }
   }
 `
 export const beforeQuery = (props) => {
@@ -33,4 +36,4 @@ export const Empty = () => 0
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
-export const Success = ({ totalUserPoints }) => totalUserPoints
+export const Success = ({ user }) => user.points

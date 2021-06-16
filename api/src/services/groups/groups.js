@@ -19,9 +19,9 @@ export const createGroup = ({ input }) => {
   requireAuth({ role: 'teacher' })
   if (input.type === 'primary' || input.type === 'secondary') {
     // input.enrollId = nanoid(8)
-    const inputWithKeys = foreignKeyReplacement(input)
+    // const inputWithKeys = foreignKeyReplacement(input)
     const group = db.group.create({
-      data: { enrollId: nanoid(8), ...inputWithKeys },
+      data: { enrollId: nanoid(8), ...input },
     })
     group.then((data) => createStarterBehaviors(data.id))
     return group
