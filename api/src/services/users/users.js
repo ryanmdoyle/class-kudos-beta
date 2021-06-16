@@ -19,14 +19,14 @@ export const createUser = ({ input }) => {
 
 export const updateUser = ({ id, input }) => {
   return db.user.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }
 
 export const updateUsersPoints = ({ input }) => {
   const updated = input.map(async (user) => {
-    // find each selected user
+    // find each selected userw
     const userInDb = await db.user.findUnique({ where: { id: user.id } })
     // Add feedback value to the existing users points
     user.points += userInDb.points
