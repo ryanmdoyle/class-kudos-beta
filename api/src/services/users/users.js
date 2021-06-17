@@ -24,6 +24,36 @@ export const updateUser = ({ id, input }) => {
   })
 }
 
+export const updateUserPoints = async ({ id, points }) => {
+  const userInDb = await db.user.findUnique({
+    where: { id },
+  })
+  return db.user.update({
+    data: { points: (userInDb.points += points) },
+    where: { id },
+  })
+}
+
+export const addUserPoints = async ({ id, points }) => {
+  const userInDb = await db.user.findUnique({
+    where: { id },
+  })
+  return db.user.update({
+    data: { points: (userInDb.points += points) },
+    where: { id },
+  })
+}
+
+export const reduceUserPoints = async ({ id, points }) => {
+  const userInDb = await db.user.findUnique({
+    where: { id },
+  })
+  return db.user.update({
+    data: { points: (userInDb.points -= points) },
+    where: { id },
+  })
+}
+
 export const updateUsersPoints = ({ input }) => {
   const updated = input.map(async (user) => {
     // find each selected userw

@@ -5,10 +5,19 @@ import timeTag from 'src/lib/timeTag'
 
 import { QUERY } from 'src/components/cells/GroupFeedbackCell/GroupFeedbackCell'
 
+// this is not deleting, but adding....
 const DELETE_FEEDBACK_MUTATION = gql`
-  mutation DeleteFeedbackMutation($id: String!) {
-    deleteFeedback(id: $id) {
+  mutation DeleteFeedbackMutation(
+    $feedbackId: String!
+    $userId: String!
+    $points: Int!
+  ) {
+    deleteFeedback(id: $feedbackId) {
       id
+    }
+    reduceUserPoints(id: $userId, points: $points) {
+      id
+      points
     }
   }
 `
@@ -22,9 +31,11 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete feedback ' + id + '?')) {
-      deleteFeedback({ variables: { id } })
+  const onDeleteClick = (feedbackId, userId, points) => {
+    if (
+      confirm('Are you sure you want to delete feedback ' + feedbackId + '?')
+    ) {
+      deleteFeedback({ variables: { feedbackId, userId, points } })
     }
   }
 
@@ -57,7 +68,13 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
                     href="#"
                     title={'Delete feedback ' + feedback?.id}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(feedback?.id)}
+                    onClick={() =>
+                      onDeleteClick(
+                        feedback?.id,
+                        feedback?.user.id,
+                        feedback?.value
+                      )
+                    }
                   >
                     Delete
                   </button>
