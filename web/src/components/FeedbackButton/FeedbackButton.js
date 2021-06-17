@@ -22,16 +22,12 @@ const FeedbackButton = ({
     const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     newFeedback({
       variables: {
-        userId: studentId,
         createFeedbackInput: {
           userId: studentId,
           behaviorId: behaviorId,
           groupId: groupId,
           name: name,
           value: adjustedValue,
-        },
-        updateUserInput: {
-          points: totalUserPoints + adjustedValue,
         },
       },
     })
@@ -46,16 +42,9 @@ const FeedbackButton = ({
         value: value,
       }
     })
-    const usersToUpdate = selected.map((userId) => {
-      return {
-        id: userId,
-        points: value,
-      }
-    })
     newFeedbacks({
       variables: {
         feedbackInput: feedbacks,
-        usersInput: usersToUpdate,
       },
     })
   }

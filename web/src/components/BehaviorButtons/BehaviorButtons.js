@@ -1,50 +1,24 @@
 import FeedbackButton from 'src/components/FeedbackButton/FeedbackButton'
 import FeedbackButtonCustom from 'src/components/FeedbackButtonCustom/FeedbackButtonCustom'
 
-import { useMutation, useQuery } from '@redwoodjs/web'
-// import { useApolloClient } from '@apollo/client'
+import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
-// import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
-// import { QUERY as userListItemQuery } from 'src/components/cells/UserListItemCell/UserListItemCell'
 import { QUERY as studentListQuery } from 'src/components/cells/GroupListCell/GroupListCell'
 
-// const USER_POINTS = gql`
-//   query FeedbackPointsQuery($userId: String!) {
-//     user(id: $userId) {
-//       id
-//       points
-//     }
-//   }
-// `
-
 const CREATE_FEEDBACK = gql`
-  mutation CreateFeedback(
-    $userId: String!
-    $createFeedbackInput: CreateFeedbackInput!
-    $updateUserInput: UpdateUserInput!
-  ) {
+  mutation CreateFeedback($createFeedbackInput: CreateFeedbackInput!) {
     createFeedback(input: $createFeedbackInput) {
       id
-    }
-    updateUser(id: $userId, input: $updateUserInput) {
-      id
-      points
     }
   }
 `
 
 const CREATE_FEEDBACKS = gql`
-  mutation CreateFeedbacks(
-    $feedbackInput: [CreateFeedbackInput!]!
-    $usersInput: [UpdateUsersPointsInput!]!
-  ) {
+  mutation CreateFeedbacks($feedbackInput: [CreateFeedbackInput!]!) {
     createFeedbacks(input: $feedbackInput) {
-      id
-    }
-    updateUsersPoints(input: $usersInput) {
       id
     }
   }
@@ -80,20 +54,13 @@ const BehaviorButtons = ({
     },
   })
 
-  // const selectedUsersToRefetch = selected?.map((user) => ({
-  //   query: userListItemQuery,
-  //   variables: { userId: user },
-  // }))
-
   const [newFeedbacks, { loading: loadings }] = useMutation(CREATE_FEEDBACKS, {
     refetchQueries: [
       {
         query: recentUserFeedbackOfGroupQuery,
         variables: { userId: userId, groupId: groupId },
       },
-      // { query: pointsQuery, variables: { userId: userId } },
       { query: studentListQuery, variables: { id: groupId } },
-      // ...selectedUsersToRefetch,
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {

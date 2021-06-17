@@ -1,6 +1,6 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
-import { reduceUserPoints } from '../users/users'
+import { addUserPoints, reduceUserPoints } from '../users/users'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const redeemeds = () => {
@@ -32,7 +32,12 @@ export const updateRedeemed = ({ id, input }) => {
   })
 }
 
-export const deleteRedeemed = ({ id }) => {
+export const deleteRedeemed = async ({ id }) => {
+  const redeemedPending = await db.redeemed.findUnique({ where: { id } })
+  await addUserPoints({
+    id: redeemedPending.userId,
+    points: redeemedPending.cost,
+  })
   return db.redeemed.delete({
     where: { id },
   })
