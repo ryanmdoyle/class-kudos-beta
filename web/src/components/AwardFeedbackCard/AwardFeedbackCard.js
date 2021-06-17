@@ -9,6 +9,9 @@ const AwardFeedbackCard = ({
   selected,
   setSelecting,
   setSelected,
+  totalPoints,
+  setCurrentStudent,
+  studentId,
 }) => {
   return (
     <div className="white-box mb-4">
@@ -25,6 +28,9 @@ const AwardFeedbackCard = ({
           selected={selected}
           setSelecting={setSelecting}
           setSelected={setSelected}
+          totalPoints={totalPoints}
+          setCurrentStudent={setCurrentStudent}
+          studentId={studentId}
         />
       </div>
     </div>

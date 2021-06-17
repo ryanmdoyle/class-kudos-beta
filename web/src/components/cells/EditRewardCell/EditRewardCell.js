@@ -5,7 +5,7 @@ import { useModal } from 'src/context/ModalContext'
 import RewardForm from 'src/components/RewardForm'
 
 export const QUERY = gql`
-  query FIND_REWARD_BY_ID($id: String!) {
+  query FIND_REWARD_WITH_RESPONSE_BY_ID($id: String!) {
     reward: reward(id: $id) {
       id
       name

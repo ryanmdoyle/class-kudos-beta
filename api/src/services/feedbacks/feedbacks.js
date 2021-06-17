@@ -1,5 +1,10 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
+import {
+  updateUserPoints,
+  updateUsersPoints,
+  reduceUserPoints,
+} from '../users/users'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const feedbacks = () => {
@@ -13,24 +18,11 @@ export const feedback = ({ id }) => {
 }
 
 export const createFeedback = async ({ input }) => {
-  const allFeedback = await db.feedback.aggregate({
-    where: { userId: input.userId },
-    sum: { value: true },
-  })
-  if (allFeedback.sum.value === null) {
-    allFeedback.sum.value = 0
-  }
-  const allRedeemed = await db.redeemed.aggregate({
-    where: { userId: input.userId },
-    sum: { cost: true },
-  })
-  if (allRedeemed.sum.value === null) {
-    allRedeemed.sum.value = 0
-  }
-  const totalPoints = allFeedback.sum.value - allRedeemed.sum.cost
-  if (totalPoints + input.value >= 0) {
+  const userInDb = await db.user.findUnique({ where: { id: input.userId } })
+  if (userInDb.points + input.value >= 0) {
+    await updateUserPoints({ id: input.userId, points: input.value })
     return db.feedback.create({
-      data: foreignKeyReplacement(input),
+      data: input,
     })
   } else {
     throw new UserInputError('User cannot be given less than 0 kudos.')
@@ -44,7 +36,12 @@ export const updateFeedback = ({ id, input }) => {
   })
 }
 
-export const deleteFeedback = ({ id }) => {
+export const deleteFeedback = async ({ id }) => {
+  const feedbackInDb = await db.feedback.findUnique({ where: { id } })
+  await reduceUserPoints({
+    id: feedbackInDb.userId,
+    points: feedbackInDb.value,
+  })
   return db.feedback.delete({
     where: { id },
   })
@@ -82,6 +79,13 @@ export const feedbackOfGroup = ({ groupId }) => {
 }
 
 export const createFeedbacks = async ({ input }) => {
+  const usersForPointUpdate = input.map((feedback) => {
+    return {
+      id: feedback.userId,
+      points: feedback.value,
+    }
+  })
+  await updateUsersPoints({ input: usersForPointUpdate })
   const created = await db.feedback.createMany({
     data: input,
   })

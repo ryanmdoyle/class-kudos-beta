@@ -1,32 +1,24 @@
 import FeedbackButton from 'src/components/FeedbackButton/FeedbackButton'
 import FeedbackButtonCustom from 'src/components/FeedbackButtonCustom/FeedbackButtonCustom'
 
-import { useMutation, useQuery } from '@redwoodjs/web'
-// import { useApolloClient } from '@apollo/client'
+import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useModal } from 'src/context/ModalContext'
 
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
-import { QUERY as pointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
-import { QUERY as userListItemQuery } from 'src/components/cells/UserListItemCell/UserListItemCell'
-
-const USER_POINTS = gql`
-  query FeedbackPointsQuery($userId: String!) {
-    totalUserPoints(id: $userId)
-  }
-`
+import { QUERY as studentListQuery } from 'src/components/cells/GroupListCell/GroupListCell'
 
 const CREATE_FEEDBACK = gql`
-  mutation CreateFeedback($input: CreateFeedbackInput!) {
-    createFeedback(input: $input) {
+  mutation CreateFeedback($createFeedbackInput: CreateFeedbackInput!) {
+    createFeedback(input: $createFeedbackInput) {
       id
     }
   }
 `
 
 const CREATE_FEEDBACKS = gql`
-  mutation CreateFeedbacks($input: [CreateFeedbackInput!]!) {
-    createFeedbacks(input: $input) {
+  mutation CreateFeedbacks($feedbackInput: [CreateFeedbackInput!]!) {
+    createFeedbacks(input: $feedbackInput) {
       id
     }
   }
@@ -40,12 +32,10 @@ const BehaviorButtons = ({
   selecting,
   setSelecting,
   setSelected,
+  totalPoints,
+  setCurrentStudent,
 }) => {
   const { isOpen, close } = useModal()
-  const { data } = useQuery(USER_POINTS, {
-    variables: { userId: userId },
-  })
-  const totalUserPoints = data?.totalUserPoints
 
   const [newFeedback, { loading }] = useMutation(CREATE_FEEDBACK, {
     refetchQueries: [
@@ -53,8 +43,7 @@ const BehaviorButtons = ({
         query: recentUserFeedbackOfGroupQuery,
         variables: { userId: userId, groupId: groupId },
       },
-      { query: pointsQuery, variables: { userId: userId } },
-      { query: userListItemQuery, variables: { userId: userId } },
+      { query: studentListQuery, variables: { id: groupId } },
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
@@ -65,25 +54,22 @@ const BehaviorButtons = ({
     },
   })
 
-  const selectedUsersToRefetch = selected?.map((user) => ({
-    query: userListItemQuery,
-    variables: { userId: user },
-  }))
   const [newFeedbacks, { loading: loadings }] = useMutation(CREATE_FEEDBACKS, {
     refetchQueries: [
       {
         query: recentUserFeedbackOfGroupQuery,
         variables: { userId: userId, groupId: groupId },
       },
-      { query: pointsQuery, variables: { userId: userId } },
-      ...selectedUsersToRefetch,
+      { query: studentListQuery, variables: { id: groupId } },
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
-      setSelected([])
       setSelecting(false)
-      if (isOpen) close()
+      setSelected([])
+      if (!selecting) {
+        setCurrentStudent(null)
+      } else setCurrentStudent(userId)
     },
     onError: () => {
       toast.error('Oops, there was a problem. Please try again.')
@@ -104,7 +90,7 @@ const BehaviorButtons = ({
         <FeedbackButton
           name={behavior.name}
           value={behavior.value}
-          totalUserPoints={totalUserPoints}
+          totalUserPoints={totalPoints}
           studentId={userId}
           behaviorId={behavior.id}
           groupId={groupId}
@@ -115,10 +101,13 @@ const BehaviorButtons = ({
           loading={loading}
           loadings={loadings}
           key={behavior.id}
+          setCurrentStudent={setCurrentStudent}
+          setSelecting={setSelecting}
+          setSelected={setSelected}
         />
       ))}
       <FeedbackButtonCustom
-        totalUserPoints={totalUserPoints}
+        totalUserPoints={totalPoints}
         studentId={userId}
         groupId={groupId}
         newFeedback={newFeedback}

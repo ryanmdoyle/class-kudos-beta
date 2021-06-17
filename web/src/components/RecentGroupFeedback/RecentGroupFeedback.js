@@ -6,8 +6,8 @@ import timeTag from 'src/lib/timeTag'
 import { QUERY } from 'src/components/cells/GroupFeedbackCell/GroupFeedbackCell'
 
 const DELETE_FEEDBACK_MUTATION = gql`
-  mutation DeleteFeedbackMutation($id: String!) {
-    deleteFeedback(id: $id) {
+  mutation DeleteFeedbackMutation($feedbackId: String!) {
+    deleteFeedback(id: $feedbackId) {
       id
     }
   }
@@ -22,9 +22,11 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete feedback ' + id + '?')) {
-      deleteFeedback({ variables: { id } })
+  const onDeleteClick = (feedbackId) => {
+    if (
+      confirm('Are you sure you want to delete feedback ' + feedbackId + '?')
+    ) {
+      deleteFeedback({ variables: { feedbackId } })
     }
   }
 

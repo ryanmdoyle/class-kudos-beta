@@ -1,5 +1,6 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
+import { addUserPoints, reduceUserPoints } from '../users/users'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const redeemeds = () => {
@@ -13,24 +14,11 @@ export const redeemed = ({ id }) => {
 }
 
 export const createRedeemed = async ({ input }) => {
-  const allFeedback = await db.feedback.aggregate({
-    where: { userId: input.userId },
-    sum: { value: true },
-  })
-  if (allFeedback.sum.value === null) {
-    allFeedback.sum.value = 0
-  }
-  const allRedeemed = await db.redeemed.aggregate({
-    where: { userId: input.userId },
-    sum: { cost: true },
-  })
-  if (allRedeemed.sum.value === null) {
-    allRedeemed.sum.value = 0
-  }
-  const totalPoints = allFeedback.sum.value - allRedeemed.sum.cost
-  if (totalPoints >= input.cost) {
+  const userInDb = await db.user.findUnique({ where: { id: input.userId } })
+  if (userInDb.points >= input.cost) {
+    await reduceUserPoints({ id: input.userId, points: input.cost })
     return db.redeemed.create({
-      data: foreignKeyReplacement(input),
+      data: input,
     })
   } else {
     throw new UserInputError('Cannot redeem more kudos than a user has.')
@@ -44,7 +32,12 @@ export const updateRedeemed = ({ id, input }) => {
   })
 }
 
-export const deleteRedeemed = ({ id }) => {
+export const deleteRedeemed = async ({ id }) => {
+  const redeemedPending = await db.redeemed.findUnique({ where: { id } })
+  await addUserPoints({
+    id: redeemedPending.userId,
+    points: redeemedPending.cost,
+  })
   return db.redeemed.delete({
     where: { id },
   })

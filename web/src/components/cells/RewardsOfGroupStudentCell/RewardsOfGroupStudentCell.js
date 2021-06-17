@@ -7,7 +7,7 @@ import { QUERY as userPointsQuery } from 'src/components/cells/UserPointsCell/Us
 import { QUERY as activityQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 
 export const QUERY = gql`
-  query RewardsOfGroupStudentQuery($groupId: String!, $userId: String!) {
+  query RewardsOfGroupStudentQuery($groupId: String!) {
     rewardsOfGroup(groupId: $groupId) {
       id
       name
@@ -15,7 +15,6 @@ export const QUERY = gql`
       responseRequired
       responsePrompt
     }
-    totalUserPoints(id: $userId)
   }
 `
 
@@ -42,17 +41,23 @@ export const beforeQuery = (props) => {
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => (
-  <div className='flex flex-col items-center'>
-    <p className="text-gray-700">Hmm...Doesn&apos;t look like there are any rewards for you yet...</p>
+  <div className="flex flex-col items-center">
+    <p className="text-gray-700">
+      Hmm...Doesn&apos;t look like there are any rewards for you yet...
+    </p>
     <p className="text-gray-700">(Your teacher can make some)</p>
-    <img src='/huh.gif' className="h-48 w-48 rounded-full my-8"></img>
+    <img
+      src="/huh.gif"
+      alt="gif of person confused"
+      className="h-48 w-48 rounded-full my-8"
+    ></img>
   </div>
-  )
+)
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({
-  totalUserPoints,
+  availablePoints,
   rewardsOfGroup,
   groupId,
   userId,
@@ -93,7 +98,7 @@ export const Success = ({
           reward={reward}
           groupId={groupId}
           userId={userId}
-          availablePoints={totalUserPoints}
+          availablePoints={availablePoints}
           newRedeemed={newRedeemed}
           sendEmail={sendEmail}
           loading={loading}

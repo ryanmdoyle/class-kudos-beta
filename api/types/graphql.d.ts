@@ -183,7 +183,9 @@ export type Mutation = {
   updateRedeemed: Redeemed;
   updateReward: Reward;
   updateUser: User;
+  updateUserPoints: User;
   updateUserRole: UserRole;
+  updateUsersPoints: Array<User>;
 };
 
 
@@ -355,9 +357,20 @@ export type MutationUpdateUserArgs = {
 };
 
 
+export type MutationUpdateUserPointsArgs = {
+  id: Scalars['String'];
+  points: Scalars['Int'];
+};
+
+
 export type MutationUpdateUserRoleArgs = {
   id: Scalars['String'];
   input: UpdateUserRoleInput;
+};
+
+
+export type MutationUpdateUsersPointsArgs = {
+  input: Array<UpdateUsersPointsInput>;
 };
 
 export type Query = {
@@ -389,7 +402,6 @@ export type Query = {
   reward?: Maybe<Reward>;
   rewards: Array<Reward>;
   rewardsOfGroup: Array<Reward>;
-  totalUserPoints: Scalars['Int'];
   user?: Maybe<User>;
   userRole?: Maybe<UserRole>;
   userRoles: Array<UserRole>;
@@ -496,11 +508,6 @@ export type QueryRewardArgs = {
 
 export type QueryRewardsOfGroupArgs = {
   groupId: Scalars['String'];
-};
-
-
-export type QueryTotalUserPointsArgs = {
-  id: Scalars['String'];
 };
 
 
@@ -622,6 +629,11 @@ export type UpdateUserInput = {
 export type UpdateUserRoleInput = {
   name?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateUsersPointsInput = {
+  id: Scalars['String'];
+  points: Scalars['Int'];
 };
 
 export type User = {
@@ -768,6 +780,7 @@ export type ResolversTypes = {
   UpdateRewardInput: UpdateRewardInput;
   UpdateUserInput: UpdateUserInput;
   UpdateUserRoleInput: UpdateUserRoleInput;
+  UpdateUsersPointsInput: UpdateUsersPointsInput;
   User: ResolverTypeWrapper<User>;
   UserRole: ResolverTypeWrapper<UserRole>;
 };
@@ -812,6 +825,7 @@ export type ResolversParentTypes = {
   UpdateRewardInput: UpdateRewardInput;
   UpdateUserInput: UpdateUserInput;
   UpdateUserRoleInput: UpdateUserRoleInput;
+  UpdateUsersPointsInput: UpdateUsersPointsInput;
   User: User;
   UserRole: UserRole;
 };
@@ -931,7 +945,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateRedeemed?: Resolver<ResolversTypes['Redeemed'], ParentType, ContextType, RequireFields<MutationUpdateRedeemedArgs, 'id' | 'input'>>;
   updateReward?: Resolver<ResolversTypes['Reward'], ParentType, ContextType, RequireFields<MutationUpdateRewardArgs, 'id' | 'input'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id' | 'input'>>;
+  updateUserPoints?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserPointsArgs, 'id' | 'points'>>;
   updateUserRole?: Resolver<ResolversTypes['UserRole'], ParentType, ContextType, RequireFields<MutationUpdateUserRoleArgs, 'id' | 'input'>>;
+  updateUsersPoints?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUsersPointsArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -962,7 +978,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   reward?: Resolver<Maybe<ResolversTypes['Reward']>, ParentType, ContextType, RequireFields<QueryRewardArgs, 'id'>>;
   rewards?: Resolver<Array<ResolversTypes['Reward']>, ParentType, ContextType>;
   rewardsOfGroup?: Resolver<Array<ResolversTypes['Reward']>, ParentType, ContextType, RequireFields<QueryRewardsOfGroupArgs, 'groupId'>>;
-  totalUserPoints?: Resolver<ResolversTypes['Int'], ParentType, ContextType, RequireFields<QueryTotalUserPointsArgs, 'id'>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   userRole?: Resolver<Maybe<ResolversTypes['UserRole']>, ParentType, ContextType, RequireFields<QueryUserRoleArgs, 'id'>>;
   userRoles?: Resolver<Array<ResolversTypes['UserRole']>, ParentType, ContextType>;

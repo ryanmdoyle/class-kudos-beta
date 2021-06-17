@@ -3,7 +3,7 @@ import { useState } from 'react'
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
 import RecentActivityListCard from 'src/components/RecentActivityListCard/RecentActivityListCard'
-import UserListItemCell from 'src/components/cells/UserListItemCell/UserListItemCell'
+import ListViewStudentItem from '../ListViewStudentItem/ListViewStudentItem'
 
 const GroupList = ({
   groupId,
@@ -12,9 +12,11 @@ const GroupList = ({
   enrollmentsOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
+  const [currentStudent, setCurrentStudent] = useState(
+    enrollmentsOfGroup[0]?.user.id
+  )
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState([])
-
   const [firstName, setFirstName] = useState(
     enrollmentsOfGroup[0]?.user.firstName
   )
@@ -24,6 +26,7 @@ const GroupList = ({
   const [userZeroPoints, setUserZeroPoints] = useState(null)
 
   const handleSelect = (userId) => {
+    setCurrentStudent(userId)
     if (selecting) {
       if (selected.includes(userId)) {
         const removed = [...selected]
@@ -52,6 +55,10 @@ const GroupList = ({
         <button
           onClick={() => {
             setSelecting(!selecting)
+            setSelected([])
+            if (!selecting) {
+              setCurrentStudent(null)
+            } else setCurrentStudent(studentId)
           }}
           className={`${
             selecting ? 'button-purple' : 'button-white'
@@ -59,6 +66,7 @@ const GroupList = ({
         >
           {selecting ? 'Cancel' : 'Select Multiple'}
         </button>
+        {/* STUDENT LIST */}
         <ul className="">
           {enrollmentsOfGroup.map((enrollment) => {
             const userSelected = selected.includes(enrollment.user.id)
@@ -69,20 +77,19 @@ const GroupList = ({
                   userSelected && selecting && 'ring-2'
                 } ring-purple-500 rounded-md`}
               >
-                <UserListItemCell
-                  userId={enrollment.user.id}
-                  firstName={enrollment.user.firstName}
-                  lastName={enrollment.user.lastName}
-                  groupId={groupId}
-                  userZero={enrollmentsOfGroup[0]?.user.id}
+                <ListViewStudentItem
+                  id={enrollment.id}
+                  key={enrollment.key}
+                  user={enrollment.user}
+                  currentStudent={currentStudent}
+                  selecting={selecting}
                   setFirstName={setFirstName}
                   setLastName={setLastName}
                   setStudentId={setStudentId}
-                  totalIsNull={totalPoints === null}
-                  setTotalPoints={setTotalPoints}
-                  userZeroPoints={userZeroPoints}
-                  setUserZeroPoints={setUserZeroPoints}
                   handleSelect={handleSelect}
+                  setTotalPoints={setTotalPoints}
+                  userZero={enrollmentsOfGroup[0]?.user.id}
+                  setUserZeroPoints={setUserZeroPoints}
                 />
               </div>
             )
@@ -94,7 +101,11 @@ const GroupList = ({
           <StudentPointsCard
             firstName={firstName}
             lastName={lastName}
-            totalPoints={studentId === enrollmentsOfGroup[0]?.user.id ? userZeroPoints : totalPoints}
+            totalPoints={
+              studentId === enrollmentsOfGroup[0]?.user.id
+                ? userZeroPoints
+                : totalPoints
+            }
           />
         )}
         <AwardFeedbackCard
@@ -106,6 +117,9 @@ const GroupList = ({
           selected={selected}
           setSelecting={setSelecting}
           setSelected={setSelected}
+          totalPoints={totalPoints}
+          setCurrentStudent={setCurrentStudent}
+          studentId={studentId}
         />
         {!selecting && (
           <RecentActivityListCard
