@@ -21,9 +21,9 @@ const FeedbackButtonCustom = ({
     const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
     newFeedback({
       variables: {
-        input: {
+        createFeedbackInput: {
           userId: studentId,
-          behaviorId: behaviorId,
+          // behaviorId: behaviorId,
           groupId: groupId,
           name: name,
           value: adjustedValue,
@@ -43,7 +43,7 @@ const FeedbackButtonCustom = ({
     })
     newFeedbacks({
       variables: {
-        input: feedbacks,
+        feedbackInput: feedbacks,
       },
     })
   }

@@ -47,7 +47,7 @@ const BehaviorButtons = ({
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
-      if (isOpen) close()
+      if (isOpen) close() // close modal for custom values
     },
     onError: () => {
       toast.error('Oops, there was a problem. Please try again.')
@@ -70,6 +70,7 @@ const BehaviorButtons = ({
       if (!selecting) {
         setCurrentStudent(null)
       } else setCurrentStudent(userId)
+      if (isOpen) close() // close modal for custom values
     },
     onError: () => {
       toast.error('Oops, there was a problem. Please try again.')
