@@ -44,7 +44,7 @@ const GroupList = ({
     return (
       <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
         No Students! Enroll new students with the code:{' '}
-        <span className="font-bold">{enrollId}</span>
+        <span className="font-bold font-mono">{enrollId}</span>
       </div>
     )
   }

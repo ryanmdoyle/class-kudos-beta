@@ -14,9 +14,10 @@ const GroupCard = ({
   const { openModal } = useModal()
 
   const cardClick = (e) => {
-    if (e.target.dataset.setting) {
+    if (e.target.dataset.clickElement === 'settings') {
       openModal(<EditGroupCell id={id} userId={userId} />)
-    } else {
+    }
+    if (e.target.dataset.clickElement !== 'enrollId') {
       navigate(routes.groupList({ groupId: id }))
     }
   }
@@ -31,12 +32,18 @@ const GroupCard = ({
           <h2 className="text-xl font-display">{name}</h2>
           <span className="text-gray-500 text-sm">{description}</span>
           {enrollId && (
-            <>
+            <span>
               <br></br>
-              <span className="text-gray-500 text-sm">
-                Enroll ID: {enrollId}
+              <span className="text-gray-500 text-sm">Enroll ID: </span>
+              <span
+                className="text-gray-500 text-sm font-mono"
+                data-click-element="enrollId"
+                id="enrollId"
+                value={enrollId}
+              >
+                {enrollId}
               </span>
-            </>
+            </span>
           )}
         </div>
       </div>
@@ -54,7 +61,7 @@ const GroupCard = ({
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
-          data-setting="true"
+          data-click-element="settings"
         >
           <path
             stroke="none"

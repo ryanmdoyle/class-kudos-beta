@@ -16,6 +16,7 @@ module.exports = {
         '"Noto Sans"',
         'sans-serif',
       ],
+      mono: ['"Roboto Mono"', 'ui-monospace', 'monospace'],
       display: ['Signika'],
       body: ['Lato'],
     },
