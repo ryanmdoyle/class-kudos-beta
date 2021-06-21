@@ -151,6 +151,7 @@ export type Group = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addUserPoints: User;
   approveRedeemed: Redeemed;
   approveRedeemeds: Array<Redeemed>;
   archiveGroup: Group;
@@ -175,6 +176,7 @@ export type Mutation = {
   deleteReward: Reward;
   deleteUser: User;
   deleteUserRole: UserRole;
+  reduceUserPoints: User;
   sendRedeemedNotification: Email;
   updateBehavior: Behavior;
   updateEnrollment: Enrollment;
@@ -186,6 +188,12 @@ export type Mutation = {
   updateUserPoints: User;
   updateUserRole: UserRole;
   updateUsersPoints: Array<User>;
+};
+
+
+export type MutationAddUserPointsArgs = {
+  id: Scalars['String'];
+  points: Scalars['Int'];
 };
 
 
@@ -307,6 +315,12 @@ export type MutationDeleteUserArgs = {
 
 export type MutationDeleteUserRoleArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationReduceUserPointsArgs = {
+  id: Scalars['String'];
+  points: Scalars['Int'];
 };
 
 
@@ -913,6 +927,7 @@ export interface JsonObjectScalarConfig extends GraphQLScalarTypeConfig<Resolver
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addUserPoints?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationAddUserPointsArgs, 'id' | 'points'>>;
   approveRedeemed?: Resolver<ResolversTypes['Redeemed'], ParentType, ContextType, RequireFields<MutationApproveRedeemedArgs, 'id'>>;
   approveRedeemeds?: Resolver<Array<ResolversTypes['Redeemed']>, ParentType, ContextType, RequireFields<MutationApproveRedeemedsArgs, 'ids'>>;
   archiveGroup?: Resolver<ResolversTypes['Group'], ParentType, ContextType, RequireFields<MutationArchiveGroupArgs, 'id'>>;
@@ -937,6 +952,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteReward?: Resolver<ResolversTypes['Reward'], ParentType, ContextType, RequireFields<MutationDeleteRewardArgs, 'id'>>;
   deleteUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   deleteUserRole?: Resolver<ResolversTypes['UserRole'], ParentType, ContextType, RequireFields<MutationDeleteUserRoleArgs, 'id'>>;
+  reduceUserPoints?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationReduceUserPointsArgs, 'id' | 'points'>>;
   sendRedeemedNotification?: Resolver<ResolversTypes['Email'], ParentType, ContextType, RequireFields<MutationSendRedeemedNotificationArgs, 'input'>>;
   updateBehavior?: Resolver<ResolversTypes['Behavior'], ParentType, ContextType, RequireFields<MutationUpdateBehaviorArgs, 'id' | 'input'>>;
   updateEnrollment?: Resolver<ResolversTypes['Enrollment'], ParentType, ContextType, RequireFields<MutationUpdateEnrollmentArgs, 'id' | 'input'>>;
