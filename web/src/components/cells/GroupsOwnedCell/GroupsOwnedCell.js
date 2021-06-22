@@ -1,5 +1,4 @@
 import TeacherNavLink from 'src/components/TeacherNavLink/TeacherNavLink'
-import TeacherHomeButton from 'src/components/TeacherHomeButton/TeacherHomeButton'
 
 export const QUERY = gql`
   query GroupsOwnedQuery($userId: String!) {
@@ -23,15 +22,13 @@ export const afterQuery = (data) => {
 
 export const Loading = () => (
   <>
-  <TeacherHomeButton />
-  <div className="animate-pulse ml-2">Loading...</div>
+    <div className="animate-pulse ml-2">Loading...</div>
   </>
 )
 
 export const Empty = () => (
   <>
-  <TeacherHomeButton />
-  <div className="ml-2">No classes or groups</div>
+    <div className="ml-2">No classes or groups</div>
   </>
 )
 
@@ -40,7 +37,6 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 export const Success = ({ primary, secondary }) => {
   return (
     <>
-    <TeacherHomeButton />
       {primary?.length > 0 && (
         <>
           <span className="text-lg font-display mb-2 mt-2">Classes</span>
