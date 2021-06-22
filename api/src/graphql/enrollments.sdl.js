@@ -12,6 +12,7 @@ export const schema = gql`
     enrollment(id: String!): Enrollment
     enrollmentsOfGroup(groupId: String!): [Enrollment!]!
     enrollmentsOfUser(userId: String!): [Enrollment!]!
+    enrollmentsOfInstructor(userId: String!): [Enrollment!]!
   }
 
   input CreateEnrollmentInput {

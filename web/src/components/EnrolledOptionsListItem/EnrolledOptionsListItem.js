@@ -14,7 +14,6 @@ const DELETE_ENROLLMENT_MUTATION = gql`
   }
 `
 const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
-  if (!enrollment?.user) return null // replace with seed data for test
   const {
     id: userId = '1',
     firstName = 'first',

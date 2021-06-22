@@ -1,5 +1,6 @@
 import { db } from 'src/lib/db'
 import { UserInputError, context } from '@redwoodjs/api'
+import { groupsOwned } from 'src/services/groups/groups'
 import foreignKeyReplacement from '../foreignKeyReplacement'
 
 export const enrollments = () => {
@@ -92,5 +93,13 @@ export const deleteEnrollmentByStudent = async ({ userId, groupId }) => {
   })
   return db.enrollment.delete({
     where: { id: group.id },
+  })
+}
+
+export const enrollmentsOfInstructor = async ({ userId }) => {
+  const groups = await groupsOwned({ userId })
+  const groupIds = groups.map((group) => group.id)
+  return db.enrollment.findMany({
+    where: { groupId: { in: groupIds } },
   })
 }

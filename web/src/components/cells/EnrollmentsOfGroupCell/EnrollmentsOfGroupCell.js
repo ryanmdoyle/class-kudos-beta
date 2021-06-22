@@ -24,8 +24,8 @@ export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ enrollmentsOfGroup, groupId }) => {
   let sorted = enrollmentsOfGroup?.slice().sort((a, b) => {
-    const nameA =  a?.user?.firstName?.toLowerCase()
-    const nameB =  b?.user?.firstName?.toLowerCase()
+    const nameA = a?.user?.firstName?.toLowerCase()
+    const nameB = b?.user?.firstName?.toLowerCase()
     return nameA < nameB ? -1 : 1
   })
   return (
