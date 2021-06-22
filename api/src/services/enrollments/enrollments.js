@@ -101,5 +101,6 @@ export const enrollmentsOfInstructor = async ({ userId }) => {
   const groupIds = groups.map((group) => group.id)
   return db.enrollment.findMany({
     where: { groupId: { in: groupIds } },
+    distinct: ['userId'], // users can have multiple enrollments, so only return one distinct user
   })
 }
