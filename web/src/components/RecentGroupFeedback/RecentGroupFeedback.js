@@ -6,7 +6,7 @@ import timeTag from 'src/lib/timeTag'
 import { QUERY } from 'src/components/cells/GroupFeedbackCell/GroupFeedbackCell'
 
 const DELETE_FEEDBACK_MUTATION = gql`
-  mutation DeleteFeedbackMutation($feedbackId: String!) {
+  mutation DeleteFeedbackMutationFromRecent($feedbackId: String!) {
     deleteFeedback(id: $feedbackId) {
       id
     }

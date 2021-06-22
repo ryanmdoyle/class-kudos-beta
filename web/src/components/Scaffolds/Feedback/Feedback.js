@@ -5,7 +5,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { QUERY } from 'src/components/Scaffolds/FeedbacksCell'
 
 const DELETE_FEEDBACK_MUTATION = gql`
-  mutation DeleteFeedbackMutation($id: String!) {
+  mutation DeleteFeedbackMutationFromFeedback($id: String!) {
     deleteFeedback(id: $id) {
       id
     }
