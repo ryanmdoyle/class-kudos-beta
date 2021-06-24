@@ -3,6 +3,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useModal } from 'src/context/ModalContext'
 
 import EditUserCell from 'src/components/cells/EditUserCell'
+import StudentPageLink from 'src/components/StudentPageLink'
 
 import truncate from 'src/lib/truncate'
 
@@ -61,9 +62,10 @@ export const Success = ({
           {sorted?.map((enrolled) => (
             <tr key={enrolled?.id}>
               <td>
-                {truncate(
-                  `${enrolled?.user.firstName} ${enrolled?.user.lastName}`
-                )}
+                <StudentPageLink
+                  userId={enrolled?.user.id}
+                  text={`${enrolled?.user.firstName} ${enrolled?.user.lastName}`}
+                />
               </td>
               <td>{truncate(enrolled?.user.points)}</td>
               <td>{truncate(enrolled?.user.enrollments.length)}</td>

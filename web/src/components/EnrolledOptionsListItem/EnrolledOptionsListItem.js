@@ -21,7 +21,7 @@ const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
   } = enrollment?.user
   const { openModal } = useModal()
 
-  const [deleteBehavior, { loading }] = useMutation(
+  const [deleteEnrollment, { loading }] = useMutation(
     DELETE_ENROLLMENT_MUTATION,
     {
       onCompleted: () => {
@@ -44,7 +44,7 @@ const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
       alert('Invalid entry, user will not be removed.')
     }
     if (response === `${firstName} ${lastName}`) {
-      deleteBehavior({ variables: { id: enrollment.id } })
+      deleteEnrollment({ variables: { id: enrollment.id } })
     }
   }
 

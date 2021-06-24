@@ -86,21 +86,3 @@ export const User = {
   enrollments: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).enrollments(),
 }
-
-// export const totalUserPoints = async ({ id }) => {
-//   const allFeedback = await db.feedback.aggregate({
-//     where: { userId: id },
-//     sum: { value: true },
-//   })
-//   if (allFeedback.sum.value === null) {
-//     allFeedback.sum.value = 0
-//   }
-//   const allRedeemed = await db.redeemed.aggregate({
-//     where: { userId: id },
-//     sum: { cost: true },
-//   })
-//   if (allRedeemed.sum.value === null) {
-//     allRedeemed.sum.value = 0
-//   }
-//   return allFeedback.sum.value - allRedeemed.sum.cost
-// }
