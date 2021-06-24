@@ -19,7 +19,7 @@ const StudentEnrollmentListItem = ({ enrollment, userId, firstName }) => {
     DELETE_ENROLLMENT_MUTATION,
     {
       onCompleted: () => {
-        toast.success('User removed.', { classes: 'rw-flash-success' })
+        toast.success('User removed.')
       },
       refetchQueries: [{ query: QUERY, variables: { userId: userId } }],
       awaitRefetchQueries: true,
