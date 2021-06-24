@@ -87,7 +87,7 @@ const UserForm = (props) => {
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
-          readonly="readonly"
+          readOnly="readonly"
           disabled="disabled"
         />
         <FieldError name="email" className="rw-field-error" />
