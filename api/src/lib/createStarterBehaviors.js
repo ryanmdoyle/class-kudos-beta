@@ -1,5 +1,4 @@
 import { db } from 'src/lib/db'
-import foreignKeyReplacement from 'src/services/foreignKeyReplacement'
 
 const createBehaviors = async (groupId) => {
   const starters = [
@@ -32,7 +31,7 @@ const createBehaviors = async (groupId) => {
       groupId: groupId,
     }
     await db.behavior.create({
-      data: foreignKeyReplacement(input),
+      data: input,
     })
   })
 }

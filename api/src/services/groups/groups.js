@@ -2,8 +2,12 @@ import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
 import { UserInputError } from '@redwoodjs/api'
 import { nanoid } from 'nanoid'
-import foreignKeyReplacement from '../foreignKeyReplacement'
 import createStarterBehaviors from 'src/lib/createStarterBehaviors'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['createGroup', 'updateGroup', 'deleteGroup', 'groupsOwned', 'archiveGroup']})
+}
 
 export const groups = () => {
   return db.group.findMany()
@@ -19,7 +23,6 @@ export const createGroup = ({ input }) => {
   requireAuth({ role: 'teacher' })
   if (input.type === 'primary' || input.type === 'secondary') {
     // input.enrollId = nanoid(8)
-    // const inputWithKeys = foreignKeyReplacement(input)
     const group = db.group.create({
       data: { enrollId: nanoid(8), ...input },
     })
@@ -32,7 +35,7 @@ export const createGroup = ({ input }) => {
 
 export const updateGroup = ({ id, input }) => {
   return db.group.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }

@@ -1,5 +1,10 @@
 import { db } from 'src/lib/db'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+import { requireAuth } from 'src/lib/auth'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['createReward', 'updateReward', 'deleteReward']})
+}
 
 export const rewards = () => {
   return db.reward.findMany()
@@ -17,13 +22,13 @@ export const createReward = ({ input }) => {
     input.responseRequired = false
   }
   return db.reward.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
 export const updateReward = ({ id, input }) => {
   return db.reward.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }

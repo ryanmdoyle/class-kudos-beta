@@ -1,5 +1,10 @@
 import { db } from 'src/lib/db'
+
 const sgMail = require('@sendgrid/mail')
+
+export const beforeResolver = (rules) => {
+  rules.skip()
+}
 
 export const sendRedeemedNotification = async ({ input }) => {
   sgMail.setApiKey(process.env.SENDGRID_DEV_API_KEY)

@@ -1,7 +1,12 @@
 import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
 import { UserInputError, context } from '@redwoodjs/api'
 import { groupsOwned } from 'src/services/groups/groups'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher']}), { only: ['enrollments', 'updateEnrollment', 'deleteEnrollment', 'enrollmentsOfGroup', 'enrollmentsOfInstructor']})
+}
 
 export const enrollments = () => {
   return db.enrollment.findMany()
@@ -15,13 +20,13 @@ export const enrollment = ({ id }) => {
 
 export const createEnrollment = ({ input }) => {
   return db.enrollment.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
 export const updateEnrollment = ({ id, input }) => {
   return db.enrollment.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }
@@ -71,7 +76,7 @@ export const createEnrollmentByEnrollId = async ({ input }) => {
   input.groupId = group.id
   delete input.enrollId // enrollId not a valid gql mutation input
   return db.enrollment.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 

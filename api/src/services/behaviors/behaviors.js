@@ -1,5 +1,10 @@
 import { db } from 'src/lib/db'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+import { requireAuth } from 'src/lib/auth'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher']}), { only: ['createBehavior', 'updateBehavior', 'deleteBehavior']})
+}
 
 export const behaviors = () => {
   return db.behavior.findMany()
@@ -13,13 +18,13 @@ export const behavior = ({ id }) => {
 
 export const createBehavior = ({ input }) => {
   return db.behavior.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
 export const updateBehavior = ({ id, input }) => {
   return db.behavior.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }
@@ -43,11 +48,5 @@ export const behaviorsOfGroup = ({ groupId }) => {
   return db.behavior.findMany({
     where: { groupId: groupId },
     orderBy: { value: 'asc' },
-  })
-}
-
-export const deleteBehaviorsOfGroup = ({ groupId }) => {
-  return db.behavior.delete({
-    where: { id: groupId },
   })
 }
