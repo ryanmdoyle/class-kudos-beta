@@ -1,6 +1,10 @@
 // exceptions with be skipped when looking for foreign keys
 const idExceptions = ['enrollId']
 
+export const beforeResolver = (rules) => {
+  rules.skip()
+}
+
 const foreignKeyReplacement = (input) => {
   let output = input
   const foreignKeys = Object.keys(input).filter((k) => {

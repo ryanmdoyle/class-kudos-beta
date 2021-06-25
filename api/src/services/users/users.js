@@ -1,5 +1,10 @@
 import { db } from 'src/lib/db'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+import { requireAuth } from 'src/lib/auth'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['users', 'deleteUser']})
+}
 
 export const users = () => {
   return db.user.findMany()
@@ -13,7 +18,7 @@ export const user = ({ id }) => {
 
 export const createUser = ({ input }) => {
   return db.user.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
@@ -61,7 +66,7 @@ export const updateUsersPoints = ({ input }) => {
     // Add feedback value to the existing users points
     user.points += userInDb.points
     return db.user.update({
-      data: foreignKeyReplacement(user),
+      data: user,
       where: { id: user.id },
     })
   })

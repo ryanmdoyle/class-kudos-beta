@@ -1,7 +1,12 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
 import { addUserPoints, reduceUserPoints } from '../users/users'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['updateRedeemed', 'deleteRedeemed', 'redeemedOfGroup', 'redeemedOfGroupToReview', 'redeemedOfGroupReviewed', 'approveRedeemed', 'approveRedeemeds']})
+}
 
 export const redeemeds = () => {
   return db.redeemed.findMany()
@@ -27,7 +32,7 @@ export const createRedeemed = async ({ input }) => {
 
 export const updateRedeemed = ({ id, input }) => {
   return db.redeemed.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }
@@ -91,7 +96,7 @@ export const approveRedeemed = ({ id }) => {
     reviewedAt: now,
   }
   return db.redeemed.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }

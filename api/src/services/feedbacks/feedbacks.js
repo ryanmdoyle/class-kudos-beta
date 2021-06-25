@@ -1,11 +1,16 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
+import { requireAuth } from 'src/lib/auth'
 import {
   updateUserPoints,
   updateUsersPoints,
   reduceUserPoints,
 } from '../users/users'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['createFeedback', 'updateFeedback', 'deleteFeedback', 'createFeedbacks', 'archiveGroup']})
+}
 
 export const feedbacks = () => {
   return db.feedback.findMany()
@@ -31,7 +36,7 @@ export const createFeedback = async ({ input }) => {
 
 export const updateFeedback = ({ id, input }) => {
   return db.feedback.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }

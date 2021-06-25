@@ -1,7 +1,13 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
 import { UserInputError } from '@redwoodjs/api'
-import foreignKeyReplacement from '../foreignKeyReplacement'
+
+export const beforeResolver = (rules) => {
+  rules.add(requireAuth)
+  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['updateUserRole', 'deleteUserRole']})
+  rules.add(() => requireAuth({role: ['admin', 'super_admin']}), { only: ['createAdminUserRole']})
+  rules.add(() => requireAuth({role: ['super_admin']}), { only: ['createSuperUserRole']})
+}
 
 export const userRoles = () => {
   return db.userRole.findMany()
@@ -20,13 +26,13 @@ export const createUserRole = ({ input }) => {
     throw new UserInputError('Role type invalid')
   }
   return db.userRole.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
 export const updateUserRole = ({ id, input }) => {
   return db.userRole.update({
-    data: foreignKeyReplacement(input),
+    data: input,
     where: { id },
   })
 }
@@ -47,13 +53,13 @@ export const UserRole = {
 export const createAdminUserRole = ({ input }) => {
   requireAuth({ role: ['admin', 'super_admin'] })
   return db.userRole.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
 
 export const createSuperUserRole = ({ input }) => {
   requireAuth({ role: 'super_admin' })
   return db.userRole.create({
-    data: foreignKeyReplacement(input),
+    data: input,
   })
 }
