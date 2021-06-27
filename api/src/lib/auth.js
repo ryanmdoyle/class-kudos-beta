@@ -41,6 +41,14 @@ export const getCurrentUser = async (decoded, { token, type }) => {
     newUser.roles = null
     return newUser
   }
+  if (verifiedGoogleUser.picture !== userInDb.profileImage) {
+    await db.user.update({
+      data: {
+        profileImage: verifiedGoogleUser.picture
+      },
+      where: { id: userInDb.id },
+    })
+  }
   userInDb.roles = null
   const userRoles = await db.user
     .findUnique({ where: { id: userInDb.id } })
