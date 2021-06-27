@@ -12,6 +12,7 @@ export const schema = gql`
     behaviors: [Behavior!]!
     behavior(id: String!): Behavior
     behaviorsOfGroup(groupId: String!): [Behavior!]!
+    behaviorsOwned(userId: String!): [Behavior!]!
   }
 
   input CreateBehaviorInput {

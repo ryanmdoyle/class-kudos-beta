@@ -1,6 +1,7 @@
 import { useModal } from 'src/context/ModalContext'
 
-import NewBehavior from '../NewBehavior/NewBehavior'
+import NewBehavior from 'src/components/NewBehavior/NewBehavior'
+import ReuseBehaviors from 'src/components/ReuseBehaviors/ReuseBehaviors'
 import BehaviorsOfGroupCell from 'src/components/cells/BehaviorsOfGroupCell/BehaviorsOfGroupCell'
 
 const BehaviorOptions = ({ groupId }) => {
@@ -10,20 +11,34 @@ const BehaviorOptions = ({ groupId }) => {
     openModal(<NewBehavior groupId={groupId} />)
   }
 
+  const reuseBehaviors = () => {
+    openModal(<ReuseBehaviors groupId={groupId} />)
+  }
+
   return (
     <div className="white-box">
-      <h2 className="text-xl font-display mb-2">Behaviors</h2>
-      <BehaviorsOfGroupCell groupId={groupId} />
-      <div className="flex w-full justify-end">
-        <button
-          className="button-green mt-2"
+    <div className="flex justify-between mb-4 h-8 items-center">
+      <h2 className="text-xl font-display">Behaviors</h2>
+      <div>
+      <button
+          className="button-green mr-2"
           onClick={() => {
             addBehavior()
           }}
         >
-          Add Behavior
+          Add New
+        </button>
+        <button
+          className="button-green"
+          onClick={() => {
+            reuseBehaviors()
+          }}
+        >
+          Reuse
         </button>
       </div>
+    </div>
+    <BehaviorsOfGroupCell groupId={groupId} />
     </div>
   )
 }

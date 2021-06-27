@@ -11,11 +11,11 @@ const RewardOptions = ({ groupId }) => {
   }
   return (
     <div className="white-box mt-4">
-      <h2 className="text-xl font-display mb-2">Rewards</h2>
-      <RewardsOfGroupCell groupId={groupId} />
+    <div className="flex justify-between mb-4 h-8 items-center">
+      <h2 className="text-xl font-display">Rewards</h2>
       <div className="flex w-full justify-end">
         <button
-          className="button-green mt-2"
+          className="button-green"
           onClick={() => {
             addReward()
           }}
@@ -23,6 +23,8 @@ const RewardOptions = ({ groupId }) => {
           Add Reward
         </button>
       </div>
+    </div>
+    <RewardsOfGroupCell groupId={groupId} />
     </div>
   )
 }
