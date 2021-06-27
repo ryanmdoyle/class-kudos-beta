@@ -16,8 +16,7 @@ const GroupCard = ({
   const cardClick = (e) => {
     if (e.target.dataset.clickElement === 'settings') {
       openModal(<EditGroupCell id={id} userId={userId} />)
-    }
-    if (e.target.dataset.clickElement !== 'enrollId') {
+    } else if (e.target.dataset.clickElement !== 'enrollId' && e.target.dataset.clickElement !== 'settings') {
       navigate(routes.groupList({ groupId: id }))
     }
   }
@@ -26,6 +25,7 @@ const GroupCard = ({
     <div
       className="w-100 h-24 white-box hover:shadow flex justify-between items-center mb-4 cursor-pointer"
       onClick={cardClick}
+      // data-click-element="card"
     >
       <div className="flex items-center">
         <div>
