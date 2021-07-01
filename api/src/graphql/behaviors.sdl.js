@@ -31,5 +31,6 @@ export const schema = gql`
     createBehavior(input: CreateBehaviorInput!): Behavior!
     updateBehavior(id: String!, input: UpdateBehaviorInput!): Behavior!
     deleteBehavior(id: String!): Behavior!
+    copyBehavior(behaviorId: String!, groupId: String!): Behavior!
   }
 `

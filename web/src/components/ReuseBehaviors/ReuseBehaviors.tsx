@@ -2,14 +2,16 @@ import { useAuth } from '@redwoodjs/auth'
 
 import BehaviorsOwnedCell from 'src/components/cells/BehaviorsOwnedCell'
 
-const ReuseBehaviors = () => {
+const ReuseBehaviors = ({ groupId }) => {
   const { currentUser } = useAuth()
+
   return (
     <div className="h-96 overflow-scroll">
       <h2 className="text-xl font-display">
-        Reuse Behavior from another Group
+        Copy Behaviors
       </h2>
-      <BehaviorsOwnedCell userId={currentUser.id} />
+      <p>Quickly add a behavior from another class or group.</p>
+      <BehaviorsOwnedCell userId={currentUser.id} parentGroupId={groupId} />
     </div>
   )
 }

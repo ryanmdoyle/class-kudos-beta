@@ -5,7 +5,7 @@ import { groupsOwned } from 'src/services/groups/groups'
 
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
-  rules.add(() => requireAuth({role: ['teacher']}), { only: ['createBehavior', 'updateBehavior', 'deleteBehavior']})
+  rules.add(() => requireAuth({role: ['teacher']}), { only: ['createBehavior', 'updateBehavior', 'deleteBehavior', 'copyBehavior']})
 }
 
 export const behaviors = () => {
@@ -59,5 +59,18 @@ export const behaviorsOwned = async ({ userId }) => {
   return db.behavior.findMany({
     where: { groupId: { in: groupIds} },
     orderBy: { value: 'asc' },
+  })
+}
+
+export const copyBehavior = async ({groupId, behaviorId}) => {
+  const behaviorToCopy = await db.behavior.findUnique({
+    where: { id: behaviorId}
+  })
+  return db.behavior.create({
+    data: {
+      name: behaviorToCopy.name,
+      value: behaviorToCopy.value,
+      groupId: groupId,
+    },
   })
 }
