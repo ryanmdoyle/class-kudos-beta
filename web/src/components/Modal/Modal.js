@@ -23,14 +23,14 @@ const Modal = () => {
       >
         <div
           id="modal-inside"
-          className="w-5/6 bg-white rounded-md p-4 pt-6 relative max-w-screen-md"
+          className="w-5/6 bg-white rounded-md p-4 relative max-w-screen-md"
         >
           {loading && <PageLoader />}
           <div
             onClick={() => {
               close()
             }}
-            className="absolute top-4 right-4 w-8 h-8 bg-purple-500 rounded-full flex justify-center items-center shadow-md hover:bg-purple-700"
+            className="absolute -top-4 -right-4 w-8 h-8 bg-red-400 rounded-full flex justify-center items-center shadow-lg hover:bg-red-500"
           >
             <span className="text-white font-bold cursor-default">X</span>
           </div>
