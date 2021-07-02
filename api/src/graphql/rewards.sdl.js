@@ -14,6 +14,7 @@ export const schema = gql`
     rewards: [Reward!]!
     reward(id: String!): Reward
     rewardsOfGroup(groupId: String!): [Reward!]!
+    rewardsOwned(userId: String!): [Reward!]!
   }
 
   input CreateRewardInput {
@@ -36,5 +37,6 @@ export const schema = gql`
     createReward(input: CreateRewardInput!): Reward!
     updateReward(id: String!, input: UpdateRewardInput!): Reward!
     deleteReward(id: String!): Reward!
+    copyReward(rewardId: String!, groupId: String!): Reward!
   }
 `
