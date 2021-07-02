@@ -87,7 +87,7 @@ const RedeemedsList = ({ redeemeds }) => {
                   <Link
                     to={routes.scaffoldsEditRedeemed({ id: redeemed.id })}
                     title={'Edit redeemed ' + redeemed.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

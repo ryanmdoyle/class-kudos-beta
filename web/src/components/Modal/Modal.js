@@ -19,11 +19,11 @@ const Modal = () => {
       <div
         id="modal-outside"
         onClick={onClick}
-        className="fixed w-full h-full bg-gray-900 bg-opacity-50 z-10 flex justify-center items-center"
+        className="fixed w-full h-full bg-gray-900 bg-opacity-70 z-10 flex justify-center items-center"
       >
         <div
           id="modal-inside"
-          className="w-5/6 bg-white rounded-md p-4 relative max-w-screen-md"
+          className="w-5/6 bg-white rounded-md relative max-w-screen-md"
         >
           {loading && <PageLoader />}
           <div
@@ -34,7 +34,9 @@ const Modal = () => {
           >
             <span className="text-white font-bold cursor-default">X</span>
           </div>
+          <div className='p-4'>
           {child}
+          </div>
         </div>
       </div>
     )

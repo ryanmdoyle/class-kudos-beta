@@ -83,7 +83,7 @@ const Redeemed = ({ redeemed }) => {
       <nav className="rw-button-group">
         <Link
           to={routes.scaffoldsEditRedeemed({ id: redeemed.id })}
-          className="rw-button rw-button-blue"
+          className="rw-button rw-button-green"
         >
           Edit
         </Link>

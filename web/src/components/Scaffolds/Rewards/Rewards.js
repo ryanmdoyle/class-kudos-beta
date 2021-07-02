@@ -87,7 +87,7 @@ const RewardsList = ({ rewards }) => {
                   <Link
                     to={routes.scaffoldsEditReward({ id: reward.id })}
                     title={'Edit reward ' + reward.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

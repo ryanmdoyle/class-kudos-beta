@@ -89,7 +89,7 @@ const UserRolesList = ({ userRoles }) => {
                   <Link
                     to={routes.scaffoldsEditUserRole({ id: userRole.id })}
                     title={'Edit userRole ' + userRole.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

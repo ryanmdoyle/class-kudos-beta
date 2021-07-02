@@ -87,7 +87,7 @@ const BehaviorsList = ({ behaviors }) => {
                   <Link
                     to={routes.scaffoldsEditBehavior({ id: behavior.id })}
                     title={'Edit behavior ' + behavior.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

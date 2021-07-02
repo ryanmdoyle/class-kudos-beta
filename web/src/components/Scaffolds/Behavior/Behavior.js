@@ -77,7 +77,7 @@ const Behavior = ({ behavior }) => {
       <nav className="rw-button-group">
         <Link
           to={routes.scaffoldsEditBehavior({ id: behavior.id })}
-          className="rw-button rw-button-blue"
+          className="rw-button rw-button-green"
         >
           Edit
         </Link>

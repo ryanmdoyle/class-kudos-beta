@@ -85,7 +85,7 @@ const EnrollmentsList = ({ enrollments }) => {
                   <Link
                     to={routes.scaffoldsEditEnrollment({ id: enrollment.id })}
                     title={'Edit enrollment ' + enrollment.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

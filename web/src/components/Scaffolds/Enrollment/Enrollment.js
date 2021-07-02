@@ -74,7 +74,7 @@ const Enrollment = ({ enrollment }) => {
       <nav className="rw-button-group">
         <Link
           to={routes.scaffoldsEditEnrollment({ id: enrollment.id })}
-          className="rw-button rw-button-blue"
+          className="rw-button rw-button-green"
         >
           Edit
         </Link>

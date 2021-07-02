@@ -89,7 +89,7 @@ const FeedbacksList = ({ feedbacks }) => {
                   <Link
                     to={routes.scaffoldsEditFeedback({ id: feedback.id })}
                     title={'Edit feedback ' + feedback.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

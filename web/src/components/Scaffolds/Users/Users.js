@@ -95,7 +95,7 @@ const UsersList = ({ users }) => {
                   <Link
                     to={routes.scaffoldsEditUser({ id: user.id })}
                     title={'Edit user ' + user.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

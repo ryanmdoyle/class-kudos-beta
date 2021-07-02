@@ -91,7 +91,7 @@ const GroupsList = ({ groups }) => {
                   <Link
                     to={routes.scaffoldsEditGroup({ id: group.id })}
                     title={'Edit group ' + group.id}
-                    className="rw-button rw-button-small rw-button-blue"
+                    className="rw-button rw-button-small rw-button-green"
                   >
                     Edit
                   </Link>

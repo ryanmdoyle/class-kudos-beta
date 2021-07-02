@@ -55,7 +55,7 @@ const RedeemedForm = (props) => {
         <FieldError name="rewardId" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
+          <Submit disabled={props.loading} className="rw-button rw-button-green">
             Save
           </Submit>
         </div>

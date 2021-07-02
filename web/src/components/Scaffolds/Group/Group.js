@@ -86,7 +86,7 @@ const Group = ({ group }) => {
       <nav className="rw-button-group">
         <Link
           to={routes.scaffoldsEditGroup({ id: group.id })}
-          className="rw-button rw-button-blue"
+          className="rw-button rw-button-green"
         >
           Edit
         </Link>

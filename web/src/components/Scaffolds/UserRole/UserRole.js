@@ -87,7 +87,7 @@ const UserRole = ({ userRole }) => {
       <nav className="rw-button-group">
         <Link
           to={routes.scaffoldsEditUserRole({ id: userRole.id })}
-          className="rw-button rw-button-blue"
+          className="rw-button rw-button-green"
         >
           Edit
         </Link>

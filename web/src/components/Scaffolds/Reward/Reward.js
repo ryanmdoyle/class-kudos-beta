@@ -78,7 +78,7 @@ const Reward = ({ reward }) => {
       <nav className="rw-button-group">
         <Link
           to={routes.scaffoldsEditReward({ id: reward.id })}
-          className="rw-button rw-button-blue"
+          className="rw-button rw-button-green"
         >
           Edit
         </Link>
