@@ -104,7 +104,7 @@ const UserForm = (props) => {
           defaultValue={props.user?.profileImage}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
+          validation={{ required: false }}
         />
         <FieldError name="profileImage" className="rw-field-error" />
 
