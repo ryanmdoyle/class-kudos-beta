@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
@@ -9,8 +9,8 @@ const GroupList = ({
   groupId,
   name,
   enrollId,
-  enrollmentsOfGroup = [],
-  behaviorsOfGroup = [],
+  enrollmentsOfGroup,
+  behaviorsOfGroup,
 }) => {
   const [currentStudent, setCurrentStudent] = useState(
     enrollmentsOfGroup[0]?.user.id
@@ -24,6 +24,13 @@ const GroupList = ({
   const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.user.id)
   const [totalPoints, setTotalPoints] = useState(null)
   const [userZeroPoints, setUserZeroPoints] = useState(null)
+
+  useEffect(() => {
+    // setCurrentStudent(enrollmentsOfGroup[0]?.user.id)
+    setFirstName(enrollmentsOfGroup[0]?.user.firstName)
+    setLastName(enrollmentsOfGroup[0]?.user.lastName)
+    setStudentId(enrollmentsOfGroup[0]?.user.id)
+  }, [groupId, enrollmentsOfGroup])
 
   const handleSelect = (userId) => {
     setCurrentStudent(userId)
