@@ -101,6 +101,8 @@ const GroupList = ({
           <StudentPointsCard
             firstName={firstName}
             lastName={lastName}
+            userId={studentId}
+            groupId={groupId}
             totalPoints={
               studentId === enrollmentsOfGroup[0]?.user.id
                 ? userZeroPoints

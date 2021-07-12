@@ -1,15 +1,12 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import {
-  updateUserPoints,
-  updateUsersPoints,
-  reduceUserPoints,
-} from '../users/users'
+import { updateGroupPoints, reduceGroupPoints, updateGroupsPoints } from '../groupPoints/groupPoints'
 
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
   rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['createFeedback', 'updateFeedback', 'deleteFeedback', 'createFeedbacks', 'archiveGroup']})
+  rules.add(() => requireAuth({role: ['super_admin']}), { only: ['deleteFeedbacks']})
 }
 
 export const feedbacks = () => {
@@ -25,7 +22,13 @@ export const feedback = ({ id }) => {
 export const createFeedback = async ({ input }) => {
   const userInDb = await db.user.findUnique({ where: { id: input.userId } })
   if (userInDb.points + input.value >= 0) {
-    await updateUserPoints({ id: input.userId, points: input.value })
+    // assign points for group feedback is given
+    await updateGroupPoints({ input: {
+      userId: input.userId,
+      groupId: input.groupId,
+      points: input.value,
+    }})
+    // create the actual feedback
     return db.feedback.create({
       data: input,
     })
@@ -43,13 +46,20 @@ export const updateFeedback = ({ id, input }) => {
 
 export const deleteFeedback = async ({ id }) => {
   const feedbackInDb = await db.feedback.findUnique({ where: { id } })
-  await reduceUserPoints({
-    id: feedbackInDb.userId,
-    points: feedbackInDb.value,
+  reduceGroupPoints({
+    input: {
+      userId: feedbackInDb.userId,
+      groupId: feedbackInDb.groupId,
+      points: feedbackInDb.value,
+    }
   })
   return db.feedback.delete({
     where: { id },
   })
+}
+
+export const deleteFeedbacks = () => {
+  return db.feedback.deleteMany()
 }
 
 export const Feedback = {
@@ -84,13 +94,17 @@ export const feedbackOfGroup = ({ groupId }) => {
 }
 
 export const createFeedbacks = async ({ input }) => {
-  const usersForPointUpdate = input.map((feedback) => {
+  // UPDATE GROUP POINTS HERE --> THIS WORKS
+  const groupsPointsInput = input.map(feedback => {
     return {
-      id: feedback.userId,
+      userId: feedback.userId,
+      groupId: feedback.groupId,
       points: feedback.value,
     }
   })
-  await updateUsersPoints({ input: usersForPointUpdate })
+  await updateGroupsPoints({ input: groupsPointsInput })
+
+  // create all the feedbacks
   const created = await db.feedback.createMany({
     data: input,
   })

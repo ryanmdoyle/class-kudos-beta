@@ -1,7 +1,7 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import { addUserPoints, reduceUserPoints } from '../users/users'
+import { reduceGroupPoints, addGroupPoints } from '../groupPoints/groupPoints'
 
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
@@ -21,7 +21,11 @@ export const redeemed = ({ id }) => {
 export const createRedeemed = async ({ input }) => {
   const userInDb = await db.user.findUnique({ where: { id: input.userId } })
   if (userInDb.points >= input.cost) {
-    await reduceUserPoints({ id: input.userId, points: input.cost })
+    await reduceGroupPoints({input: {
+      groupId: input.groupId,
+      userId: input.userId,
+      points: input.cost,
+    }})
     return db.redeemed.create({
       data: input,
     })
@@ -39,9 +43,12 @@ export const updateRedeemed = ({ id, input }) => {
 
 export const deleteRedeemed = async ({ id }) => {
   const redeemedPending = await db.redeemed.findUnique({ where: { id } })
-  await addUserPoints({
-    id: redeemedPending.userId,
-    points: redeemedPending.cost,
+  await addGroupPoints({
+    input:{
+      userId: redeemedPending.userId,
+      groupId: redeemedPending.groupId,
+      points:redeemedPending.cost
+    }
   })
   return db.redeemed.delete({
     where: { id },

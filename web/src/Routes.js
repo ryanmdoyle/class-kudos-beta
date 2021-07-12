@@ -27,7 +27,7 @@ const Routes = () => {
         <Route path="/student" page={StudentHomePage} name="studentHome" />
         <Route path="/student/group/{groupId}" page={StudentGroupPage} name="studentGroup" />
       </Private>
-      <Private unauthenticated="home" role="super_admin">
+      <Private unauthenticated="home" role="teacher">
         <Set wrap={[DashboardLayout]}>
           <Route path="/profile" page={ProfilePage} name="profile" />
           <Route path="/scaffolds/enrollments/new" page={ScaffoldsNewEnrollmentPage} name="scaffoldsNewEnrollment" />

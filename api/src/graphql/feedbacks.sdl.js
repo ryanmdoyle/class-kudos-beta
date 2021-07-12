@@ -39,10 +39,14 @@ export const schema = gql`
     count: Int
   }
 
+  type BatchPayload {
+    count: Int
+  }
   type Mutation {
     createFeedback(input: CreateFeedbackInput!): Feedback!
     createFeedbacks(input: [CreateFeedbackInput!]): CreatedManyReturn!
     updateFeedback(id: String!, input: UpdateFeedbackInput!): Feedback!
     deleteFeedback(id: String!): Feedback!
+    deleteFeedbacks: BatchPayload!
   }
 `

@@ -29,12 +29,14 @@ export const updateUser = ({ id, input }) => {
   })
 }
 
-export const updateUserPoints = async ({ id, points }) => {
-  const userInDb = await db.user.findUnique({
-    where: { id },
+export const updateUserPoints = async ({ id }) => {
+  // update a users points based on the sum all of all group points
+  const groupPointsTotal = await db.groupPoint.aggregate({
+    where: { userId: id, group: { archived: false} },
+    _sum: { points: true }
   })
-  return db.user.update({
-    data: { points: (userInDb.points += points) },
+  return await db.user.update({
+    data: { points: groupPointsTotal._sum.points || 0 },
     where: { id },
   })
 }
@@ -60,15 +62,17 @@ export const reduceUserPoints = async ({ id, points }) => {
 }
 
 export const updateUsersPoints = ({ input }) => {
+  console.log('2 RUNNING updateUsersPoints in updateUsersPoints')
   const updated = input.map(async (user) => {
-    // find each selected userw
-    const userInDb = await db.user.findUnique({ where: { id: user.id } })
-    // Add feedback value to the existing users points
-    user.points += userInDb.points
-    return db.user.update({
-      data: user,
-      where: { id: user.id },
-    })
+    return await updateUserPoints({id: user.id})
+    // // find each selected user
+    // const userInDb = await db.user.findUnique({ where: { id: user.id } })
+    // // Add feedback value to the existing users points
+    // user.points += userInDb.points
+    // return db.user.update({
+    //   data: user,
+    //   where: { id: user.id },
+    // })
   })
   return updated
 }

@@ -24,6 +24,7 @@ model User {
   feedback     Feedback[]
   redeemed     Redeemed[]
   groups       Group[]
+  groupPoints  GroupPoint[]
   enrollments  Enrollment[]
 }
 
@@ -96,6 +97,16 @@ model Group {
   rewards     Reward[]
   feedback    Feedback[]
   redeemed    Redeemed[]
+  groupPoints GroupPoint[]
+}
+
+model GroupPoint {
+  id      String @id @default(uuid())
+  points  Int    @default(0)
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  group   Group  @relation(fields: [groupId], references: [id])
+  groupId String
 }
 
 model Enrollment {

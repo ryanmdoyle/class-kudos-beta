@@ -19,7 +19,6 @@ export const schema = gql`
   type Query {
     users: [User!]!
     user(id: String!): User
-    # totalUserPoints(id: String!): Int!
   }
 
   input CreateUserInput {
@@ -48,9 +47,9 @@ export const schema = gql`
     createUser(input: CreateUserInput!): User!
     updateUser(id: String!, input: UpdateUserInput!): User!
     updateUserPoints(id: String!, points: Int!): User!
+    updateUsersPoints(input: [UpdateUsersPointsInput!]!): [User!]!
     addUserPoints(id: String!, points: Int!): User!
     reduceUserPoints(id: String!, points: Int!): User!
-    updateUsersPoints(input: [UpdateUsersPointsInput!]!): [User!]!
     deleteUser(id: String!): User!
   }
 `
