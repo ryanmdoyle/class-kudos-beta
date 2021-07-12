@@ -26,11 +26,10 @@ const GroupList = ({
   const [userZeroPoints, setUserZeroPoints] = useState(null)
 
   useEffect(() => {
-    // setCurrentStudent(enrollmentsOfGroup[0]?.user.id)
     setFirstName(enrollmentsOfGroup[0]?.user.firstName)
     setLastName(enrollmentsOfGroup[0]?.user.lastName)
     setStudentId(enrollmentsOfGroup[0]?.user.id)
-  }, [groupId, enrollmentsOfGroup])
+  }, [groupId])
 
   const handleSelect = (userId) => {
     setCurrentStudent(userId)

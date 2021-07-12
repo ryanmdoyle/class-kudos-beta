@@ -7,6 +7,7 @@ import { useModal } from 'src/context/ModalContext'
 
 import { QUERY as recentUserFeedbackOfGroupQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 import { QUERY as studentListQuery } from 'src/components/cells/GroupListCell/GroupListCell'
+import { QUERY as groupPointsOfUserQuery } from 'src/components/cells/StudentGroupPointsCell/StudentGroupPointsCell'
 
 const CREATE_FEEDBACK = gql`
   mutation CreateFeedback($createFeedbackInput: CreateFeedbackInput!) {
@@ -44,6 +45,7 @@ const BehaviorButtons = ({
         variables: { userId: userId, groupId: groupId },
       },
       { query: studentListQuery, variables: { id: groupId } },
+      { query: groupPointsOfUserQuery, variables: { userId: userId, groupId: groupId }}
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
@@ -61,6 +63,7 @@ const BehaviorButtons = ({
         variables: { userId: userId, groupId: groupId },
       },
       { query: studentListQuery, variables: { id: groupId } },
+      { query: groupPointsOfUserQuery, variables: { userId: userId, groupId: groupId }}
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {
