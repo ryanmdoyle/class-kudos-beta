@@ -61,6 +61,8 @@ export const Group = {
     db.group.findUnique({ where: { id: root.id } }).rewards(),
   feedback: (_obj, { root }) =>
     db.group.findUnique({ where: { id: root.id } }).feedback(),
+  groupPoints: (_obj, { root }) =>
+    db.group.findUnique({ where: { id: root.id } }).groupPoints(),
 }
 
 // Custom

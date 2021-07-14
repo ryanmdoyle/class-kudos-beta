@@ -2,10 +2,10 @@ import { navigate, routes } from '@redwoodjs/router'
 import { useModal } from 'src/context/ModalContext'
 
 import StudentDeleteEnrollment from 'src/components/StudentDeleteEnrollment/StudentDeleteEnrollment'
+import StudentGroupPointValueCell from 'src/components/cells/StudentGroupPointValueCell/StudentGroupPointValueCell'
 
 const StudentGroupCard = ({
   groupId,
-  enrollmentId,
   userId,
   name,
   description,
@@ -31,9 +31,15 @@ const StudentGroupCard = ({
           <span className="text-gray-500 text-sm">{description}</span>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="h-full flex flex-col justify-between">
+        <div>
+          <span className='text-green text-xl font-display'>
+            <StudentGroupPointValueCell userId={userId} groupId={groupId} />
+          </span>
+          <span className='text-gray-500 text-sm'> points</span>
+        </div>
         <svg
-          className="w-8 h-t stroke-current stroke-2 text-gray-400 hover:text-purple-800 self-end"
+          className="w-6 h-t stroke-current stroke-2 text-gray-400 hover:text-purple-800 self-end"
           viewBox="0 0 24 24"
           fill="none"
           strokeLinecap="round"

@@ -12,6 +12,7 @@ export const schema = gql`
     behaviors: [Behavior]!
     rewards: [Reward]!
     feedback: [Feedback]!
+    groupPoints: [GroupPoint]!
   }
 
   type Query {
