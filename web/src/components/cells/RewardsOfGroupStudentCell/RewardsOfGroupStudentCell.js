@@ -3,7 +3,8 @@ import { toast } from '@redwoodjs/web/toast'
 
 import RewardButton from 'src/components/RewardButton/RewardButton'
 
-import { QUERY as userPointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
+import { QUERY as totalPointsQuery } from 'src/components/cells/UserPointsCell/UserPointsCell'
+import { QUERY as groupPointsQuery } from 'src/components/cells/StudentGroupPointValueCell/StudentGroupPointValueCell'
 import { QUERY as activityQuery } from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
 
 export const QUERY = gql`
@@ -57,16 +58,21 @@ export const Empty = () => (
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({
-  availablePoints,
   rewardsOfGroup,
   groupId,
   userId,
+  totalPoints,
+  groupPoints
 }) => {
   const [newRedeemed, { loading }] = useMutation(CREATE_REDEEMED, {
     refetchQueries: [
       {
-        query: userPointsQuery,
+        query: totalPointsQuery,
         variables: { userId: userId },
+      },
+      {
+        query: groupPointsQuery,
+        variables: { userId: userId, groupId: groupId },
       },
       {
         query: activityQuery,
@@ -98,7 +104,8 @@ export const Success = ({
           reward={reward}
           groupId={groupId}
           userId={userId}
-          availablePoints={availablePoints}
+          totalPoints={totalPoints}
+          groupPoints={groupPoints}
           newRedeemed={newRedeemed}
           sendEmail={sendEmail}
           loading={loading}

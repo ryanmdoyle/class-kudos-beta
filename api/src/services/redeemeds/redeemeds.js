@@ -19,8 +19,8 @@ export const redeemed = ({ id }) => {
 }
 
 export const createRedeemed = async ({ input }) => {
-  const userInDb = await db.user.findUnique({ where: { id: input.userId } })
-  if (userInDb.points >= input.cost) {
+  const userGroupPoints = await db.groupPoint.findFirst({ where : { groupId: input.groupId, userId: input.userId,}})
+  if (userGroupPoints.points >= input.cost) {
     await reduceGroupPoints({input: {
       groupId: input.groupId,
       userId: input.userId,

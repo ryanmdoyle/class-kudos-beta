@@ -3,7 +3,7 @@ import UserActivityOfGroupCell from 'src/components/cells/UserActivityOfGroupCel
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
 export const QUERY = gql`
-  query UserPointsWrapperQuery($groupId: String!, $userId: String!) {
+  query StudentGroupPageQuery($groupId: String!, $userId: String!) {
     group(id: $groupId) {
       id
       name
@@ -60,7 +60,8 @@ export const Success = ({ userId, groupId, group, user, groupPointsOfUser }) => 
           <RewardsOfGroupStudentCell
             groupId={groupId}
             userId={userId}
-            availablePoints={user.points}
+            totalPoints={user.points}
+            groupPoints={groupPointsOfUser.points}
           />
         </div>
       </div>
