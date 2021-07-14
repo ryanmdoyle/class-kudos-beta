@@ -39,7 +39,7 @@ const GroupForm = (props) => {
   const onArchiveClick = (id) => {
     if (
       confirm(
-        'Are you sure you want to archive group ' + props.group.name + '?'
+        'Are you sure you want to archive group ' + props.group.name + '?' + ' Archiving this group will re-calculate the total Kudos for everyone enrolled in this group.'
       )
     ) {
       archiveGroup({ variables: { id } })

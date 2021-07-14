@@ -2,7 +2,11 @@ import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
 import { UserInputError } from '@redwoodjs/api'
 import { nanoid } from 'nanoid'
+
 import createStarterBehaviors from 'src/lib/createStarterBehaviors'
+
+import { enrollmentsOfGroup } from 'src/services/enrollments/enrollments'
+import { updateUserPoints } from 'src/services/users/users'
 
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
@@ -86,10 +90,26 @@ export const groupsEnrolled = async ({ userId }) => {
 }
 
 export const archiveGroup = async ({ id }) => {
-  return db.group.update({
+  const archived = await db.group.update({
     data: {
       archived: true,
     },
     where: { id },
   })
+  try {
+    const enrolled = await enrollmentsOfGroup({ groupId: id})
+    await Promise.all(
+      enrolled.map(enrollment => updateUserPoints({ id: enrollment.userId}))
+    )
+  }
+  catch(err) {
+    await db.group.update({
+      data: {
+        archived: false,
+      },
+      where: { id },
+    })
+    throw new UserInputError('There was a problem updating user points. Please try again later.')
+  }
+  return archived
 }

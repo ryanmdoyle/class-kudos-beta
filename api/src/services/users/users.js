@@ -30,7 +30,7 @@ export const updateUser = ({ id, input }) => {
 }
 
 export const updateUserPoints = async ({ id }) => {
-  // update a users points based on the sum all of all group points
+a  // update a users points based on the sum all of all group points
   const groupPointsTotal = await db.groupPoint.aggregate({
     where: { userId: id, group: { archived: false} },
     _sum: { points: true }
@@ -62,7 +62,6 @@ export const reduceUserPoints = async ({ id, points }) => {
 }
 
 export const updateUsersPoints = ({ input }) => {
-  console.log('2 RUNNING updateUsersPoints in updateUsersPoints')
   const updated = input.map(async (user) => {
     return await updateUserPoints({id: user.id})
     // // find each selected user
