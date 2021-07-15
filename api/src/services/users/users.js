@@ -85,4 +85,6 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).groups(),
   enrollments: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).enrollments(),
+  groupPoints: ( _obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).groupPoints(),
 }
