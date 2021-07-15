@@ -6,6 +6,7 @@ import ProfileImageCircle from 'src/components/ProfileImageCircle/ProfileImageCi
 
 const ListViewStudentItem = ({
   user = {},
+  groupId,
   currentStudent,
   selecting,
   setFirstName,
@@ -13,18 +14,22 @@ const ListViewStudentItem = ({
   setStudentId,
   handleSelect,
   setTotalPoints = () => {},
+  setUserGroupPoints = () => {},
   userZero,
   setUserZeroPoints = () => {},
+  setUserZeroGroupPoints = () => {}
 }) => {
-  const { id, firstName, lastName, profileImage, points } = user
-
+  const { id, firstName, lastName, profileImage, points, groupPoints } = user
+  const groupPoint = groupPoints[groupPoints.findIndex(element => element.groupId === groupId)].points
   useEffect(() => {
     if (id === userZero) {
       setUserZeroPoints(points)
+      setUserZeroGroupPoints(groupPoint)
     } else {
       setTotalPoints(points)
+      setUserGroupPoints(groupPoint)
     }
-  }, [id, userZero, setUserZeroPoints, points, setTotalPoints])
+  }, [id, userZero, setUserZeroPoints, setUserZeroGroupPoints, points, setTotalPoints, setUserGroupPoints])
 
   const MAX_STRING_LENGTH = 20
 
@@ -47,6 +52,7 @@ const ListViewStudentItem = ({
           setLastName(user.lastName)
           setStudentId(user.id)
           setTotalPoints(points)
+          setUserGroupPoints(groupPoint)
         }
         handleSelect(user.id)
       }}
@@ -65,7 +71,7 @@ const ListViewStudentItem = ({
       </div>
       <div>
         <span className="justify-self-end text-green-500 font-bold">
-          {points}
+          {groupPoint}
         </span>
       </div>
     </li>

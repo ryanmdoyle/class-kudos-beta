@@ -13,22 +13,24 @@ const GroupList = ({
   behaviorsOfGroup,
 }) => {
   const [currentStudent, setCurrentStudent] = useState(
-    enrollmentsOfGroup[0]?.user.id
+    enrollmentsOfGroup[0]?.id
   )
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState([])
   const [firstName, setFirstName] = useState(
-    enrollmentsOfGroup[0]?.user.firstName
+    enrollmentsOfGroup[0]?.firstName
   )
-  const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.user.lastName)
-  const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.user.id)
+  const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.lastName)
+  const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.id)
   const [totalPoints, setTotalPoints] = useState(null)
+  const [userGroupPoints, setUserGroupPoints] = useState(null)
   const [userZeroPoints, setUserZeroPoints] = useState(null)
+  const [userZeroGroupPoints, setUserZeroGroupPoints] = useState(null)
 
   useEffect(() => {
-    setFirstName(enrollmentsOfGroup[0]?.user.firstName)
-    setLastName(enrollmentsOfGroup[0]?.user.lastName)
-    setStudentId(enrollmentsOfGroup[0]?.user.id)
+    setFirstName(enrollmentsOfGroup[0]?.firstName)
+    setLastName(enrollmentsOfGroup[0]?.lastName)
+    setStudentId(enrollmentsOfGroup[0]?.id)
   }, [groupId])
 
   const handleSelect = (userId) => {
@@ -75,10 +77,10 @@ const GroupList = ({
         {/* STUDENT LIST */}
         <ul className="">
           {enrollmentsOfGroup.map((enrollment) => {
-            const userSelected = selected.includes(enrollment.user.id)
+            const userSelected = selected.includes(enrollment.id)
             return (
               <div
-                key={enrollment.user.id}
+                key={enrollment.id}
                 className={`${
                   userSelected && selecting && 'ring-2'
                 } ring-purple-500 rounded-md`}
@@ -86,7 +88,8 @@ const GroupList = ({
                 <ListViewStudentItem
                   id={enrollment.id}
                   key={enrollment.key}
-                  user={enrollment.user}
+                  user={enrollment}
+                  groupId={groupId}
                   currentStudent={currentStudent}
                   selecting={selecting}
                   setFirstName={setFirstName}
@@ -94,8 +97,10 @@ const GroupList = ({
                   setStudentId={setStudentId}
                   handleSelect={handleSelect}
                   setTotalPoints={setTotalPoints}
-                  userZero={enrollmentsOfGroup[0]?.user.id}
+                  setUserGroupPoints={setUserGroupPoints}
+                  userZero={enrollmentsOfGroup[0]?.id}
                   setUserZeroPoints={setUserZeroPoints}
+                  setUserZeroGroupPoints={setUserZeroGroupPoints}
                 />
               </div>
             )
@@ -110,9 +115,14 @@ const GroupList = ({
             userId={studentId}
             groupId={groupId}
             totalPoints={
-              studentId === enrollmentsOfGroup[0]?.user.id
+              studentId === enrollmentsOfGroup[0]?.id
                 ? userZeroPoints
                 : totalPoints
+            }
+            userGroupPoints={
+              studentId === enrollmentsOfGroup[0]?.id
+                ? userZeroGroupPoints
+                : userGroupPoints
             }
           />
         )}

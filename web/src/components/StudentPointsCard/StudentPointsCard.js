@@ -1,6 +1,6 @@
 import StudentGroupPointValueCell from 'src/components/cells/StudentGroupPointValueCell/StudentGroupPointValueCell'
 
-const StudentPointsCard = ({ firstName, lastName, userId, groupId, totalPoints }) => {
+const StudentPointsCard = ({ firstName, lastName, userId, groupId, totalPoints, userGroupPoints }) => {
   return (
     <div className="h-36 flex-grow-0 flex-shrink-0 white-box mt-1 mb-4 flex flex-col relative">
       <h1 className="text-3xl font-display mb-4">
@@ -9,7 +9,8 @@ const StudentPointsCard = ({ firstName, lastName, userId, groupId, totalPoints }
       <div className="flex absolute bottom-2 right-4 items-end">
         <div className='mb-1'>
           <span className="font-display text-6xl text-green mr-2">
-            <StudentGroupPointValueCell userId={userId} groupId={groupId} />
+            {/* <StudentGroupPointValueCell userId={userId} groupId={groupId} /> */}
+            {userGroupPoints}
           </span>
           <span className="font-display text-3xl text-green mr-6">
             group kudos
