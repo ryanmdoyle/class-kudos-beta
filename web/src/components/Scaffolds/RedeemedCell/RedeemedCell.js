@@ -5,7 +5,6 @@ export const QUERY = gql`
     redeemed: redeemed(id: $id) {
       id
       userId
-      rewardId
       createdAt
     }
   }
