@@ -77,7 +77,6 @@ const RewardButton = ({
         } text-center text-sm`}
       >
         {reward?.name || '?'}
-        {totalPoints} {groupPoints}
       </span>
       <span
         className={`${
