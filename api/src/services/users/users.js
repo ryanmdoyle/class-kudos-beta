@@ -1,6 +1,8 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
 
+import { enrollmentsOfGroup } from 'src/services/enrollments/enrollments'
+
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
   rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['users', 'deleteUser']})
@@ -30,7 +32,7 @@ export const updateUser = ({ id, input }) => {
 }
 
 export const updateUserPoints = async ({ id }) => {
-a  // update a users points based on the sum all of all group points
+  // update a users points based on the sum all of all group points
   const groupPointsTotal = await db.groupPoint.aggregate({
     where: { userId: id, group: { archived: false} },
     _sum: { points: true }
@@ -85,6 +87,15 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).groups(),
   enrollments: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).enrollments(),
-  groupPoints: ( _obj, { root }) =>
+  groupPoints: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).groupPoints(),
+}
+
+export const usersOfGroup = async ({ groupId }) => {
+  const enrollments = await enrollmentsOfGroup({ groupId })
+  const userIds = enrollments.map(enrollment => enrollment.userId)
+  return db.user.findMany({
+    where: { id: { in: userIds} },
+    orderBy: { firstName: 'asc' }
+  })
 }

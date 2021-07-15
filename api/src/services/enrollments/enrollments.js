@@ -82,7 +82,7 @@ export const createEnrollmentByEnrollId = async ({ input }) => {
 
 export const enrollmentsOfGroup = ({ groupId }) => {
   return db.enrollment.findMany({
-    where: { groupId: groupId },
+    where: { groupId: groupId }
   })
 }
 

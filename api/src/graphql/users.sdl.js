@@ -14,11 +14,13 @@ export const schema = gql`
     redeemed: [Redeemed]!
     groups: [Group]!
     enrollments: [Enrollment]!
+    groupPoints: [GroupPoint]!
   }
 
   type Query {
     users: [User!]!
     user(id: String!): User
+    usersOfGroup(groupId: String!): [User!]!
   }
 
   input CreateUserInput {
