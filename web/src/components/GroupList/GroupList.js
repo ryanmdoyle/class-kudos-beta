@@ -9,28 +9,28 @@ const GroupList = ({
   groupId,
   name,
   enrollId,
-  enrollmentsOfGroup,
+  usersOfGroup,
   behaviorsOfGroup,
 }) => {
   const [currentStudent, setCurrentStudent] = useState(
-    enrollmentsOfGroup[0]?.id
+    usersOfGroup[0]?.id
   )
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState([])
   const [firstName, setFirstName] = useState(
-    enrollmentsOfGroup[0]?.firstName
+    usersOfGroup[0]?.firstName
   )
-  const [lastName, setLastName] = useState(enrollmentsOfGroup[0]?.lastName)
-  const [studentId, setStudentId] = useState(enrollmentsOfGroup[0]?.id)
+  const [lastName, setLastName] = useState(usersOfGroup[0]?.lastName)
+  const [studentId, setStudentId] = useState(usersOfGroup[0]?.id)
   const [totalPoints, setTotalPoints] = useState(null)
   const [userGroupPoints, setUserGroupPoints] = useState(null)
   const [userZeroPoints, setUserZeroPoints] = useState(null)
   const [userZeroGroupPoints, setUserZeroGroupPoints] = useState(null)
 
   useEffect(() => {
-    setFirstName(enrollmentsOfGroup[0]?.firstName)
-    setLastName(enrollmentsOfGroup[0]?.lastName)
-    setStudentId(enrollmentsOfGroup[0]?.id)
+    setFirstName(usersOfGroup[0]?.firstName)
+    setLastName(usersOfGroup[0]?.lastName)
+    setStudentId(usersOfGroup[0]?.id)
   }, [groupId])
 
   const handleSelect = (userId) => {
@@ -48,7 +48,7 @@ const GroupList = ({
     }
   }
 
-  if (enrollmentsOfGroup.length === 0) {
+  if (usersOfGroup.length === 0) {
     return (
       <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
         No Students! Enroll new students with the code:{' '}
@@ -76,7 +76,7 @@ const GroupList = ({
         </button>
         {/* STUDENT LIST */}
         <ul className="">
-          {enrollmentsOfGroup.map((enrollment) => {
+          {usersOfGroup.map((enrollment) => {
             const userSelected = selected.includes(enrollment.id)
             return (
               <div
@@ -98,7 +98,7 @@ const GroupList = ({
                   handleSelect={handleSelect}
                   setTotalPoints={setTotalPoints}
                   setUserGroupPoints={setUserGroupPoints}
-                  userZero={enrollmentsOfGroup[0]?.id}
+                  userZero={usersOfGroup[0]?.id}
                   setUserZeroPoints={setUserZeroPoints}
                   setUserZeroGroupPoints={setUserZeroGroupPoints}
                 />
@@ -115,12 +115,12 @@ const GroupList = ({
             userId={studentId}
             groupId={groupId}
             totalPoints={
-              studentId === enrollmentsOfGroup[0]?.id
+              studentId === usersOfGroup[0]?.id
                 ? userZeroPoints
                 : totalPoints
             }
             userGroupPoints={
-              studentId === enrollmentsOfGroup[0]?.id
+              studentId === usersOfGroup[0]?.id
                 ? userZeroGroupPoints
                 : userGroupPoints
             }

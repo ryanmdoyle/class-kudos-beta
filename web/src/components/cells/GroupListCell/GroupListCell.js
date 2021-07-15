@@ -67,7 +67,7 @@ export const Success = ({
       groupId={id}
       name={group?.name}
       enrollId={group?.enrollId}
-      enrollmentsOfGroup={usersOfGroup}
+      usersOfGroup={usersOfGroup}
       behaviorsOfGroup={behaviorsOfGroup}
     />
   )
