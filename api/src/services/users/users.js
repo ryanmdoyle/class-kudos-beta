@@ -64,14 +64,6 @@ export const reduceUserPoints = async ({ id, points }) => {
 export const updateUsersPoints = ({ input }) => {
   const updated = input.map(async (user) => {
     return await updateUserPoints({id: user.id})
-    // // find each selected user
-    // const userInDb = await db.user.findUnique({ where: { id: user.id } })
-    // // Add feedback value to the existing users points
-    // user.points += userInDb.points
-    // return db.user.update({
-    //   data: user,
-    //   where: { id: user.id },
-    // })
   })
   return updated
 }
