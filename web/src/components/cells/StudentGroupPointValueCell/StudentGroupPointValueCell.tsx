@@ -10,7 +10,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <span className='animate-pulse'>...</span>
 
 export const Empty = () => <div>Empty</div>
 
