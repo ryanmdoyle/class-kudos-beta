@@ -20,21 +20,6 @@ export const QUERY = gql`
           points
         }
     }
-    # enrollmentsOfGroup(groupId: $id) {
-    #   id
-    #   user {
-    #     id
-    #     firstName
-    #     lastName
-    #     profileImage
-    #     points
-    #     groupPoints {
-    #       id
-    #       groupId
-    #       points
-    #     }
-    #   }
-    # }
     behaviorsOfGroup(groupId: $id) {
       id
       name
@@ -73,16 +58,10 @@ export const Failure = () => {
 
 export const Success = ({
   id,
-  // enrollmentsOfGroup,
   behaviorsOfGroup,
   group,
   usersOfGroup
 }) => {
-  // const sorted = enrollmentsOfGroup?.slice().sort((a, b) => {
-  //   const nameA = a?.user?.firstName?.toLowerCase()
-  //   const nameB = b?.user?.firstName?.toLowerCase()
-  //   return nameA < nameB ? -1 : 1
-  // })
   return (
     <GroupList
       groupId={id}
