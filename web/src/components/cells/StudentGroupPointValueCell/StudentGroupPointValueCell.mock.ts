@@ -1,6 +1,7 @@
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
-  studentGroupPointValue: {
-    id: 42,
+  groupPointsOfUser: {
+    id: 1234567890,
+    points: 5
   },
 })

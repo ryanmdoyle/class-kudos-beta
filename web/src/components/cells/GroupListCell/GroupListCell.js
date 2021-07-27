@@ -32,10 +32,6 @@ export const QUERY = gql`
 
 export const Loading = () => (
   <>
-    <MetaTags
-      title="Class Kudos"
-      description="Group Page"
-    />
     <div className="col-span-4 overflow-scroll p-1">
       <button className={`button-white mr-4 w-52 mb-4`}></button>
       <ul className="">
