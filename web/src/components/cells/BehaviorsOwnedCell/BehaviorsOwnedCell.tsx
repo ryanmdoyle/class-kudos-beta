@@ -36,7 +36,6 @@ export const Success = ({ behaviorsOwned, groupsOwned, parentGroupId }: CellSucc
   const handleChange = (e) => {
     setGroup(e.target.value)
   }
-  console.log(behaviorsOwned, groupsOwned, parentGroupId)
 
   return (
     <div className="mt-4">
