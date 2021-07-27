@@ -28,7 +28,15 @@ describe('GroupListCell', () => {
 
   test('Success renders successfully', async () => {
     expect(() => {
-      render(<Success groupList={standard().group} />)
+      render(
+        <Success
+          id={standard().group}
+          group={standard().group}
+          behaviorsOfGroup={standard().behaviorsOfGroup}
+          usersOfGroup={standard().usersOfGroup}
+
+        />
+      )
     }).not.toThrow()
   })
 })

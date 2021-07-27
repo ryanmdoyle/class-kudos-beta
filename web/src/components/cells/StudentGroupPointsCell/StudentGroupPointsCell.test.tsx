@@ -29,7 +29,7 @@ describe('StudentGroupPointsCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success studentGroupPoints={standard().studentGroupPoints} />)
+      render(<Success groupPointsOfUser={standard().groupPointsOfUser} />)
     }).not.toThrow()
   })
 })

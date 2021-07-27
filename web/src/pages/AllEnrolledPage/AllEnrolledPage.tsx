@@ -9,7 +9,7 @@ const AllEnrolledPage = () => {
     <DashboardLayout>
       <div className="p-4">
         <h1 className="text-2xl font-display mb-2">All Enrolled Students</h1>
-        <AllEnrolledCell userId={currentUser.id} />
+        <AllEnrolledCell userId={currentUser?.id} />
       </div>
     </DashboardLayout>
   )

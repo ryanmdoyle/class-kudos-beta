@@ -34,8 +34,8 @@ export const Success = ({ userId, groupId, group, user, groupPointsOfUser }) => 
   return (
     <>
       <MetaTags
-        title={`Class Kudos - ${group.name}`}
-        description={`Student view for ${group.name}`}
+        title={`Class Kudos - ${group?.name}`}
+        description={`Student view for ${group?.name}`}
       />
       <div className="w-full h-full p-4 relative grid grid-cols-2 grid-rows-6 gap-2">
         <div className='col-span-1 row-span-6 flex flex-col'>
@@ -44,18 +44,18 @@ export const Success = ({ userId, groupId, group, user, groupPointsOfUser }) => 
             <div className="h-32 w-1/2 white-box relative p-2 mb-4 flex items-center mr-2">
               {/* GROUP Points */}
               <div className='flex flex-col items-center w-full'>
-                <span className="text-5xl text-green">{groupPointsOfUser.points}</span>
+                <span className="text-5xl text-green">{groupPointsOfUser?.points}</span>
                 <span className="text-lg text-green">
-                  {group.name} {`${groupPointsOfUser.points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
+                  {group?.name} {`${groupPointsOfUser?.points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
                 </span>
               </div>
             </div>
             <div className="h-32 w-1/2 white-box relative p-2 mb-4 flex items-center ml-2">
               {/* TOTAL */}
               <div className='flex flex-col items-center w-full'>
-                <span className="text-5xl text-gray-400">{user.points}</span>
+                <span className="text-5xl text-gray-400">{user?.points}</span>
                 <span className="text-lg text-gray-500">
-                  total {`${user.points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
+                  total {`${user?.points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
                 </span>
               </div>
             </div>
@@ -66,8 +66,8 @@ export const Success = ({ userId, groupId, group, user, groupPointsOfUser }) => 
             <RewardsOfGroupStudentCell
               groupId={groupId}
               userId={userId}
-              totalPoints={user.points}
-              groupPoints={groupPointsOfUser.points}
+              totalPoints={user?.points}
+              groupPoints={groupPointsOfUser?.points}
             />
           </div>
         </div>

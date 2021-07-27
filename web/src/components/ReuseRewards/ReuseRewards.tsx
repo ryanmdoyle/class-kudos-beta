@@ -11,7 +11,7 @@ const ReuseRewards = ({ groupId }) => {
         Copy Rewards
       </h2>
       <p>Quickly add a reward from another class or group.</p>
-      <RewardsOwnedCell userId={currentUser.id} parentGroupId={groupId} />
+      <RewardsOwnedCell userId={currentUser?.id} parentGroupId={groupId} />
     </div>
   )
 }

@@ -23,7 +23,7 @@ export const Success = ({ groupPointsOfUser }: CellSuccessProps<StudentGroupPoin
   return (
     <div className='mb-1'>
       <span className="font-display text-5xl text-green mr-2">
-        {groupPointsOfUser.points}
+        {groupPointsOfUser?.points}
       </span>
       <span className="font-display text-xl text-green mr-6">
         group kudos

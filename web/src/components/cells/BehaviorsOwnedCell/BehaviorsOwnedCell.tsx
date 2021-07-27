@@ -31,7 +31,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ behaviorsOwned, groupsOwned, parentGroupId }: CellSuccessProps<FindBehaviorsOwnedQuery>) => {
-  const [group, setGroup] = useState(groupsOwned[0].id)
+  const [group, setGroup] = useState(groupsOwned[0]?.id)
 
   const handleChange = (e) => {
     setGroup(e.target.value)

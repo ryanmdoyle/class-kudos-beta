@@ -36,15 +36,15 @@ const CopyBehaviorListItem = ({ behavior, parentGroupId }) => {
   }
 
   return (
-    <li className="white-box mb-2 mx-2 flex justify-between items-center" key={behavior.id}>
+    <li className="white-box mb-2 mx-2 flex justify-between items-center" key={behavior?.id}>
       <span>
-        <span>{behavior.name}</span>
+        <span>{behavior?.name}</span>
         {` - `}
-        <span className="text-gray-500">{behavior.group.name}</span>
+        <span className="text-gray-500">{behavior?.group?.name}</span>
       </span>
       <span>
         <span className="text-gray-500">Value: </span>
-        <span>{behavior.value}</span>
+        <span>{behavior?.value}</span>
         <button className={`button-green ml-4 ${loading ? 'cursor-wait' : ''}`} onClick={copy} disabled={loading} >Copy</button>
       </span>
     </li>

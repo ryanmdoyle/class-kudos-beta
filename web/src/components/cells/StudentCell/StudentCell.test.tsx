@@ -29,7 +29,7 @@ describe('StudentCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success student={standard().student} />)
+      render(<Success student={standard().user} />)
     }).not.toThrow()
   })
 })

@@ -11,7 +11,7 @@ const ReuseBehaviors = ({ groupId }) => {
         Copy Behaviors
       </h2>
       <p>Quickly add a behavior from another class or group.</p>
-      <BehaviorsOwnedCell userId={currentUser.id} parentGroupId={groupId} />
+      <BehaviorsOwnedCell userId={currentUser?.id} parentGroupId={groupId} />
     </div>
   )
 }

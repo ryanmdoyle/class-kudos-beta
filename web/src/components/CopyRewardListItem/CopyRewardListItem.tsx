@@ -36,15 +36,15 @@ const CopyRewardListItem = ({ reward, parentGroupId }) => {
   }
 
   return (
-    <li className="white-box mb-2 mx-2 flex justify-between items-center" key={reward.id}>
+    <li className="white-box mb-2 mx-2 flex justify-between items-center" key={reward?.id}>
       <span>
-        <span>{reward.name}</span>
+        <span>{reward?.name}</span>
         {` - `}
-        <span className="text-gray-500">{reward.group.name}</span>
+        <span className="text-gray-500">{reward?.group?.name}</span>
       </span>
       <span>
         <span className="text-gray-500">Value: </span>
-        <span>{reward.cost}</span>
+        <span>{reward?.cost}</span>
         <button className={`button-green ml-4 ${loading ? 'cursor-wait' : ''}`} onClick={copy} disabled={loading} >Copy</button>
       </span>
     </li>

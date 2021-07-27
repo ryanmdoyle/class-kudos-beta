@@ -14,11 +14,6 @@ const DELETE_ENROLLMENT_MUTATION = gql`
   }
 `
 const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
-  const {
-    id: userId = '1',
-    firstName = 'first',
-    lastName = 'last',
-  } = enrollment?.user
   const { openModal } = useModal()
 
   const [deleteEnrollment, { loading }] = useMutation(
@@ -33,17 +28,17 @@ const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
   )
 
   const onEditClick = () => {
-    openModal(<EditUserCell id={userId} />)
+    openModal(<EditUserCell id={enrollment?.user?.userId} />)
   }
 
   const onDeleteClick = () => {
     const response = prompt(
-      `Are you sure you want to remove ${firstName}?\nTo confirm, type: "${firstName} ${lastName}" `
+      `Are you sure you want to remove ${enrollment?.user?.firstName}?\nTo confirm, type: "${enrollment?.user?.firstName} ${enrollment?.user?.lastName}" `
     )
-    if (response !== null && response !== `${firstName} ${lastName}`) {
+    if (response !== null && response !== `${enrollment?.user?.firstName} ${enrollment?.user?.lastName}`) {
       alert('Invalid entry, user will not be removed.')
     }
-    if (response === `${firstName} ${lastName}`) {
+    if (response === `${enrollment?.user?.firstName} ${enrollment?.user?.lastName}`) {
       deleteEnrollment({ variables: { id: enrollment.id } })
     }
   }
@@ -53,9 +48,9 @@ const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
       className={`${
         loading ? 'animate-pulse' : null
       } w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center`}
-      key={userId}
+      key={enrollment?.user?.id}
     >
-      <span>{`${firstName} ${lastName}`}</span>
+      <span>{`${enrollment?.user?.firstName} ${enrollment?.user?.lastName}`}</span>
       <span className="text-green-400 font-bold flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +80,7 @@ const EnrolledOptionsListItem = ({ enrollment, groupId }) => {
           width="44"
           height="44"
           onClick={() => onDeleteClick()}
-          title={'Remove ' + firstName + '?'}
+          title={'Remove ' + enrollment?.user?.firstName + '?'}
         >
           <path
             strokeLinecap="round"

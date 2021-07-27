@@ -12,15 +12,15 @@ export const QUERY = gql`
     }
     usersOfGroup(groupId: $id) {
       id
-        firstName
-        lastName
-        profileImage
+      firstName
+      lastName
+      profileImage
+      points
+      groupPoints {
+        id
+        groupId
         points
-        groupPoints {
-          id
-          groupId
-          points
-        }
+      }
     }
     behaviorsOfGroup(groupId: $id) {
       id
@@ -67,8 +67,8 @@ export const Success = ({
   return (
     <>
     <MetaTags
-      title={`Class Kudos - ${group.name}`}
-      description={`Group page for ${group.name}`}
+      title={`Class Kudos - ${group?.name}`}
+      description={`Group page for ${group?.name}`}
     />
     <GroupList
       groupId={id}

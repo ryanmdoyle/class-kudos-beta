@@ -29,7 +29,7 @@ describe('RewardsOwnedCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success rewardsOwned={standard().rewardsOwned} />)
+      render(<Success rewardsOwned={standard().rewardsOwned} groupsOwned={standard().groupsOwned} parentGroupId={standard().parentGroupId}/>)
     }).not.toThrow()
   })
 })

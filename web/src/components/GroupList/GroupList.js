@@ -9,8 +9,8 @@ const GroupList = ({
   groupId,
   name,
   enrollId,
-  usersOfGroup,
-  behaviorsOfGroup,
+  usersOfGroup = [],
+  behaviorsOfGroup = [],
 }) => {
   const [currentStudent, setCurrentStudent] = useState(
     usersOfGroup[0]?.id

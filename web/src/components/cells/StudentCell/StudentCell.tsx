@@ -73,7 +73,7 @@ export const Success = ({ student }: CellSuccessProps<FindStudentQuery>) => {
         <h2 className="text-xl font-display mb-2">Enrollments</h2>
         <ul>
           {student.enrollments.map((enrollment) => (
-            <StudentEnrollmentListItem enrollment={enrollment} userId={student.id} firstName={student.firstName} />
+            <StudentEnrollmentListItem key={enrollment.id} enrollment={enrollment} userId={student.id} firstName={student.firstName} />
           ))}
         </ul>
       </div>

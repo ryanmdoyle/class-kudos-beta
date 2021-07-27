@@ -19,8 +19,8 @@ const ListViewStudentItem = ({
   setUserZeroPoints = () => {},
   setUserZeroGroupPoints = () => {}
 }) => {
-  const { id, firstName, lastName, profileImage, points, groupPoints } = user
-  const groupPoint = groupPoints[groupPoints.findIndex(element => element.groupId === groupId)].points
+  const { id, firstName, lastName, profileImage, points, groupPoints = [] } = user
+  const groupPoint = groupPoints[groupPoints?.findIndex(element => element.groupId === groupId)]?.points
   useEffect(() => {
     if (id === userZero) {
       setUserZeroPoints(points)

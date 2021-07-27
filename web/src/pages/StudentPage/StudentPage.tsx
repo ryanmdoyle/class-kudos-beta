@@ -1,6 +1,3 @@
-import { Link, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
-
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import StudentCell from 'src/components/cells/StudentCell'
 

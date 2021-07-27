@@ -29,7 +29,11 @@ describe('BehaviorsOwnedCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success behaviorsOwned={standard().behaviorsOwned} />)
+      render(<Success
+        behaviorsOwned={standard().behaviorsOwned}
+        groupsOwned={standard().groupsOwned}
+        parentGroupId={standard().parentGroupId}
+      />)
     }).not.toThrow()
   })
 })

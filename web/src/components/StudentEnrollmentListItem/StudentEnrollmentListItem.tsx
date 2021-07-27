@@ -45,8 +45,8 @@ const StudentEnrollmentListItem = ({ enrollment, userId, firstName }) => {
       } w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center`}
       key={userId}
     >
-      <span>{`${enrollment?.group.name}`}</span>
-      <span className="text-green-400 font-bold flex items-center" title={'Remove ' + enrollment.group.name + '?'}>
+      <span>{`${enrollment?.group?.name}`}</span>
+      <span className="text-green-400 font-bold flex items-center" title={'Remove ' + enrollment?.group?.name + '?'}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

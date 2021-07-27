@@ -5,7 +5,7 @@ import ReuseBehaviors from './ReuseBehaviors'
 describe('ReuseBehaviors', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<ReuseBehaviors />)
+      render(<ReuseBehaviors groupId='123' />)
     }).not.toThrow()
   })
 })
