@@ -1,5 +1,6 @@
 import { routes, Redirect } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
+import { MetaTags } from '@redwoodjs/web'
 
 import LandingLayout from '../../layouts/LandingLayout'
 import HighFive from 'src/components/svg/HighFive/HighFive'
@@ -12,6 +13,12 @@ const WelcomePage = () => {
   if (isAuthenticated) return <Redirect to={routes.login()} />
   return (
     <LandingLayout>
+      <MetaTags
+        title="Class Kudos - Welcome!"
+        description="A simple classroom management economy."
+        ogUrl="https://www.classkudos.com"
+        ogContentUrl="https://www.classkudos.com/ClassKudos.svg"
+      />
       <h1 className="text-center text-5xl font-bold pb-4">
         Kudos = Happy Humans
       </h1>

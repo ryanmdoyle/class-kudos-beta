@@ -1,5 +1,6 @@
 import type { FindStudentQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { MetaTags } from '@redwoodjs/web'
 
 import timeTag from 'src/lib/timeTag'
 import ListViewRecentItem from 'src/components/ListViewRecentItem/ListViewRecentItem'
@@ -55,6 +56,10 @@ export const Success = ({ student }: CellSuccessProps<FindStudentQuery>) => {
     : null
   return (
     <>
+      <MetaTags
+        title={`Class Kudos - ${student?.firstName} ${student?.lastName}`}
+        description={`Student page for ${student?.firstName} ${student?.lastName}`}
+      />
       <div className="white-box mb-4 flex flex-col justify-between">
       <h1 className="font-display text-2xl mb-4">
         {student.firstName} {student.lastName}
@@ -69,12 +74,6 @@ export const Success = ({ student }: CellSuccessProps<FindStudentQuery>) => {
         <ul>
           {student.enrollments.map((enrollment) => (
             <StudentEnrollmentListItem enrollment={enrollment} userId={student.id} firstName={student.firstName} />
-            // <li
-            //   key={enrollment.id}
-            //   className="w-full rounded bg-white shadow p-2 mb-2 flex justify-between items-center"
-            // >
-            //   {enrollment.group.name}
-            // </li>
           ))}
         </ul>
       </div>
@@ -84,7 +83,7 @@ export const Success = ({ student }: CellSuccessProps<FindStudentQuery>) => {
           {sorted.map((activity) => (
             <ListViewRecentItem
               name={activity.name}
-              value={activity.value || activity.cost || 'n/a'}
+              value={activity.__typename === 'Feedback' ? activity.value : activity.cost}
               createdAt={activity.createdAt}
               activityType={activity.__typename}
               key={activity.id}

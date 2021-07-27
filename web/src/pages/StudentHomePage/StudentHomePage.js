@@ -1,4 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
+import { MetaTags } from '@redwoodjs/web'
 
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout'
 import StudentHomeCell from 'src/components/cells/StudentHomeCell/StudentHomeCell'
@@ -9,6 +10,10 @@ const StudentHomePage = () => {
   const { currentUser } = useAuth()
   return (
     <DashboardLayout>
+      <MetaTags
+        title="Class Kudos - Student Home"
+        description="Student Home Page"
+      />
       <div className="p-4">
         <h1 className="text-3xl font-display mb-4">
           Welcome{currentUser ? `, ${currentUser?.firstName}` : null}! 👋

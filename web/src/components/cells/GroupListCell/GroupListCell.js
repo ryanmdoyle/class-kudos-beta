@@ -1,4 +1,6 @@
 import { Redirect, routes } from '@redwoodjs/router'
+import { MetaTags } from '@redwoodjs/web'
+
 import GroupList from 'src/components/GroupList/GroupList'
 
 export const QUERY = gql`
@@ -30,6 +32,10 @@ export const QUERY = gql`
 
 export const Loading = () => (
   <>
+    <MetaTags
+      title="Class Kudos"
+      description="Group Page"
+    />
     <div className="col-span-4 overflow-scroll p-1">
       <button className={`button-white mr-4 w-52 mb-4`}></button>
       <ul className="">
@@ -63,6 +69,11 @@ export const Success = ({
   usersOfGroup
 }) => {
   return (
+    <>
+    <MetaTags
+      title={`Class Kudos - ${group.name}`}
+      description={`Group page for ${group.name}`}
+    />
     <GroupList
       groupId={id}
       name={group?.name}
@@ -70,5 +81,6 @@ export const Success = ({
       usersOfGroup={usersOfGroup}
       behaviorsOfGroup={behaviorsOfGroup}
     />
+    </>
   )
 }
