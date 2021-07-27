@@ -9,6 +9,7 @@ import ScaffoldNav from 'src/components/ScaffoldNav/ScaffoldNav'
 import SiteHeader from 'src/components/SiteHeader/SiteHeader'
 import Modal from 'src/components/Modal/Modal'
 import PageLoader from 'src/components/PageLoader/PageLoader'
+import DonateButton from 'src/components/DonateButton/DonateButton'
 
 const DashboardLayout = ({ children }) => {
   const { hasRole } = useAuth()
@@ -21,10 +22,15 @@ const DashboardLayout = ({ children }) => {
       <div className="w-full h-screen relative overflow-y-scroll">
         <SiteHeader />
         <div className="flex w-full h-full-minusNav bg-gray-100">
-          <nav className="w-1/5 h-full bg-white lg:w-dashboard">
+          <nav className="w-1/5 h-full bg-white lg:w-dashboard relative">
             {hasRole('teacher') && <TeacherNav />}
             {hasRole('student') && <StudentNav />}
             {hasRole('super_admin') && <ScaffoldNav />}
+            {hasRole('teacher') && (
+              <div className="flex w-full justify-center absolute bottom-2">
+                <DonateButton />
+              </div>
+            )}
           </nav>
           <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll relative">
             {loading && <PageLoader />}
