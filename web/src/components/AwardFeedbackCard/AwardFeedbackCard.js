@@ -10,6 +10,7 @@ const AwardFeedbackCard = ({
   setSelecting,
   setSelected,
   totalPoints,
+  userGroupPoints,
   setCurrentStudent,
   studentId,
 }) => {
@@ -29,6 +30,7 @@ const AwardFeedbackCard = ({
           setSelecting={setSelecting}
           setSelected={setSelected}
           totalPoints={totalPoints}
+          userGroupPoints={userGroupPoints}
           setCurrentStudent={setCurrentStudent}
           studentId={studentId}
         />

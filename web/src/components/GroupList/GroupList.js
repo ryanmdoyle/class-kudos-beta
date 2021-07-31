@@ -135,9 +135,18 @@ const GroupList = ({
           selected={selected}
           setSelecting={setSelecting}
           setSelected={setSelected}
-          totalPoints={totalPoints}
           setCurrentStudent={setCurrentStudent}
           studentId={studentId}
+          totalPoints={
+              studentId === usersOfGroup[0]?.id
+                ? userZeroPoints
+                : totalPoints
+            }
+            userGroupPoints={
+              studentId === usersOfGroup[0]?.id
+                ? userZeroGroupPoints
+                : userGroupPoints
+            }
         />
         {!selecting && (
           <RecentActivityListCard

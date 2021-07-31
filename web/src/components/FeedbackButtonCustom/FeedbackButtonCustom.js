@@ -6,6 +6,7 @@ import FeedbackCustomForm from 'src/components/FeedbackCustomForm/FeedbackCustom
 
 const FeedbackButtonCustom = ({
   totalUserPoints,
+  userGroupPoints,
   studentId,
   behaviorId,
   groupId,
@@ -17,13 +18,12 @@ const FeedbackButtonCustom = ({
 }) => {
   const { openModal } = useModal()
   const giveFeedback = (name, value) => {
-    // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
-    const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
+    // adjustedValue reduces negative values to userGroupPoints to prevent negative total user points
+    const adjustedValue = userGroupPoints + value < 0 ? -userGroupPoints : value
     newFeedback({
       variables: {
         createFeedbackInput: {
           userId: studentId,
-          // behaviorId: behaviorId,
           groupId: groupId,
           name: name,
           value: adjustedValue,
@@ -49,8 +49,8 @@ const FeedbackButtonCustom = ({
   }
 
   const wontReturnNegativeTotal = (value) => {
-    if (totalUserPoints === 0 && value > 0) return true
-    if (totalUserPoints > 0) return true // giveFeedback will auto-adjust neg values before query
+    if (userGroupPoints === 0 && value > 0) return true
+    if (userGroupPoints > 0) return true // giveFeedback will auto-adjust neg values before query
     return false
   }
 

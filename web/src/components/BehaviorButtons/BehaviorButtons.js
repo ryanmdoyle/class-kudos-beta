@@ -34,6 +34,7 @@ const BehaviorButtons = ({
   setSelecting,
   setSelected,
   totalPoints,
+  userGroupPoints,
   setCurrentStudent,
 }) => {
   const { isOpen, close } = useModal()
@@ -95,6 +96,7 @@ const BehaviorButtons = ({
           name={behavior.name}
           value={behavior.value}
           totalUserPoints={totalPoints}
+          userGroupPoints={userGroupPoints}
           studentId={userId}
           behaviorId={behavior.id}
           groupId={groupId}
@@ -112,6 +114,7 @@ const BehaviorButtons = ({
       ))}
       <FeedbackButtonCustom
         totalUserPoints={totalPoints}
+        userGroupPoints={userGroupPoints}
         studentId={userId}
         groupId={groupId}
         newFeedback={newFeedback}

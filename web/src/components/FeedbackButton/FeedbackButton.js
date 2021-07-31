@@ -7,6 +7,7 @@ const FeedbackButton = ({
   name,
   value,
   totalUserPoints,
+  userGroupPoints,
   studentId,
   behaviorId,
   groupId,
@@ -19,7 +20,7 @@ const FeedbackButton = ({
 }) => {
   const giveFeedback = () => {
     // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
-    const adjustedValue = totalUserPoints + value < 0 ? -totalUserPoints : value
+    const adjustedValue = userGroupPoints + value < 0 ? -userGroupPoints : value
     newFeedback({
       variables: {
         createFeedbackInput: {
@@ -50,8 +51,8 @@ const FeedbackButton = ({
   }
 
   const wontReturnNegativeTotal = () => {
-    if (totalUserPoints === 0 && value > 0) return true
-    if (totalUserPoints > 0) return true // giveFeedback will auto-adjust neg values before query
+    if (userGroupPoints === 0 && value > 0) return true
+    if (userGroupPoints > 0) return true // giveFeedback will auto-adjust neg values before query
     return false
   }
 
@@ -62,7 +63,7 @@ const FeedbackButton = ({
         (loading ||
           loadings ||
           (selecting && selected.length === 0) ||
-          (totalUserPoints === 0 && value < 0) ||
+          (userGroupPoints === 0 && value < 0) ||
           (selecting && value < 0)) &&
         'opacity-70 cursor-not-allowed'
       }
