@@ -40,7 +40,7 @@ const BehaviorOptionsListItem = ({ id, name, value, groupId }) => {
       key={id}
     >
       <span>{name}</span>
-      <span className="text-green-400 font-bold flex items-center">
+      <span className={`${value > 0 ? 'text-green-400' : 'text-red-500'} font-bold flex items-center`}>
         {value}
         <svg
           xmlns="http://www.w3.org/2000/svg"
