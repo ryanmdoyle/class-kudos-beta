@@ -48,6 +48,11 @@ const GroupList = ({
     }
   }
 
+  const selectAll = () => {
+    const allUsers = usersOfGroup.map(user => user.id)
+    setSelected(allUsers)
+  }
+
   if (usersOfGroup.length === 0) {
     return (
       <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
@@ -70,10 +75,24 @@ const GroupList = ({
           }}
           className={`${
             selecting ? 'button-purple' : 'button-white'
-          } mr-4 w-52 mb-4`}
+          } mr-4 w-42 mb-4`}
         >
           {selecting ? 'Cancel' : 'Select Multiple'}
         </button>
+        { selecting && (
+          <button
+          onClick={() => {
+            if (selecting) {
+              selectAll()
+            }
+          }}
+          className={`${
+            selecting ? 'button-purple' : 'button-white'
+          } mr-4 w-42 mb-4`}
+        >
+          {'Select All'}
+        </button>
+        )}
         {/* STUDENT LIST */}
         <ul className="">
           {usersOfGroup.map((enrollment) => {
