@@ -1,12 +1,26 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import { updateGroupPoints, reduceGroupPoints, updateGroupsPoints } from '../groupPoints/groupPoints'
+import {
+  updateGroupPoints,
+  reduceGroupPoints,
+  updateGroupsPoints,
+} from '../groupPoints/groupPoints'
 
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
-  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['createFeedback', 'updateFeedback', 'deleteFeedback', 'createFeedbacks', 'archiveGroup']})
-  rules.add(() => requireAuth({role: ['super_admin']}), { only: ['deleteFeedbacks']})
+  rules.add(() => requireAuth({ role: ['teacher', 'super_admin'] }), {
+    only: [
+      'createFeedback',
+      'updateFeedback',
+      'deleteFeedback',
+      'createFeedbacks',
+      'archiveGroup',
+    ],
+  })
+  rules.add(() => requireAuth({ role: ['super_admin'] }), {
+    only: ['deleteFeedbacks'],
+  })
 }
 
 export const feedbacks = () => {
@@ -23,11 +37,13 @@ export const createFeedback = async ({ input }) => {
   const userInDb = await db.user.findUnique({ where: { id: input.userId } })
   if (userInDb.points + input.value >= 0) {
     // assign points for group feedback is given
-    await updateGroupPoints({ input: {
-      userId: input.userId,
-      groupId: input.groupId,
-      points: input.value,
-    }})
+    await updateGroupPoints({
+      input: {
+        userId: input.userId,
+        groupId: input.groupId,
+        points: input.value,
+      },
+    })
     // create the actual feedback
     return db.feedback.create({
       data: input,
@@ -51,7 +67,7 @@ export const deleteFeedback = async ({ id }) => {
       userId: feedbackInDb.userId,
       groupId: feedbackInDb.groupId,
       points: feedbackInDb.value,
-    }
+    },
   })
   return db.feedback.delete({
     where: { id },
@@ -95,7 +111,7 @@ export const feedbackOfGroup = ({ groupId }) => {
 
 export const createFeedbacks = async ({ input }) => {
   // UPDATE GROUP POINTS HERE --> THIS WORKS
-  const groupsPointsInput = input.map(feedback => {
+  const groupsPointsInput = input.map((feedback) => {
     return {
       userId: feedback.userId,
       groupId: feedback.groupId,
