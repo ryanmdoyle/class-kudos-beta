@@ -46,7 +46,10 @@ const BehaviorButtons = ({
         variables: { userId: userId, groupId: groupId },
       },
       { query: studentListQuery, variables: { id: groupId } },
-      { query: groupPointsOfUserQuery, variables: { userId: userId, groupId: groupId }}
+      {
+        query: groupPointsOfUserQuery,
+        variables: { userId: userId, groupId: groupId },
+      },
     ],
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
@@ -64,7 +67,10 @@ const BehaviorButtons = ({
         variables: { userId: userId, groupId: groupId },
       },
       { query: studentListQuery, variables: { id: groupId } },
-      { query: groupPointsOfUserQuery, variables: { userId: userId, groupId: groupId }}
+      {
+        query: groupPointsOfUserQuery,
+        variables: { userId: userId, groupId: groupId },
+      },
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {

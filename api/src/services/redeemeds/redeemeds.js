@@ -5,7 +5,17 @@ import { reduceGroupPoints, addGroupPoints } from '../groupPoints/groupPoints'
 
 export const beforeResolver = (rules) => {
   rules.add(requireAuth)
-  rules.add(() => requireAuth({role: ['teacher', 'super_admin']}), { only: ['updateRedeemed', 'deleteRedeemed', 'redeemedOfGroup', 'redeemedOfGroupToReview', 'redeemedOfGroupReviewed', 'approveRedeemed', 'approveRedeemeds']})
+  rules.add(() => requireAuth({ role: ['teacher', 'super_admin'] }), {
+    only: [
+      'updateRedeemed',
+      'deleteRedeemed',
+      'redeemedOfGroup',
+      'redeemedOfGroupToReview',
+      'redeemedOfGroupReviewed',
+      'approveRedeemed',
+      'approveRedeemeds',
+    ],
+  })
 }
 
 export const redeemeds = () => {
@@ -19,13 +29,17 @@ export const redeemed = ({ id }) => {
 }
 
 export const createRedeemed = async ({ input }) => {
-  const userGroupPoints = await db.groupPoint.findFirst({ where : { groupId: input.groupId, userId: input.userId,}})
+  const userGroupPoints = await db.groupPoint.findFirst({
+    where: { groupId: input.groupId, userId: input.userId },
+  })
   if (userGroupPoints.points >= input.cost) {
-    await reduceGroupPoints({input: {
-      groupId: input.groupId,
-      userId: input.userId,
-      points: input.cost,
-    }})
+    await reduceGroupPoints({
+      input: {
+        groupId: input.groupId,
+        userId: input.userId,
+        points: input.cost,
+      },
+    })
     return db.redeemed.create({
       data: input,
     })
@@ -44,11 +58,11 @@ export const updateRedeemed = ({ id, input }) => {
 export const deleteRedeemed = async ({ id }) => {
   const redeemedPending = await db.redeemed.findUnique({ where: { id } })
   await addGroupPoints({
-    input:{
+    input: {
       userId: redeemedPending.userId,
       groupId: redeemedPending.groupId,
-      points:redeemedPending.cost
-    }
+      points: redeemedPending.cost,
+    },
   })
   return db.redeemed.delete({
     where: { id },
