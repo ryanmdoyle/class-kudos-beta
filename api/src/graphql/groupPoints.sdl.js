@@ -14,6 +14,7 @@ export const schema = gql`
   }
 
   type Mutation {
+    createGroupPoints(input: CreateGroupPointInput): GroupPoint!
     updateGroupPoints(input: UpdateGroupPointInput!): GroupPoint!
     updateGroupsPoints(input: [UpdateGroupPointInput!]!): [GroupPoint!]!
     addGroupPoints(input: UpdateGroupPointInput!): GroupPoint!
@@ -22,7 +23,6 @@ export const schema = gql`
   }
 
   input CreateGroupPointInput {
-    points: Int!
     userId: String!
     groupId: String!
   }

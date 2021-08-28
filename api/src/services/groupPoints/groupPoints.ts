@@ -1,16 +1,6 @@
-import type { Prisma } from '@prisma/client'
-import type { ResolverArgs, BeforeResolverSpecType } from '@redwoodjs/api'
-
-import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-
-import {
-  updateUserPoints,
-  addUserPoints,
-  updateUsersPoints,
-  reduceUserPoints,
-} from '../users/users'
+import type { ResolverArgs, BeforeResolverSpecType } from '@redwoodjs/api'
 
 // Used when the environment variable REDWOOD_SECURE_SERVICES=1
 export const beforeResolver = (rules: BeforeResolverSpecType) => {
@@ -20,12 +10,10 @@ export const beforeResolver = (rules: BeforeResolverSpecType) => {
   })
 }
 
+// QUERIES /////////////////////////////////////////////////////////////
+
 export const groupPoints = () => {
   return db.groupPoint.findMany()
-}
-
-export const deleteGroupPoints = () => {
-  return db.groupPoint.deleteMany()
 }
 
 export const groupPointsOfUser = async ({ groupId, userId }) => {
@@ -49,35 +37,25 @@ export const groupPointsOfUser = async ({ groupId, userId }) => {
   return groupPoints
 }
 
-export const updateGroupPoints = async ({ input }) => {
-  const groupPoints = await db.groupPoint.findFirst({
-    where: {
-      groupId: input.groupId,
-      userId: input.userId,
-    },
-  })
-  if (groupPoints === null) {
-    // Create group points if they don't exist already
-    const newGroupPoint = await db.groupPoint.create({
-      data: input,
-    })
-    input.points > 0
-      ? await addUserPoints({ id: input.userId, points: input.points })
-      : await reduceUserPoints({ id: input.userId, points: input.points })
-    // await updateUserPoints({ id: input.userId })
-    return newGroupPoint
-  }
-  const updated = await db.groupPoint.update({
+// MUTATAIONS //////////////////////////////////////////////////////////
+
+export const createGroupPoints = async ({ userId, groupId }) => {
+  return await db.groupPoint.create({
     data: {
-      points: groupPoints.points + input.points,
+      points: 0,
+      userId: userId,
+      groupId: groupId,
     },
-    where: { id: groupPoints.id },
   })
-  // await updateUserPoints({ id: input.userId })
-  input.points > 0
-    ? await addUserPoints({ id: input.userId, points: input.points })
-    : await reduceUserPoints({ id: input.userId, points: input.points })
-  return updated
+}
+
+export const updateGroupPoints = async ({ input }) => {
+  console.log('update group points', input)
+  if (input.points > 0) {
+    addGroupPoints({ input })
+  } else {
+    reduceGroupPoints({ input })
+  }
 }
 
 export const updateGroupsPoints = async ({ input }) => {
@@ -92,50 +70,53 @@ export const updateGroupsPoints = async ({ input }) => {
 }
 
 export const addGroupPoints = async ({ input }) => {
-  const groupPoints = await db.groupPoint.findFirst({
-    where: {
-      groupId: input.groupId,
-      userId: input.userId,
-    },
-  })
-  const updatedGroupPoints = await db.groupPoint.update({
+  return await db.groupPoint.updateMany({
     data: {
-      points: groupPoints.points + input.points,
+      points: {
+        increment: input.points,
+      },
     },
-    where: { id: groupPoints.id },
+    where: {
+      userId: input.userId,
+      groupId: input.groupId,
+    },
   })
-  // await updateUserPoints({ id: input.userId })
-  input.points > 0
-    ? await addUserPoints({ id: input.userId, points: input.points })
-    : await reduceUserPoints({ id: input.userId, points: input.points })
-  return updatedGroupPoints
 }
 
 export const reduceGroupPoints = async ({ input }) => {
   const groupPoints = await db.groupPoint.findFirst({
     where: {
-      groupId: input.groupId,
       userId: input.userId,
+      groupId: input.groupId,
     },
   })
-  if (groupPoints.points >= input.points) {
-    // Create group points if they don't exist already
-    const updatedGroupPoints = await db.groupPoint.update({
+  if (groupPoints + input.points >= 0) {
+    return await db.groupPoint.update({
       data: {
-        points: groupPoints.points - input.points,
+        points: {
+          increment: input.points, // points are neg, must increment. (adding negative to reduce)
+        },
       },
-      where: { id: groupPoints.id },
+      where: {
+        id: groupPoints.id,
+      },
     })
-    // await updateUserPoints({ id: input.userId })
-    input.points > 0
-      ? await addUserPoints({ id: input.userId, points: input.points })
-      : await reduceUserPoints({ id: input.userId, points: input.points })
-    return updatedGroupPoints
   } else {
-    throw new UserInputError(
-      'User cannot be given less than 0 kudos in a group.'
-    )
+    return await db.groupPoint.update({
+      data: {
+        points: {
+          set: 0, // points are neg, must increment. (adding negative to reduce)
+        },
+      },
+      where: {
+        id: groupPoints.id,
+      },
+    })
   }
+}
+
+export const deleteGroupPoints = () => {
+  return db.groupPoint.deleteMany()
 }
 
 export const GroupPoint = {
