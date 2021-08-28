@@ -17,12 +17,6 @@ export const schema = gql`
     groupPoints: [GroupPoint]!
   }
 
-  type Query {
-    users: [User!]!
-    user(id: String!): User
-    usersOfGroup(groupId: String!): [User!]!
-  }
-
   input CreateUserInput {
     uid: String!
     firstName: String!
@@ -45,11 +39,18 @@ export const schema = gql`
     points: Int!
   }
 
+  type Query {
+    users: [User!]!
+    user(id: String!): User
+    usersOfGroup(groupId: String!): [User!]!
+  }
+
   type Mutation {
     createUser(input: CreateUserInput!): User!
     updateUser(id: String!, input: UpdateUserInput!): User!
-    updateUserPoints(id: String!, points: Int!): User!
+    updateUserPoints(input: UpdateUsersPointsInput!): User!
     updateUsersPoints(input: [UpdateUsersPointsInput!]!): [User!]!
+    updateUserPointsFromGroupPoints(id: String!, points: Int!): User!
     addUserPoints(id: String!, points: Int!): User!
     reduceUserPoints(id: String!, points: Int!): User!
     deleteUser(id: String!): User!
