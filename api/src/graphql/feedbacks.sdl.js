@@ -21,7 +21,7 @@ export const schema = gql`
 
   type Mutation {
     createFeedback(input: CreateFeedbackInput!): Feedback!
-    createFeedbacks(input: [CreateFeedbackInput!]): CreatedManyReturn!
+    createFeedbacks(input: CreateFeedbacksInput!): CreatedManyReturn!
     updateFeedback(id: String!, input: UpdateFeedbackInput!): Feedback!
     deleteFeedback(id: String!): Feedback!
     deleteFeedbacks: BatchPayload!
@@ -29,6 +29,14 @@ export const schema = gql`
 
   input CreateFeedbackInput {
     userId: String!
+    behaviorId: String
+    groupId: String!
+    name: String!
+    value: Int!
+  }
+
+  input CreateFeedbacksInput {
+    userIds: [String!]!
     behaviorId: String
     groupId: String!
     name: String!

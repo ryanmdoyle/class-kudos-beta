@@ -49,8 +49,7 @@ export const createGroupPoints = async ({ userId, groupId }) => {
   })
 }
 
-export const updateGroupPoints = async ({ input }) => {
-  console.log('update group points', input)
+export const updateGroupPoint = async ({ input }) => {
   if (input.points > 0) {
     addGroupPoints({ input })
   } else {
@@ -58,15 +57,12 @@ export const updateGroupPoints = async ({ input }) => {
   }
 }
 
-export const updateGroupsPoints = async ({ input }) => {
-  // Use Promise.all to wait for ALL updates to resolve
-  const updatedUsers = await Promise.all(
-    input.map((groupPointsInput) => {
-      // find the groupPoint for the user/group
-      return updateGroupPoints({ input: groupPointsInput })
-    })
-  )
-  return updatedUsers
+export const updateGroupPoints = async ({ input }) => {
+  if (input.points > 0) {
+    return await addManyGroupPoints({ input })
+  } else {
+    return await reduceManyGroupPoints({ input })
+  }
 }
 
 export const addGroupPoints = async ({ input }) => {
@@ -113,6 +109,33 @@ export const reduceGroupPoints = async ({ input }) => {
       },
     })
   }
+}
+
+export const addManyGroupPoints = async ({ input }) => {
+  return await db.groupPoint.updateMany({
+    data: {
+      points: {
+        increment: input.points,
+      },
+    },
+    where: {
+      AND: [{ groupId: input.groupId }, { userId: { in: input.userIds } }],
+    },
+  })
+}
+
+export const reduceManyGroupPoints = async ({ input }) => {
+  // TODO - check for return negative value
+  return await db.groupPoint.updateMany({
+    data: {
+      points: {
+        increment: input.points,
+      },
+    },
+    where: {
+      AND: [{ groupId: input.groupId }, { userId: { in: input.userIds } }],
+    },
+  })
 }
 
 export const deleteGroupPoints = () => {

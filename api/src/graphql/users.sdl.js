@@ -34,8 +34,13 @@ export const schema = gql`
     points: Int
   }
 
-  input UpdateUsersPointsInput {
+  input UpdateUserPointsInput {
     id: String!
+    points: Int!
+  }
+
+  input UpdateUsersPointsInput {
+    ids: [String!]!
     points: Int!
   }
 
@@ -48,11 +53,13 @@ export const schema = gql`
   type Mutation {
     createUser(input: CreateUserInput!): User!
     updateUser(id: String!, input: UpdateUserInput!): User!
-    updateUserPoints(input: UpdateUsersPointsInput!): User!
+    updateUserPoints(input: UpdateUserPointsInput!): User!
     updateUsersPoints(input: [UpdateUsersPointsInput!]!): [User!]!
     updateUserPointsFromGroupPoints(id: String!, points: Int!): User!
     addUserPoints(id: String!, points: Int!): User!
     reduceUserPoints(id: String!, points: Int!): User!
+    addUsersPoints(input: [UpdateUserPointsInput!]!): [User!]!
+    reduceUsersPoints(input: [UpdateUserPointsInput!]!): [User!]!
     deleteUser(id: String!): User!
   }
 `

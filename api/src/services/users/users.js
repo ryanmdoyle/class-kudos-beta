@@ -55,11 +55,12 @@ export const updateUserPoints = async ({ input }) => {
   }
 }
 
-export const updateUsersPoints = ({ input }) => {
-  const updated = input.map(async (user) => {
-    return await updateUserPoints({ id: user.id })
-  })
-  return updated
+export const updateUsersPoints = async ({ input }) => {
+  if (input.points > 0) {
+    return await addUsersPoints({ input })
+  } else {
+    return await reduceUsersPoints({ input })
+  }
 }
 
 export const updateUserPointsFromGroupPoints = async ({ id }) => {
@@ -110,6 +111,44 @@ export const reduceUserPoints = async ({ id, points }) => {
       where: { id },
     })
   }
+}
+
+export const addUsersPoints = async ({ input }) => {
+  return db.user.updateMany({
+    data: {
+      points: {
+        increment: input.points,
+      },
+    },
+    where: { id: { in: input.userIds } },
+  })
+}
+
+export const reduceUsersPoints = async ({ input }) => {
+  // const user = await db.user.findUnique({
+  //   where: { id },
+  // })
+  // if (user.points + points >= 0) {
+  //   // reduce points if result is 0 or positive total
+  //   return db.user.update({
+  //     data: {
+  //       points: {
+  //         increment: points, // points are neg, must increment. (adding negative to reduce)
+  //       },
+  //     },
+  //     where: { id },
+  //   })
+  // } else {
+  //   // if result would be negative, set to 0
+  //   return db.user.update({
+  //     data: {
+  //       points: {
+  //         set: 0,
+  //       },
+  //     },
+  //     where: { id },
+  //   })
+  // }
 }
 
 export const deleteUser = ({ id }) => {

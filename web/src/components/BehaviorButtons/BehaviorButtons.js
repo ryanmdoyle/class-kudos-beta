@@ -18,8 +18,8 @@ const CREATE_FEEDBACK = gql`
 `
 
 const CREATE_FEEDBACKS = gql`
-  mutation CreateFeedbacks($feedbackInput: [CreateFeedbackInput!]!) {
-    createFeedbacks(input: $feedbackInput) {
+  mutation CreateFeedbacks($createFeedbacksInput: CreateFeedbacksInput!) {
+    createFeedbacks(input: $createFeedbacksInput) {
       id
     }
   }

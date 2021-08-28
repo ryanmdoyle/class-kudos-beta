@@ -32,18 +32,16 @@ const FeedbackButtonCustom = ({
     })
   }
   const giveFeedbacks = (name, value) => {
-    const feedbacks = selected.map((userId) => {
-      return {
-        userId: userId,
-        behaviorId: behaviorId,
-        groupId: groupId,
-        name: name,
-        value: value,
-      }
-    })
+    const userIds = selected.map((userId) => userId)
     newFeedbacks({
       variables: {
-        feedbackInput: feedbacks,
+        createFeedbacksInput: {
+          userIds: userIds,
+          behaviorId: behaviorId,
+          groupId: groupId,
+          name: name,
+          value: value,
+        },
       },
     })
   }

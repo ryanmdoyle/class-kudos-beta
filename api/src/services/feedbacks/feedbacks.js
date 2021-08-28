@@ -1,11 +1,11 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import { updateUserPoints } from '../users/users'
+import { updateUserPoints, updateUsersPoints } from '../users/users'
 import {
+  updateGroupPoint,
   updateGroupPoints,
   reduceGroupPoints,
-  updateGroupsPoints,
 } from '../groupPoints/groupPoints'
 
 export const beforeResolver = (rules) => {
@@ -67,7 +67,7 @@ export const createFeedback = async ({ input }) => {
         points: input.value,
       },
     }),
-    updateGroupPoints({
+    updateGroupPoint({
       input: {
         userId: input.userId,
         groupId: input.groupId,
@@ -84,25 +84,36 @@ export const createFeedback = async ({ input }) => {
 }
 
 export const createFeedbacks = async ({ input }) => {
-  // UPDATE GROUP POINTS HERE --> THIS WORKS
-  const groupsPointsInput = input.map((feedback) => {
-    return {
-      userId: feedback.userId,
-      groupId: feedback.groupId,
-      points: feedback.value,
+  await updateUsersPoints({
+    //DONE!
+    input: {
+      ids: input.userIds,
+      points: input.value,
+    },
+  })
+  await updateGroupPoints({
+    // DONE!
+    input: {
+      userIds: input.userIds,
+      groupId: input.groupId,
+      points: input.value,
+    },
+  })
+  const feedbackData = input.userIds.map((userId) => {
+    const feedback = {
+      userId: userId,
+      groupId: input.groupId,
+      name: input.name,
+      value: input.value,
     }
+    if (input.behaviorId) {
+      feedback.behaviorId = input.behaviorId
+    }
+    return feedback
   })
-  await updateGroupsPoints({ input: groupsPointsInput })
-
-  // create all the feedbacks
-  const created = await db.feedback.createMany({
-    data: input,
+  return await db.feedback.createMany({
+    data: feedbackData,
   })
-  if (created.count === input.length) {
-    created.id = created.count
-    return created
-  }
-  return UserInputError('Invalid Users')
 }
 
 export const updateFeedback = ({ id, input }) => {

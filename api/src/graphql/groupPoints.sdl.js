@@ -15,10 +15,12 @@ export const schema = gql`
 
   type Mutation {
     createGroupPoints(input: CreateGroupPointInput): GroupPoint!
-    updateGroupPoints(input: UpdateGroupPointInput!): GroupPoint!
-    updateGroupsPoints(input: [UpdateGroupPointInput!]!): [GroupPoint!]!
+    updateGroupPoint(input: UpdateGroupPointInput!): GroupPoint!
+    updateGroupPoints(input: UpdateGroupPointsInput!): [GroupPoint!]!
     addGroupPoints(input: UpdateGroupPointInput!): GroupPoint!
     reduceGroupPoints(input: UpdateGroupPointInput!): GroupPoint!
+    addManyGroupPoints(input: UpdateGroupPointsInput!): BatchPayload!
+    reduceManyGroupPoints(input: UpdateGroupPointsInput!): BatchPayload!
     deleteGroupPoints: BatchPayload!
   }
 
@@ -28,9 +30,15 @@ export const schema = gql`
   }
 
   input UpdateGroupPointInput {
-    points: Int
-    userId: String
-    groupId: String
+    points: Int!
+    userId: String!
+    groupId: String!
+  }
+
+  input UpdateGroupPointsInput {
+    userIds: [String!]!
+    groupId: String!
+    points: Int!
   }
 
   type BatchPayload {
