@@ -15,6 +15,16 @@ export const schema = gql`
     enrollmentsOfInstructor(userId: String!): [Enrollment!]!
   }
 
+  type Mutation {
+    createEnrollment(input: CreateEnrollmentInput!): Enrollment!
+    createEnrollmentByEnrollId(
+      input: CreateEnrollmentByEnrollIdInput!
+    ): Enrollment!
+    updateEnrollment(id: String!, input: UpdateEnrollmentInput!): Enrollment!
+    deleteEnrollment(id: String!): Enrollment!
+    deleteEnrollmentByStudent(userId: String!, groupId: String!): Enrollment!
+  }
+
   input CreateEnrollmentInput {
     userId: String!
     groupId: String!
@@ -28,16 +38,5 @@ export const schema = gql`
   input CreateEnrollmentByEnrollIdInput {
     userId: String!
     enrollId: String!
-  }
-
-  type Mutation {
-    createEnrollment(input: CreateEnrollmentInput!): Enrollment!
-    updateEnrollment(id: String!, input: UpdateEnrollmentInput!): Enrollment!
-    deleteEnrollment(id: String!): Enrollment!
-    # Custom
-    createEnrollmentByEnrollId(
-      input: CreateEnrollmentByEnrollIdInput!
-    ): Enrollment!
-    deleteEnrollmentByStudent(userId: String!, groupId: String!): Enrollment!
   }
 `
