@@ -1,6 +1,7 @@
 import { UserInputError } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
+import { updateUserPoints } from '../users/users'
 import {
   updateGroupPoints,
   reduceGroupPoints,
@@ -23,6 +24,8 @@ export const beforeResolver = (rules) => {
   })
 }
 
+// QUERIES /////////////////////////////////////////////////////////////
+
 export const feedbacks = () => {
   return db.feedback.findMany()
 }
@@ -33,24 +36,73 @@ export const feedback = ({ id }) => {
   })
 }
 
+export const feedbackOfUser = ({ userId }) => {
+  return db.feedback.findMany({
+    where: { userId: userId },
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
+export const feedbackOfUserForGroup = ({ userId, groupId }) => {
+  return db.feedback.findMany({
+    where: { userId: userId, groupId: groupId },
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
+export const feedbackOfGroup = ({ groupId }) => {
+  return db.feedback.findMany({
+    where: { groupId: groupId },
+    orderBy: { createdAt: 'desc' },
+  })
+}
+
+// MUTATIONS //////////////////////////////////////////////////////////
+
 export const createFeedback = async ({ input }) => {
-  const userInDb = await db.user.findUnique({ where: { id: input.userId } })
-  if (userInDb.points + input.value >= 0) {
-    // assign points for group feedback is given
-    await updateGroupPoints({
+  await Promise.allSettled([
+    updateUserPoints({
+      input: {
+        userId: input.userId,
+        points: input.value,
+      },
+    }),
+    updateGroupPoints({
       input: {
         userId: input.userId,
         groupId: input.groupId,
         points: input.value,
       },
-    })
-    // create the actual feedback
-    return db.feedback.create({
-      data: input,
-    })
-  } else {
-    throw new UserInputError('User cannot be given less than 0 kudos.')
+    }),
+  ]).catch(() => {
+    throw new UserInputError('error')
+  })
+  // create the actual feedback
+  return db.feedback.create({
+    data: input,
+  })
+}
+
+export const createFeedbacks = async ({ input }) => {
+  // UPDATE GROUP POINTS HERE --> THIS WORKS
+  const groupsPointsInput = input.map((feedback) => {
+    return {
+      userId: feedback.userId,
+      groupId: feedback.groupId,
+      points: feedback.value,
+    }
+  })
+  await updateGroupsPoints({ input: groupsPointsInput })
+
+  // create all the feedbacks
+  const created = await db.feedback.createMany({
+    data: input,
+  })
+  if (created.count === input.length) {
+    created.id = created.count
+    return created
   }
+  return UserInputError('Invalid Users')
 }
 
 export const updateFeedback = ({ id, input }) => {
@@ -85,48 +137,4 @@ export const Feedback = {
     db.feedback.findUnique({ where: { id: root.id } }).behavior(),
   group: (_obj, { root }) =>
     db.feedback.findUnique({ where: { id: root.id } }).group(),
-}
-
-// Custom
-export const feedbackOfUser = ({ userId }) => {
-  return db.feedback.findMany({
-    where: { userId: userId },
-    orderBy: { createdAt: 'desc' },
-  })
-}
-
-export const feedbackOfUserForGroup = ({ userId, groupId }) => {
-  return db.feedback.findMany({
-    where: { userId: userId, groupId: groupId },
-    orderBy: { createdAt: 'desc' },
-  })
-}
-
-export const feedbackOfGroup = ({ groupId }) => {
-  return db.feedback.findMany({
-    where: { groupId: groupId },
-    orderBy: { createdAt: 'desc' },
-  })
-}
-
-export const createFeedbacks = async ({ input }) => {
-  // UPDATE GROUP POINTS HERE --> THIS WORKS
-  const groupsPointsInput = input.map((feedback) => {
-    return {
-      userId: feedback.userId,
-      groupId: feedback.groupId,
-      points: feedback.value,
-    }
-  })
-  await updateGroupsPoints({ input: groupsPointsInput })
-
-  // create all the feedbacks
-  const created = await db.feedback.createMany({
-    data: input,
-  })
-  if (created.count === input.length) {
-    created.id = created.count
-    return created
-  }
-  return UserInputError('Invalid Users')
 }

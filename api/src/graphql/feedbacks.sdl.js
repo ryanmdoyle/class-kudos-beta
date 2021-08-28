@@ -19,6 +19,14 @@ export const schema = gql`
     feedbackOfGroup(groupId: String!): [Feedback!]!
   }
 
+  type Mutation {
+    createFeedback(input: CreateFeedbackInput!): Feedback!
+    createFeedbacks(input: [CreateFeedbackInput!]): CreatedManyReturn!
+    updateFeedback(id: String!, input: UpdateFeedbackInput!): Feedback!
+    deleteFeedback(id: String!): Feedback!
+    deleteFeedbacks: BatchPayload!
+  }
+
   input CreateFeedbackInput {
     userId: String!
     behaviorId: String
@@ -41,12 +49,5 @@ export const schema = gql`
 
   type BatchPayload {
     count: Int
-  }
-  type Mutation {
-    createFeedback(input: CreateFeedbackInput!): Feedback!
-    createFeedbacks(input: [CreateFeedbackInput!]): CreatedManyReturn!
-    updateFeedback(id: String!, input: UpdateFeedbackInput!): Feedback!
-    deleteFeedback(id: String!): Feedback!
-    deleteFeedbacks: BatchPayload!
   }
 `
