@@ -12,14 +12,10 @@ const GroupList = ({
   usersOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
-  const [currentStudent, setCurrentStudent] = useState(
-    usersOfGroup[0]?.id
-  )
+  const [currentStudent, setCurrentStudent] = useState(usersOfGroup[0]?.id)
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState([])
-  const [firstName, setFirstName] = useState(
-    usersOfGroup[0]?.firstName
-  )
+  const [firstName, setFirstName] = useState(usersOfGroup[0]?.firstName)
   const [lastName, setLastName] = useState(usersOfGroup[0]?.lastName)
   const [studentId, setStudentId] = useState(usersOfGroup[0]?.id)
   const [totalPoints, setTotalPoints] = useState(null)
@@ -49,13 +45,13 @@ const GroupList = ({
   }
 
   const selectAll = () => {
-    const allUsers = usersOfGroup.map(user => user.id)
+    const allUsers = usersOfGroup.map((user) => user.id)
     setSelected(allUsers)
   }
 
   if (usersOfGroup.length === 0) {
     return (
-      <div className="col-span-full overflow-scroll 2xl:col-span-5 p-1">
+      <div className="col-span-full overflow-y-auto 2xl:col-span-5 p-1">
         No Students! Enroll new students with the code:{' '}
         <span className="font-bold font-mono">{enrollId}</span>
       </div>
@@ -64,7 +60,7 @@ const GroupList = ({
 
   return (
     <>
-      <div className="col-span-4 overflow-scroll p-1">
+      <div className="col-span-4 overflow-y-auto p-1">
         <button
           onClick={() => {
             setSelecting(!selecting)
@@ -79,19 +75,19 @@ const GroupList = ({
         >
           {selecting ? 'Cancel' : 'Select Multiple'}
         </button>
-        { selecting && (
+        {selecting && (
           <button
-          onClick={() => {
-            if (selecting) {
-              selectAll()
-            }
-          }}
-          className={`${
-            selecting ? 'button-purple' : 'button-white'
-          } mr-4 w-42 mb-4`}
-        >
-          {'Select All'}
-        </button>
+            onClick={() => {
+              if (selecting) {
+                selectAll()
+              }
+            }}
+            className={`${
+              selecting ? 'button-purple' : 'button-white'
+            } mr-4 w-42 mb-4`}
+          >
+            {'Select All'}
+          </button>
         )}
         {/* STUDENT LIST */}
         <ul className="">
@@ -134,9 +130,7 @@ const GroupList = ({
             userId={studentId}
             groupId={groupId}
             totalPoints={
-              studentId === usersOfGroup[0]?.id
-                ? userZeroPoints
-                : totalPoints
+              studentId === usersOfGroup[0]?.id ? userZeroPoints : totalPoints
             }
             userGroupPoints={
               studentId === usersOfGroup[0]?.id
@@ -157,15 +151,13 @@ const GroupList = ({
           setCurrentStudent={setCurrentStudent}
           studentId={studentId}
           totalPoints={
-              studentId === usersOfGroup[0]?.id
-                ? userZeroPoints
-                : totalPoints
-            }
-            userGroupPoints={
-              studentId === usersOfGroup[0]?.id
-                ? userZeroGroupPoints
-                : userGroupPoints
-            }
+            studentId === usersOfGroup[0]?.id ? userZeroPoints : totalPoints
+          }
+          userGroupPoints={
+            studentId === usersOfGroup[0]?.id
+              ? userZeroGroupPoints
+              : userGroupPoints
+          }
         />
         {!selecting && (
           <RecentActivityListCard

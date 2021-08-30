@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }) => {
     <ModalProvider>
       <Modal />
       <Toaster timeout={4000} />
-      <div className="w-full h-screen relative overflow-y-scroll">
+      <div className="w-full h-screen relative overflow-auto">
         <SiteHeader />
         <div className="flex w-full h-full-minusNav bg-gray-100">
           <nav className="w-1/5 h-full bg-white lg:w-dashboard relative">
@@ -32,7 +32,7 @@ const DashboardLayout = ({ children }) => {
               </div>
             )}
           </nav>
-          <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-scroll relative">
+          <main className="w-4/5 h-full bg-gray-100 lg:w-content overflow-auto relative">
             {loading && <PageLoader />}
             {children}
           </main>
