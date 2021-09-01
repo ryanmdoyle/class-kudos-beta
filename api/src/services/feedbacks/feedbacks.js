@@ -125,11 +125,17 @@ export const updateFeedback = ({ id, input }) => {
 
 export const deleteFeedback = async ({ id }) => {
   const feedbackInDb = await db.feedback.findUnique({ where: { id } })
-  reduceGroupPoints({
+  await reduceGroupPoints({
     input: {
       userId: feedbackInDb.userId,
       groupId: feedbackInDb.groupId,
-      points: feedbackInDb.value,
+      points: -feedbackInDb.value, // reduceGroupPoints uses "decrement", pass reduce value as pos int
+    },
+  })
+  await updateUserPoints({
+    input: {
+      userId: feedbackInDb.userId,
+      points: -feedbackInDb.value,
     },
   })
   return db.feedback.delete({

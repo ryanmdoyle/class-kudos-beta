@@ -86,11 +86,11 @@ export const reduceGroupPoints = async ({ input }) => {
       groupId: input.groupId,
     },
   })
-  if (groupPoints + input.points >= 0) {
+  if (groupPoints.points + input.points >= 0) {
     return await db.groupPoint.update({
       data: {
         points: {
-          increment: input.points, // points are neg, must increment. (adding negative to reduce)
+          increment: input.points, // points passed should be negative value
         },
       },
       where: {
@@ -101,7 +101,7 @@ export const reduceGroupPoints = async ({ input }) => {
     return await db.groupPoint.update({
       data: {
         points: {
-          set: 0, // points are neg, must increment. (adding negative to reduce)
+          set: 0,
         },
       },
       where: {
@@ -109,19 +109,22 @@ export const reduceGroupPoints = async ({ input }) => {
       },
     })
   }
+  return true
 }
 
 export const addManyGroupPoints = async ({ input }) => {
-  return await db.groupPoint.updateMany({
+  const updated = await db.groupPoint.updateMany({
     data: {
       points: {
         increment: input.points,
       },
     },
     where: {
-      AND: [{ groupId: input.groupId }, { userId: { in: input.userIds } }],
+      groupId: { equals: input.groupId },
+      userId: { in: input.userIds },
     },
   })
+  return updated
 }
 
 export const reduceManyGroupPoints = async ({ input }) => {
