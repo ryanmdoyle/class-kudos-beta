@@ -17,10 +17,20 @@ const ListViewStudentItem = ({
   setUserGroupPoints = () => {},
   userZero,
   setUserZeroPoints = () => {},
-  setUserZeroGroupPoints = () => {}
+  setUserZeroGroupPoints = () => {},
 }) => {
-  const { id, firstName, lastName, profileImage, points, groupPoints = [] } = user
-  const groupPoint = groupPoints[groupPoints?.findIndex(element => element.groupId === groupId)]?.points
+  const {
+    id,
+    firstName,
+    lastName,
+    profileImage,
+    points,
+    groupPoints = [],
+  } = user
+  const groupPoint =
+    groupPoints[
+      groupPoints?.findIndex((element) => element.groupId === groupId)
+    ]?.points
   useEffect(() => {
     if (id === userZero) {
       setUserZeroPoints(points)
@@ -29,7 +39,16 @@ const ListViewStudentItem = ({
       setTotalPoints(points)
       setUserGroupPoints(groupPoint)
     }
-  }, [id, userZero, setUserZeroPoints, setUserZeroGroupPoints, points, setTotalPoints, setUserGroupPoints])
+  }, [
+    id,
+    userZero,
+    setUserZeroPoints,
+    setUserZeroGroupPoints,
+    points,
+    setTotalPoints,
+    setUserGroupPoints,
+    groupPoint,
+  ])
 
   const MAX_STRING_LENGTH = 20
 
