@@ -12,41 +12,43 @@ const GroupList = ({
   usersOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
-  const [currentStudent, setCurrentStudent] = useState(usersOfGroup[0]?.id)
   const [selecting, setSelecting] = useState(false)
   const [selected, setSelected] = useState([])
-  const [firstName, setFirstName] = useState(usersOfGroup[0]?.firstName)
-  const [lastName, setLastName] = useState(usersOfGroup[0]?.lastName)
-  const [studentId, setStudentId] = useState(usersOfGroup[0]?.id)
-  const [totalPoints, setTotalPoints] = useState(null)
-  const [userGroupPoints, setUserGroupPoints] = useState(null)
-  const [userZeroPoints, setUserZeroPoints] = useState(null)
-  const [userZeroGroupPoints, setUserZeroGroupPoints] = useState(null)
+
+  const [selectedStudents, setSelectedStudents] = useState([usersOfGroup[0]])
+  const [isSelectingMultiple, setIsSelectingMultiple] = useState(false)
 
   useEffect(() => {
-    setFirstName(usersOfGroup[0]?.firstName)
-    setLastName(usersOfGroup[0]?.lastName)
-    setStudentId(usersOfGroup[0]?.id)
-  }, [groupId])
+    setSelectedStudents([usersOfGroup[0]])
+  }, [usersOfGroup])
 
-  const handleSelect = (userId) => {
-    setCurrentStudent(userId)
-    if (selecting) {
-      if (selected.includes(userId)) {
-        const removed = [...selected]
-        const userLocation = removed.indexOf(userId)
+  const handleSelect = async (userId) => {
+    const studentLocation = usersOfGroup.findIndex((user) => user.id === userId)
+    const clickedStudent =
+      usersOfGroup[usersOfGroup.findIndex((user) => user.id === userId)]
+    if (!isSelectingMultiple) {
+      // sets the single user
+      setSelectedStudents([clickedStudent])
+    } else {
+      // add/remove the user to the selected array if selecting multiples
+      const isUserInSelected =
+        selectedStudents.findIndex((user) => user.id === userId) !== -1
+      if (isUserInSelected) {
+        const removed = [...selectedStudents]
+        const userLocation = await removed.findIndex(
+          (user) => user.id === userId
+        )
         removed.splice(userLocation, 1)
-        setSelected(removed)
+        setSelectedStudents(removed)
       } else {
-        const added = [...selected, userId]
-        setSelected(added)
+        const added = [...selectedStudents, usersOfGroup[studentLocation]]
+        setSelectedStudents(added)
       }
     }
   }
 
   const selectAll = () => {
-    const allUsers = usersOfGroup.map((user) => user.id)
-    setSelected(allUsers)
+    setSelectedStudents([...usersOfGroup])
   }
 
   if (usersOfGroup.length === 0) {
@@ -63,27 +65,28 @@ const GroupList = ({
       <div className="col-span-4 overflow-y-auto p-1">
         <button
           onClick={() => {
-            setSelecting(!selecting)
-            setSelected([])
-            if (!selecting) {
-              setCurrentStudent(null)
-            } else setCurrentStudent(studentId)
+            setIsSelectingMultiple(!isSelectingMultiple)
+            if (!isSelectingMultiple) {
+              setSelectedStudents([])
+            } else {
+              setSelectedStudents([usersOfGroup[0]])
+            }
           }}
           className={`${
-            selecting ? 'button-purple' : 'button-white'
+            isSelectingMultiple ? 'button-purple' : 'button-white'
           } mr-4 w-42 mb-4`}
         >
-          {selecting ? 'Cancel' : 'Select Multiple'}
+          {isSelectingMultiple ? 'Cancel' : 'Select Multiple'}
         </button>
-        {selecting && (
+        {isSelectingMultiple && (
           <button
             onClick={() => {
-              if (selecting) {
+              if (isSelectingMultiple) {
                 selectAll()
               }
             }}
             className={`${
-              selecting ? 'button-purple' : 'button-white'
+              isSelectingMultiple ? 'button-purple' : 'button-white'
             } mr-4 w-42 mb-4`}
           >
             {'Select All'}
@@ -92,30 +95,14 @@ const GroupList = ({
         {/* STUDENT LIST */}
         <ul className="">
           {usersOfGroup.map((enrollment) => {
-            const userSelected = selected.includes(enrollment.id)
             return (
-              <div
-                key={enrollment.id}
-                className={`${
-                  userSelected && selecting && 'ring-2'
-                } ring-purple-500 rounded-md`}
-              >
+              <div key={enrollment.id}>
                 <ListViewStudentItem
                   id={enrollment.id}
                   key={enrollment.key}
                   user={enrollment}
-                  groupId={groupId}
-                  currentStudent={currentStudent}
-                  selecting={selecting}
-                  setFirstName={setFirstName}
-                  setLastName={setLastName}
-                  setStudentId={setStudentId}
+                  selectedStudents={selectedStudents}
                   handleSelect={handleSelect}
-                  setTotalPoints={setTotalPoints}
-                  setUserGroupPoints={setUserGroupPoints}
-                  userZero={usersOfGroup[0]?.id}
-                  setUserZeroPoints={setUserZeroPoints}
-                  setUserZeroGroupPoints={setUserZeroGroupPoints}
                 />
               </div>
             )
@@ -123,46 +110,27 @@ const GroupList = ({
         </ul>
       </div>
       <div className="flex flex-col col-span-8 overflow-y-auto">
-        {!selecting && (
-          <StudentPointsCard
-            firstName={firstName}
-            lastName={lastName}
-            userId={studentId}
-            groupId={groupId}
-            totalPoints={
-              studentId === usersOfGroup[0]?.id ? userZeroPoints : totalPoints
-            }
-            userGroupPoints={
-              studentId === usersOfGroup[0]?.id
-                ? userZeroGroupPoints
-                : userGroupPoints
-            }
-          />
+        {/* todo => just have the whole student passed as single prop */}
+        {!isSelectingMultiple && (
+          <StudentPointsCard user={selectedStudents[0]} />
         )}
         <AwardFeedbackCard
           groupId={groupId}
-          userId={studentId}
-          firstName={firstName}
+          userId={selectedStudents[0]?.id}
+          firstName={selectedStudents[0]?.firstName}
           behaviorsOfGroup={behaviorsOfGroup}
           selecting={selecting}
           selected={selected}
           setSelecting={setSelecting}
           setSelected={setSelected}
-          setCurrentStudent={setCurrentStudent}
-          studentId={studentId}
-          totalPoints={
-            studentId === usersOfGroup[0]?.id ? userZeroPoints : totalPoints
-          }
-          userGroupPoints={
-            studentId === usersOfGroup[0]?.id
-              ? userZeroGroupPoints
-              : userGroupPoints
-          }
+          // setCurrentStudent={setCurrentStudent}
+          studentId={selectedStudents[0]?.id}
+          totalPoints={selectedStudents[0]?.points}
+          userGroupPoints={selectedStudents[0]?.groupPoints[0].points}
         />
-        {!selecting && (
+        {!isSelectingMultiple && (
           <RecentActivityListCard
-            userId={studentId}
-            firstName={firstName}
+            user={selectedStudents[0]}
             groupId={groupId}
             groupName={name}
           />

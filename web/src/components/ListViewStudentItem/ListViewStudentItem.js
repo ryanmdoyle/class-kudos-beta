@@ -1,54 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useEffect } from 'react'
 
 import ProfileImageCircle from 'src/components/ProfileImageCircle/ProfileImageCircle'
 
-const ListViewStudentItem = ({
-  user = {},
-  groupId,
-  currentStudent,
-  selecting,
-  setFirstName,
-  setLastName,
-  setStudentId,
-  handleSelect,
-  setTotalPoints = () => {},
-  setUserGroupPoints = () => {},
-  userZero,
-  setUserZeroPoints = () => {},
-  setUserZeroGroupPoints = () => {},
-}) => {
-  const {
-    id,
-    firstName,
-    lastName,
-    profileImage,
-    points,
-    groupPoints = [],
-  } = user
-  const groupPoint =
-    groupPoints[
-      groupPoints?.findIndex((element) => element.groupId === groupId)
-    ]?.points
-  useEffect(() => {
-    if (id === userZero) {
-      setUserZeroPoints(points)
-      setUserZeroGroupPoints(groupPoint)
-    } else {
-      setTotalPoints(points)
-      setUserGroupPoints(groupPoint)
-    }
-  }, [
-    id,
-    userZero,
-    setUserZeroPoints,
-    setUserZeroGroupPoints,
-    points,
-    setTotalPoints,
-    setUserGroupPoints,
-    groupPoint,
-  ])
+const ListViewStudentItem = ({ user = {}, selectedStudents, handleSelect }) => {
+  const { id, firstName, lastName, profileImage, groupPoints = [] } = user
 
   const MAX_STRING_LENGTH = 20
 
@@ -63,16 +19,11 @@ const ListViewStudentItem = ({
   return (
     <li
       className={`h-12 w-full white-box hover:ring-2 ring-purple-500 flex items-center justify-between mb-2 ${
-        currentStudent === id ? 'ring-2' : null
+        selectedStudents.findIndex((student) => student.id === id) !== -1
+          ? 'ring-2'
+          : null
       }`}
       onClick={() => {
-        if (!selecting) {
-          setFirstName(user.firstName)
-          setLastName(user.lastName)
-          setStudentId(user.id)
-          setTotalPoints(points)
-          setUserGroupPoints(groupPoint)
-        }
         handleSelect(user.id)
       }}
       key={id}
@@ -90,7 +41,7 @@ const ListViewStudentItem = ({
       </div>
       <div>
         <span className="justify-self-end text-green-500 font-bold">
-          {groupPoint}
+          {groupPoints[0].points}
         </span>
       </div>
     </li>
