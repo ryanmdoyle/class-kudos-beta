@@ -14,7 +14,7 @@ const FeedbackButton = ({
   loadings,
 }) => {
   const thisGroupIndex = selectedStudents[0]?.groupPoints.findIndex(
-    (group) => group.id === groupId
+    (group) => group.groupId === groupId
   )
   const userGroupPoints =
     selectedStudents[0]?.groupPoints[thisGroupIndex]?.points
