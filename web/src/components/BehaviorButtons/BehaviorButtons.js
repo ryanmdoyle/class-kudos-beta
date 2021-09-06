@@ -26,16 +26,12 @@ const CREATE_FEEDBACKS = gql`
 `
 
 const BehaviorButtons = ({
-  userId,
   behaviors,
+  selectedStudents,
+  setSelectedStudents,
+  isSelectingMultiple,
+  setIsSelectingMultiple,
   groupId,
-  selected,
-  selecting,
-  setSelecting,
-  setSelected,
-  totalPoints,
-  userGroupPoints,
-  setCurrentStudent,
 }) => {
   const { isOpen, close } = useModal()
 
@@ -43,12 +39,12 @@ const BehaviorButtons = ({
     refetchQueries: [
       {
         query: recentUserFeedbackOfGroupQuery,
-        variables: { userId: userId, groupId: groupId },
+        variables: { userId: selectedStudents[0]?.id, groupId: groupId },
       },
       { query: studentListQuery, variables: { id: groupId } },
       {
         query: groupPointsOfUserQuery,
-        variables: { userId: userId, groupId: groupId },
+        variables: { userId: selectedStudents[0]?.id, groupId: groupId },
       },
     ],
     onCompleted: () => {
@@ -64,22 +60,21 @@ const BehaviorButtons = ({
     refetchQueries: [
       {
         query: recentUserFeedbackOfGroupQuery,
-        variables: { userId: userId, groupId: groupId },
+        variables: { userId: selectedStudents[0]?.id, groupId: groupId },
       },
       { query: studentListQuery, variables: { id: groupId } },
       {
         query: groupPointsOfUserQuery,
-        variables: { userId: userId, groupId: groupId },
+        variables: { userId: selectedStudents[0]?.id, groupId: groupId },
       },
     ],
     awaitRefetchQueries: true,
     onCompleted: () => {
       toast.success('Added feedback!', { className: 'rw-flash-success' })
-      setSelecting(false)
-      setSelected([])
-      if (!selecting) {
-        setCurrentStudent(null)
-      } else setCurrentStudent(userId)
+      setIsSelectingMultiple(false)
+      if (!isSelectingMultiple) {
+        setSelectedStudents([])
+      } else setSelectedStudents([selectedStudents[0]])
       if (isOpen) close() // close modal for custom values
     },
     onError: () => {
@@ -99,35 +94,23 @@ const BehaviorButtons = ({
     <>
       {behaviors?.map((behavior) => (
         <FeedbackButton
-          name={behavior.name}
-          value={behavior.value}
-          totalUserPoints={totalPoints}
-          userGroupPoints={userGroupPoints}
-          studentId={userId}
-          behaviorId={behavior.id}
+          key={behavior.id}
+          behavior={behavior}
+          isSelectingMultiple={isSelectingMultiple}
+          selectedStudents={selectedStudents}
           groupId={groupId}
           newFeedback={newFeedback}
-          newFeedbacks={newFeedbacks}
-          selected={selected}
-          selecting={selecting}
           loading={loading}
+          newFeedbacks={newFeedbacks}
           loadings={loadings}
-          key={behavior.id}
-          setCurrentStudent={setCurrentStudent}
-          setSelecting={setSelecting}
-          setSelected={setSelected}
         />
       ))}
       <FeedbackButtonCustom
-        totalUserPoints={totalPoints}
-        userGroupPoints={userGroupPoints}
-        studentId={userId}
+        isSelectingMultiple={isSelectingMultiple}
+        selectedStudents={selectedStudents}
         groupId={groupId}
         newFeedback={newFeedback}
         newFeedbacks={newFeedbacks}
-        selected={selected}
-        selecting={selecting}
-        loading={loading}
         loadings={loadings}
         key={'custom'}
       />

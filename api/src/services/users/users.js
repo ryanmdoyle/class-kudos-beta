@@ -120,7 +120,7 @@ export const addUsersPoints = async ({ input }) => {
         increment: input.points,
       },
     },
-    where: { id: { in: input.userIds } },
+    where: { id: { in: input.ids } },
   })
 }
 

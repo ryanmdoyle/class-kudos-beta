@@ -1,9 +1,8 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import type { ResolverArgs, BeforeResolverSpecType } from '@redwoodjs/api'
 
 // Used when the environment variable REDWOOD_SECURE_SERVICES=1
-export const beforeResolver = (rules: BeforeResolverSpecType) => {
+export const beforeResolver = (rules) => {
   rules.add(requireAuth)
   rules.add(() => requireAuth({ role: ['teacher', 'super_admin'] }), {
     only: ['deleteGroupPoints'],
@@ -109,7 +108,6 @@ export const reduceGroupPoints = async ({ input }) => {
       },
     })
   }
-  return true
 }
 
 export const addManyGroupPoints = async ({ input }) => {
@@ -146,8 +144,8 @@ export const deleteGroupPoints = () => {
 }
 
 export const GroupPoint = {
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof groupPoint>>) =>
+  user: (_obj, { root }) =>
     db.groupPoint.findUnique({ where: { id: root.id } }).user(),
-  group: (_obj, { root }: ResolverArgs<ReturnType<typeof groupPoint>>) =>
+  group: (_obj, { root }) =>
     db.groupPoint.findUnique({ where: { id: root.id } }).group(),
 }
