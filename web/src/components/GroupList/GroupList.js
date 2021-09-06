@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import StudentPointsCard from 'src/components/StudentPointsCard/StudentPointsCard'
 import AwardFeedbackCard from 'src/components/AwardFeedbackCard/AwardFeedbackCard'
@@ -12,40 +12,54 @@ const GroupList = ({
   usersOfGroup = [],
   behaviorsOfGroup = [],
 }) => {
-  const [selecting, setSelecting] = useState(false)
-  const [selected, setSelected] = useState([])
-
   const [selectedStudents, setSelectedStudents] = useState([usersOfGroup[0]])
   const [isSelectingMultiple, setIsSelectingMultiple] = useState(false)
 
   useEffect(() => {
-    setSelectedStudents([usersOfGroup[0]])
-  }, [usersOfGroup])
-
-  const handleSelect = async (userId) => {
-    const studentLocation = usersOfGroup.findIndex((user) => user.id === userId)
-    const clickedStudent =
-      usersOfGroup[usersOfGroup.findIndex((user) => user.id === userId)]
-    if (!isSelectingMultiple) {
-      // sets the single user
-      setSelectedStudents([clickedStudent])
-    } else {
-      // add/remove the user to the selected array if selecting multiples
-      const isUserInSelected =
-        selectedStudents.findIndex((user) => user.id === userId) !== -1
-      if (isUserInSelected) {
-        const removed = [...selectedStudents]
-        const userLocation = await removed.findIndex(
-          (user) => user.id === userId
-        )
-        removed.splice(userLocation, 1)
-        setSelectedStudents(removed)
-      } else {
-        const added = [...selectedStudents, usersOfGroup[studentLocation]]
-        setSelectedStudents(added)
+    // checks for diffs in usersOfGroup after awading points.
+    // todo -> look into refs for more efficiency
+    if (selectedStudents.length === 1) {
+      const usersOfGroupLocation = usersOfGroup.findIndex(
+        (user) => user.id === selectedStudents[0]?.id
+      )
+      if (
+        selectedStudents[0]?.points !==
+        usersOfGroup[usersOfGroupLocation].points
+      ) {
+        handleSelect(selectedStudents[0].id) // forces refreash of state for StudentPointsCard
       }
     }
-  }
+  }, [usersOfGroup, selectedStudents, handleSelect])
+
+  const handleSelect = useCallback(
+    (userId) => {
+      if (!isSelectingMultiple) {
+        // sets the single user
+        const clickedStudent =
+          usersOfGroup[usersOfGroup.findIndex((user) => user.id === userId)]
+        setSelectedStudents([clickedStudent])
+      } else {
+        // sets multiple selections
+        const isUserInSelected =
+          selectedStudents.findIndex((user) => user.id === userId) !== -1
+        if (isUserInSelected) {
+          // remove selected if present
+          const removed = [...selectedStudents]
+          const userLocation = removed.findIndex((user) => user.id === userId)
+          removed.splice(userLocation, 1)
+          setSelectedStudents(removed)
+        } else {
+          // add user to selection
+          const studentLocation = usersOfGroup.findIndex(
+            (user) => user.id === userId
+          )
+          const added = [...selectedStudents, usersOfGroup[studentLocation]]
+          setSelectedStudents(added)
+        }
+      }
+    },
+    [isSelectingMultiple, selectedStudents, usersOfGroup]
+  )
 
   const selectAll = () => {
     setSelectedStudents([...usersOfGroup])
@@ -94,13 +108,14 @@ const GroupList = ({
         )}
         {/* STUDENT LIST */}
         <ul className="">
-          {usersOfGroup.map((enrollment) => {
+          {usersOfGroup.map((user) => {
             return (
-              <div key={enrollment.id}>
+              <div key={user.id}>
                 <ListViewStudentItem
-                  id={enrollment.id}
-                  key={enrollment.key}
-                  user={enrollment}
+                  id={user.id}
+                  key={user.key}
+                  user={user}
+                  groupId={groupId}
                   selectedStudents={selectedStudents}
                   handleSelect={handleSelect}
                 />
@@ -110,25 +125,22 @@ const GroupList = ({
         </ul>
       </div>
       <div className="flex flex-col col-span-8 overflow-y-auto">
-        {/* todo => just have the whole student passed as single prop */}
-        {!isSelectingMultiple && (
-          <StudentPointsCard user={selectedStudents[0]} />
+        {!isSelectingMultiple && selectedStudents.length > 0 && (
+          <StudentPointsCard
+            user={selectedStudents[0]}
+            selectedStudents={selectedStudents}
+            groupId={groupId}
+          />
         )}
         <AwardFeedbackCard
+          selectedStudents={selectedStudents}
+          setSelectedStudents={setSelectedStudents}
           groupId={groupId}
-          userId={selectedStudents[0]?.id}
-          firstName={selectedStudents[0]?.firstName}
           behaviorsOfGroup={behaviorsOfGroup}
-          selecting={selecting}
-          selected={selected}
-          setSelecting={setSelecting}
-          setSelected={setSelected}
-          // setCurrentStudent={setCurrentStudent}
-          studentId={selectedStudents[0]?.id}
-          totalPoints={selectedStudents[0]?.points}
-          userGroupPoints={selectedStudents[0]?.groupPoints[0].points}
+          isSelectingMultiple={isSelectingMultiple}
+          setIsSelectingMultiple={setIsSelectingMultiple}
         />
-        {!isSelectingMultiple && (
+        {!isSelectingMultiple && selectedStudents.length > 0 && (
           <RecentActivityListCard
             user={selectedStudents[0]}
             groupId={groupId}

@@ -85,14 +85,12 @@ export const createFeedback = async ({ input }) => {
 
 export const createFeedbacks = async ({ input }) => {
   await updateUsersPoints({
-    //DONE!
     input: {
       ids: input.userIds,
       points: input.value,
     },
   })
   await updateGroupPoints({
-    // DONE!
     input: {
       userIds: input.userIds,
       groupId: input.groupId,

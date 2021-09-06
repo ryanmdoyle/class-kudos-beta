@@ -3,8 +3,14 @@
 
 import ProfileImageCircle from 'src/components/ProfileImageCircle/ProfileImageCircle'
 
-const ListViewStudentItem = ({ user = {}, selectedStudents, handleSelect }) => {
+const ListViewStudentItem = ({
+  user = {},
+  selectedStudents,
+  handleSelect,
+  groupId,
+}) => {
   const { id, firstName, lastName, profileImage, groupPoints = [] } = user
+  const thisGroup = groupPoints.findIndex((group) => group.groupId === groupId)
 
   const MAX_STRING_LENGTH = 20
 
@@ -41,7 +47,7 @@ const ListViewStudentItem = ({ user = {}, selectedStudents, handleSelect }) => {
       </div>
       <div>
         <span className="justify-self-end text-green-500 font-bold">
-          {groupPoints[0].points}
+          {groupPoints[thisGroup].points}
         </span>
       </div>
     </li>

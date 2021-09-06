@@ -58,25 +58,20 @@ export const Failure = () => {
   return <Redirect to={routes.teacherHome()} />
 }
 
-export const Success = ({
-  id,
-  behaviorsOfGroup,
-  group,
-  usersOfGroup
-}) => {
+export const Success = ({ id, behaviorsOfGroup, group, usersOfGroup }) => {
   return (
     <>
-    <MetaTags
-      title={`Class Kudos - ${group?.name}`}
-      description={`Group page for ${group?.name}`}
-    />
-    <GroupList
-      groupId={id}
-      name={group?.name}
-      enrollId={group?.enrollId}
-      usersOfGroup={usersOfGroup}
-      behaviorsOfGroup={behaviorsOfGroup}
-    />
+      <MetaTags
+        title={`Class Kudos - ${group?.name}`}
+        description={`Group page for ${group?.name}`}
+      />
+      <GroupList
+        groupId={id}
+        name={group?.name}
+        enrollId={group?.enrollId}
+        usersOfGroup={usersOfGroup}
+        behaviorsOfGroup={behaviorsOfGroup}
+      />
     </>
   )
 }

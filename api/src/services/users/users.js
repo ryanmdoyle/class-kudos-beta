@@ -56,6 +56,7 @@ export const updateUserPoints = async ({ input }) => {
 }
 
 export const updateUsersPoints = async ({ input }) => {
+  console.log('updateUsersPoints', input)
   if (input.points > 0) {
     return await addUsersPoints({ input })
   } else {
@@ -120,7 +121,7 @@ export const addUsersPoints = async ({ input }) => {
         increment: input.points,
       },
     },
-    where: { id: { in: input.userIds } },
+    where: { id: { in: input.ids } },
   })
 }
 
