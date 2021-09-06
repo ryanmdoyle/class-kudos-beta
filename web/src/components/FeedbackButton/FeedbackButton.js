@@ -13,7 +13,11 @@ const FeedbackButton = ({
   newFeedbacks,
   loadings,
 }) => {
-  const userGroupPoints = selectedStudents[0]?.groupPoints[0]?.points
+  const thisGroupIndex = selectedStudents[0]?.groupPoints.findIndex(
+    (group) => group.id === groupId
+  )
+  const userGroupPoints =
+    selectedStudents[0]?.groupPoints[thisGroupIndex]?.points
   const giveFeedback = () => {
     // adjustedValue reduces negative values to totalUserPoints to prevent negative total user points
     const adjustedValue =
