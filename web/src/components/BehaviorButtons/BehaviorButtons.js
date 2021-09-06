@@ -1,5 +1,5 @@
 import FeedbackButton from 'src/components/FeedbackButton/FeedbackButton'
-// import FeedbackButtonCustom from 'src/components/FeedbackButtonCustom/FeedbackButtonCustom'
+import FeedbackButtonCustom from 'src/components/FeedbackButtonCustom/FeedbackButtonCustom'
 
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -105,19 +105,15 @@ const BehaviorButtons = ({
           loadings={loadings}
         />
       ))}
-      {/* <FeedbackButtonCustom
-        totalUserPoints={totalPoints}
-        userGroupPoints={userGroupPoints}
-        studentId={selectedStudents[0].id}
+      <FeedbackButtonCustom
+        isSelectingMultiple={isSelectingMultiple}
+        selectedStudents={selectedStudents}
         groupId={groupId}
         newFeedback={newFeedback}
         newFeedbacks={newFeedbacks}
-        selected={selected}
-        selecting={selecting}
-        loading={loading}
         loadings={loadings}
         key={'custom'}
-      /> */}
+      />
     </>
   )
 }

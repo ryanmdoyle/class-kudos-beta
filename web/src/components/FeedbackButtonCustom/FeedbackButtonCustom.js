@@ -5,25 +5,29 @@ import Pencil from 'src/components/svg/Pencil/Pencil'
 import FeedbackCustomForm from 'src/components/FeedbackCustomForm/FeedbackCustomForm'
 
 const FeedbackButtonCustom = ({
-  totalUserPoints,
-  userGroupPoints,
-  studentId,
-  behaviorId,
+  isSelectingMultiple,
+  selectedStudents,
   groupId,
   newFeedback,
   newFeedbacks,
-  selected,
-  selecting,
-  loading,
+  loadings,
 }) => {
   const { openModal } = useModal()
+
+  const thisGroupIndex = selectedStudents[0]?.groupPoints.findIndex(
+    (group) => group.groupId === groupId
+  )
+
+  const userGroupPoints =
+    selectedStudents[0]?.groupPoints[thisGroupIndex]?.points
+
   const giveFeedback = (name, value) => {
     // adjustedValue reduces negative values to userGroupPoints to prevent negative total user points
     const adjustedValue = userGroupPoints + value < 0 ? -userGroupPoints : value
     newFeedback({
       variables: {
         createFeedbackInput: {
-          userId: studentId,
+          userId: selectedStudents[0]?.id,
           groupId: groupId,
           name: name,
           value: adjustedValue,
@@ -31,13 +35,13 @@ const FeedbackButtonCustom = ({
       },
     })
   }
+
   const giveFeedbacks = (name, value) => {
-    const userIds = selected.map((userId) => userId)
+    const userIds = selectedStudents.map((user) => user.id)
     newFeedbacks({
       variables: {
         createFeedbacksInput: {
           userIds: userIds,
-          behaviorId: behaviorId,
           groupId: groupId,
           name: name,
           value: value,
@@ -55,10 +59,15 @@ const FeedbackButtonCustom = ({
   const handleAwardSave = (name, value) => {
     if (!wontReturnNegativeTotal(value))
       toast.error('User already has zero kudos.')
-    if (!loading && !selecting && wontReturnNegativeTotal(value)) {
+    if (!loadings && !isSelectingMultiple && wontReturnNegativeTotal(value)) {
       giveFeedback(name, value)
     }
-    if (!loading && selecting && wontReturnNegativeTotal(value) && value > 0) {
+    if (
+      !loadings &&
+      isSelectingMultiple &&
+      wontReturnNegativeTotal(value) &&
+      value > 0
+    ) {
       giveFeedbacks(name, value)
     }
   }
@@ -66,8 +75,8 @@ const FeedbackButtonCustom = ({
   return (
     <button
       className={`h-24 w-36 white-box m-1 overflow-hidden flex flex-col justify-center items-center
-      ${loading && 'opacity-70 cursor-not-allowed'}
-      ${!loading && 'hover:ring-2'} ring-purple-500`}
+      ${loadings && 'opacity-70 cursor-not-allowed'}
+      ${!loadings && 'hover:ring-2'} ring-purple-500`}
       onClick={() => {
         openModal(
           <>
