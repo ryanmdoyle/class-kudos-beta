@@ -62,7 +62,7 @@ export const Success = ({
   groupId,
   userId,
   totalPoints,
-  groupPoints
+  groupPoints,
 }) => {
   const [newRedeemed, { loading }] = useMutation(CREATE_REDEEMED, {
     refetchQueries: [
