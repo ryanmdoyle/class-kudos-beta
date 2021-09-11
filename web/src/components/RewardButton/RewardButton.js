@@ -41,16 +41,18 @@ const RewardButton = ({
 
   return (
     <button
-      className={`h-24 w-48 white-box m-1 overflow-hidden flex flex-col justify-between items-center ${
+      className={`w-full white-box m-1 overflow-hidden flex flex-row justify-between items-center z-0 ${
         groupPoints >= reward?.cost
           ? 'hover:ring-2 ring-purple-500'
           : 'cursor-not-allowed opacity-70'
       } ${loading && 'cursor-wait'}`}
       onClick={() => {
         let response = null
-        if (groupPoints < reward?.cost) { // not enough points, throw error
+        if (groupPoints < reward?.cost) {
+          // not enough points, throw error
           toast.error('You do not have enough kudos to claim that reward!')
-        } else { // if enough points...
+        } else {
+          // if enough points...
           // prompt is needed
           if (reward.responseRequired === true && groupPoints >= reward?.cost) {
             response = window.prompt(reward.responsePrompt)
