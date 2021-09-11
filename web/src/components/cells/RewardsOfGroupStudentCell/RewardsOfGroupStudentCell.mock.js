@@ -1,6 +1,61 @@
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
-  rewardsOfGroupStudent: {
-    id: 42,
-  },
+  rewardsOfGroup: [
+    {
+      __typename: 'Reward',
+      id: 'ace651d9-fbb9-4d01-910b-42233aea28f3',
+      name: 'High Five',
+      cost: 1,
+      responseRequired: false,
+      responsePrompt: null,
+    },
+    {
+      __typename: 'Reward',
+      id: 'e668a679-ebf3-4de6-8fce-b9bcaf1b6a87',
+      name: 'Sticker!',
+      cost: 10,
+      responseRequired: false,
+      responsePrompt: null,
+    },
+    {
+      __typename: 'Reward',
+      id: 'a6f742bc-0d4f-415e-aab9-ede239c9cb31',
+      name: 'New Mech Pencil',
+      cost: 10,
+      responseRequired: false,
+      responsePrompt: null,
+    },
+    {
+      __typename: 'Reward',
+      id: 'a2873c14-4c60-4ab9-a0f3-96dd72d87d7c',
+      name: 'Science Exploration Pass',
+      cost: 20,
+      responseRequired: true,
+      responsePrompt: 'Which exporation do you want to use the pass on?',
+    },
+    {
+      __typename: 'Reward',
+      id: '2ef60bf9-080a-4711-b809-0ab33b534155',
+      name: 'History Homework Pass',
+      cost: 20,
+      responseRequired: true,
+      responsePrompt: 'What assignment would you like to use this pass on?',
+    },
+    {
+      __typename: 'Reward',
+      id: '027e9e28-85a0-4e54-a89f-6f4f98e5d1fc',
+      name: 'Math Homework Pass',
+      cost: 25,
+      responseRequired: true,
+      responsePrompt: 'What assignment are you using this pass on?',
+    },
+    {
+      __typename: 'Reward',
+      id: '2c0af103-7f71-49b9-9669-ecaa789f8127',
+      name: 'Starbucks Trip!',
+      cost: 50,
+      responseRequired: true,
+      responsePrompt: 'What day/date do you want to go?',
+    },
+  ],
 })
