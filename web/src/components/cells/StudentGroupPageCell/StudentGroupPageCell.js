@@ -1,6 +1,7 @@
 import { MetaTags } from '@redwoodjs/web'
 import RewardsOfGroupStudentCell from 'src/components/cells/RewardsOfGroupStudentCell/RewardsOfGroupStudentCell'
 import UserActivityOfGroupCell from 'src/components/cells/UserActivityOfGroupCell/UserActivityOfGroupCell'
+import GroupPointsOfGroupCell from 'src/components/cells/GroupPointsOfGroupCell/GroupPointsOfGroupCell'
 import PageLoader from 'src/components/PageLoader/PageLoader'
 
 export const QUERY = gql`
@@ -47,28 +48,39 @@ export const Success = ({
         <div className="col-span-1 row-span-6 flex flex-col">
           {/* Points */}
           <div className="flex w-full justify-between">
-            <div className="h-32 w-1/2 white-box relative p-2 mb-4 flex items-center mr-2">
+            <div className="h-32 w-1/3 white-box relative p-2 mb-4 flex items-center mr-2">
               {/* GROUP Points */}
               <div className="flex flex-col items-center w-full">
-                <span className="text-5xl text-green">
+                <span className="text-4xl text-green">
                   {groupPointsOfUser?.points}
                 </span>
-                <span className="text-lg text-green">
+                <span className="text-base text-green text-center">
                   {group?.name}{' '}
                   {`${
                     groupPointsOfUser?.points === 1
-                      ? 'kudo'
-                      : 'kudos' || 'kudos'
+                      ? 'Kudo'
+                      : 'Kudos' || 'Kudos'
                   }`}
                 </span>
               </div>
             </div>
-            <div className="h-32 w-1/2 white-box relative p-2 mb-4 flex items-center ml-2">
+            <div className="h-32 w-1/3 white-box relative p-2 mb-4 flex items-center ml-2">
               {/* TOTAL */}
               <div className="flex flex-col items-center w-full">
-                <span className="text-5xl text-gray-400">{user?.points}</span>
-                <span className="text-lg text-gray-500">
-                  total {`${user?.points === 1 ? 'kudo' : 'kudos' || 'kudos'}`}
+                <span className="text-4xl text-gray-400">{user?.points}</span>
+                <span className="text-base text-gray-500 text-center">
+                  Total Kudos
+                </span>
+              </div>
+            </div>
+            <div className="h-32 w-1/3 white-box relative p-2 mb-4 flex items-center ml-2">
+              {/* TOTAL OF GROUP*/}
+              <div className="flex flex-col items-center w-full">
+                <span className="text-4xl text-gray-400">
+                  <GroupPointsOfGroupCell groupId={groupId} />
+                </span>
+                <span className="text-base text-gray-500 text-center">
+                  Earned in {group?.name}
                 </span>
               </div>
             </div>

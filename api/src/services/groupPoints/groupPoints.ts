@@ -36,6 +36,25 @@ export const groupPointsOfUser = async ({ groupId, userId }) => {
   return groupPoints
 }
 
+export const groupPointsOfGroup = async ({ groupId }) => {
+  const enrolled = await db.enrollment.findMany({
+    where: {
+      groupId: groupId,
+    },
+  })
+  const enrolledUserIds = enrolled.map((user) => user.userId)
+  const groupPointsFound = await db.feedback.aggregate({
+    where: {
+      groupId: groupId,
+      userId: { in: enrolledUserIds },
+    },
+    _sum: {
+      value: true,
+    },
+  })
+  return groupPointsFound._sum.value
+}
+
 // MUTATAIONS //////////////////////////////////////////////////////////
 
 export const createGroupPoints = async ({ userId, groupId }) => {

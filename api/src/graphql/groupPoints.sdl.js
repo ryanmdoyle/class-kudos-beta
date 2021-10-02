@@ -11,6 +11,7 @@ export const schema = gql`
   type Query {
     groupPoints: [GroupPoint!]!
     groupPointsOfUser(groupId: String!, userId: String!): GroupPoint!
+    groupPointsOfGroup(groupId: String!): Int!
   }
 
   type Mutation {

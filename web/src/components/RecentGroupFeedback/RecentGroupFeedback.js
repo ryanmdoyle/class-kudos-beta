@@ -31,7 +31,7 @@ const RecentGroupFeedback = ({ feedbacksOfGroup, groupId }) => {
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive overflow-y-scroll">
+    <div className="h-sub-full rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
         <thead>
           <tr>
