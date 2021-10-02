@@ -67,6 +67,7 @@
   background-color: #fff;
   border-width: 1px;
   border-radius: 0.5rem;
+  border-color: #E5E7EB;
   overflow: hidden;
 }
 .rw-segment-header {
@@ -299,6 +300,7 @@
 .rw-table tbody tr {
   background-color: #fff;
   border-top-width: 1px;
+  border-color: #E5E7EB;
 }
 .rw-table tbody tr:nth-child(even) {
   background-color: #fff;
