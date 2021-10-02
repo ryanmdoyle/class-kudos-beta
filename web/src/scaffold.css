@@ -264,7 +264,8 @@
   color: #c53030;
 }
 .rw-table-wrapper-responsive {
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 .rw-table-wrapper-responsive .rw-table {
   min-width: 48rem;
