@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }) => {
           <nav className="w-1/5 h-full bg-white lg:w-dashboard relative">
             {hasRole('teacher') && <TeacherNav />}
             {hasRole('student') && <StudentNav />}
-            {hasRole('super_admin') && <ScaffoldNav />}
+            {/* {hasRole('super_admin') && <ScaffoldNav />} */}
             {hasRole('teacher') && (
               <div className="flex w-full justify-center absolute bottom-2">
                 <DonateButton />
