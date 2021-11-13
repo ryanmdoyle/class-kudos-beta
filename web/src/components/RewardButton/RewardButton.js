@@ -21,22 +21,24 @@ const RewardButton = ({
       redeemedInput.response = response
     }
 
-    newRedeemed({
-      variables: {
-        input: redeemedInput,
-      },
-    })
-
-    sendEmail({
-      variables: {
-        input: {
-          userId: userId,
-          groupId: groupId,
-          rewardId: reward?.id,
-          value: reward?.cost,
+    if (window.confirm(`You would like to redeem ${reward?.name}?`)) {
+      newRedeemed({
+        variables: {
+          input: redeemedInput,
         },
-      },
-    })
+      })
+
+      sendEmail({
+        variables: {
+          input: {
+            userId: userId,
+            groupId: groupId,
+            rewardId: reward?.id,
+            value: reward?.cost,
+          },
+        },
+      })
+    }
   }
 
   return (
