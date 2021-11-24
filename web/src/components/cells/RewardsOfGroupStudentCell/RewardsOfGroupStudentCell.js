@@ -35,10 +35,6 @@ const SEND_REDEEMED_NOTIFICATION_EMAIL = gql`
   }
 `
 
-export const beforeQuery = (props) => {
-  return { variables: props, pollInterval: 60000 }
-}
-
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => (

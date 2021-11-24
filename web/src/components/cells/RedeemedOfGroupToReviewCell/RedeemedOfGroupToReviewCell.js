@@ -47,7 +47,7 @@ const DELETE_REDEEMED_MUTATION = gql`
   }
 `
 export const beforeQuery = (props) => {
-  return { variables: props, pollInterval: 60000 }
+  return { variables: props, pollInterval: 900000 }
 }
 
 export const Loading = () => <div>Loading...</div>
